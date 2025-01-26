@@ -3,11 +3,16 @@ form {
     border-radius: 25px;
     padding: 25px;
     max-width: 250px;
+    height: 30vh;
+}
+form.regisztracio{
+    height: 50vh;
+
 }
 
 input:not(input[type=checkbox]) {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     width: 100%;
 }
 
