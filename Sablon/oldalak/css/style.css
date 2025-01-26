@@ -14,11 +14,7 @@ main {
 }
 
 .mainContent section {
-    padding: 0 30px 0 30px;
-}
-
-.mainContent section h2 {
-    padding: 50px 0 10px 0;
+    padding: 0 30px 25px 30px;
 }
 
 .mainContent h1 {
@@ -41,11 +37,6 @@ main {
     display: grid;
     gap: 15px;
     grid-template-columns: auto auto auto;
-}
-
-.szallodaImgGrid img {
-    max-width: 100%;
-    height: auto
 }
 
 .sidebar {
@@ -102,11 +93,6 @@ main {
     grid-template-columns: auto auto;
 }
 
-.varosGrid img {
-    max-width: 100%;
-    height: auto
-}
-
 footer {
     background-color: lightgray;
 }
@@ -115,4 +101,9 @@ footer p {
     font-size: 150%;
     padding: 25px 0 25px 0;
     text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto
 }
