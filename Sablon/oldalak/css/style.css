@@ -10,6 +10,7 @@ main {
 }
 
 .mainContent {
+    width: 100%;
     padding-top: 10px;
 }
 
@@ -20,6 +21,11 @@ main {
 
 .mainContent section {
     padding: 0 30px 10px 30px;
+}
+
+.mainContent section p {
+    text-align: justify;
+    font-size: 125%;
 }
 
 .sidebar {
@@ -83,4 +89,9 @@ footer p {
 .img-fluid {
     max-width: 100%;
     height: auto
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }

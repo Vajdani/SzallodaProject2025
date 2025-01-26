@@ -1,0 +1,28 @@
+form {
+    background-color: darkgray;
+    border-radius: 25px;
+    padding: 25px;
+    width: fit-content;
+    width: 250px;
+}
+
+input:not(input[type=checkbox]) {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+form a {
+    display: block;
+    color: black;
+    text-align: center;
+}
+
+a + a {
+    margin-top: 10px;
+}
+
+input[type=submit] {
+    padding: 5px;
+    font-size: 90%;
+}

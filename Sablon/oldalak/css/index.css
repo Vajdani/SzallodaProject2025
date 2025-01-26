@@ -1,7 +1,5 @@
 .carousel {
     width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .mainContent section:not(:first-child) p {
