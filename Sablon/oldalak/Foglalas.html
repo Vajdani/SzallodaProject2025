@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/foglalas.css">
+    <title>Szálloda projekt sablon</title>
+</head>
+
+<body>
+    <main>
+        <div class="mainContent">
+            <section>
+                <h1>Foglalás</h1>
+                <form action="/" method="post" class="center">
+                    <section class="form">
+                        <label for="szalloda">Szálloda neve:</label>
+                        <select name="szalloda" id="szalloda">
+                            <option value="szal1">Szálloda 1</option>
+                            <option value="szal2">Szálloda 2</option>
+                            <option value="szal3">Szálloda 3</option>
+                        </select>
+                        <p>Ellátás típusa</p>
+                        <label for="full">Teljes ellátás</label> <input type="radio" name="ellatas" id="full">
+                        <label for="half">Fél panzió</label> <input type="radio" name="ellatas" id="half">
+                        <label for="none">Nincs</label> <input type="radio" name="ellatas" id="none">
+                        <p>Dátum</p>
+                        <input type="date"> <p class="inline">—</p> <input type="date">
+                        <br>
+                        <br>
+                        <label for="letszam">Létszám:</label>
+                        <select name="letszam" id="letszam">
+                            <option value="1">Egy fő</option>
+                            <option value="2">Két fő</option>
+                            <option value="3">Három fő</option>
+                            <option value="4">Négy fő</option>
+                        </select>
+                        <p class="inline">xxx Ft/fő</p>
+                    </section>
+                    <section class="form">
+                        <label for="nev">Vásárló teljes neve</label> <input type="text" name="nev" id="nev">
+                        <p for="fizetes">Fizetési módszer</p>
+                        <label for="bankkartya">Bankkártya</label>
+                        <input type="radio" name="fizetes" id="bankkartya">
+                        <label for="keszpenz">Készpénz</label>
+                        <input type="radio" name="fizetes" id="keszpenz" >
+                        <label for="szuldate">Születési dátum</label>
+                        <input type="date" id="szuldate">
+                        <br>
+                        <label for="telefonszam">Telefonszám</label>
+                        <input type="text" name="kod" id="kod" class="kod" value="+36" class="inline">
+                        <input type="text" name="szam" id="szam" class="szam" class="inline"><br>
+                        <label for="email">E-mail</label> <input type="text" name="email" id="email"><br>
+                        <label for="special">Speciális információ (allergiák, étrendek)</label>
+                        <textarea name="special" id="special"></textarea>
+
+                    </section>
+
+                    
+
+                    <input type="submit" value="Foglalok">
+                </form>
+            </section>
+        </div>
+        <div class="sidebar">
+            <ul class="sidebarLinks">
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="profil.html">Profilom</a></li>
+                <li><a href="ertekelesek.html">Értékelések</a></li>
+                <li><a href="szalloda.html">Nyaraló ajánlás</a></li>
+                <li><a href="foglalas.html">Foglalás</a></li>
+            </ul>
+            <hr>
+            <ul class="sidebarContacts">
+                <li>Elérhetőségeink</li>
+                <li>Tel: <a href="tel:+3620111111">06 20 111 111</a></li>
+                <li>E-mail: <a href="mailto:valaki@pelda.hu">valaki@pelda.hu</a></li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <p>Footer text</p>
+    </footer>
+</body>
+
+</html>
