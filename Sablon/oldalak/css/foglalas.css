@@ -9,6 +9,9 @@ label{
 .inline{
     display: inline;
 }
+.block {
+    display: block;
+}
 .mainContent {
     font-size: medium;
 }
