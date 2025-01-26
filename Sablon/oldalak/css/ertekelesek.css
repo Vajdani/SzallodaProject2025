@@ -1,0 +1,58 @@
+.mainContent {
+    padding: 0;
+}
+
+.mainContent section:first-child {
+    width: 100%;
+    background-color: lightgrey;
+    font-size: 150%;
+    padding: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.mainContent section:first-child ul {
+    list-style-type: none;
+}
+
+.mainContent section:first-child ul li {
+    display: inline;
+}
+
+.mainContent section:first-child ul li+li {
+    margin-left: 15px;
+}
+
+.mainContent section:first-child ul li select {
+    font-size: 75%;
+}
+
+.starTicked {
+    color: gold;
+}
+
+.starUnTicked {
+    color: black;
+}
+
+.rating {
+    background-color: darkgray;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.ratingUser {
+    display: grid;
+    grid-template-areas: "profilePicture data";
+    grid-template-columns: 1fr 6fr;
+    gap: 5px;
+}
+
+.ratingUser>div.profilePicture {
+    grid-area: profilePicture;
+    width: 100px;
+}
+
+.ratingUser>div.data {
+    grid-area: data;
+}
