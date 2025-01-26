@@ -1,0 +1,147 @@
+.profile-con{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile-header{
+    width: 80%;
+    border-radius: 30px;
+    box-shadow: 10px 10px 8px 10px #888888;
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    margin-bottom: 2%;
+}
+
+.profile-details-con{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-picture{
+    border-radius: 50%;
+}
+
+.profile-option-con{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+}
+
+.profile-option-con a{
+    text-decoration: none;
+}
+
+.profile-picture-con{
+    width: 120px;
+    padding: 10px;
+}
+
+.profile-body{
+    border-radius: 30px;
+    width: 80%;
+    box-shadow: 10px 10px 8px 10px #888888;
+}
+
+.profile-body h2{
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.save-button{
+    border-radius: 15px;
+    height: 30px;
+    min-width: 15%;
+    background-color: gray;
+    box-shadow: none;
+}
+
+.user-information form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.user-data{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 10px;
+
+}
+
+
+.user-data input{
+    width: 100%;
+    border-radius: 15px;
+    height: 30px;
+    box-shadow: none;
+    text-align: center;
+}
+
+.rating-con{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.rating{
+    width: 80%;
+    border-radius: 15px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 5px;
+
+}
+
+.rating-head{
+    display: flex;
+    flex-direction: row;
+}
+
+.rating-info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 5px;
+}
+
+.rating-info-data{
+    width: 50%;
+    text-align: center;
+}
+
+.rating-desc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    padding: 2%;
+}
+.starTicked {
+    color: gold;
+}
+
+@media only screen and (max-width: 600px) {
+.save-button{
+    width: 60%;
+}
+.profile-header{
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+.profile-body{
+    margin-bottom: 40px;
+}
+
+
+}
