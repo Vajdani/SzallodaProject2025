@@ -13,35 +13,18 @@ main {
     padding-top: 10px;
 }
 
-.mainContent section {
-    padding: 0 30px 25px 30px;
-}
-
 .mainContent h1 {
     text-align: center;
     padding-bottom: 10px;
 }
 
-.szallodaMainImg {
-    margin: 0 auto 25px auto;
-    display: block;
-}
-
-.mainContent p {
-    text-align: justify;
-    font-size: 125%;
-}
-
-.szallodaImgGrid {
-    padding-top: 10px;
-    display: grid;
-    gap: 15px;
-    grid-template-columns: auto auto auto;
+.mainContent section {
+    padding: 0 30px 10px 30px;
 }
 
 .sidebar {
     background-color: gray;
-    width: 600px;
+    /* width: 400px; */
 }
 
 .sidebarLinks {
@@ -49,7 +32,7 @@ main {
 }
 
 .sidebarLinks, .sidebarContacts {
-    margin: 25px 0px 25px 15px;
+    margin: 25px 25px 25px 15px;
     gap: 10px;
     list-style-type: none;
 }
@@ -85,12 +68,6 @@ main {
 
 .sidebarContacts li + li {
     margin-top: 20px;
-}
-
-.varosGrid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: auto auto;
 }
 
 footer {
