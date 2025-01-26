@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.mainContent {
+    padding-top: 10px;
+}
+
+.mainContent section {
+    padding: 0 30px 0 30px;
+}
+
+.mainContent section h2 {
+    padding: 50px 0 10px 0;
+}
+
+.mainContent h1 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.szallodaMainImg {
+    margin: 0 auto 25px auto;
+    display: block;
+}
+
+.mainContent p {
+    text-align: justify;
+    font-size: 125%;
+}
+
+.szallodaImgGrid {
+    padding-top: 10px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: auto auto auto;
+}
+
+.szallodaImgGrid img {
+    max-width: 100%;
+    height: auto
+}
+
+.sidebar {
+    background-color: gray;
+    width: 600px;
+}
+
+.sidebarLinks {
+    padding-bottom: 150px;
+}
+
+.sidebarLinks, .sidebarContacts {
+    margin: 25px 0px 25px 15px;
+    gap: 10px;
+    list-style-type: none;
+}
+
+.sidebarLinks li a {
+    text-decoration: none;
+    color: white;
+    font-size: 150%;
+}
+
+.sidebarLinks li + li {
+    margin-top: 20px;
+}
+
+.sidebarContacts li:first-child {
+    font-size: 150%;
+}
+
+.sidebar hr {
+    background-color: white;
+    border: 0;
+    height: 3px;
+    margin: 0 5px 0 5px;
+}
+
+.sidebarContacts li {
+    color: white;
+}
+
+.sidebarContacts li a {
+    color: white;
+}
+
+.sidebarContacts li + li {
+    margin-top: 20px;
+}
+
+.varosGrid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto auto;
+}
+
+.varosGrid img {
+    max-width: 100%;
+    height: auto
+}
+
+footer {
+    background-color: lightgray;
+}
+
+footer p {
+    font-size: 150%;
+    padding: 25px 0 25px 0;
+    text-align: center;
+}
