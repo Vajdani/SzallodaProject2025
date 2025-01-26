@@ -1,0 +1,38 @@
+.szallodaMainImg {
+    margin: 0 auto 25px auto;
+    display: block;
+}
+
+.citySection {
+    padding: 0 30px 25px 30px;
+}
+
+.starTicked {
+    color: gold;
+}
+
+.starUnTicked {
+    color: black;
+}
+
+.city {
+    background-color: darkgray;
+    padding: 10px;
+    margin-top: 15px;
+    text-align: justify;
+}
+
+.city img {
+    width: 200px;
+}
+
+.cityImgContainer {
+    float: left;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.city:nth-child(even) .cityImgContainer {
+    float: right;
+    padding-left: 10px;
+}
