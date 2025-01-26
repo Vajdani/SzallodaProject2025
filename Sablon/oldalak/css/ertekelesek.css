@@ -7,7 +7,6 @@
 }
 
 .filterBar:first-child {
-    width: 100%;
     background-color: lightgrey;
     font-size: 150%;
     padding: 20px;
@@ -29,6 +28,20 @@
 
 .filterBar:first-child ul li select {
     font-size: 75%;
+}
+
+@media only screen and (max-width: 600px) {
+    .filterBar:first-child ul li {
+        display: block;
+    }
+
+    .filterBar:first-child {
+        text-align: left;
+    }
+
+    .filterBar:first-child ul li+li {
+        margin-left: 0;
+    }
 }
 
 .starTicked {
