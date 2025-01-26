@@ -23,9 +23,9 @@
                             <option value="szal3">Szálloda 3</option>
                         </select>
                         <p>Ellátás típusa</p>
-                        <label for="full">Teljes ellátás</label> <input type="radio" name="ellatas" id="full">
-                        <label for="half">Fél panzió</label> <input type="radio" name="ellatas" id="half">
-                        <label for="none">Nincs</label> <input type="radio" name="ellatas" id="none">
+                        <label for="full" class="inline">Teljes ellátás</label> <input type="radio" name="ellatas" id="full"><span></span>
+                        <label for="half" class="inline">Fél panzió</label> <input type="radio" name="ellatas" id="half"><span></span>
+                        <label for="none" class="inline">Nincs</label> <input type="radio" name="ellatas" id="none">
                         <p>Dátum</p>
                         <input type="date"> <p class="inline">—</p> <input type="date">
                         <br>
@@ -42,10 +42,10 @@
                     <section class="form">
                         <label for="nev">Vásárló teljes neve</label> <input type="text" name="nev" id="nev">
                         <p for="fizetes">Fizetési módszer</p>
-                        <label for="bankkartya">Bankkártya</label>
-                        <input type="radio" name="fizetes" id="bankkartya">
-                        <label for="keszpenz">Készpénz</label>
-                        <input type="radio" name="fizetes" id="keszpenz" >
+                        <label for="bankkartya" class="inline">Bankkártya</label>
+                        <input type="radio" name="fizetes" id="bankkartya" class="inline"><span></span>
+                        <label for="keszpenz"  class="inline">Készpénz</label>
+                        <input type="radio" name="fizetes" id="keszpenz"><br>
                         <label for="szuldate">Születési dátum</label>
                         <input type="date" id="szuldate">
                         <br>
@@ -55,7 +55,6 @@
                         <label for="email">E-mail</label> <input type="text" name="email" id="email"><br>
                         <label for="special">Speciális információ (allergiák, étrendek)</label>
                         <textarea name="special" id="special"></textarea>
-
                     </section>
 
                     
