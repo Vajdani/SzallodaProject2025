@@ -6,3 +6,8 @@
     text-align: justify;
     font-size: 125%;
 }
+
+.mainContent section:first-child p {
+    text-align: center;
+    /* font-size: 125%; */
+}
