@@ -143,6 +143,13 @@ h2{
 .starTicked {
     color: gold;
 }
+a{
+    color: #E5E1EE;
+}
+a:hover{
+    color: #d2c6ec;
+}
+
 
 @media only screen and (max-width: 600px) {
 .save-button{
