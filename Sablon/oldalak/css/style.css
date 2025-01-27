@@ -7,6 +7,8 @@ body {
     max-width: 1920px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #233D4D;
+    color: #E5E1EE;
 }
 
 main {
@@ -36,7 +38,7 @@ main {
 }
 
 .sidebar {
-    background-color: #4F7CAC;
+    background-color: #387042;
     position: sticky;
     top: 0;
     overflow: hidden;
@@ -101,7 +103,7 @@ main {
 }
 
 footer {
-    background-color: #b4d5f8;
+    background-color: rgb(13, 133, 77);
 }
 
 footer p {
