@@ -1,10 +1,12 @@
 form {
-    background-color: darkgray;
+    background-color: #248232;
     border-radius: 25px;
     padding: 25px;
     max-width: 250px;
     height: 30vh;
 }
+
+
 form.regisztracio{
     height: 50vh;
 
@@ -14,19 +16,41 @@ input:not(input[type=checkbox]) {
     display: block;
     margin-bottom: 25px;
     width: 100%;
+    color: #E5E1EE;
+
+
 }
 
 form a {
     display: block;
-    color: black;
+    color: #E5E1EE;
     text-align: center;
+}
+a:hover{
+    color: #d2c6ec;
 }
 
 a + a {
     margin-top: 10px;
 }
-
+input{
+    background-color: #2BA84A;
+    
+}
+input[type=text],input[type=password],input[type=date]{
+    border-radius: 50px;
+    border: none;
+}
 input[type=submit] {
     padding: 5px;
     font-size: 90%;
+    box-shadow: none;
+    border: 2px solid black;
+    border-radius: 50px;
+}
+input[type=submit]:hover{
+    background-color: #04611c;
+    color: #d2c6ec;
+
+
 }
