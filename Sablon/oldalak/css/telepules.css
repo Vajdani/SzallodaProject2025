@@ -12,11 +12,11 @@
 }
 
 .starUnTicked {
-    color: black;
+    color: #E5E1EE;
 }
 
 .city {
-    background-color: darkgray;
+    background-color: #2AA248;
     padding: 10px;
     margin-top: 15px;
     text-align: justify;
