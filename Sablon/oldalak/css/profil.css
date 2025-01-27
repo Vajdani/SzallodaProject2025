@@ -67,6 +67,7 @@ h2{
     min-width: 15%;
     background-color: #2BA84A;
     box-shadow: none;
+    border: 2px solid black;
 }
 
 .user-information form{
@@ -89,7 +90,7 @@ h2{
     width: 100%;
     border-radius: 15px;
     height: 30px;
-    border: none;
+    border: 2px solid black;
     text-align: center;
     background-color: #2AA248;
     color: #E5E1EE;
@@ -106,7 +107,7 @@ h2{
 .rating{
     width: 80%;
     border-radius: 15px;
-    border: 1px solid black;
+    border: 2px solid black;
     margin-bottom: 10px;
     padding: 5px;
     background-color: #2BA84A;
