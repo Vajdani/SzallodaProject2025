@@ -37,6 +37,11 @@ main {
 
 .sidebar {
     background-color: #4F7CAC;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    z-index: 100;
+    max-height: 750px;
     /* width: 400px; */
 }
 
