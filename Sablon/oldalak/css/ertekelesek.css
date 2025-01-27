@@ -63,6 +63,8 @@
     grid-template-areas: "profilePicture data";
     grid-template-columns: 1fr 6fr;
     gap: 5px;
+    width: min-content;
+    text-wrap: nowrap;
 }
 
 .ratingUser>div.profilePicture {
