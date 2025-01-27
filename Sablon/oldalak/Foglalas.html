@@ -23,9 +23,15 @@
                             <option value="szal3">Szálloda 3</option>
                         </select>
                         <p>Ellátás típusa</p>
-                        <label for="full" class="inline">Teljes ellátás</label> <input type="radio" name="ellatas" id="full"><span></span>
-                        <label for="half" class="inline">Fél panzió</label> <input type="radio" name="ellatas" id="half"><span></span>
-                        <label for="none" class="inline">Nincs</label> <input type="radio" name="ellatas" id="none">
+                        <div class="ellatas-opcio">
+                            <label for="full" class="inline">Teljes ellátás</label> <input type="radio" name="ellatas" id="full"><span></span>
+                        </div>
+                        <div class="ellatas-opcio">
+                            <label for="half" class="inline">Fél panzió</label> <input type="radio" name="ellatas" id="half"><span></span>
+                        </div>
+                        <div class="ellatas-opcio">
+                            <label for="none" class="inline">Nincs</label> <input type="radio" name="ellatas" id="none">
+                        </div>
                         <p>Dátum</p>
                         <input type="date"> <p class="inline">—</p> <input type="date">
                         <br>
@@ -42,16 +48,24 @@
                     <div class="form">
                         <label for="nev">Vásárló teljes neve</label> <input type="text" name="nev" id="nev">
                         <label for="bankkartya" class="block">Fizetési módszer</label>
-                        <label for="bankkartya" class="inline">Bankkártya</label>
-                        <input type="radio" name="fizetes" id="bankkartya" class="inline"><span></span>
-                        <label for="keszpenz"  class="inline">Készpénz</label>
-                        <input type="radio" name="fizetes" id="keszpenz"><br>
+                        <div class="ellatas-opcio">
+                            <label for="bankkartya" class="inline">Bankkártya</label>
+                            <input type="radio" name="fizetes" id="bankkartya" class="inline">
+                        </div>
+                        <div class="ellatas-opcio">
+                            <label for="keszpenz"  class="inline">Készpénz</label>
+                            <input type="radio" name="fizetes" id="keszpenz">
+                        </div>
+                        
+                        
                         <label for="szuldate">Születési dátum</label>
                         <input type="date" id="szuldate">
                         <br>
                         <label for="kod">Telefonszám</label>
-                        <input type="text" name="kod" id="kod" class="kod inline" value="+36">
-                        <input type="text" name="szam" id="szam" class="szam inline"><br>
+                        <div class="telefonszam">
+                            <input type="text" name="kod" id="kod" class="kod inline" value="+36">
+                            <input type="text" name="szam" id="szam" class="szam inline"><br>
+                        </div>
                         <label for="email">E-mail</label> <input type="text" name="email" id="email"><br>
                         <label for="special">Speciális információ (allergiák, étrendek)</label>
                         <textarea name="special" id="special"></textarea>
