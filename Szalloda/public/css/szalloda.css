@@ -1,0 +1,17 @@
+.szallodaMainImg {
+    margin: 0 auto 25px auto;
+    display: block;
+}
+
+.szallodaImgGrid {
+    padding-top: 10px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: auto auto auto;
+}
+
+.varosGrid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto auto;
+}

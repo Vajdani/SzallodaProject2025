@@ -1,0 +1,132 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #233D4D;
+    color: #E5E1EE;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 92vh;
+}
+
+.mainContent {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.mainContent h1 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.mainContent section {
+    padding: 10px 30px 10px 30px;
+}
+
+.mainContent section p {
+    text-align: justify;
+    font-size: 125%;
+}
+
+.sidebar {
+    background-color: #387042;
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    z-index: 100;
+    max-height: 750px;
+    min-width: fit-content;
+    /* width: 400px; */
+}
+
+.sidebarLinks {
+    padding-bottom: 150px;
+}
+
+.sidebarLinks,
+.sidebarContacts {
+    margin: 25px 25px 25px 15px;
+    gap: 10px;
+    list-style-type: none;
+}
+
+.sidebarLinks li a {
+    text-decoration: none;
+    color: #E5E1EE;
+    font-size: 150%;
+}
+
+
+.sidebarLinks li a:hover {
+    background-color: rgb(13, 133, 77);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.sidebarLinks li+li {
+    margin-top: 20px;
+}
+
+.sidebarContacts li:first-child {
+    font-size: 150%;
+}
+
+.sidebar hr {
+    background-color: #E5E1EE;
+    border: 0;
+    height: 2px;
+    margin: 0 5px 0 5px;
+}
+
+.sidebarContacts li {
+    color: #E5E1EE;
+}
+
+.sidebarContacts li a {
+    color: #E5E1EE;
+}
+
+.sidebarContacts li+li {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    main {
+        flex-direction: column-reverse;
+        justify-content:unset;
+    }
+
+    .sidebarLinks {
+        padding-bottom: 0;
+    }
+}
+
+footer {
+    background-color: rgb(13, 133, 77);
+}
+
+footer p {
+    font-size: 150%;
+    padding: 25px 0 25px 0;
+    margin: 0;
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}

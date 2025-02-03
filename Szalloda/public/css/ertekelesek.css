@@ -1,0 +1,80 @@
+.mainContent {
+    padding: 0;
+}
+
+.ratingSection {
+    padding: 0 30px 25px 30px;
+}
+
+.filterBar:first-child {
+    background-color: #248232;
+    font-size: 150%;
+    padding: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.filterBar:first-child ul {
+    list-style-type: none;
+}
+
+.filterBar:first-child ul li {
+    display: inline;
+}
+
+.filterBar:first-child ul li+li {
+    margin-left: 15px;
+}
+
+.filterBar:first-child ul li select {
+    font-size: 75%;
+}
+select{
+    background-color: #2AA248;
+    color: #E5E1EE;
+}
+@media only screen and (max-width: 600px) {
+    .filterBar:first-child ul li {
+        display: block;
+    }
+
+    .filterBar:first-child {
+        text-align: left;
+    }
+
+    .filterBar:first-child ul li+li {
+        margin-left: 0;
+    }
+}
+
+.starTicked {
+    color: gold;
+}
+
+.starUnTicked {
+    color: rgb(255, 255, 255);
+}
+
+.rating {
+    background-color:#248232;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.ratingUser {
+    display: grid;
+    grid-template-areas: "profilePicture data";
+    grid-template-columns: 1fr 6fr;
+    gap: 5px;
+    width: min-content;
+    text-wrap: nowrap;
+}
+
+.ratingUser>div.profilePicture {
+    grid-area: profilePicture;
+    width: 100px;
+}
+
+.ratingUser>div.data {
+    grid-area: data;
+}
