@@ -35,7 +35,7 @@ a + a {
 }
 input{
     background-color: #2BA84A;
-    
+
 }
 input[type=text],input[type=password],input[type=date]{
     border-radius: 50px;
@@ -54,3 +54,5 @@ input[type=submit]:hover{
 
 
 }
+
+

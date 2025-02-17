@@ -12,8 +12,17 @@
                 <label for="name">Felhasználónév</label>
                 <input type="text" name="name" id="name">
 
+                <label for="last">Vezetéknév</label>
+                <input type="text" name="last" id="last" class="half">
+
+                <label for="first">Keresztnév</label>
+                <input type="text" name="first" id="first" class="half">
+
                 <label for="email">E-mail cím</label>
                 <input type="text" name="email" id="email">
+
+                <label for="phone">Telefonszám</label>
+                <input type="text" name="phone" id="phone" class="half">
 
                 <label for="password">Jelszó</label>
                 <input type="password" name="password" id="password">
