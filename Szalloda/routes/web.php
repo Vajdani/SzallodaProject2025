@@ -16,6 +16,10 @@ Route::post('/foglalas', [MainController::class, "reservationPost"]);
 Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::get('/kijelentkezes', [UserController::class, "logout"]);
     Route::get('/profil', [UserController::class, "profile"]);
+    Route::get('/jelszovaltoztatas', [UserController::class, "changePassword"]);
+    Route::post('/jelszovaltoztatas', [UserController::class, "changePasswordPost"]);
+    Route::get('/fioktorles', [UserController::class, "deleteAccount"]);
+    Route::post('/fioktorles', [UserController::class, "deleteAccountPost"]);
 });
 
 Route::group(['middleware' => [IsntLoggedIn::class]], function () {

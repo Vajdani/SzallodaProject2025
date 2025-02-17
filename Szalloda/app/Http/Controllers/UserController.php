@@ -31,4 +31,21 @@ class UserController extends Controller
     public function registrationPost(Request $request) {
         return redirect("/");
     }
+
+    public function changePassword() {
+        return view("changePassword");
+    }
+
+    public function changePasswordPost(Request $request) {
+        return redirect("/");
+    }
+
+
+    public function deleteAccount() {
+        return view("deleteAccount");
+    }
+
+    public function deleteAccountPost(Request $request) {
+        return redirect("/");
+    }
 }
