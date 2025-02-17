@@ -18,6 +18,9 @@
         <div class="sidebar">
             <ul class="sidebarContacts">
                 <li><h4>Szálloda</h4></li>
+                <label for="" class="toggleButtonCon">
+                    <input type="checkbox" id="toggleButtonCheckbox" class="toggleButtonCheckbox">
+                </label>
             </ul>
             <hr>
             <ul class="sidebarLinks">

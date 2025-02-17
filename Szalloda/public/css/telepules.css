@@ -21,6 +21,7 @@
     margin-top: 15px;
     text-align: justify;
     overflow: hidden;
+    border-radius: 15px;
 }
 
 .city img {

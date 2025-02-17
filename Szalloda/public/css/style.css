@@ -48,6 +48,18 @@ main {
     /* width: 400px; */
 }
 
+.toggleButtonCon{
+    display: none;
+    min-width: 20px;
+    min-height: 500px;
+    border: 1px solid red;
+}
+
+.toggleButtonCheckbox{
+    display: none;
+    position: absolute;
+}
+
 .sidebarLinks {
     padding-bottom: 150px;
 }
