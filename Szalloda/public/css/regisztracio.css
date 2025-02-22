@@ -1,0 +1,11 @@
+form.regisztracio{
+    height: auto;
+}
+
+input:not(input[type="checkbox"]) {
+    margin: 0;
+}
+
+.inputItem {
+    margin: 10px 0 10px 0;
+}

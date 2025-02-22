@@ -142,3 +142,9 @@ footer p {
     margin-left: auto;
     margin-right: auto;
 }
+
+.error {
+    color: rgb(255, 0, 0);
+    font-size: 100% !important;
+    text-align: unset !important;
+}
