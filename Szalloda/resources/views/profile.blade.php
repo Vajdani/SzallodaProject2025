@@ -29,15 +29,25 @@
                     <div class="user-data">
                         <label for="email">Email-cím</label>
                         <input type="text" value="{{Auth::user()->email}}" name="email" id="email">
+                        @error('email')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="user-data">
                         <label for="username">Felhasználónév</label>
                         <input type="text" value="{{Auth::user()->username}}" name="username" id="username">
+                        @error('username')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="user-data">
                         <label for="realname">Polgári név</label>
                         <input type="text" value="{{Auth::user()->lastName}} {{Auth::user()->firstName}}" name="realname" id="realname">
+                        @error('realname')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
+
                     <button class="save-button" type="submit">Mentés</button>
                 </form>
             </div>

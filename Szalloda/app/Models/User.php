@@ -48,4 +48,5 @@ class User extends Authenticatable
 
     public $primaryKey = "user_id";
     protected $table = "user";
+    public $timestamps = true;
 }
