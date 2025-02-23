@@ -29,7 +29,7 @@
                     <li><a href="/profil">Profilom</a></li>
                 @endauth
 
-                <li><a href="/reviews">Értékelések</a></li>
+                <li><a href="/ertekelesek/1">Értékelések</a></li>
                 <li><a href="/szalloda/veletlenszeru">Nyaraló ajánlás</a></li>
                 @auth
                     <li><a href="/foglalas">Foglalás</a></li>

@@ -7,13 +7,49 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Reviews;
+use Carbon\Carbon;
+
 
 class UserController extends Controller
 {
     static int $minPasswordLength = 8;
 
+    public function review(){
+        return view("review");
+    }
+
+    public function reviewPost(Request $req){
+        $req->validate([
+            'hotel' => 'required',
+            'star' => 'required',
+        ], [
+            'hotel.required' => 'Muszáj választania egy szállodát!',
+            'star.required' => 'Muszáj értékelnie a szállodát!',
+        ]);
+
+        $review = new Reviews;
+        $review->user_id = Auth::user()->user_id;
+        $review->hotel_id = $req->hotel;
+        $review->rating = $req->star;
+        $review->reviewText = $req->comment;
+        $review->created_at = Carbon::now('Europe/Budapest');
+        $review->Save();
+        return redirect("/profil");
+    }
+
+
     public function profile() {
-        return view("profile");
+        $sv = Reviews::where('user_id', Auth::user()->user_id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+        $hotel = ["budapest","nyíregyháza","debrecen"];
+        return view("profile", [
+            'result' => $sv,
+            'hotel' => $hotel
+        ]);
+
+
 
     }
     public function profilePost(Request $req) {
@@ -34,7 +70,7 @@ class UserController extends Controller
         ]);
         $data = User::find(Auth::user()->user_id);
         $data->username = $req->username;
-        $nev = explode(' ', $req->realname);
+        $nev = explode(' ', $req->realname, $limit = 2);
         $data->lastName = $nev[0];
         $data->firstName = $nev[1];
         $data->email = $req->email;
