@@ -6,6 +6,15 @@ form {
     height: 30vh;
 }
 
+.form {
+    background-color: #248232;
+    border-radius: 25px;
+    padding: 25px;
+    max-width: 250px;
+    height: 30vh;
+}
+
+
 
 form.regisztracio{
     height: 50vh;

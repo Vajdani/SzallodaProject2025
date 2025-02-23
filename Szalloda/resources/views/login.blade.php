@@ -9,13 +9,15 @@
         <section>
             <h1>Bejelentkezés</h1>
             <form action="/bejelentkezes" method="post" class="center">
-                   @if($errors->any())
-                        <div class="error">
-                            Hibás bejelentkezési adatok
-                        </div>
-                    @endif
                 @csrf
-                <label for="name">Felhasználónév/E-mail</label>
+
+                @if($errors->any())
+                    <div class="error">
+                        Hibás bejelentkezési adatok
+                    </div>
+                @endif
+
+                <label for="username">Felhasználónév/E-mail</label>
                 <input type="text" name="username" id="username">
 
 

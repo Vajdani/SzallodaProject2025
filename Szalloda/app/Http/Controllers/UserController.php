@@ -45,7 +45,7 @@ class UserController extends Controller
 
     public function logout() {
         Auth::logout();
-        return view("welcome",[
+        return view("index",[
             'sv' => 'Sikeres kijelentkezés!'
         ]);
     }
@@ -56,13 +56,13 @@ class UserController extends Controller
 
     public function loginPost(Request $req) {
         $req->validate([
-            'username' => 'required|unique:user,username',
+            'username' => 'required',
             'password' => 'required'
         ]);
-        if(Auth::attempt(['username' => $req->username, 'password' => $req->password])){
+        if(Auth::attempt(['username' => $req->username, 'password' => $req->password, "active" => true])){
             return redirect('/');
         }
-        else if(Auth::attempt(['email' => $req->username, 'password' => $req->password])){
+        else if(Auth::attempt(['email' => $req->username, 'password' => $req->password, "active" => true])){
             return redirect('/');
         }
         else{
@@ -185,7 +185,13 @@ class UserController extends Controller
         return view("deleteAccount");
     }
 
-    public function deleteAccountPost(Request $request) {
+    public function deleteAccountConfirm(Request $request) {
+        $user = User::find(Auth::user()->user_id);
+        $user->active = false;
+        $user->Save();
+
+        Auth::logout();
+
         return redirect("/");
     }
 }
