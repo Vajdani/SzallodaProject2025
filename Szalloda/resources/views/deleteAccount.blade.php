@@ -9,8 +9,6 @@
         <section>
             <h1>Felhasználó törlése</h1>
             <form action="/" method="post" class="center">
-                <label for="name">Felhasználónév/E-mail</label>
-                <input type="text" name="name" id="name">
 
                 <label for="password"> jelszó</label>
                 <input type="password" name="password" id="password">

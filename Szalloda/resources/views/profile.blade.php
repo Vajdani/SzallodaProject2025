@@ -13,29 +13,30 @@
                 <img src="https://placehold.co/100" alt="Profilkép" class="profile-picture">
             </div>
             <div class="profile-details-con">
-                <h2>Felhasználónév</h2>
+                <h2>{{Auth::user()->username}}</h2>
                 <div class="profile-option-con">
                     <a href="">Profilképcsere</a>
-                    <a href="jelszomodosit.html">Jelszóváltoztatás</a>
-                    <a href="torles.html">Felhasználó törlése</a>
+                    <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
+                    <a href="/fioktorles">Felhasználó törlése</a>
                 </div>
             </div>
         </div>
         <div class="profile-body">
             <div class="user-information">
                 <h2>Felhasználói Adatok</h2>
-                <form action="/" method="POST">
+                <form action="/profil" method="post">
+                    @csrf
                     <div class="user-data">
                         <label for="email">Email-cím</label>
-                        <input type="text" value="valami@pelda.kell" name="email" id="email">
+                        <input type="text" value="{{Auth::user()->email}}" name="email" id="email">
                     </div>
                     <div class="user-data">
                         <label for="username">Felhasználónév</label>
-                        <input type="text" value="SzallodaFoglalo330" name="username" id="username">
+                        <input type="text" value="{{Auth::user()->username}}" name="username" id="username">
                     </div>
                     <div class="user-data">
                         <label for="realname">Polgári név</label>
-                        <input type="text" value="Sólyom Miklós" name="realname" id="realname">
+                        <input type="text" value="{{Auth::user()->lastName}} {{Auth::user()->firstName}}" name="realname" id="realname">
                     </div>
                     <button class="save-button" type="submit">Mentés</button>
                 </form>

@@ -14,19 +14,54 @@ class UserController extends Controller
 
     public function profile() {
         return view("profile");
+
+    }
+    public function profilePost(Request $req) {
+        $req->validate([
+            'username' => 'required|unique:user,username',
+            'realname' => 'required',
+            "email" => [
+                "required",
+                "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
+                "unique:user,email"
+            ]
+        ]);
+        $data = User::find(Auth::user()->user_id);
+        dd($data);
+        $data->username = $req->username;
+        $nev = explode(' ', $req->realname, $limit = 2);
+        $data->lastName = $nev[0];
+        $data->firstName = $nev[1];
+        $data->email = $req->email;
+        $data->Save();
+
     }
 
     public function logout() {
         Auth::logout();
-        return redirect("/");
+        return view("welcome",[
+            'sv' => 'Sikeres kijelentkezés!'
+        ]);
     }
 
     public function login() {
         return view("login");
     }
 
-    public function loginPost(Request $request) {
-        return redirect("/");
+    public function loginPost(Request $req) {
+        $req->validate([
+            'username' => 'required|unique:user,username',
+            'password' => 'required'
+        ]);
+        if(Auth::attempt(['username' => $req->username, 'password' => $req->password])){
+            return redirect('/');
+        }
+        else if(Auth::attempt(['email' => $req->username, 'password' => $req->password])){
+            return redirect('/');
+        }
+        else{
+            return redirect('/bejelentkezes');
+        }
     }
 
     public function registration() {
@@ -93,17 +128,49 @@ class UserController extends Controller
         $user->active = true;
         $user->Save();
 
-        return redirect("/");
+        return redirect("/bejelentkezes");
     }
 
     public function changePassword() {
         return view("changePassword");
     }
 
-    public function changePasswordPost(Request $request) {
-        return redirect("/");
-    }
+    public function changePasswordPost(Request $req) {
+            $req->validate([
+                'password'      => 'required',
+                'newpassword'  => ['required', Password::min(8)
+                                                      ->numbers()
+                                                      ->letters()
+                                                      ->mixedCase()
+                                                      ->symbols(),
+                                                    'confirmed'],
+                'newpassword_confirmation' => 'required',
+            ],[
+                'password.required'     => 'A jelszó megadása kötelező',
+                'newpassword.required'  => 'Az új Jelszó megadása kötelező',
+                'newpassword.min'       => 'Legalább 8 karakter legyen az új jelszó!',
+                'newpassword.numbers'   => 'Az új jelszónak tartalmaznia kell számot',
+                'newpassword.letters'   => 'Az új jelszónak tartalmaznia kell betűt',
+                'newpassword.mixed'     => 'Az új jelszónak kell tartalmazni kis és nagybetűt is!',
+                'newpassword.symbols'   => 'Az új jelszónak kell tartalmazni speciális karaktert!',
+                'newpassword.confirmed' => 'A két új jelszónak meg kell egyeznie'
+            ]);
 
+            if(Hash::check($req->password,Auth::user()->password)){
+                $data = User::find(Auth::user()->user_id);
+                $data->password    = Hash::make($req->newpassword);
+                $data->Save();
+                Auth::logout();
+                return view('/',[
+                    'sv'=>'A jelszava megváltozott!'
+                ]);
+            }
+            else{
+                return view('/',[
+                    'sv'    => 'A jelszó nem változott meg'
+                ]);
+            }
+        }
 
     public function deleteAccount() {
         return view("deleteAccount");

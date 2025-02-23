@@ -21,6 +21,11 @@ class MainController extends Controller
     public function city($id) {
         return view("city");
     }
+    public function success(){
+        return view("success");
+    }
+
+
 
     public function reservation() {
         return view("reservation");
