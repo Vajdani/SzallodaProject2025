@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Reviews extends Model
+class hotel extends Model
 {
-    protected $table = "reviews";
+    protected $table = "hotel";
     public $timestamps = false;
-    public $primaryKey = "review_id";
-
+    public $primaryKey = "hotel_id";
 
 }

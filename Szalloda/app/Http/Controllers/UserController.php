@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Reviews;
+use App\Models\Hotel;
 use Carbon\Carbon;
 
 
@@ -43,7 +44,11 @@ class UserController extends Controller
         $sv = Reviews::where('user_id', Auth::user()->user_id)
                             ->orderBy('created_at', 'desc')
                             ->get();
-        $hotel = ["budapest","nyíregyháza","debrecen"];
+        $hotel = hotel::select('hotelName')
+                    ->join('reviews','reviews.hotel_id','hotel.hotel_id')
+                    ->get();
+
+        dd($hotel);
         return view("profile", [
             'result' => $sv,
             'hotel' => $hotel
