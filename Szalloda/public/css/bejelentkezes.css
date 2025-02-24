@@ -1,5 +1,5 @@
 form {
-    background-color: #248232;
+    background-color: #3D8D7A;
     border-radius: 25px;
     padding: 25px;
     max-width: 250px;
@@ -13,8 +13,6 @@ form {
     max-width: 250px;
     height: 30vh;
 }
-
-
 
 form.regisztracio{
     height: 50vh;
@@ -89,8 +87,6 @@ input[type=submit] {
 input[type=submit]:hover{
     background-color: #04611c;
     color: #d2c6ec;
-
-
 }
 
 

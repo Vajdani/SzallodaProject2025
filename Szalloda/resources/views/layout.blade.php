@@ -16,14 +16,17 @@
     <main>
         @yield("content")
         <div class="sidebar">
-            <ul class="sidebarContacts">
-                <li><h4>Szálloda</h4></li>
-                <label for="" class="toggleButtonCon">
-                    <input type="checkbox" id="toggleButtonCheckbox" class="toggleButtonCheckbox">
+            <div class="sidebarHeader">
+                <h2>Szálloda</h2>
+                <label for="toggleButtonCheckbox" class="toggleButtonCon">
+                    <input name="toggleButtonCheckbox" type="checkbox" id="toggleButtonCheckbox" class="toggleButtonCheckbox">
+                    <p>≡</p>
                 </label>
-            </ul>
-            <hr>
+            </div>
+            <div class="sidebarCollapsableContent">
+                <hr>
             <ul class="sidebarLinks">
+                
                 <li><a href="/">Főoldal</a></li>
                 @auth
                     <li><a href="/profil">Profilom</a></li>
@@ -49,6 +52,7 @@
                 <li>Tel: <a href="tel:+3620111111">06 20 111 111</a></li>
                 <li>E-mail: <a href="mailto:valaki@pelda.hu">valaki@pelda.hu</a></li>
             </ul>
+            </div>
         </div>
     </main>
     <footer>

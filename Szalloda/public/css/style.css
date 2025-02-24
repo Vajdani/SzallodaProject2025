@@ -7,29 +7,28 @@ body {
     max-width: 1920px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #233D4D;
+    background-color: #A3D1C6;
     color: #E5E1EE;
 }
 
 main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     min-height: 92vh;
 }
 
 .mainContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    padding-top: 10px;
+    margin: 0;
 }
 
 .mainContent h1 {
     text-align: center;
     padding-bottom: 10px;
-}
-
-.mainContent section {
-    padding: 10px 30px 10px 30px;
 }
 
 .mainContent section p {
@@ -38,7 +37,8 @@ main {
 }
 
 .sidebar {
-    background-color: #387042;
+    display: block;
+    background-color: #15B392;
     position: sticky;
     top: 0;
     overflow: hidden;
@@ -48,11 +48,30 @@ main {
     /* width: 400px; */
 }
 
+.sidebarHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.sidebarHeader h2{
+    margin-top: 10px;
+}
+
 .toggleButtonCon{
     display: none;
-    min-width: 20px;
-    min-height: 500px;
-    border: 1px solid red;
+    align-items: center;
+    justify-content: center;
+    min-width: 20%;
+    border-radius: 5px;
+    border: 2px solid white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.toggleButtonCon p{
+    font-size: xx-large;
+    font-weight: bold;
 }
 
 .toggleButtonCheckbox{
@@ -120,6 +139,18 @@ main {
     .sidebarLinks {
         padding-bottom: 0;
     }
+
+    .toggleButtonCon{
+        display: flex;
+    }
+
+    .sidebarCollapsableContent{
+        display: none;
+    }
+
+    body:has(input[id="toggleButtonCheckbox"]:checked) .sidebarCollapsableContent{
+        display: block !important;
+    }
 }
 
 footer {
@@ -148,3 +179,6 @@ footer p {
     font-size: 100% !important;
     text-align: unset !important;
 }
+
+/* https://colorhunt.co/palette/d2ff7273ec8b54c39215b392 */
+/* https://colorhunt.co/palette/3d8d7ab3d8a8fbffe4a3d1c6 */ 
