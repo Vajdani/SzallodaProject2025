@@ -16,6 +16,13 @@ class UserController extends Controller
 {
     static int $minPasswordLength = 8;
 
+    public function reviews() {
+        return view("reviews",[
+            "review" => Reviews::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id")
+
+        ]);
+    }
+
     public function review(){
         return view("review");
     }
@@ -42,7 +49,11 @@ class UserController extends Controller
 
     public function profile() {
         return view("profile", [
-            "reviews" => Reviews::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName from reviews, hotel where reviews.hotel_id = hotel.hotel_id")
+            "result" => Reviews::fromQuery("select r.rating, r.created_at, r.reviewText, h.hotelName, u.username
+                                            from reviews r
+                                            inner join user u on u.user_id = r.user_id
+                                            inner join hotel h on r.hotel_id = h.hotel_id
+                                            where u.user_id like ".Auth::user()->user_id)
         ]);
     }
     public function profilePost(Request $req) {
@@ -64,10 +75,17 @@ class UserController extends Controller
         $data = User::find(Auth::user()->user_id);
         $data->username = $req->username;
         $nev = explode(' ', $req->realname, $limit = 2);
-        $data->lastName = $nev[0];
-        $data->firstName = $nev[1];
-        $data->email = $req->email;
-        $data->Save();
+        if(count($nev) < 2){
+            return redirect("/profil");
+        }
+        else{
+            $data->lastName = $nev[0];
+            $data->firstName = $nev[1];
+            $data->email = $req->email;
+            $data->Save();
+        }
+
+
 
         return redirect("/profil");
     }

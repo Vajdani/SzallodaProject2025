@@ -10,8 +10,8 @@
             <h1>Felhasználói fiók törlése</h1>
             <div class="center form">
                 <p>Biztos hogy meg szeretne válni a fiókjától?</p>
-                <a href="/fioktorles/megerositem">Igen, törlöm a fiókom</a>
-                <a href="/profil">Nem, mégsem törlöm a fiókom</a>
+                <a href="/fioktorles/megerositem"><button class="save-button">Igen, törlöm a fiókom</button></a>
+                <a href="/profil"><button class="delete-button">Nem, mégsem törlöm a fiókom</button></a>
             </div>
         </section>
     </div>

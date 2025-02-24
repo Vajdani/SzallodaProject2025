@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('css')
+@section("css")
     <link rel="stylesheet" href="css/profil.css">
 @endsection
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+    <link rel="stylesheet" href="{{ asset("css/profil.css") }}">
 
     <div class="profile-con">
         <div class="profile-header">
@@ -13,7 +13,7 @@
                 <img src="https://placehold.co/100" alt="Profilkép" class="profile-picture">
             </div>
             <div class="profile-details-con">
-                <h2>{{ Auth::user()->username }}</h2>
+                <h2>{{Auth::user()->username}}</h2>
                 <div class="profile-option-con">
                     <a href="">Profilképcsere</a>
                     <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
@@ -28,22 +28,21 @@
                     @csrf
                     <div class="user-data">
                         <label for="email">Email-cím</label>
-                        <input type="text" value="{{ Auth::user()->email }}" name="email" id="email">
+                        <input type="text" value="{{Auth::user()->email}}" name="email" id="email">
                         @error('email')
                             <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="user-data">
                         <label for="username">Felhasználónév</label>
-                        <input type="text" value="{{ Auth::user()->username }}" name="username" id="username">
+                        <input type="text" value="{{Auth::user()->username}}" name="username" id="username">
                         @error('username')
                             <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="user-data">
                         <label for="realname">Polgári név</label>
-                        <input type="text" value="{{ Auth::user()->lastName }} {{ Auth::user()->firstName }}"
-                            name="realname" id="realname">
+                        <input type="text" value="{{Auth::user()->lastName}} {{Auth::user()->firstName}}" name="realname" id="realname">
                         @error('realname')
                             <p class="error">{{ $message }}</p>
                         @enderror
@@ -54,35 +53,35 @@
             </div>
             <div class="ratings">
                 <h2>Értékelések</h2>
-                <a href="/ertekeles"><button class="save-button">Új értékelés írása</button></a>
-                @foreach ($reviews as $review)
-                    <div class="rating-con">
-                        <div class="rating">
-                            <div class="rating-head">
-                                <div class="profile-picture-con">
-                                    <img class="profile-picture" src="https://placehold.co/100" alt="">
-                                </div>
-                                <div class="rating-title">
-                                    <h3>{{ Auth::user()->username }} - {{ $review->hotelName }}</h3>
-                                </div>
+                <div class="flex">
+                    <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
+                </div>
+                <div class="rating-con">
+                @foreach ($result as $review)
+                    <div class="rating">
+                        <div class="rating-head">
+                            <div class="profile-picture-con">
+                                <img class="profile-picture" src="https://placehold.co/100" alt="">
                             </div>
-                            <div class="rating-info">
-                                <p>
-                                    @for ($i = 0; $i < 5; $i++)
-                                        @if ($i < $review->rating)
-                                            <span class="starTicked">★</span>
-                                        @else
-                                            <span class="starUnTicked">★</span>
-                                        @endif
-                                    @endfor — {{ $review->created_at }}
-                                </p>
+                            <div class="rating-title">
+                                <h3>{{Auth::user()->username}} - {{$review->hotelName}}</h3>
                             </div>
-                            <div class="rating-desc">
-                                <p>{{ $review->reviewText }}</p>
-                            </div>
+                        </div>
+                        <div class="rating-info">
+                            <p>@for ($i = 0; $i < 5; $i++)
+                                @if($i < $review->rating)
+                                    <span class="starTicked">★</span>
+                                @else
+                                <span class="starUnTicked">★</span>
+                                @endif
+                            @endfor — {{$review->created_at}}</p>
+                        </div>
+                        <div class="rating-desc">
+                            <p>{{$review->reviewText}}</p>
                         </div>
                     </div>
                 @endforeach
+            </div>
             </div>
         </div>
     </div>

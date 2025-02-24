@@ -30,8 +30,34 @@ input:not(input[type=checkbox]) {
     width: 100%;
     color: #E5E1EE;
 
-
 }
+
+.save-button{
+    border-radius: 15px;
+    height: 30px;
+    min-width: 25%;
+    background-color: #2BA84A;
+    color: #E5E1EE;
+    box-shadow: none;
+    border: 2px solid black;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+}
+
+
+
+.delete-button{
+    border-radius: 15px;
+    height: 30px;
+    min-width: 25%;
+    background-color: #f52525;
+    color: #E5E1EE;
+    box-shadow: none;
+    border: 2px solid black;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+}
+
 
 form a {
     display: block;

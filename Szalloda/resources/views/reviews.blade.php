@@ -35,69 +35,35 @@
             </ul>
         </div>
         <div class="ratingSection">
-            <div class="rating">
-                <div class="ratingUser">
-                    <div class="profilePicture">
-                        <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
-                    </div>
-                    <div class="data">
-                        <div>
-                            <p>Felhasználó</p>
-                            <p>XY Szálloda</p>
-                        </div>
-                    </div>
+        @foreach ($review as $r)
+        <div class="rating">
+            <div class="ratingUser">
+                <div class="profilePicture">
+                    <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
                 </div>
-                <div>
-                    <p><span class="starTicked">★★★★★</span> — Dátum</p>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro distinctio quasi pariatur
-                        culpa! Tenetur animi omnis explicabo, facere tempore autem error necessitatibus, saepe dolor
-                        corporis, quos fuga blanditiis voluptates magnam.
-                    </p>
+                <div class="data">
+                    <div>
+                        <p>{{$r->username}}</p>
+                        <p>{{$r->hotelName}}</p>
+                    </div>
                 </div>
             </div>
-            <div class="rating">
-                <div class="ratingUser">
-                    <div class="profilePicture">
-                        <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
-                    </div>
-                    <div class="data">
-                        <div>
-                            <p>Felhasználó</p>
-                            <p>XY Szálloda</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p><span class="starTicked">★</span><span class="starUnTicked">★★★★</span> — Dátum</p>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro distinctio quasi pariatur
-                        culpa! Tenetur animi omnis explicabo, facere tempore autem error necessitatibus, saepe dolor
-                        corporis, quos fuga blanditiis voluptates magnam.
-                    </p>
-                </div>
+            <div>
+                <p>
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < $r->rating)
+                            <span class="starTicked">★</span>
+                        @else
+                        <span class="starUnTicked">★</span>
+                        @endif
+                    @endfor — {{ $r->created_at }}</p>
+                <p>
+                    {{$r->reviewText}}
+                </p>
             </div>
-            <div class="rating">
-                <div class="ratingUser">
-                    <div class="profilePicture">
-                        <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
-                    </div>
-                    <div class="data">
-                        <div>
-                            <p>Felhasználó</p>
-                            <p>XY Szálloda</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p><span class="starTicked">★★★</span><span class="starUnTicked">★★</span> — Dátum</p>
-                    <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro distinctio quasi pariatur
-                        culpa! Tenetur animi omnis explicabo, facere tempore autem error necessitatibus, saepe dolor
-                        corporis, quos fuga blanditiis voluptates magnam.
-                    </p>
-                </div>
-            </div>
+        </div>
+        @endforeach
+
         </div>
     </div>
 @endsection

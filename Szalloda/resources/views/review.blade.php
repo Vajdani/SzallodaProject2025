@@ -13,9 +13,9 @@
                 <label for="hotel">Melyik hotelünkhöz szeretne értékelést írni?</label>
                 <br>
                 <select name="hotel" id="hotel">
-                    <option value="1">Budapest</option>
-                    <option value="2">Nyíregyháza</option>
-                    <option value="3">Debrecen</option>
+                    <option value="1">Hotel budapest</option>
+                    <option value="2">Pangea Hotel</option>
+                    <option value="3">Régi Posta Étterem és Fogadó</option>
                 </select>
                 <br>
                 <label for="rating">Értékelés</label>

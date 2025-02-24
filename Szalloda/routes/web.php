@@ -7,7 +7,7 @@ use App\Http\Middleware\IsLoggedIn;
 use App\Http\Middleware\IsntLoggedIn;
 
 Route::get('/', [MainController::class, "index"]);
-Route::get('/ertekelesek/{id}', [MainController::class, "reviews"]);
+Route::get('/ertekelesek', [UserController::class, "reviews"]);
 Route::get('/szalloda/{id}', [MainController::class, "hotel"]);
 Route::get('/telepules/{id}', [MainController::class, "city"]);
 Route::get('/foglalas', [MainController::class, "reservation"]);

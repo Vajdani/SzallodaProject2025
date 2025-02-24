@@ -10,9 +10,7 @@ class MainController extends Controller
         return view("index");
     }
 
-    public function reviews($id) {
-        return view("reviews");
-    }
+
 
     public function hotel($id) {
         return view("hotel");
