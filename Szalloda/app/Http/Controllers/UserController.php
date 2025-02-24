@@ -41,21 +41,9 @@ class UserController extends Controller
 
 
     public function profile() {
-        $sv = Reviews::where('user_id', Auth::user()->user_id)
-                            ->orderBy('created_at', 'desc')
-                            ->get();
-        $hotel = hotel::select('hotelName')
-                    ->join('reviews','reviews.hotel_id','hotel.hotel_id')
-                    ->get();
-
-        dd($hotel);
         return view("profile", [
-            'result' => $sv,
-            'hotel' => $hotel
+            "reviews" => Reviews::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName from reviews, hotel where reviews.hotel_id = hotel.hotel_id")
         ]);
-
-
-
     }
     public function profilePost(Request $req) {
         $req->validate([
