@@ -4,6 +4,7 @@
 
 .ratingSection {
     padding: 0 30px 25px 30px;
+    width: 80%;
 }
 
 .filterBar:first-child {
