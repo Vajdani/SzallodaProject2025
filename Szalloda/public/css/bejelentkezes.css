@@ -6,12 +6,24 @@ form {
     height: 30vh;
 }
 
+.form {
+    background-color: #248232;
+    border-radius: 25px;
+    padding: 25px;
+    max-width: 250px;
+    height: 30vh;
+}
+
+
 
 form.regisztracio{
     height: 50vh;
 
 }
 
+input::placeholder{
+    color:#E5E1EE;
+}
 input:not(input[type=checkbox]) {
     display: block;
     margin-bottom: 25px;

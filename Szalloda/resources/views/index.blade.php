@@ -19,7 +19,7 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <a href="telepules.html">
+                        <a href="/telepules/1">
                             <img src="https://placehold.co/600x400" alt="Budapest" title="Budapest">
                             <div class="carousel-caption">
                                 <h3>Budapest</h3>
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="item">
-                        <a href="telepules.html">
+                        <a href="/telepules/2">
                             <img src="https://placehold.co/600x400" alt="Nyiregyhaza" title="Nyíregyháza">
                             <div class="carousel-caption">
                                 <h3>Nyíregyháza</h3>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="item">
-                        <a href="telepules.html">
+                        <a href="/telepules/3">
                             <img src="https://placehold.co/600x400" alt="Debrecen" title="Debrecen">
                             <div class="carousel-caption">
                                 <h3>Debrecen</h3>

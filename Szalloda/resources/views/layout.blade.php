@@ -29,15 +29,18 @@
                     <li><a href="/profil">Profilom</a></li>
                 @endauth
 
-                <li><a href="/ertekelesek">Értékelések</a></li>
+                <li><a href="/ertekelesek/1">Értékelések</a></li>
                 <li><a href="/szalloda/veletlenszeru">Nyaraló ajánlás</a></li>
-                <li><a href="/foglalas">Foglalás</a></li>
-
+                @auth
+                    <li><a href="/foglalas">Foglalás</a></li>
+                @endauth
                 <li><hr></li>
                 @auth
                     <li><a href="/kijelentkezes">Kijelentkezés</a></li>
                 @else
                     <li><a href="/regisztracio">Regisztráció</a></li>
+                    <li><a href="/bejelentkezes">Bejelentkezés</a></li>
+
                 @endauth
             </ul>
             <hr>

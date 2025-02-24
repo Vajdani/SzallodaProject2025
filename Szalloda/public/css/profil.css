@@ -68,6 +68,8 @@ h2{
     background-color: #2BA84A;
     box-shadow: none;
     border: 2px solid black;
+    margin: 10px 0 10px 0;
+
 }
 
 .user-information form{
@@ -134,9 +136,7 @@ h2{
 }
 
 .rating-desc{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
     text-align: justify;
     padding: 2%;
 }
