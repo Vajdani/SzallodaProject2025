@@ -62,8 +62,7 @@
                                 <img class="profile-picture" src="https://placehold.co/100" alt="">
                             </div>
                             <div class="rating-title">
-                                <h3>{{Auth::user()->username}} - {{$hotel[$review->hotel_id]}}</h3>
-
+                                <h3>{{Auth::user()->username}} - {{$hotel[$review->hotel_id-1]}}</h3>
                             </div>
                         </div>
                         <div class="rating-info">
