@@ -85,16 +85,12 @@ class UserController extends Controller
             $data->Save();
         }
 
-
-
         return redirect("/profil");
     }
 
     public function logout() {
         Auth::logout();
-        return view("index",[
-            'sv' => 'Sikeres kijelentkezés!'
-        ]);
+        return redirect("/")->with('sv', 'Sikeres kijelentkezés!');
     }
 
     public function login() {
@@ -217,13 +213,13 @@ class UserController extends Controller
             $data->password    = Hash::make($req->newpassword);
             $data->Save();
             Auth::logout();
-            return view('/',[
+            return redirect('/')->with([
                 'sv'=>'A jelszava megváltozott!'
             ]);
         }
         else {
-            return view('/',[
-                'sv'    => 'A jelszó nem változott meg'
+            return redirect('/')->with([
+                'sv'=>'A jelszó nem változott meg!'
             ]);
         }
     }
