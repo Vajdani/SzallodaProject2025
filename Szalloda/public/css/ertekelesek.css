@@ -7,8 +7,12 @@
     width: 80%;
 }
 
+.filterBar{
+    width: 100%;
+}
+
 .filterBar:first-child {
-    background-color: #248232;
+    background-color: #15B392;
     font-size: 150%;
     padding: 20px;
     margin-bottom: 10px;
@@ -31,7 +35,7 @@
     font-size: 75%;
 }
 select{
-    background-color: #2AA248;
+    background-color: #15B392;
     color: #E5E1EE;
 }
 @media only screen and (max-width: 600px) {
@@ -57,9 +61,10 @@ select{
 }
 
 .rating {
-    background-color:#248232;
+    background-color:#15B392;
     padding: 10px;
     margin-top: 15px;
+    border-radius: 15px;
 }
 
 .ratingUser {

@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="mainContent">
-        <form action="/regisztracio" method="post" class="registration-form">
+        <form action="/regisztracio" method="post" class="form-design">
             <h1>Regisztráció</h1>
             @csrf
             <div class="inputItem">

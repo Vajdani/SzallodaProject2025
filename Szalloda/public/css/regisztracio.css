@@ -1,7 +1,7 @@
 
 /* formok */
 
-.registration-form{
+.form-design{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,12 +14,12 @@
     margin-bottom: 20px;
 }
 
-.registration-form .inputItem{
+.form-design .inputItem{
     width: 100%;
     margin-bottom: 15px;
 }
 
-.registration-form input{
+.form-design input{
     border: none;
     border-bottom: 2px solid #3D8D7A;
     background-color: #15B392;
@@ -27,24 +27,42 @@
     transition: all 99999999999999s linear;
 }
 
-.registration-form label{
+.form-design label{
     margin-bottom: 10px;
     display: block;
 }
 
-.registration-form input:focus{
+.form-design input:focus{
     outline: none;
 }
 
-.registration-form button{
+.form-design button{
     border-radius: 25px;
     width: 40%;
     border: none;
     background-color: #3D8D7A;
     height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.registration-form input:internal-autofill-selected{
-    
+.error{
+    border: 2px solid red;
+    border-radius: 5px;
+    background-color: rgb(216, 137, 137);
+    color: rgb(201, 0, 0);
+    width: 95%;
+    padding: 5px;
+    text-align: center !important;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
+
+@media only screen and (max-width:600px){
+    .form-design{
+        min-width: 100%;
+        border-radius: 0;
+    }
+}
+
 

@@ -13,7 +13,7 @@
 }
 
 section:not(:first-child) {
-    background-color: #2AA248;
+    background-color: #15B392;
     border-radius: 10px;
     margin: 0 25px 10px 25px;
     min-width: fit-content;

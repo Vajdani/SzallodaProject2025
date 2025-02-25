@@ -1,14 +1,13 @@
 @extends('layout')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/regisztracio.css') }}">
 @endsection
 
 @section('content')
-    <div class="mainContent">
-        <section>
-            <h1>Bejelentkezés</h1>
-            <form action="/bejelentkezes" method="post" class="center">
+    <div class="mainContent">      
+            <form action="/bejelentkezes" method="post" class="form-design">
+                <h1>Bejelentkezés</h1>
                 @csrf
 
                 @if($errors->any())
@@ -17,18 +16,19 @@
                     </div>
                 @endif
 
-                <label for="username">Felhasználónév/E-mail</label>
+                <div class="inputItem">
+                    <label for="username">Felhasználónév/E-mail</label>
                 <input type="text" name="username" id="username">
-
-
-                <label for="password">Jelszó</label>
-                <input type="password" name="password" id="password">
-
-
-                <input type="submit" value="Bejelentkezés">
+                </div>
+                
+                <div class="inputItem">
+                    <label for="password">Jelszó</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                
+                <button type="submit" value="">Bejelentkezés</button>
 
                 <a href="/regisztracio">Még nincs fiókja?</a>
             </form>
-        </section>
     </div>
 @endsection
