@@ -14,9 +14,9 @@
                 <label for="hotel">Melyik hotelünkhöz szeretne értékelést írni?</label>
                 <br>
                 <select name="hotel" id="hotel">
-                    <option value="1">Hotel budapest</option>
-                    <option value="2">Pangea Hotel</option>
-                    <option value="3">Régi Posta Étterem és Fogadó</option>
+                    @foreach ($hotels as $hotel)
+                        <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>
+                    @endforeach
                 </select>
                 <br>
                 <p>Értékelés</p>

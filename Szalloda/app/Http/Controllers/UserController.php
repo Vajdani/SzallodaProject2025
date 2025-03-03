@@ -17,7 +17,9 @@ class UserController extends Controller
     static int $minPasswordLength = 8;
 
     public function review(){
-        return view("review");
+        return view("review", [
+            "hotels" => Hotel::all()
+        ]);
     }
 
     public function reviewPost(Request $req){
