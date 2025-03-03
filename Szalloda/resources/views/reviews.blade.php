@@ -36,9 +36,8 @@
         </div>
         <div class="ratingSection center" id="ratingSection">
             <script src="{{asset('js/reviews.js')}}"></script>
-
             @foreach ($reviews as $r)
-            <script>renderRating("{{$r->username}}","{{$r->hotelName}}","{{$r->rating}}","{{$r->created_at}}","{{$r->reviewText}}")</script>
+                <script>renderRating("{{$r->username}}","{{$r->hotelName}}","{{$r->rating}}","{{$r->created_at}}","{{$r->reviewText}}")</script>
             @endforeach
         </div>
     </div>
