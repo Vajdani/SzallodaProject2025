@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}">
+    <script src="{{asset('js/script.js')}}"></script>
 @endsection
 
 @section('content')
@@ -18,16 +19,13 @@
                     <option value="3">Régi Posta Étterem és Fogadó</option>
                 </select>
                 <br>
-                <label for="rating">Értékelés</label>
-                <select name="star" id="star">
-                    <option value="1">1★</option>
-                    <option value="2">2★</option>
-                    <option value="3">3★</option>
-                    <option value="4">4★</option>
-                    <option value="5">5★</option>
-                </select>
+                <p>Értékelés</p>
+                <p id="rating"><span onclick="reviewstar(1)">★</span><span onclick="reviewstar(2)">★</span><span onclick="reviewstar(3)">★</span><span onclick="reviewstar(4)">★</span><span onclick="reviewstar(5)">★</span></p>
+                @error('star')
+                <p class="error">{{ $message }}</p>
+                @enderror
+                <input type="number" name="star" id="star" style="display: none">
                 <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-
                 <input type="submit" value="Közzététel">
 
 

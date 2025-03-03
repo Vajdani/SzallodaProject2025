@@ -29,6 +29,9 @@ input:not(input[type=checkbox]) {
     color: #E5E1EE;
 
 }
+#rating{
+    cursor: pointer;
+}
 
 .save-button{
     border-radius: 15px;

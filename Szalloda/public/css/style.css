@@ -135,6 +135,14 @@ section{
     margin-top: 20px;
 }
 
+.starTicked {
+    color: gold;
+}
+
+.starUnTicked {
+    color: #E5E1EE
+}
+
 @media only screen and (max-width: 600px) {
     main {
         flex-direction: column-reverse;
