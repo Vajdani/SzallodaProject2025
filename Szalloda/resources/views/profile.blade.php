@@ -74,21 +74,23 @@
                             <div class="profile-picture-con">
                                 <img class="profile-picture" src="https://placehold.co/100" alt="">
                             </div>
+                        </div>
+                        <div class="rating-body">
                             <div class="rating-title">
                                 <h3>{{Auth::user()->username}} - {{$review->hotelName}}</h3>
                             </div>
-                        </div>
-                        <div class="rating-info">
-                            <p>@for ($i = 0; $i < 5; $i++)
-                                @if($i < $review->rating)
-                                    <span class="starTicked">★</span>
-                                @else
-                                <span class="starUnTicked">★</span>
-                                @endif
-                            @endfor — {{$review->created_at}}</p>
-                        </div>
-                        <div class="rating-desc">
-                            <p>{{$review->reviewText}}</p>
+                            <div class="rating-info">
+                                <p>@for ($i = 0; $i < 5; $i++)
+                                    @if($i < $review->rating)
+                                        <span class="starTicked">★</span>
+                                    @else
+                                    <span class="starUnTicked">★</span>
+                                    @endif
+                                @endfor — {{$review->created_at}}</p>
+                            </div>
+                            <div class="rating-desc">
+                                <p>{{$review->reviewText}}</p>
+                            </div>
                         </div>
                     </div>
                 @endforeach

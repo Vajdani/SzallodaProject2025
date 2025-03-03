@@ -66,6 +66,7 @@
 @media only screen and (max-width:600px){
     .form-design{
         min-width: 100%;
+        box-sizing: border-box;
         border-radius: 0;
     }
 }
