@@ -11,43 +11,33 @@
             <div id="myCarousel" class="carousel slide center" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    @foreach ($varos as $v)
+                        @if ($v->city_id == 1)
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>           
+                        @else
+                            <li data-target="#myCarousel" data-slide-to={{$v->city_id-1}}></li>
+                        @endif
+                    @endforeach
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    <div class="item active">
-                        <a href="/telepules/1">
-                            <img src="https://placehold.co/600x400" alt="Budapest" title="Budapest">
+                    @foreach ($varos as $v)
+                        @if ($v->city_id == 1)
+                        <div class="item active">
+                        @else
+                        <div class="item">
+                        @endif
+                        <a href="/telepules/{{$v->city_id}}">
+                            <img src="https://placehold.co/600x400" alt="{{$v->cityName}}" title="{{$v->cityName}}">
                             <div class="carousel-caption">
-                                <h3>Budapest</h3>
-                                <p>Olyan jó!</p>
+                                <h3>{{$v->cityName}}</h3>
+                                <p>{{$v->country}}</p>
                             </div>
                         </a>
                     </div>
-
-                    <div class="item">
-                        <a href="/telepules/2">
-                            <img src="https://placehold.co/600x400" alt="Nyiregyhaza" title="Nyíregyháza">
-                            <div class="carousel-caption">
-                                <h3>Nyíregyháza</h3>
-                                <p>Olyan jó!</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item">
-                        <a href="/telepules/3">
-                            <img src="https://placehold.co/600x400" alt="Debrecen" title="Debrecen">
-                            <div class="carousel-caption">
-                                <h3>Debrecen</h3>
-                                <p>Olyan jó!</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                    @endforeach
+     
 
                 <!-- Left and right controls -->
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">

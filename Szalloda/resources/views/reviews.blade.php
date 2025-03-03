@@ -34,38 +34,16 @@
                 </li>
             </ul>
         </div>
-        <div class="ratingSection center">
+        <div class="ratingSection center" id="ratingSection">
+            <script src="{{asset('js/reviews.js')}}"></script>
+
             @foreach ($reviews as $r)
-                <div class="rating">
-                    <div class="ratingUser">
-                        <div class="profilePicture">
-                            <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
-                        </div>
-                        <div class="data">
-                            <div>
-                                <p>{{ $r->username }}</p>
-                                <p>{{ $r->hotelName }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p>
-                            @for ($i = 0; $i < 5; $i++)
-                                @if ($i < $r->rating)
-                                    <span class="starTicked">★</span>
-                                @else
-                                    <span class="starUnTicked">★</span>
-                                @endif
-                            @endfor — {{ $r->created_at }}
-                        </p>
-                        <p>
-                            {{ $r->reviewText }}
-                        </p>
-                    </div>
-                </div>
+            <script>renderRating("{{$r->username}}","{{$r->hotelName}}","{{$r->rating}}","{{$r->created_at}}","{{$r->reviewText}}")</script>
             @endforeach
         </div>
     </div>
 
-    <script src="{{asset('js/reviews.js')}}"></script>
+
+    <script>
+    </script>
 @endsection
