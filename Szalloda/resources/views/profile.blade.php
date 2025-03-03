@@ -72,7 +72,7 @@
                     <div class="rating">
                         <div class="rating-head">
                             <div class="profile-picture-con">
-                                <img class="profile-picture" src="https://placehold.co/100" alt="">
+                                <img class="profile-picture" src="{{asset('img/pfp/'.Auth::user()->profilePic.'.png')}}" alt="">
                             </div>
                         </div>
                         <div class="rating-body">

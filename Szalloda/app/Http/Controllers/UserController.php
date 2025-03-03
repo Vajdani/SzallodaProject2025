@@ -52,7 +52,7 @@ class UserController extends Controller
 
     public function profile() {
         return view("profile", [
-            "result" => Reviews::fromQuery("select r.rating, r.created_at, r.reviewText, h.hotelName, u.username
+            "result" => Reviews::fromQuery("select r.rating, r.created_at, r.reviewText, h.hotelName, u.username, u.profilePic
                                             from reviews r
                                             inner join user u on u.user_id = r.user_id
                                             inner join hotel h on r.hotel_id = h.hotel_id

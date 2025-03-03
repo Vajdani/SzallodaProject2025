@@ -3,7 +3,7 @@ const varos = document.getElementById("varos")
 const szalloda = document.getElementById("szalloda")
 const ratingSection = document.getElementById("ratingSection")
 
-function renderRating(uname, hname, rating, createdat, text) {
+function renderRating(uname, hname, rating, createdat, text,pfp) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -12,7 +12,7 @@ function renderRating(uname, hname, rating, createdat, text) {
         <div class="rating">
             <div class="ratingUser">
                 <div class="profilePicture">
-                    <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
+                    <img src="img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture">
                 </div>
                 <div class="data">
                     <div>
@@ -54,7 +54,7 @@ async function updateContents() {
         }
         else {
             data.forEach(element => {
-                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText)
+                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText,element.profilePic)
             });
         }
     }).catch((error) => {
