@@ -13,18 +13,18 @@ function renderRating(uname, hname, rating, createdat, text,pfp) {
             <div class="ratingUser">
                 <div class="profilePicture">
                     <img src="img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture">
+                    <p class="text-center">` + uname+ `</p>
                 </div>
                 <div class="data">
                     <div>
-                        <p>`+ uname + `</p>
-                        <p>`+ hname + `</p>
+                        <h3>`+ hname + `</h3>
+                        <p>`+ starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
+                        <p> `+createdat+`</p>
+                        <p>`+ text + `</p>
                     </div>
                 </div>
             </div>
-            <div>
-                <p>`+ starT.repeat(rating) + starU.repeat(5 - rating) + ` — ` + createdat + `</p>
-                <p>`+ text + `</p>
-            </div>
+
         </div>
     `
     ratingSection.appendChild(div)
