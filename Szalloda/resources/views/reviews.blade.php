@@ -11,6 +11,7 @@
                 <li>Szűrés:</li>
                 <li>
                     <select name="csillagok" id="csillagok">
+                        <option value="0">Összes</option>
                         <option value="1">1 csillag</option>
                         <option value="2">2 csillag</option>
                         <option value="3">3 csillag</option>
@@ -20,6 +21,7 @@
                 </li>
                 <li>
                     <select name="varos" id="varos">
+                        <option value="0">Összes</option>
                         @foreach ($cities as $city)
                             <option value="{{$city->city_id}}">{{$city->cityName}}</option>
                         @endforeach
@@ -27,6 +29,7 @@
                 </li>
                 <li>
                     <select name="szalloda" id="szalloda">
+                        <option value="0">Összes</option>
                         @foreach ($hotels as $hotel)
                             <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>
                         @endforeach
@@ -41,8 +44,4 @@
             @endforeach
         </div>
     </div>
-
-
-    <script>
-    </script>
 @endsection

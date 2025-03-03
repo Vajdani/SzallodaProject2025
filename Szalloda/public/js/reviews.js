@@ -30,8 +30,36 @@ function renderRating(uname, hname, rating, createdat, text) {
     ratingSection.appendChild(div)
 }
 
-function updateContents() {
-    ratingSection.innerHTML = ""
+function renderNone() {
+    const div = document.createElement("div")
+    div.innerHTML = `
+        <div class="rating">
+            Egy olyan értékelés sincs, ami megfelel a szűrőnek!
+        </div>
+    `
+    ratingSection.appendChild(div)
+}
+
+async function updateContents() {
+    //"/ertekelesek/ertek/"+ csillagok.value +"/varos/"+ varos.value +"/szalloda/"+ szalloda.value
+    await fetch("/ertekelesek/" + csillagok.value + "/" + varos.value + "/" + szalloda.value).then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }).then((data) => {
+        ratingSection.innerHTML = ""
+        if (data.length == 0) {
+            renderNone()
+        }
+        else {
+            data.forEach(element => {
+                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText)
+            });
+        }
+    }).catch((error) => {
+        console.error('Fetch error:', error);
+    })
 }
 
 csillagok.onchange = updateContents

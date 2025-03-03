@@ -8,6 +8,8 @@ use App\Http\Middleware\IsntLoggedIn;
 
 Route::get('/', [MainController::class, "index"]);
 Route::get('/ertekelesek', [MainController::class, "reviews"]);
+//Route::get('/ertekelesek/ertek/{csillagok}/varos/{varos}/szalloda/{hotel}', [MainController::class, "reviewsFilter"]);
+Route::get('/ertekelesek/{csillagok}/{varos}/{hotel}', [MainController::class, "reviewsFilter"]);
 Route::get('/szalloda/{id}', [MainController::class, "hotel"]);
 Route::get('/telepules/{id}', [MainController::class, "city"]);
 Route::get('/foglalas', [MainController::class, "reservation"]);
@@ -24,7 +26,6 @@ Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::get('/fioktorles', [UserController::class, "deleteAccount"]);
     Route::post('/fioktorles', [UserController::class, "deleteAccountPost"]);
     Route::get('/fioktorles/megerositem', [UserController::class, "deleteAccountConfirm"]);
-
 });
 
 Route::group(['middleware' => [IsntLoggedIn::class]], function () {
