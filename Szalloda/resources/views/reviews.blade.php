@@ -20,50 +20,52 @@
                 </li>
                 <li>
                     <select name="varos" id="varos">
-                        <option value="Budapest">Budapest</option>
-                        <option value="Nyíregyháza">Nyíregyháza</option>
-                        <option value="Debrecen">Debrecen</option>
+                        @foreach ($cities as $city)
+                            <option value="{{$city->city_id}}">{{$city->cityName}}</option>
+                        @endforeach
                     </select>
                 </li>
                 <li>
                     <select name="szalloda" id="szalloda">
-                        <option value="ABCD">ABCD</option>
-                        <option value="EFGH">EFGH</option>
-                        <option value="IJKL">IJKL</option>
+                        @foreach ($hotels as $hotel)
+                            <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>
+                        @endforeach
                     </select>
                 </li>
             </ul>
         </div>
-        <div class="ratingSection">
-        @foreach ($review as $r)
-        <div class="rating">
-            <div class="ratingUser">
-                <div class="profilePicture">
-                    <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
-                </div>
-                <div class="data">
+        <div class="ratingSection center">
+            @foreach ($reviews as $r)
+                <div class="rating">
+                    <div class="ratingUser">
+                        <div class="profilePicture">
+                            <img src="https://placehold.co/400" alt="profilkep" title="Profilkép" class="img-fluid">
+                        </div>
+                        <div class="data">
+                            <div>
+                                <p>{{ $r->username }}</p>
+                                <p>{{ $r->hotelName }}</p>
+                            </div>
+                        </div>
+                    </div>
                     <div>
-                        <p>{{$r->username}}</p>
-                        <p>{{$r->hotelName}}</p>
+                        <p>
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < $r->rating)
+                                    <span class="starTicked">★</span>
+                                @else
+                                    <span class="starUnTicked">★</span>
+                                @endif
+                            @endfor — {{ $r->created_at }}
+                        </p>
+                        <p>
+                            {{ $r->reviewText }}
+                        </p>
                     </div>
                 </div>
-            </div>
-            <div>
-                <p>
-                    @for ($i = 0; $i < 5; $i++)
-                        @if ($i < $r->rating)
-                            <span class="starTicked">★</span>
-                        @else
-                        <span class="starUnTicked">★</span>
-                        @endif
-                    @endfor — {{ $r->created_at }}</p>
-                <p>
-                    {{$r->reviewText}}
-                </p>
-            </div>
-        </div>
-        @endforeach
-
+            @endforeach
         </div>
     </div>
+
+    <script src="{{asset('js/reviews.js')}}"></script>
 @endsection

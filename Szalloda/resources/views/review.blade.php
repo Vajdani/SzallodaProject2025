@@ -22,13 +22,11 @@
                 <p>Értékelés</p>
                 <p id="rating"><span onclick="reviewstar(1)">★</span><span onclick="reviewstar(2)">★</span><span onclick="reviewstar(3)">★</span><span onclick="reviewstar(4)">★</span><span onclick="reviewstar(5)">★</span></p>
                 @error('star')
-                <p class="error">{{ $message }}</p>
+                    <p class="error">{{ $message }}</p>
                 @enderror
                 <input type="number" name="star" id="star" style="display: none">
                 <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
                 <input type="submit" value="Közzététel">
-
-
             </form>
         </section>
     </div>

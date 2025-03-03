@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class hotel extends Model
+class Varos extends Model
 {
-    protected $table = "hotel";
+    protected $table = "city";
     public $timestamps = false;
-    public $primaryKey = "hotel_id";
+    public $primaryKey = "city_id";
 }
