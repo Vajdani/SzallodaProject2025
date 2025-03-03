@@ -180,6 +180,10 @@ footer p {
     margin-right: auto;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .error {
     color: rgb(253, 118, 118);
     font-size: 100% !important;

@@ -76,7 +76,7 @@
                 @enderror
             </div>
 
-            <div class="">
+            <div class="inputItem text-center">
                 <input type="checkbox" name="tos" id="tos">
                 <label for="tos" style="display: inline">Elfogadom a felhasználói feltételeket</label>
                 @error('tos')
