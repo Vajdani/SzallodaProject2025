@@ -58,6 +58,11 @@
     <footer>
         <p>Footer text</p>
     </footer>
+
+    @php
+        if (Session::has("sv"))
+            echo "<script>window.addEventListener('load', () => { alert('".Session::get("sv")."'); });</script>"
+    @endphp
 </body>
 
 </html>

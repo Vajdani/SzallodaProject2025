@@ -102,11 +102,9 @@ class UserController extends Controller
             'username' => 'required',
             'password' => 'required'
         ]);
-        if(Auth::attempt(['username' => $req->username, 'password' => $req->password, "active" => true])){
-            return redirect('/');
-        }
-        else if(Auth::attempt(['email' => $req->username, 'password' => $req->password, "active" => true])){
-            return redirect('/');
+        if(Auth::attempt(['username' => $req->username, 'password' => $req->password, "active" => true]) ||
+           Auth::attempt(['email' => $req->username, 'password' => $req->password, "active" => true])) {
+            return redirect('/')->with("sv", "Sikeres bejelentkezés!");
         }
         else{
             return redirect('/bejelentkezes');
@@ -213,12 +211,12 @@ class UserController extends Controller
             $data->password    = Hash::make($req->newpassword);
             $data->Save();
             Auth::logout();
-            return redirect('/')->with([
+            return redirect('/bejelentkezes')->with([
                 'sv'=>'A jelszava megváltozott!'
             ]);
         }
         else {
-            return redirect('/')->with([
+            return redirect('/profil')->with([
                 'sv'=>'A jelszó nem változott meg!'
             ]);
         }

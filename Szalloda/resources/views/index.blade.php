@@ -148,9 +148,4 @@
             </p>
         </section>
     </div>
-
-    @php
-        if (Session::has("sv"))
-            echo "<script>window.addEventListener('load', () => { alert('".Session::get("sv")."'); });</script>"
-    @endphp
 @endsection
