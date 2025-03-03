@@ -43,7 +43,7 @@ class MainController extends Controller
     }
 
     public function reviewsFilter($csillagok, $varos, $hotel) {
-        $query = "select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id";
+        $query = "select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id";
 
         if ($csillagok != 0) { $query .= " and reviews.rating = $csillagok"; }
         if ($varos != 0) { $query .= " and hotel.city_id = $varos"; }
