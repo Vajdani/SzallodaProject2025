@@ -14,7 +14,7 @@ body {
 main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; 
+    justify-content: space-between;
     min-height: 92vh;
 }
 
@@ -61,6 +61,7 @@ section{
 
 .sidebarHeader h2{
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .toggleButtonCon{
@@ -199,4 +200,4 @@ footer p {
 }
 
 /* https://colorhunt.co/palette/d2ff7273ec8b54c39215b392 */
-/* https://colorhunt.co/palette/3d8d7ab3d8a8fbffe4a3d1c6 */ 
+/* https://colorhunt.co/palette/3d8d7ab3d8a8fbffe4a3d1c6 */
