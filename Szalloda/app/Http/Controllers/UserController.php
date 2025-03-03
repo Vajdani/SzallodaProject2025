@@ -22,6 +22,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function profilePfp(Request $req){
+        $req->validate([
+
+        ]);
+
+        $data = User::find(Auth::user()->user_id);
+        $data->profilePic = $req->pfp;
+        $data->save();
+        return redirect("/profil");
+
+    }
+
     public function reviewPost(Request $req){
         $req->validate([
             'hotel' => 'required',

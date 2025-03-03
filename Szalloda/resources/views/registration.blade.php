@@ -85,6 +85,6 @@
             </div>
 
             <button type="submit">Bejelentkezés</button>
-        </form>    
+        </form>
     </div>
 @endsection

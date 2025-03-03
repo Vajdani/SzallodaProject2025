@@ -10,7 +10,11 @@ body {
     background-color: #A3D1C6;
     color: #E5E1EE;
 }
-
+.profile-picture{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
 main {
     display: flex;
     flex-direction: row;

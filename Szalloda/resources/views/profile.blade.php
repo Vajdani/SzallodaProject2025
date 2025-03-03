@@ -2,6 +2,7 @@
 
 @section("css")
     <link rel="stylesheet" href="css/profil.css">
+    <script src="{{asset('js/profile.js')}}"></script>
 @endsection
 
 @section('content')
@@ -10,21 +11,31 @@
     <div class="profile-con">
         <div class="profile-header">
             <div class="profile-picture-con">
-                <img src="https://placehold.co/100" alt="Profilkép" class="profile-picture">
+                <img src="{{asset('img/pfp/'.Auth::user()->profilePic.'.png')}}" alt="Profilkép" class="profile-picture" id="profile">
             </div>
             <div class="profile-details-con">
                 <h2>{{Auth::user()->username}}</h2>
                 <div class="profile-option-con">
-                    <a href="">Profilképcsere</a>
+                    <a onclick="pfpmenu()">Profilképcsere</a>
                     <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
                     <a href="/fioktorles">Felhasználó törlése</a>
                 </div>
             </div>
         </div>
+        <div id="pics" class="pfp" style="display: none">
+            <form action="/profil/pfp" method="post">
+            @csrf
+            @for($i=0;$i<4;$i++)
+            <img src="{{asset('img/pfp/'.$i.'.png')}}" alt="{{$i}}" class="profile-picture" onclick="pfpchange({{$i}})">
+            @endfor
+            <input type="text" style="display: none" id="pfp" name="pfp">
+            <button class="save-button" type="submit">Mentés</button>
+        </form>
+        </div>
         <div class="profile-body">
             <div class="user-information">
                 <h2>Felhasználói Adatok</h2>
-                <form action="/profil" method="post">
+                <form action="/profil/adat" method="post">
                     @csrf
                     <div class="user-data">
                         <label for="email">Email-cím</label>
