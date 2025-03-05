@@ -43,12 +43,23 @@ class MainController extends Controller
     }
 
     public function reviewsFilter($csillagok, $varos, $hotel) {
-        $query = "select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id";
+        $reviewQuery = "select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id";
 
-        if ($csillagok != 0) { $query .= " and reviews.rating = $csillagok"; }
-        if ($varos != 0) { $query .= " and hotel.city_id = $varos"; }
-        if ($hotel != 0) { $query .= " and reviews.hotel_id = $hotel"; }
+        if ($csillagok != 0) { $reviewQuery .= " and reviews.rating = $csillagok"; }
+        if ($varos != 0) { $reviewQuery .= " and hotel.city_id = $varos"; }
+        if ($hotel != 0) { $reviewQuery .= " and reviews.hotel_id = $hotel"; }
 
-        return Reviews::fromQuery($query);
+        $response = [
+            "reviews" => Reviews::fromQuery($reviewQuery),
+        ];
+
+        $hotelQuery = "select hotelName, hotel_id from hotel";
+        if ($varos != 0) {
+            $hotelQuery .= " where city_id = $varos";
+        }
+
+        $response["hotels"] = Hotel::fromQuery($hotelQuery);
+
+        return $response;
     }
 }

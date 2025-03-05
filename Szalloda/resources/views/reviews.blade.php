@@ -28,7 +28,7 @@
                     </select>
                 </li>
                 <li>
-                    <select name="szalloda" id="szalloda" onchange="szallodachange()">
+                    <select name="szalloda" id="szalloda">
                         <option value="0">Összes</option>
                         @foreach ($hotels as $hotel)
                             <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>

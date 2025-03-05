@@ -3,7 +3,10 @@ const varos = document.getElementById("varos")
 const szalloda = document.getElementById("szalloda")
 const ratingSection = document.getElementById("ratingSection")
 
-function renderRating(uname, hname, rating, createdat, text,pfp) {
+let lastSzalloda = 0
+let varosChanged = false
+
+function renderRating(uname, hname, rating, createdat, text, pfp) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -17,10 +20,10 @@ function renderRating(uname, hname, rating, createdat, text,pfp) {
                 </div>
                 <div class="data">
                     <div>
-                        <h3>`+ hname + `</h3>
-                        <p>`+ starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
-                        <p> `+createdat+`</p>
-                        <p>`+ text + `</p>
+                        <h3>` + hname + `</h3>
+                        <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
+                        <p>` + createdat + `</p>
+                        <p>` + ((text == "" || text == "null" || text == null) ? "" : text) + `</p>
                     </div>
                 </div>
             </div>
@@ -30,19 +33,14 @@ function renderRating(uname, hname, rating, createdat, text,pfp) {
     ratingSection.appendChild(div)
 }
 
-function renderHotels(cityId,hotelName,hotelId){
-    var dropdown = document.getElementById("szalloda");
-    if(cityId == document.getElementById("varos").value){
+function renderHotel(hotelName, hotelId) {
     var option = document.createElement("option");
     option.text = hotelName;
     option.value = hotelId;
-    dropdown.add(option);
-    }
+
+    szalloda.appendChild(option);
 }
 
-function szallodachange(){
-    conmsole.log("szallodachange")
-}
 
 function renderNone() {
     const div = document.createElement("div")
@@ -56,26 +54,45 @@ function renderNone() {
 
 async function updateContents() {
     //"/ertekelesek/ertek/"+ csillagok.value +"/varos/"+ varos.value +"/szalloda/"+ szalloda.value
+    lastSzalloda = szalloda.value
     await fetch("/ertekelesek/" + csillagok.value + "/" + varos.value + "/" + szalloda.value).then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
     }).then((data) => {
+        let reviews = data.reviews
         ratingSection.innerHTML = ""
-        if (data.length == 0) {
+        if (reviews.length == 0) {
             renderNone()
         }
         else {
-            data.forEach(element => {
+            reviews.forEach(element => {
                 renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText,element.profilePic)
             });
         }
+
+        szalloda.innerHTML = ""
+
+        renderHotel("Összes", 0)
+        data.hotels.forEach(element => {
+            renderHotel(element.hotelName, element.hotel_id)
+        });
+
+        if (!varosChanged) {
+            szalloda.value = lastSzalloda
+        }
+
+        varosChanged = false
     }).catch((error) => {
         console.error('Fetch error:', error);
     })
 }
 
 csillagok.onchange = updateContents
-varos.onchange = updateContents
+varos.onchange = () => {
+    varosChanged = true
+    szalloda.value = 0
+    updateContents()
+}
 szalloda.onchange = updateContents
