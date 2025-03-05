@@ -23,12 +23,12 @@
                     <select name="varos" id="varos">
                         <option value="0">Összes</option>
                         @foreach ($cities as $city)
-                            <option value="{{$city->city_id}}">{{$city->cityName}}</option>
+                            <option value="{{$city->city_id}}" onchange="">{{$city->cityName}}</option>
                         @endforeach
                     </select>
                 </li>
                 <li>
-                    <select name="szalloda" id="szalloda">
+                    <select name="szalloda" id="szalloda" onchange="szallodachange()">
                         <option value="0">Összes</option>
                         @foreach ($hotels as $hotel)
                             <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>

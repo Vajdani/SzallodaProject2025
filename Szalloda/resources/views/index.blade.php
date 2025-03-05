@@ -13,7 +13,7 @@
                 <ol class="carousel-indicators">
                     @foreach ($varos as $v)
                         @if ($v->city_id == 1)
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>           
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         @else
                             <li data-target="#myCarousel" data-slide-to={{$v->city_id-1}}></li>
                         @endif
@@ -29,7 +29,7 @@
                         <div class="item">
                         @endif
                         <a href="/telepules/{{$v->city_id}}">
-                            <img src="https://placehold.co/600x400" alt="{{$v->cityName}}" title="{{$v->cityName}}">
+                            <img src="{{asset('img/cities/'.$v->city_id.'.jpg')}}" alt="{{$v->cityName}}" title="{{$v->cityName}}">
                             <div class="carousel-caption">
                                 <h3>{{$v->cityName}}</h3>
                                 <p>{{$v->country}}</p>
@@ -37,7 +37,7 @@
                         </a>
                     </div>
                     @endforeach
-     
+
 
                 <!-- Left and right controls -->
                 <a class="left carousel-control" href="#myCarousel" data-slide="prev">

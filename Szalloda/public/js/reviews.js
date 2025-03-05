@@ -30,6 +30,20 @@ function renderRating(uname, hname, rating, createdat, text,pfp) {
     ratingSection.appendChild(div)
 }
 
+function renderHotels(cityId,hotelName,hotelId){
+    var dropdown = document.getElementById("szalloda");
+    if(cityId == document.getElementById("varos").value){
+    var option = document.createElement("option");
+    option.text = hotelName;
+    option.value = hotelId;
+    dropdown.add(option);
+    }
+}
+
+function szallodachange(){
+    conmsole.log("szallodachange")
+}
+
 function renderNone() {
     const div = document.createElement("div")
     div.innerHTML = `

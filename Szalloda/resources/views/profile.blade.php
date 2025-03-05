@@ -47,7 +47,7 @@
                                 <p class="error">{{ $message }}</p>
                             @enderror
                         </div>
-    
+
                         <button class="save-button" type="submit">Mentés</button>
                     </form>
                 </div>
@@ -61,7 +61,7 @@
                         <div class="rating">
                             <div class="rating-head">
                                 <div class="profile-picture-con">
-                                    <img class="profile-picture" src="https://placehold.co/100" alt="">
+                                    <img class="profile-picture" src="{{asset('img/pfp/'.Auth::user()->profilePic.'.png')}}" alt="">
                                 </div>
                             </div>
                             <div class="rating-body">
@@ -87,21 +87,24 @@
                 </div>
             </div>
         </div>
-    
-        <div class="ProfilePicture-Selection" id="pics">
-            <div class="PPS-head">
-                <h2>Vállasza ki a porfilképet</h2>
+        <form action="/profil/pfp" method="post">
+            @csrf
+            <div class="ProfilePicture-Selection" id="pics" style="display: none">
+                <div class="PPS-head">
+                    <h2>Vállasza ki a porfilképet</h2>
+                </div>
+                <hr>
+                <div class="PPS-body">
+                    @for($i=0;$i<4;$i++)
+                    <img src="{{asset('img/pfp/'.$i.'.png')}}" alt="{{$i}}" class="profile-picture" onclick="pfpchange({{$i}})">
+                    @endfor
+                </div>
+                <div class="PPS-buttons">
+                    <button class="save-button" onclick="pfpmenu()">Mégse</button>
+                    <button class="save-button" type="submit">Profilkép beállítása</button>
+                    <input type="text" name="pfp" id="pfp" style="display: none">
+                </div>
             </div>
-            <hr>
-            <div class="PPS-body">
-                @for($i=0;$i<4;$i++)
-                <img src="{{asset('img/pfp/'.$i.'.png')}}" alt="{{$i}}" class="profile-picture" onclick="pfpchange({{$i}})">
-                @endfor
-            </div>
-            <div class="PPS-buttons">
-                <button class="save-button" onclick="pfpmenu()">Mégse</button>
-                <button class="save-button">Profilkép beállítása</button>
-            </div>
-        </div>
+        </form>
     </div>
 @endsection
