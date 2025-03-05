@@ -8,8 +8,10 @@
 @section('content')
     <div class="mainContent">
         <form action="/regisztracio" method="post" class="form-design">
-            <h1>Regisztráció</h1>
             @csrf
+
+            <h1>Regisztráció</h1>
+
             <div class="inputItem">
                 <label for="name">Felhasználónév</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}">
