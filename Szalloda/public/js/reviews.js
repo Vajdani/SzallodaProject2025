@@ -75,9 +75,12 @@ async function updateContents() {
         szalloda.innerHTML = ""
 
         renderHotel("Összes", 0)
-        data.hotels.forEach(element => {
-            renderHotel(element.hotelName, element.hotel_id)
-        });
+        let hotels = data.hotels
+        if (hotels.length > 1) {
+            hotels.forEach(element => {
+                renderHotel(element.hotelName, element.hotel_id)
+            });
+        }
 
         if (!varosChanged) {
             szalloda.value = lastSzalloda
