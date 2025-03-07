@@ -15,6 +15,8 @@ Route::get('/telepules/{id}', [MainController::class, "city"]);
 Route::get('/foglalas', [MainController::class, "reservation"]);
 Route::post('/foglalas', [MainController::class, "reservationPost"]);
 
+Route::get('/profil/{id}', [UserController::class, "profileByID"]);
+
 Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::get('/kijelentkezes', [UserController::class, "logout"]);
     Route::get('/profil', [UserController::class, "profile"]);
