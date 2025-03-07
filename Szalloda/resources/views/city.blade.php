@@ -8,7 +8,7 @@
     <div class="mainContent">
         <section>
             <h1>{{ $city->cityName }}</h1>
-            <img src="https://placehold.co/600x400" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid">
+            <img src="{{asset('img/cities/'.$city->city_id.'.jpg')}}" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid" width="600px" height="400px">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula varius magna. Praesent
                 consequat, eros vel iaculis efficitur, ante odio rutrum ex, eget finibus elit justo nec orci.
