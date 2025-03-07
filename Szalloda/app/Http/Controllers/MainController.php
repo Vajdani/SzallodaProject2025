@@ -23,11 +23,12 @@ class MainController extends Controller
         return view("city", [
             "city" => Varos::find($id),
             "hotels" => Hotel::fromQuery("
-                                        select hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, avg(reviews.rating) as rating
+                                        select hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating
                                         from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
                                         where hotel.city_id = $id
-                                        group by hotel.hotel_id;")
-        ]);
+                                        group by hotel.hotel_id;"),
+
+        ]); 
     }
 
     public function reservation() {
@@ -40,7 +41,7 @@ class MainController extends Controller
 
     public function reviews() {
         return view("reviews",[
-            "reviews" => Reviews::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id"),
+            "reviews" => Reviews::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.user_id from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id"),
             "cities" => Varos::all(),
             "hotels" => Hotel::all()
         ]);

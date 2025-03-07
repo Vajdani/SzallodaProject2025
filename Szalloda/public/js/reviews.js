@@ -6,7 +6,7 @@ const ratingSection = document.getElementById("ratingSection")
 let lastSzalloda = 0
 let varosChanged = false
 
-function renderRating(uname, hname, rating, createdat, text, pfp) {
+function renderRating(uname, hname, rating, createdat, text, pfp,userid) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -15,7 +15,7 @@ function renderRating(uname, hname, rating, createdat, text, pfp) {
         <div class="rating">
             <div class="ratingUser">
                 <div class="profilePicture">
-                    <img src="img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture">
+                    <a href="/profil/`+userid+`"><img src="img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
                     <p class="text-center">` + uname+ `</p>
                 </div>
                 <div class="data">
@@ -68,7 +68,7 @@ async function updateContents() {
         }
         else {
             reviews.forEach(element => {
-                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText,element.profilePic)
+                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText,element.profilePic,element.user_id)
             });
         }
 

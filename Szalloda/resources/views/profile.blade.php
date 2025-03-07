@@ -73,9 +73,11 @@
                 </div>
                 <div class="ratings">
                     <h2>Értékelések</h2>
+                    @if($hasPermission)
                     <div class="flex">
                         <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
                     </div>
+                    @endif
                     <div class="rating-con">
                     @foreach ($reviews as $review)
                         <div class="rating">
@@ -89,13 +91,7 @@
                                     <h3>{{$user->username}} - {{$review->hotelName}}</h3>
                                 </div>
                                 <div class="rating-info">
-                                    <p>@for ($i = 0; $i < 5; $i++)
-                                        @if($i < $review->rating)
-                                            <span class="starTicked">★</span>
-                                        @else
-                                        <span class="starUnTicked">★</span>
-                                        @endif
-                                    @endfor — {{$review->created_at}}</p>
+                                    <p><span class="starTicked">{{str_repeat("★",$review->rating)}}</span><span class="starUnTicked">{{str_repeat("★",5-$review->rating)}}</span> — {{$review->created_at}}</p>
                                 </div>
                                 <div class="rating-desc">
                                     <p>{{$review->reviewText}}</p>
