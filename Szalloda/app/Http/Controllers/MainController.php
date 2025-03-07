@@ -24,8 +24,8 @@ class MainController extends Controller
             "city" => Varos::find($id),
             "hotels" => Hotel::fromQuery("
                                         select hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, avg(reviews.rating) as rating
-                                        from hotel, reviews
-                                        where hotel.city_id = $id and hotel.hotel_id = reviews.hotel_id
+                                        from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
+                                        where hotel.city_id = $id
                                         group by hotel.hotel_id;")
         ]);
     }

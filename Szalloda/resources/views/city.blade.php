@@ -39,9 +39,13 @@
                     <div class="cityImgContainer">
                         <img src="https://placehold.co/400" alt="telepules" title="Település" class="img-fluid">
                         <p>
-                            <span class="starTicked">{{ str_repeat("★", $hotel->rating) }}</span>
-                            <span class="starTicked">{{ str_repeat("⯪", ceil($hotel->rating - floor($hotel->rating))) }}</span>
-                            <span class="starUnTicked">{{ str_repeat("★", 5 - floor($hotel->rating)) }}</span>
+                            @if ($hotel->rating == "")
+                                <p>Nincsenek értékelések.</p>
+                            @else
+                                <span class="starTicked">{{ str_repeat("★", $hotel->rating) }}</span>
+                                <span class="starTicked">{{ str_repeat("⯪", ceil($hotel->rating - floor($hotel->rating))) }}</span>
+                                <span class="starUnTicked">{{ str_repeat("★", 5 - floor($hotel->rating)) }}</span>
+                            @endif
                         </p>
                     </div>
                     <table>
