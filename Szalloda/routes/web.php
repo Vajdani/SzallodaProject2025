@@ -13,6 +13,7 @@ Route::get('/ertekelesek/{csillagok}/{varos}/{hotel}', [MainController::class, "
 Route::get('/szalloda/{id}', [MainController::class, "hotel"]);
 Route::get('/telepules/{id}', [MainController::class, "city"]);
 Route::get('/foglalas', [MainController::class, "reservation"]);
+Route::get('/foglalas/{id}', [MainController::class, "reservationById"]);
 Route::post('/foglalas', [MainController::class, "reservationPost"]);
 
 Route::get('/profil/{id}', [UserController::class, "profileByID"]);

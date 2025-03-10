@@ -11,11 +11,16 @@
             <form action="/" method="post" class="center">
                 <div class="form">
                     <label for="szalloda">Szálloda neve:</label>
-                    <select name="szalloda" id="szalloda">
-                        <option value="szal1">Szálloda 1</option>
-                        <option value="szal2">Szálloda 2</option>
-                        <option value="szal3">Szálloda 3</option>
-                    </select>
+                    @isset($hotel_id)
+                        <input type="text" name="szalloda" id="szalloda" style="display:none" value="{{$hotel_id}}">
+                        <p>{{$hotelName}}</p>
+                    @else
+                        <select name="szalloda" id="szalloda">
+                            @foreach ($hotels as $hotel)
+                                <option value="{{$hotel["hotel_id"]}}">{{$hotel["hotelName"]}}</option>
+                            @endforeach
+                        </select>
+                    @endisset                    
                     <p>Ellátás típusa</p>
                     <div class="ellatas-opcio">
                         <label for="full" class="inline">Teljes ellátás</label> <input type="radio" name="ellatas"

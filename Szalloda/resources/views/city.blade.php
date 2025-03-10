@@ -47,6 +47,7 @@
                                 <p>Nincsenek értékelések.</p>
                             @else
                                 <span class="starTicked">{{ str_repeat('★', $hotel->rating) }}</span><span class="starTicked">{{ str_repeat('⯪', ceil($hotel->rating - floor($hotel->rating))) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - ceil($hotel->rating)) }} - {{ $hotel->rating }}</span>
+                                <p>{{$hotel->ratingCount}} értékelés</p>
                             @endif
                         </p>
                     </div>
