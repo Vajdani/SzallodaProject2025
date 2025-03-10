@@ -15,6 +15,10 @@ class MainController extends Controller
         ]);
     }
 
+    public function randomHotel() {
+        return MainController::hotel(rand(1, Hotel::max("hotel_id")));
+    }
+
     public function hotel($id) {
         $hotel = Hotel::find($id);
         if ($hotel == null) {
