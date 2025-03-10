@@ -31,3 +31,16 @@ table {
 th + td {
     padding-left: 10px
 }
+
+.roomsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.roomsTable,
+.roomsTable td,
+.roomsTable th {
+    border: 1px solid white;
+    padding: 2px;
+}

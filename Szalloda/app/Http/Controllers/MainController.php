@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use App\Models\City;
 use App\Models\Hotel;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -27,6 +28,7 @@ class MainController extends Controller
 
         return view("hotel", [
             "hotel" => $hotel,
+            "rooms" => Room::where("hotel_id", $id)->get(),
             "city" => City::find($hotel->city_id)
         ]);
     }

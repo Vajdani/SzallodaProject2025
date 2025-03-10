@@ -13,6 +13,7 @@
         </section>
         <section>
             <h2>A szállodáról</h2>
+            <hr>
             <p>Adatok:</p>
             <table>
                 <tr>
@@ -36,11 +37,25 @@
                     <td>{{ $hotel->email }}</td>
                 </tr>
             </table>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore a officia perspiciatis rem cumque iusto.
-                Dolore expedita at, commodi nam voluptas architecto asperiores. Magnam perspiciatis facere quod
-                voluptate molestiae accusantium.
-            </p>
+            <hr>
+            <p>Szobák</p>
+            <table class="roomsTable">
+                <tr>
+                    <th>Emelet</th>
+                    <th>Szoba szám</th>
+                    <th>Férőhely</th>
+                    <th>Ár/éjszaka</th>
+                </tr>
+                @foreach ($rooms as $room)
+                    <tr>
+                        <td>{{$room->floor}}. emelet</td>
+                        <td>{{$room->roomNumber}}. szoba</td>
+                        <td>{{$room->capacity}} fő</td>
+                        <td>{{$room->pricepernight}} Ft</td>
+                    </tr>
+                @endforeach
+            </table>
+            <hr>
             <div class="szallodaImgGrid">
                 <img src="https://placehold.co/600x400" alt="szalloda_kep_1" title="Szálloda 1.kép" class="img-fluid">
                 <img src="https://placehold.co/600x400" alt="szalloda_kep_2" title="Szálloda 2.kép" class="img-fluid">
