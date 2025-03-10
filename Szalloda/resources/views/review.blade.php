@@ -2,7 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}">
-    <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{asset('js/reviewstar.js')}}"></script>
 @endsection
 
 @section('content')
