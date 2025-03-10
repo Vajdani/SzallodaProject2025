@@ -6,7 +6,7 @@ const ratingSection = document.getElementById("ratingSection")
 let lastSzalloda = 0
 let varosChanged = false
 
-function renderRating(uname, hname, rating, createdat, text, pfp,userid) {
+function renderRating(username, hotelName, rating, created_at, review, pfp, user_id, userActive) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -15,15 +15,15 @@ function renderRating(uname, hname, rating, createdat, text, pfp,userid) {
         <div class="rating">
             <div class="ratingUser">
                 <div class="profilePicture">
-                    <a href="/profil/`+userid+`"><img src="/img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
-                    <p class="text-center">` + uname+ `</p>
+                    <a href="/profil/` + user_id + `"><img src="/img/pfp/` + (userActive ? pfp : 0) + `.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
+                    <p class="text-center">` + (userActive ? username : "Törölt fiók") + `</p>
                 </div>
                 <div class="data">
                     <div>
-                        <h3>` + hname + `</h3>
+                        <h3>` + hotelName + `</h3>
                         <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
-                        <p>` + createdat + `</p>
-                        <p>` + ((text == "" || text == "null" || text == null) ? "" : text) + `</p>
+                        <p>` + created_at + `</p>
+                        <p>` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@ async function updateContents() {
         }
         else {
             reviews.forEach(element => {
-                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText,element.profilePic,element.user_id)
+                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
             });
         }
 

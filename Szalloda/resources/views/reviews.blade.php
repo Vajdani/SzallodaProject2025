@@ -23,7 +23,7 @@
                     <select name="varos" id="varos">
                         <option value="0">Összes</option>
                         @foreach ($cities as $city)
-                            <option value="{{$city->city_id}}" onchange="">{{$city->cityName}}</option>
+                            <option value="{{ $city->city_id }}" onchange="">{{ $city->cityName }}</option>
                         @endforeach
                     </select>
                 </li>
@@ -31,17 +31,17 @@
                     <select name="szalloda" id="szalloda">
                         <option value="0">Összes</option>
                         @foreach ($hotels as $hotel)
-                            <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>
+                            <option value="{{ $hotel->hotel_id }}">{{ $hotel->hotelName }}</option>
                         @endforeach
                     </select>
                 </li>
             </ul>
         </div>
         <div class="ratingSection center" id="ratingSection">
-            <script src="{{asset('js/reviews.js')}}"></script>
+            <script src="{{ asset('js/reviews.js') }}"></script>
             @foreach ($reviews as $r)
                 <script>
-                    renderRating("{{$r->username}}","{{$r->hotelName}}","{{$r->rating}}","{{$r->created_at}}","{{$r->reviewText}}","{{$r->profilePic}}","{{$r->user_id}}")
+                    renderRating("{{ $r->username }}", "{{ $r->hotelName }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
                 </script>
             @endforeach
         </div>

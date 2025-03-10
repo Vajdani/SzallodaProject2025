@@ -7,6 +7,7 @@
 
 @php
     $hasPermission = Auth::check() && Auth::user()->user_id == $user->user_id;
+    $userActive = $user->active == 1
 @endphp
 
 @section('content')
@@ -14,11 +15,10 @@
         <div class="profile-con">
             <div class="profile-header">
                 <div class="profile-picture-con">
-                    <img src="{{ asset('img/pfp/' . $user->profilePic . '.png') }}" alt="Profilkép" class="profile-picture"
-                        id="profile">
+                    <img src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="Profilkép" class="profile-picture" id="profile">
                 </div>
                 <div class="profile-details-con">
-                    <h2>{{ $user->username }}</h2>
+                    <h2>{{ $userActive ? $user->username : "Törölt fiók" }}</h2>
                     @if ($hasPermission)
                         <div class="profile-option-con">
                             <a onclick="pfpmenu()">Profilképcsere</a>
@@ -29,50 +29,52 @@
                 </div>
             </div>
             <div class="profile-body">
-                <div class="user-information">
-                    <h2>Felhasználói Adatok</h2>
-                    <form action="/profil/adat" method="post">
-                        @csrf
-                        <div class="user-data">
-                            <label for="email">Email-cím</label>
-                            @if ($hasPermission)
-                                <input type="text" value="{{ $user->email }}" name="email" id="email">
-                                @error('email')
-                                    <p class="error">{{ $message }}</p>
-                                @enderror
-                            @else
-                                <p>{{ $user->email }}</p>
-                            @endif
-                        </div>
-                        <div class="user-data">
-                            <label for="username">Felhasználónév</label>
-                            @if ($hasPermission)
-                                <input type="text" value="{{ $user->username }}" name="username" id="username">
-                                @error('username')
-                                    <p class="error">{{ $message }}</p>
-                                @enderror
-                            @else
-                                <p>{{ $user->username }}</p>
-                            @endif
-                        </div>
-                        <div class="user-data">
-                            <label for="realname">Polgári név</label>
-                            @if ($hasPermission)
-                                <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname"
-                                    id="realname">
-                                @error('realname')
-                                    <p class="error">{{ $message }}</p>
-                                @enderror
-                            @else
-                                <p>{{ $user->lastName }} {{ $user->firstName }}</p>
-                            @endif
-                        </div>
+                @if ($userActive)
+                    <div class="user-information">
+                        <h2>Felhasználói Adatok</h2>
+                        <form action="/profil/adat" method="post">
+                            @csrf
+                            <div class="user-data">
+                                <label for="email">Email-cím</label>
+                                @if ($hasPermission)
+                                    <input type="text" value="{{ $user->email }}" name="email" id="email">
+                                    @error('email')
+                                        <p class="error">{{ $message }}</p>
+                                    @enderror
+                                @else
+                                    <p>{{ $user->email }}</p>
+                                @endif
+                            </div>
+                            <div class="user-data">
+                                <label for="username">Felhasználónév</label>
+                                @if ($hasPermission)
+                                    <input type="text" value="{{ $user->username }}" name="username" id="username">
+                                    @error('username')
+                                        <p class="error">{{ $message }}</p>
+                                    @enderror
+                                @else
+                                    <p>{{ $user->username }}</p>
+                                @endif
+                            </div>
+                            <div class="user-data">
+                                <label for="realname">Polgári név</label>
+                                @if ($hasPermission)
+                                    <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname"
+                                        id="realname">
+                                    @error('realname')
+                                        <p class="error">{{ $message }}</p>
+                                    @enderror
+                                @else
+                                    <p>{{ $user->lastName }} {{ $user->firstName }}</p>
+                                @endif
+                            </div>
 
-                        @if ($hasPermission)
-                            <button class="save-button" type="submit">Mentés</button>
-                        @endif
-                    </form>
-                </div>
+                            @if ($hasPermission)
+                                <button class="save-button" type="submit">Mentés</button>
+                            @endif
+                        </form>
+                    </div>
+                @endif
                 <div class="ratings">
                     <h2>Értékelések</h2>
                     @if ($hasPermission)
@@ -85,18 +87,15 @@
                             <div class="rating">
                                 <div class="rating-head">
                                     <div class="profile-picture-con">
-                                        <img class="profile-picture" src="{{ asset('img/pfp/' . $user->profilePic . '.png') }}"
-                                            alt="">
+                                        <img class="profile-picture" src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="">
                                     </div>
                                 </div>
                                 <div class="rating-body">
                                     <div class="rating-title">
-                                        <h3>{{ $user->username }} - {{ $review->hotelName }}</h3>
+                                        <h3>{{ ($userActive ? $user->username : "Törölt fiók") }} - {{ $review->hotelName }}</h3>
                                     </div>
                                     <div class="rating-info">
-                                        <p><span class="starTicked">{{ str_repeat('★', $review->rating) }}</span><span
-                                                class="starUnTicked">{{ str_repeat('★', 5 - $review->rating) }}</span> —
-                                            {{ $review->created_at }}</p>
+                                        <p><span class="starTicked">{{ str_repeat('★', $review->rating) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - $review->rating) }}</span> — {{ $review->created_at }}</p>
                                     </div>
                                     <div class="rating-desc">
                                         <p>{{ $review->reviewText }}</p>
