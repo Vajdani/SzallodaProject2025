@@ -44,3 +44,8 @@ th + td {
     border: 1px solid white;
     padding: 2px;
 }
+
+.roomsTable th {
+    background-color: white;
+    color: var(--colour_sidebar);
+}
