@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: #248232;
+    background-color: var(--colour_randomgreen2);
 }
 
 .ellatas-opcio{
@@ -56,8 +56,8 @@ form a {
 input[type=text]{
     border: none;
     border-radius: 15px;
-    background-color: #2AA248;
-    color: #E5E1EE;
+    background-color: var(--colour_randomgreen5);
+    color: var(--colour_lightwhite);
 }
 
 input[type=date]

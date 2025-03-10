@@ -1,14 +1,32 @@
 * {
     padding: 0;
     margin: 0;
+
+    --colour_background: #A3D1C6;
+    --colour_sidebar: #15B392;
+    --colour_footer: #0d854d;
+    --colour_lightwhite: #E5E1EE;
+
+    --colour_error: #fd7676;
+    --colour_error_intense: #c90000;
+    --colour_delete: #f52525;
+
+    --colour_randomgreen1: #3D8D7A;
+    --colour_randomgreen2: #248232;
+    --colour_randomgreen3: #2BA84A;
+    --colour_randomgreen4: #04611c;
+    --colour_randomgreen5: #2AA248;
+    --colour_randomgreen6: #33be56;
+
+    --colour_randomhover: #d2c6ec;
 }
 
 body {
     max-width: 1920px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #A3D1C6;
-    color: #E5E1EE;
+    background-color: var(--colour_background);
+    color: var(--colour_lightwhite);
 }
 .profile-picture{
     height: 100px;
@@ -44,7 +62,7 @@ section{
 
 .sidebar {
     display: block;
-    background-color: #15B392;
+    background-color: var(--colour_sidebar);
     position: sticky;
     top: 0;
     overflow: hidden;
@@ -99,13 +117,13 @@ section{
 
 .sidebarLinks li a {
     text-decoration: none;
-    color: #E5E1EE;
+    color: var(--colour_lightwhite);
     font-size: 150%;
 }
 
 
 .sidebarLinks li a:hover {
-    background-color: rgb(13, 133, 77);
+    background-color: var(--colour_footer);
     border-radius: 10px;
     padding: 5px;
 }
@@ -119,30 +137,19 @@ section{
 }
 
 .sidebar hr {
-    background-color: #E5E1EE;
-    border: 0;
-    height: 2px;
     margin: 0 5px 0 5px;
 }
 
 .sidebarContacts li {
-    color: #E5E1EE;
+    color: var(--colour_lightwhite);
 }
 
 .sidebarContacts li a {
-    color: #E5E1EE;
+    color: var(--colour_lightwhite);
 }
 
 .sidebarContacts li+li {
     margin-top: 20px;
-}
-
-.starTicked {
-    color: gold;
-}
-
-.starUnTicked {
-    color: #E5E1EE
 }
 
 @media only screen and (max-width: 600px) {
@@ -170,7 +177,7 @@ section{
 }
 
 footer {
-    background-color: rgb(13, 133, 77);
+    background-color: var(--colour_footer);
 }
 
 footer p {
@@ -195,10 +202,26 @@ footer p {
 }
 
 .error {
-    color: rgb(253, 118, 118);
+    color: var(--colour_error);
     font-size: 100% !important;
     text-align: unset !important;
 }
 
 /* https://colorhunt.co/palette/d2ff7273ec8b54c39215b392 */
 /* https://colorhunt.co/palette/3d8d7ab3d8a8fbffe4a3d1c6 */
+
+
+hr {
+    border: 0;
+    background-color: white;
+    height: 2px;
+    margin-bottom: 5px;
+}
+
+.starTicked {
+    color: gold;
+}
+
+.starUnTicked {
+    color: var(--colour_lightwhite)
+}

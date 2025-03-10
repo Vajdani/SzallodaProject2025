@@ -12,7 +12,7 @@
 }
 
 .filterBar:first-child {
-    background-color: #15B392;
+    background-color: var(--colour_sidebar);
     font-size: 150%;
     padding: 20px;
     margin-bottom: 10px;
@@ -35,8 +35,8 @@
     font-size: 75%;
 }
 select{
-    background-color: #15B392;
-    color: #E5E1EE;
+    background-color: var(--colour_sidebar);
+    color: var(--colour_lightwhite);
 }
 @media only screen and (max-width: 600px) {
     .filterBar:first-child ul li {
@@ -53,7 +53,7 @@ select{
 }
 
 .rating {
-    background-color:#15B392;
+    background-color:var(--colour_sidebar);
     padding: 10px;
     margin-top: 15px;
     border-radius: 15px;

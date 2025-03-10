@@ -19,7 +19,7 @@
 }
 
 section:not(:first-child) {
-    background-color: #15B392;
+    background-color: var(--colour_sidebar);
     border-radius: 10px;
     margin: 0 25px 10px 25px;
     min-width: fit-content;
@@ -27,11 +27,4 @@ section:not(:first-child) {
 
 section h2{
     margin-bottom: 10px;
-}
-
-hr {
-    border: 0;
-    background-color: white;
-    height: 2px;
-    margin-bottom: 5px;
 }

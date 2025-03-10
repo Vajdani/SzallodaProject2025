@@ -1,12 +1,12 @@
 form {
-    background-color: #3D8D7A;
+    background-color: var(--colour_randomgreen1);
     border-radius: 25px;
     padding: 25px;
     max-width: 250px;
 }
 
 .form {
-    background-color: #248232;
+    background-color: var(--colour_randomgreen2);
     border-radius: 25px;
     padding: 25px;
     max-width: 250px;
@@ -19,13 +19,13 @@ form.regisztracio{
 }
 
 input::placeholder{
-    color:#E5E1EE;
+    color:var(--colour_lightwhite);
 }
 input:not(input[type=checkbox]) {
     display: block;
     margin-bottom: 25px;
     width: 100%;
-    color: #E5E1EE;
+    color: var(--colour_lightwhite);
 
 }
 #rating{
@@ -36,8 +36,8 @@ input:not(input[type=checkbox]) {
     border-radius: 15px;
     height: 30px;
     min-width: 25%;
-    background-color: #2BA84A;
-    color: #E5E1EE;
+    background-color: var(--colour_randomgreen3);
+    color: var(--colour_lightwhite);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
@@ -50,8 +50,8 @@ input:not(input[type=checkbox]) {
     border-radius: 15px;
     height: 30px;
     min-width: 25%;
-    background-color: #f52525;
-    color: #E5E1EE;
+    background-color: var(--colour_delete);
+    color: var(--colour_lightwhite);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
@@ -61,18 +61,18 @@ input:not(input[type=checkbox]) {
 
 form a {
     display: block;
-    color: #E5E1EE;
+    color: var(--colour_lightwhite);
     text-align: center;
 }
 a:hover{
-    color: #d2c6ec;
+    color: var(--colour_randomhover);
 }
 
 a + a {
     margin-top: 10px;
 }
 input{
-    background-color: #2BA84A;
+    background-color: var(--colour_randomgreen3);
 
 }
 input[type=text],input[type=password],input[type=date]{
@@ -87,8 +87,8 @@ input[type=submit] {
     border-radius: 50px;
 }
 input[type=submit]:hover{
-    background-color: #04611c;
-    color: #d2c6ec;
+    background-color: var(--colour_randomgreen4);
+    color: var(--colour_randomhover);
 }
 
 
