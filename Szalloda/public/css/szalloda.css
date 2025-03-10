@@ -23,3 +23,11 @@
         justify-content: space-around;
     }
 }
+
+table {
+    text-align: justify;
+}
+
+th + td {
+    padding-left: 10px
+}

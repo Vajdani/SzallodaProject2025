@@ -44,6 +44,10 @@ a {
     color: white;
 }
 
+th + td {
+    padding-left: 10px
+}
+
 @media only screen and (max-width: 600px) {
     .cityImgContainer {
         float: none;

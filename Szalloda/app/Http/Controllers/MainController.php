@@ -16,19 +16,27 @@ class MainController extends Controller
     }
 
     public function hotel($id) {
-        return view("hotel");
+        $hotel = Hotel::find($id);
+        if ($hotel == null) {
+            return redirect("/");
+        }
+
+        return view("hotel", [
+            "hotel" => $hotel,
+            "city" => City::find($hotel->city_id)
+        ]);
     }
 
     public function city($id) {
         return view("city", [
             "city" => City::find($id),
             "hotels" => Hotel::fromQuery("
-                                        select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating, count(reviews.rating) as ratingCount
-                                        from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
-                                        where hotel.city_id = $id
-                                        group by hotel.hotel_id;"),
-
-        ]); 
+                select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating, count(reviews.rating) as ratingCount
+                from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
+                where hotel.city_id = $id
+                group by hotel.hotel_id;
+            "),
+        ]);
     }
 
     public function reservation() {
@@ -68,11 +76,12 @@ class MainController extends Controller
     }
 
     public function reviewsFilter($stars, $city, $hotel) {
-        $reviewQuery = "select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.active
-                        from reviews, hotel, user
-                        where
-                            reviews.hotel_id = hotel.hotel_id and
-                            reviews.user_id = user.user_id";
+        $reviewQuery = "
+            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.active
+            from reviews, hotel, user
+            where
+                reviews.hotel_id = hotel.hotel_id and
+                reviews.user_id = user.user_id";
 
         if ($stars <= 5 && $stars >= 1) { $reviewQuery .= " and reviews.rating = $stars"; }
         if ($city != 0 && City::find($city) != null) { $reviewQuery .= " and hotel.city_id = $city"; }
