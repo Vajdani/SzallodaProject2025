@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Reviews;
+use App\Models\Review;
 use App\Models\Hotel;
 use Carbon\Carbon;
 
@@ -39,7 +39,7 @@ class UserController extends Controller
             'star.required' => 'Muszáj értékelnie a szállodát!',
         ]);
 
-        $review = new Reviews;
+        $review = new Review;
         $review->user_id = Auth::user()->user_id;
         $review->hotel_id = $req->hotel;
         $review->rating = $req->star;
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function profileByID($id) {
         return view("profile", [
             "user" => User::find($id),
-            "reviews" => Reviews::fromQuery("select r.rating, r.created_at, r.reviewText, h.hotelName, u.username, u.profilePic
+            "reviews" => Review::fromQuery("select r.rating, r.created_at, r.reviewText, h.hotelName, u.username, u.profilePic
                                             from reviews r
                                             inner join user u on u.user_id = r.user_id
                                             inner join hotel h on r.hotel_id = h.hotel_id

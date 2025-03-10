@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reviews;
-use App\Models\Varos;
-use App\Models\hotel as Hotel;
+use App\Models\Review;
+use App\Models\City;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
     public function index() {
         return view("index",[
-            "varos" => Varos::all()
+            "cities" => City::all()
         ]);
     }
 
@@ -21,7 +21,7 @@ class MainController extends Controller
 
     public function city($id) {
         return view("city", [
-            "city" => Varos::find($id),
+            "city" => City::find($id),
             "hotels" => Hotel::fromQuery("
                                         select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating, count(reviews.rating) as ratingCount
                                         from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
@@ -55,30 +55,30 @@ class MainController extends Controller
 
     public function reviews() {
         return view("reviews",[
-            "reviews" => Reviews::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.user_id from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id"),
-            "cities" => Varos::all(),
+            "reviews" => Review::fromQuery("select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.user_id from reviews, hotel, user where reviews.hotel_id = hotel.hotel_id and reviews.user_id = user.user_id"),
+            "cities" => City::all(),
             "hotels" => Hotel::all()
         ]);
     }
 
-    public function reviewsFilter($csillagok, $varos, $hotel) {
+    public function reviewsFilter($stars, $city, $hotel) {
         $reviewQuery = "select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic
                         from reviews, hotel, user
                         where
                             reviews.hotel_id = hotel.hotel_id and
                             reviews.user_id = user.user_id";
 
-        if ($csillagok <= 5 && $csillagok >= 1) { $reviewQuery .= " and reviews.rating = $csillagok"; }
-        if ($varos != 0 && Varos::find($varos) != null) { $reviewQuery .= " and hotel.city_id = $varos"; }
+        if ($stars <= 5 && $stars >= 1) { $reviewQuery .= " and reviews.rating = $stars"; }
+        if ($city != 0 && City::find($city) != null) { $reviewQuery .= " and hotel.city_id = $city"; }
         if ($hotel != 0 && Hotel::find($hotel) != null) { $reviewQuery .= " and reviews.hotel_id = $hotel"; }
 
         $response = [
-            "reviews" => Reviews::fromQuery($reviewQuery),
+            "reviews" => Review::fromQuery($reviewQuery),
         ];
 
         $hotelQuery = "select hotelName, hotel_id from hotel";
-        if ($varos != 0) {
-            $hotelQuery .= " where city_id = $varos";
+        if ($city != 0) {
+            $hotelQuery .= " where city_id = $city";
         }
 
         $response["hotels"] = Hotel::fromQuery($hotelQuery);

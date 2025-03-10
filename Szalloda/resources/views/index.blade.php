@@ -11,29 +11,29 @@
             <div id="myCarousel" class="carousel slide center" data-ride="carousel">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    @foreach ($varos as $v)
-                        @if ($v->city_id == 1)
+                    @foreach ($cities as $city)
+                        @if ($city->city_id == 1)
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         @else
-                            <li data-target="#myCarousel" data-slide-to={{ $v->city_id - 1 }}></li>
+                            <li data-target="#myCarousel" data-slide-to={{ $city->city_id - 1 }}></li>
                         @endif
                     @endforeach
                 </ol>
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                    @foreach ($varos as $v)
-                        @if ($v->city_id == 1)
+                    @foreach ($cities as $city)
+                        @if ($city->city_id == 1)
                             <div class="item active">
                         @else
                             <div class="item">
                         @endif
-                        <a href="/telepules/{{ $v->city_id }}">
-                            <img src="{{ asset('img/cities/' . $v->city_id . '.jpg') }}" alt="{{ $v->cityName }}"
-                                title="{{ $v->cityName }}">
+                        <a href="/telepules/{{ $city->city_id }}">
+                            <img src="{{ asset('img/cities/' . $city->city_id . '.jpg') }}" alt="{{ $city->cityName }}"
+                                title="{{ $city->cityName }}">
                             <div class="carousel-caption">
-                                <h3>{{ $v->cityName }}</h3>
-                                <p>{{ $v->country }}</p>
+                                <h3>{{ $city->cityName }}</h3>
+                                <p>{{ $city->country }}</p>
                             </div>
                         </a>
                 </div>
