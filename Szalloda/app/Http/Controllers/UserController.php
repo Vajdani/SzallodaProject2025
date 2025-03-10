@@ -233,7 +233,7 @@ class UserController extends Controller
         return view("deleteAccount");
     }
 
-    public function deleteAccountConfirm(Request $request) {
+    public function deleteAccountConfirm() {
         $user = User::find(Auth::user()->user_id);
         $user->active = false;
         $user->Save();

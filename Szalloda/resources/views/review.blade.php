@@ -25,7 +25,7 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
                 <input type="number" name="star" id="star" style="display: none">
-                <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10">{{old("comment")}}</textarea>
                 <input type="submit" value="Közzététel">
             </form>
         </section>
