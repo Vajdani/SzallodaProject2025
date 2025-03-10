@@ -112,7 +112,7 @@
             @csrf
             <div class="ProfilePicture-Selection" id="pics" style="display: none">
                 <div class="PPS-head">
-                    <h2>Vállasza ki a porfilképet</h2>
+                    <h2>Válasza ki a profilképét!</h2>
                 </div>
                 <hr>
                 <div class="PPS-body">
