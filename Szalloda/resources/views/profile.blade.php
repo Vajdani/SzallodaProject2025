@@ -23,7 +23,7 @@
                         <div class="profile-option-con">
                             <a onclick="pfpmenu()">Profilképcsere</a>
                             <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
-                            <a href="/fioktorles">Felhasználó törlése</a>
+                            <a href="/fioktorles">Felhasználói fiókom törlése</a>
                         </div>
                     @endif
                 </div>
