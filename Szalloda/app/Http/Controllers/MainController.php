@@ -23,7 +23,7 @@ class MainController extends Controller
         return view("city", [
             "city" => Varos::find($id),
             "hotels" => Hotel::fromQuery("
-                                        select hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating
+                                        select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating
                                         from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
                                         where hotel.city_id = $id
                                         group by hotel.hotel_id;"),

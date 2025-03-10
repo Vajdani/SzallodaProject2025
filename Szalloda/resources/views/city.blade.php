@@ -8,7 +8,7 @@
     <div class="mainContent">
         <section>
             <h1>{{ $city->cityName }}</h1>
-            <img src="{{asset('img/cities/'.$city->city_id.'.jpg')}}" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid" width="600px" height="400px">
+            <img src="{{ asset('img/cities/' . $city->city_id . '.jpg') }}" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid" width="600px" height="400px">
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula varius magna. Praesent
                 consequat, eros vel iaculis efficitur, ante odio rutrum ex, eget finibus elit justo nec orci.
@@ -35,14 +35,18 @@
         <div class="citySection">
             @foreach ($hotels as $hotel)
                 <div class="city">
-                    <h2>{{ $hotel->hotelName }}</h2>
+                    <a href="/szalloda/{{ $hotel->hotel_id }}">
+                        <h2>{{ $hotel->hotelName }}</h2>
+                    </a>
                     <div class="cityImgContainer">
-                        <img src="https://placehold.co/400" alt="telepules" title="Település" class="img-fluid">
+                        <a href="/szalloda/{{ $hotel->hotel_id }}">
+                            <img src="https://placehold.co/400" alt="telepules" title="{{ $hotel->hotelName }}" class="img-fluid">
+                        </a>
                         <p>
-                            @if ($hotel->rating == "")
+                            @if ($hotel->rating == '')
                                 <p>Nincsenek értékelések.</p>
                             @else
-                            <span class="starTicked">{{str_repeat("★", $hotel->rating)}}</span><span class="starTicked">{{str_repeat("⯪", ceil($hotel->rating - floor($hotel->rating)))}}</span><span class="starUnTicked">{{str_repeat("★", 5 - ceil($hotel->rating))}} - {{$hotel->rating}}</span>
+                                <span class="starTicked">{{ str_repeat('★', $hotel->rating) }}</span><span class="starTicked">{{ str_repeat('⯪', ceil($hotel->rating - floor($hotel->rating))) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - ceil($hotel->rating)) }} - {{ $hotel->rating }}</span>
                             @endif
                         </p>
                     </div>
