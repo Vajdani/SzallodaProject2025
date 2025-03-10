@@ -15,7 +15,7 @@ function renderRating(uname, hname, rating, createdat, text, pfp,userid) {
         <div class="rating">
             <div class="ratingUser">
                 <div class="profilePicture">
-                    <a href="/profil/`+userid+`"><img src="img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
+                    <a href="/profil/`+userid+`"><img src="/img/pfp/`+pfp+`.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
                     <p class="text-center">` + uname+ `</p>
                 </div>
                 <div class="data">
