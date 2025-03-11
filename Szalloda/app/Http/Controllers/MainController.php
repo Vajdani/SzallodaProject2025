@@ -29,7 +29,15 @@ class MainController extends Controller
         return view("hotel", [
             "hotel" => $hotel,
             "rooms" => Room::where("hotel_id", $id)->get(),
-            "city" => City::find($hotel->city_id)
+            "city" => City::find($hotel->city_id),
+            "reviews" => Review::fromQuery("
+                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.user_id, user.active
+                from reviews, hotel, user
+                where
+                    reviews.hotel_id = hotel.hotel_id and
+                    reviews.user_id = user.user_id and
+                    hotel.hotel_id = $id
+                "),
         ]);
     }
 

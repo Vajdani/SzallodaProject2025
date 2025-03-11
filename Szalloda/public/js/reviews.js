@@ -20,10 +20,10 @@ function renderRating(username, hotelName, rating, created_at, review, pfp, user
                 </div>
                 <div class="data">
                     <div>
-                        <h3>` + hotelName + `</h3>
+                        <h3 style="text-wrap:auto">` + hotelName + `</h3>
                         <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
                         <p>` + created_at + `</p>
-                        <p>` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
+                        <p style="text-wrap:auto">` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
                     </div>
                 </div>
             </div>

@@ -3,8 +3,11 @@
     display: block;
 }
 
+.szallodaAdatSection div {
+    margin-bottom: 10px;
+}
+
 .szallodaImgGrid {
-    padding-top: 10px;
     display: grid;
     gap: 15px;
     grid-template-columns: auto auto auto;
@@ -35,7 +38,7 @@ th + td {
 .roomsTable {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .roomsTable,
