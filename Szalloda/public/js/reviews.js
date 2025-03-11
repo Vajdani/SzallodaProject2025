@@ -12,23 +12,22 @@ function renderRating(username, hotelName, rating, created_at, review, pfp, user
 
     const div = document.createElement("div")
     div.innerHTML = `
-        <div class="rating center">
-            <div class="ratingUser">
-                <div class="profilePicture">
-                    <a href="/profil/` + user_id + `"><img src="/img/pfp/` + (userActive ? pfp : 0) + `.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
-                    <p class="text-center">` + (userActive ? username : "Törölt fiók") + `</p>
-                </div>
-                <div class="data">
-                    <div>
-                        <h3 style="text-wrap:auto">` + hotelName + `</h3>
-                        <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
-                        <p>` + created_at + `</p>
-                        <p style="text-wrap:auto">` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
-                    </div>
-                </div>
+        <div class="ratingUser">
+            <div class="profilePicture">
+                <a href="/profil/` + user_id + `"><img src="/img/pfp/` + (userActive ? pfp : 0) + `.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
+                <p class="text-center">` + (userActive ? username : "Törölt fiók") + `</p>
+            </div>
+            <div class="ratingData">
+                <h3 style="text-wrap:auto">` + hotelName + `</h3>
+                <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
+                <p>` + created_at + `</p>
+                <p style="text-wrap:auto;text-align:justify">` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
             </div>
         </div>
     `
+
+    div.classList.add("rating", "center")
+
     ratingSection.appendChild(div)
 }
 

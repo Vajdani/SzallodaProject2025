@@ -62,11 +62,12 @@ select{
 
 .ratingUser {
     display: grid;
-    grid-template-areas: "profilePicture data";
-    grid-template-columns: 1fr 6fr;
+    grid-template-areas: "profilePicture ratingData";
+    grid-template-columns: 1fr 1000fr;
     gap: 5px;
     width: min-content;
     text-wrap: nowrap;
+    width: 100%;
 }
 
 .ratingUser>div.profilePicture {
@@ -74,6 +75,10 @@ select{
     width: 100px;
 }
 
-.ratingUser>div.data {
-    grid-area: data;
+.ratingUser>div.ratingData {
+    grid-area: ratingData;
+}
+
+.ratingData {
+    width: 100%;
 }
