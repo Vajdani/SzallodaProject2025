@@ -12,7 +12,7 @@ function renderRating(username, hotelName, rating, created_at, review, pfp, user
 
     const div = document.createElement("div")
     div.innerHTML = `
-        <div class="rating">
+        <div class="rating center">
             <div class="ratingUser">
                 <div class="profilePicture">
                     <a href="/profil/` + user_id + `"><img src="/img/pfp/` + (userActive ? pfp : 0) + `.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
@@ -27,7 +27,6 @@ function renderRating(username, hotelName, rating, created_at, review, pfp, user
                     </div>
                 </div>
             </div>
-
         </div>
     `
     ratingSection.appendChild(div)
@@ -92,10 +91,12 @@ async function updateContents() {
     })
 }
 
-csillagok.onchange = updateContents
-varos.onchange = () => {
-    varosChanged = true
-    szalloda.value = 0
-    updateContents()
+if (csillagok != null) {
+    csillagok.onchange = updateContents
+    varos.onchange = () => {
+        varosChanged = true
+        szalloda.value = 0
+        updateContents()
+    }
+    szalloda.onchange = updateContents
 }
-szalloda.onchange = updateContents

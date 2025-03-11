@@ -2,6 +2,8 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ertekelesek.css') }}">
+
     <script src="{{ asset('js/profile.js') }}"></script>
 @endsection
 
@@ -81,26 +83,12 @@
                             <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
                         </div>
                     @endif
-                    <div class="rating-con">
-                        @foreach ($reviews as $review)
-                            <div class="rating">
-                                <div class="rating-head">
-                                    <div class="profile-picture-con">
-                                        <img class="profile-picture" src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="rating-body">
-                                    <div class="rating-title">
-                                        <h3>{{ ($userActive ? $user->username : "Törölt fiók") }} - {{ $review->hotelName }}</h3>
-                                    </div>
-                                    <div class="rating-info">
-                                        <p><span class="starTicked">{{ str_repeat('★', $review->rating) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - $review->rating) }}</span> — {{ $review->created_at }}</p>
-                                    </div>
-                                    <div class="rating-desc">
-                                        <p>{{ $review->reviewText }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="ratingSection center" id="ratingSection">
+                        <script src="{{ asset('js/reviews.js') }}"></script>
+                        @foreach ($reviews as $r)
+                            <script>
+                                renderRating("", "{{ $r->username }} - {{ $r->hotelName }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
+                            </script>
                         @endforeach
                     </div>
                 </div>
