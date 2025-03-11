@@ -35,37 +35,36 @@
                         <form action="/profil/adat" method="post">
                             @csrf
                             <div class="user-data">
-                                <label for="email">Email-cím</label>
                                 @if ($hasPermission)
+                                    <label for="email">Email-cím</label>
                                     <input type="text" value="{{ $user->email }}" name="email" id="email">
                                     @error('email')
                                         <p class="error">{{ $message }}</p>
                                     @enderror
                                 @else
-                                    <p>{{ $user->email }}</p>
+                                    <p>Email-cím: {{ $user->email }}</p>
                                 @endif
                             </div>
                             <div class="user-data">
-                                <label for="username">Felhasználónév</label>
                                 @if ($hasPermission)
+                                    <label for="username">Felhasználónév</label>
                                     <input type="text" value="{{ $user->username }}" name="username" id="username">
                                     @error('username')
                                         <p class="error">{{ $message }}</p>
                                     @enderror
                                 @else
-                                    <p>{{ $user->username }}</p>
+                                    <p>Felhasználónév: {{ $user->username }}</p>
                                 @endif
                             </div>
                             <div class="user-data">
-                                <label for="realname">Polgári név</label>
                                 @if ($hasPermission)
-                                    <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname"
-                                        id="realname">
+                                    <label for="realname">Polgári név</label>
+                                    <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname" id="realname">
                                     @error('realname')
                                         <p class="error">{{ $message }}</p>
                                     @enderror
                                 @else
-                                    <p>{{ $user->lastName }} {{ $user->firstName }}</p>
+                                    <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>
                                 @endif
                             </div>
 
