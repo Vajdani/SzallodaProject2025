@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SzallodaManagerForm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d57a95bc4e9a0ff00a8fea7e79034d1f1394854")]
 [assembly: System.Reflection.AssemblyProductAttribute("SzallodaManagerForm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SzallodaManagerForm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

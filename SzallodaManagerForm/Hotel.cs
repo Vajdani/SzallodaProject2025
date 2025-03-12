@@ -1,35 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SzallodaManagerForm
+﻿namespace SzallodaManagerForm
 {
     internal class Hotel
     {
-        public enum AuthorityLevel
-        {
-            Employee,
-            Owner
-        }
-
-        private int hotelID;
-        private AuthorityLevel userAuth;
-
+        private int hotel_id;
         public string Name { get; private set; }
 
+        public static List<Hotel> userHotels = [];
 
-        public Hotel(int id, AuthorityLevel auth)
+        public Hotel(int id)
         {
-            hotelID = id;
-            userAuth = auth;
+            hotel_id = id;
 
-            Database DB = new($"select hotelName from hotel where hotel_id = {hotelID}");
-            DB.Dr.Read();
+            using Database DB = new($"select hotelName from hotel where hotel_id = {hotel_id}");
+            DB.Read();
 
-            this.Name = DB.Dr["hotelName"].ToString();
+            Name = DB.GetString("hotelName");
         }
 
+        public static void OnUserLogin(int user_id)
+        {
+            using Database hotelQuery = new($"select hotel_id, userType from employee where user_id = {user_id}");
+            while (hotelQuery.Read())
+            {
+                userHotels.Add(new(hotelQuery.GetInt("hotel_id")));
+            }
+        }
+
+        public static void OnUserLogout()
+        {
+            userHotels = [];
+        }
     }
 }

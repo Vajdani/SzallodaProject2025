@@ -1,37 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 
 namespace SzallodaManagerForm
 {
-    internal class Database
+    internal class Database : IDisposable
     {
-        const string server = "server=linsql.verebely.dc,database=diak72,uid=diak72,password=GUILRN";
-        MySqlConnection connection;
-        MySqlCommand command;
+        const string server = "datasource=127.0.0.1;sslmode=none;port=3306;username=root;password=;database=szalloda";
 
-        public MySqlDataReader Dr;
+        MySqlConnection conn;
+        MySqlCommand cmd;
+        MySqlDataReader reader;
+        public MySqlDataReader Reader { get => reader; private set => reader = value; }
 
-        public Database(string q)
+        public Database(string query)
         {
-            connection = new(server);
-            command = new MySqlCommand(q, connection);
-            Dr = command.ExecuteReader();
-        }
+            conn = new MySqlConnection(server);
+            conn.Open();
 
-        public void CloseConnection()
-        {
-            connection.Close();
-            Dr = null;
+            cmd = new MySqlCommand(query, conn);
+            reader = cmd.ExecuteReader();
         }
 
         ~Database()
         {
-            connection.Close();
+            Close();
         }
 
+        public void Dispose()
+        {
+            Close();
+        }
+
+        public void Close()
+        {
+            conn.Close();
+        }
+
+        public bool Read()
+        {
+            return reader.Read();
+        }
+
+        public string GetString(string key)
+        {
+            return reader.GetString(key);
+        }
+
+        public int GetInt(string key)
+        {
+            return reader.GetInt32(key);
+        }
     }
 }

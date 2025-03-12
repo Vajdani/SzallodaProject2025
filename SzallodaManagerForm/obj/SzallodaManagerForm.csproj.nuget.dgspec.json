@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\barczi.bence\\Desktop\\Mih-lySz-ll-From-main\\Mih-lySz-ll-From-main\\SzallodaForm\\SzallodaManagerForm\\SzallodaManagerForm.csproj": {}
+    "C:\\Users\\dvajd\\Desktop\\MyStuff\\School\\SzallodaProject2025\\SzallodaManagerForm\\SzallodaManagerForm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\barczi.bence\\Desktop\\Mih-lySz-ll-From-main\\Mih-lySz-ll-From-main\\SzallodaForm\\SzallodaManagerForm\\SzallodaManagerForm.csproj": {
+    "C:\\Users\\dvajd\\Desktop\\MyStuff\\School\\SzallodaProject2025\\SzallodaManagerForm\\SzallodaManagerForm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\barczi.bence\\Desktop\\Mih-lySz-ll-From-main\\Mih-lySz-ll-From-main\\SzallodaForm\\SzallodaManagerForm\\SzallodaManagerForm.csproj",
+        "projectUniqueName": "C:\\Users\\dvajd\\Desktop\\MyStuff\\School\\SzallodaProject2025\\SzallodaManagerForm\\SzallodaManagerForm.csproj",
         "projectName": "SzallodaManagerForm",
-        "projectPath": "C:\\Users\\barczi.bence\\Desktop\\Mih-lySz-ll-From-main\\Mih-lySz-ll-From-main\\SzallodaForm\\SzallodaManagerForm\\SzallodaManagerForm.csproj",
-        "packagesPath": "C:\\Users\\barczi.bence\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\barczi.bence\\Desktop\\Mih-lySz-ll-From-main\\Mih-lySz-ll-From-main\\SzallodaForm\\SzallodaManagerForm\\obj\\",
+        "projectPath": "C:\\Users\\dvajd\\Desktop\\MyStuff\\School\\SzallodaProject2025\\SzallodaManagerForm\\SzallodaManagerForm.csproj",
+        "packagesPath": "C:\\Users\\dvajd\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dvajd\\Desktop\\MyStuff\\School\\SzallodaProject2025\\SzallodaManagerForm\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\barczi.bence\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dvajd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -51,6 +51,10 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "MySql.Data": {
               "target": "Package",
               "version": "[9.2.0, )"
