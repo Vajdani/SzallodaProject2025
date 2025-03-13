@@ -20,11 +20,6 @@ namespace SzallodaManagerForm
                 ThrowError(lbUsernameError, "Kérlek add meg a felhasználóneved!");
                 tbUsername.Focus();
             }
-            else if (tbUsername.Text.Length < 5)
-            {
-                ThrowError(lbUsernameError, "A felhasználónév legalább 5 karakter hosszú!");
-                tbUsername.Focus();
-            }
             else if (tbPassword.Text.Length == 0)
             {
                 ThrowError(lbPasswordError, "Kérem adja meg a jelszót!");
@@ -41,16 +36,28 @@ namespace SzallodaManagerForm
 
         void HandleLogin()
         {
-            using Database userQuery = new($"select user_id, password from user where username like '{tbUsername.Text}' or email like '{tbUsername.Text}';");
-            if (!userQuery.Reader.Read())
+            Database userQuery;
+            try
             {
-                MessageBox.Show("Nincsen ilyen felhasználó! Probáljon meg egy másik felhasználónevet!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                userQuery = new($"select user.user_id, user.password from user, employee " +
+                                $"where (username like '{tbUsername.Text}' or email like '{tbUsername.Text}') and " +
+                                $"employee.user_id = user.user_id;");
+                if (!userQuery.Reader.Read())
+                {
+                    MessageBox.Show("Sikertelen bejelentkezés! Rossz felhasználónevet vagy jelszavat adott meg!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Nem elérhetõ a szerver! Próbálja meg késõbb.", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (BCrypt.Net.BCrypt.Verify(tbPassword.Text, userQuery.Reader["password"].ToString()))
             {
                 int user_id = Convert.ToInt32(userQuery.Reader["user_id"]);
+                userQuery.Close();
 
                 User.OnUserLogin(user_id);
                 Hotel.OnUserLogin(user_id);
@@ -63,6 +70,7 @@ namespace SzallodaManagerForm
             }
             else
             {
+                userQuery.Close();
                 ThrowError(lbPasswordError, "Hibás jelszó!");
             }
         }
