@@ -25,7 +25,6 @@ class MainController extends Controller
         if ($hotel == null) {
             return redirect("/");
         }
-
         return view("hotel", [
             "hotel" => $hotel,
             "rooms" => Room::where("hotel_id", $id)->get(),
@@ -38,10 +37,14 @@ class MainController extends Controller
                     reviews.user_id = user.user_id and
                     hotel.hotel_id = $id
                 "),
+            "description" => City::find($hotel->city_id)->description_short
         ]);
     }
 
     public function city($id) {
+        $desc = City::find($id)->description;
+        $desc = explode('{break}', $desc);
+
         return view("city", [
             "city" => City::find($id),
             "hotels" => Hotel::fromQuery("
@@ -50,6 +53,7 @@ class MainController extends Controller
                 where hotel.city_id = $id
                 group by hotel.hotel_id;
             "),
+            "description" => $desc
         ]);
     }
 

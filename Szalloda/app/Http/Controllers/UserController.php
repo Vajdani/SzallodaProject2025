@@ -142,7 +142,7 @@ class UserController extends Controller
                 "confirmed"
             ],
             "password_confirmation" => "required",
-            "date" => "required|date",
+            "date" => "required|date|before:".Carbon::now()->subYears(18),
             "tos" => "required",
         ], [
             "name.required" => "Muszáj megadnia a felhasználónevét!",
@@ -162,13 +162,15 @@ class UserController extends Controller
             "password.required" => "Muszáj megadnia a jelszavát!",
             "password.min" => "A jelszónak legalább ".self::$minPasswordLength." karakter hosszúnak kell lennie!",
             "password.letters" => "A jelszónak betűket is tartalmaznia kell!",
-            "password.mixedCase" => "A jelszónak kis- és nagybetűket is tartalmaznia kell!",
+            "password.mixed" => "A jelszónak kis- és nagybetűket is tartalmaznia kell!",
             "password.numbers" => "A jelszónak számokat is tartalmaznia kell!",
             "password.symbols" => "A jelszónak speciális karaktereket is tartalmaznia kell!",
 
             "password_confirmation.required" => "Muszáj megerősítenie a jelszavát!",
 
             "date.required" => "Muszáj megadnia a születési dátumát!",
+            "date.date" => "Valós dátumot adjon meg!",
+            "date.before" => "Csak 18 évnél idősebb személy regisztrálhat!",
 
             "tos.required" => "Muszáj elfogadnia a felhasználói feltételeket!",
         ]);

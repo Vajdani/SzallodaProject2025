@@ -43,6 +43,8 @@
                 </table>
                 <hr>
             </div>
+
+
             <div>
                 <p>Képek</p>
                 <div class="szallodaImgGrid">
@@ -93,10 +95,7 @@
                 <div>
                     <p>{{ $city->cityName }}</p>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore a officia perspiciatis rem cumque
-                        iusto.
-                        Dolore expedita at, commodi nam voluptas architecto asperiores. Magnam perspiciatis facere quod
-                        voluptate molestiae accusantium.
+                       {{ $description }}
                     </p>
                 </div>
                 <img src="{{ asset("img/cities/$city->city_id.jpg") }}" alt="{{ $city->cityName }}" title="{{ $city->cityName }}" class="img-fluid">
