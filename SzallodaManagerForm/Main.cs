@@ -5,7 +5,6 @@
         public Main()
         {
             InitializeComponent();
-
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -31,6 +30,24 @@
         private void Main_Closed(object sender, FormClosedEventArgs e)
         {
             Login.OnUserLogout();
+        }
+
+        private void OnHotelSelected(object sender, EventArgs e)
+        {
+            Hotel? hotel = Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!);
+            if (hotel == null) { return; }
+
+            pHotelInfo.Visible = true;
+
+            lbHotelName.Text = $"Név: {hotel.Name}";
+
+            using Database cityName = new($"select cityName from city where city_id = {hotel.city_id}");
+            cityName.Read();
+            lbCity.Text = $"Város: {cityName.GetString("cityName")}";
+
+            lbAddress.Text = $"Cím: {hotel.Address}";
+            lbPhoneNumber.Text = $"Telefonszám: {hotel.PhoneNumber}";
+            lbEmail.Text = $"E-mail cím: {hotel.Email}";
         }
     }
 }

@@ -33,8 +33,15 @@
             lbFelhasznalo = new Label();
             panel2 = new Panel();
             label2 = new Label();
+            lbHotelName = new Label();
+            pHotelInfo = new Panel();
+            lbCity = new Label();
+            lbEmail = new Label();
+            lbPhoneNumber = new Label();
+            lbAddress = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            pHotelInfo.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -48,12 +55,14 @@
             // 
             // cbHotelek
             // 
+            cbHotelek.DropDownStyle = ComboBoxStyle.DropDownList;
             cbHotelek.FormattingEnabled = true;
             cbHotelek.Location = new Point(657, 19);
             cbHotelek.Margin = new Padding(3, 2, 3, 2);
             cbHotelek.Name = "cbHotelek";
             cbHotelek.Size = new Size(133, 23);
             cbHotelek.TabIndex = 1;
+            cbHotelek.SelectedValueChanged += OnHotelSelected;
             // 
             // lbFelhasznalo
             // 
@@ -83,11 +92,70 @@
             label2.TabIndex = 0;
             label2.Text = "Hotel";
             // 
+            // lbHotelName
+            // 
+            lbHotelName.AutoSize = true;
+            lbHotelName.Location = new Point(15, 15);
+            lbHotelName.Name = "lbHotelName";
+            lbHotelName.Size = new Size(78, 15);
+            lbHotelName.TabIndex = 2;
+            lbHotelName.Text = "lbHotelName";
+            // 
+            // pHotelInfo
+            // 
+            pHotelInfo.Controls.Add(lbCity);
+            pHotelInfo.Controls.Add(lbEmail);
+            pHotelInfo.Controls.Add(lbPhoneNumber);
+            pHotelInfo.Controls.Add(lbAddress);
+            pHotelInfo.Controls.Add(lbHotelName);
+            pHotelInfo.Location = new Point(114, 65);
+            pHotelInfo.Name = "pHotelInfo";
+            pHotelInfo.Size = new Size(676, 384);
+            pHotelInfo.TabIndex = 3;
+            pHotelInfo.Visible = false;
+            // 
+            // lbCity
+            // 
+            lbCity.AutoSize = true;
+            lbCity.Location = new Point(15, 40);
+            lbCity.Name = "lbCity";
+            lbCity.Size = new Size(38, 15);
+            lbCity.TabIndex = 6;
+            lbCity.Text = "lbCity";
+            // 
+            // lbEmail
+            // 
+            lbEmail.AutoSize = true;
+            lbEmail.Location = new Point(15, 115);
+            lbEmail.Name = "lbEmail";
+            lbEmail.Size = new Size(46, 15);
+            lbEmail.TabIndex = 5;
+            lbEmail.Text = "lbEmail";
+            // 
+            // lbPhoneNumber
+            // 
+            lbPhoneNumber.AutoSize = true;
+            lbPhoneNumber.Location = new Point(15, 90);
+            lbPhoneNumber.Name = "lbPhoneNumber";
+            lbPhoneNumber.Size = new Size(95, 15);
+            lbPhoneNumber.TabIndex = 4;
+            lbPhoneNumber.Text = "lbPhoneNumber";
+            // 
+            // lbAddress
+            // 
+            lbAddress.AutoSize = true;
+            lbAddress.Location = new Point(15, 65);
+            lbAddress.Name = "lbAddress";
+            lbAddress.Size = new Size(59, 15);
+            lbAddress.TabIndex = 3;
+            lbAddress.Text = "lbAddress";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pHotelInfo);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "Main";
@@ -99,6 +167,8 @@
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            pHotelInfo.ResumeLayout(false);
+            pHotelInfo.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -109,5 +179,11 @@
         private Label lbFelhasznalo;
         private Label label2;
         private ComboBox cbHotelek;
+        private Label lbHotelName;
+        private Panel pHotelInfo;
+        private Label lbAddress;
+        private Label lbPhoneNumber;
+        private Label lbEmail;
+        private Label lbCity;
     }
 }

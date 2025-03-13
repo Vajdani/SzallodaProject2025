@@ -51,6 +51,7 @@
             // 
             tbPassword.Location = new Point(35, 169);
             tbPassword.Name = "tbPassword";
+            tbPassword.PasswordChar = '*';
             tbPassword.Size = new Size(165, 23);
             tbPassword.TabIndex = 1;
             // 
