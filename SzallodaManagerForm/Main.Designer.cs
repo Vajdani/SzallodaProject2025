@@ -39,6 +39,9 @@
             lbEmail = new Label();
             lbPhoneNumber = new Label();
             lbAddress = new Label();
+            panel3 = new Panel();
+            label1 = new Label();
+            vScrollBar1 = new VScrollBar();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             pHotelInfo.SuspendLayout();
@@ -76,21 +79,22 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(label1);
             panel2.Controls.Add(label2);
             panel2.Location = new Point(0, 65);
             panel2.Name = "panel2";
-            panel2.Size = new Size(108, 384);
+            panel2.Size = new Size(118, 384);
             panel2.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(12, 10);
+            label2.Location = new Point(3, 10);
             label2.Name = "label2";
-            label2.Size = new Size(47, 21);
+            label2.Size = new Size(110, 21);
             label2.TabIndex = 0;
-            label2.Text = "Hotel";
+            label2.Text = "Szolgáltatások";
             // 
             // lbHotelName
             // 
@@ -103,14 +107,16 @@
             // 
             // pHotelInfo
             // 
+            pHotelInfo.Controls.Add(vScrollBar1);
+            pHotelInfo.Controls.Add(panel3);
             pHotelInfo.Controls.Add(lbCity);
             pHotelInfo.Controls.Add(lbEmail);
             pHotelInfo.Controls.Add(lbPhoneNumber);
             pHotelInfo.Controls.Add(lbAddress);
             pHotelInfo.Controls.Add(lbHotelName);
-            pHotelInfo.Location = new Point(114, 65);
+            pHotelInfo.Location = new Point(124, 65);
             pHotelInfo.Name = "pHotelInfo";
-            pHotelInfo.Size = new Size(676, 384);
+            pHotelInfo.Size = new Size(666, 384);
             pHotelInfo.TabIndex = 3;
             pHotelInfo.Visible = false;
             // 
@@ -150,6 +156,30 @@
             lbAddress.TabIndex = 3;
             lbAddress.Text = "lbAddress";
             // 
+            // panel3
+            // 
+            panel3.Location = new Point(15, 142);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(627, 52);
+            panel3.TabIndex = 7;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(3, 40);
+            label1.Name = "label1";
+            label1.Size = new Size(108, 21);
+            label1.TabIndex = 1;
+            label1.Text = "Alkalmazottak";
+            // 
+            // vScrollBar1
+            // 
+            vScrollBar1.Location = new Point(645, 10);
+            vScrollBar1.Name = "vScrollBar1";
+            vScrollBar1.Size = new Size(17, 366);
+            vScrollBar1.TabIndex = 8;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -185,5 +215,8 @@
         private Label lbPhoneNumber;
         private Label lbEmail;
         private Label lbCity;
+        private Panel panel3;
+        private Label label1;
+        private VScrollBar vScrollBar1;
     }
 }
