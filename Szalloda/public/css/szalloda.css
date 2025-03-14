@@ -10,21 +10,33 @@
 .szallodaImgGrid {
     display: grid;
     gap: 15px;
-    grid-template-columns: auto auto auto;
+}
+
+@media only screen and (min-width: 600px) {
+    .szallodaImgGrid {
+        grid-template-columns: auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .szallodaImgGrid {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .szallodaImgGrid {
+        grid-template-columns: auto auto auto;
+    }
 }
 
 .varosGrid {
-    display: grid;
+    /* display: grid;
+    grid-template-columns: auto auto; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 20px;
-    grid-template-columns: auto auto;
-}
-
-@media only screen and (max-width:600px){
-    .szallodaImgGrid{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
 }
 
 table {
