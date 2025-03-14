@@ -14,7 +14,7 @@ namespace SzallodaManagerForm
         public ItemPanel(string display)
         {
 
-            this.Size = new System.Drawing.Size(750, 50);
+            this.Size = new System.Drawing.Size(820, 50);
             this.Location = new Point(10, 50);
             this.BackColor = Color.Aqua;
             this.Visible = true;

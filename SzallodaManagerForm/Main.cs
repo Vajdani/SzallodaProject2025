@@ -2,6 +2,11 @@
 {
     public partial class Main : Form
     {
+        OptionPanel current;
+        OptionPanel alkalmazottak;
+        OptionPanel szobak;
+        OptionPanel szolgaltatasok;
+
         public Main()
         {
             InitializeComponent();
@@ -27,8 +32,22 @@
             }
 
 
-            ItemPanel a = new ItemPanel("alma");
-            pHotelInfo.Controls.Add(a);
+            alkalmazottak = new();
+            szobak = new();
+            szolgaltatasok = new();
+
+            this.Controls.Add(alkalmazottak);
+            this.Controls.Add(szobak);
+            this.Controls.Add(szolgaltatasok);
+
+
+            alkalmazottak.BackColor = Color.RebeccaPurple;
+            //Alapbeállítás
+            current = alkalmazottak;
+            cbModositas.SelectedIndex = 0;
+            current.UpdateNShow();
+            cbHotelek.SelectedIndex = 0;
+
         }
 
         private void Main_Closed(object sender, FormClosedEventArgs e)
@@ -41,7 +60,7 @@
             Hotel? hotel = Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!);
             if (hotel == null) { return; }
 
-            pHotelInfo.Visible = true;
+            //pHotelInfo.Visible = true;
 
             //lbHotelName.Text = $"Név: {hotel.Name}";
 
@@ -56,18 +75,25 @@
 
         private void cbModositas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (cbModositas.SelectedItem)
+            switch (cbModositas.Text)
             {
                 case "Alkalmazottak":
+                    current.Visible = false;
+                    current = alkalmazottak;
+                    current.UpdateNShow();
                     break;
 
                 case "Szobák":
+                    current.Visible = false;
+                    current = szobak;
+                    current.UpdateNShow();
                     break;
 
                 case "Szolgáltatások":
+                    current.Visible = false;
+                    current = szolgaltatasok;
+                    current.UpdateNShow();
                     break;
-
-
 
             }
         }
