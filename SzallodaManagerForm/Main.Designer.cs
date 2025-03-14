@@ -29,38 +29,63 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label2 = new Label();
+            cbModositas = new ComboBox();
+            label1 = new Label();
             cbHotelek = new ComboBox();
             lbFelhasznalo = new Label();
-            panel2 = new Panel();
-            label2 = new Label();
-            lbHotelName = new Label();
             pHotelInfo = new Panel();
-            lbCity = new Label();
-            lbEmail = new Label();
-            lbPhoneNumber = new Label();
-            lbAddress = new Label();
-            panel3 = new Panel();
-            label1 = new Label();
-            vScrollBar1 = new VScrollBar();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
-            pHotelInfo.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(cbModositas);
+            panel1.Controls.Add(label1);
             panel1.Controls.Add(cbHotelek);
             panel1.Controls.Add(lbFelhasznalo);
-            panel1.Location = new Point(0, 1);
+            panel1.Location = new Point(1, 1);
             panel1.Name = "panel1";
-            panel1.Size = new Size(798, 58);
+            panel1.Size = new Size(800, 60);
             panel1.TabIndex = 0;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 14F);
+            label2.Location = new Point(535, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(103, 25);
+            label2.TabIndex = 4;
+            label2.Text = "Módosítás:";
+            // 
+            // cbModositas
+            // 
+            cbModositas.AutoCompleteCustomSource.AddRange(new string[] { "Alkalmazottak", "Szolgáltatások", "Szobák" });
+            cbModositas.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbModositas.FormattingEnabled = true;
+            cbModositas.Location = new Point(644, 21);
+            cbModositas.Name = "cbModositas";
+            cbModositas.Size = new Size(121, 23);
+            cbModositas.TabIndex = 2;
+            cbModositas.SelectedIndexChanged += cbModositas_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14F);
+            label1.Location = new Point(312, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(61, 25);
+            label1.TabIndex = 3;
+            label1.Text = "Hotel:";
             // 
             // cbHotelek
             // 
             cbHotelek.DropDownStyle = ComboBoxStyle.DropDownList;
             cbHotelek.FormattingEnabled = true;
-            cbHotelek.Location = new Point(657, 19);
+            cbHotelek.Location = new Point(375, 21);
             cbHotelek.Margin = new Padding(3, 2, 3, 2);
             cbHotelek.Name = "cbHotelek";
             cbHotelek.Size = new Size(133, 23);
@@ -71,122 +96,28 @@
             // 
             lbFelhasznalo.AutoSize = true;
             lbFelhasznalo.Font = new Font("Segoe UI", 20F);
-            lbFelhasznalo.Location = new Point(12, 6);
+            lbFelhasznalo.Location = new Point(11, 6);
             lbFelhasznalo.Name = "lbFelhasznalo";
             lbFelhasznalo.Size = new Size(197, 37);
             lbFelhasznalo.TabIndex = 0;
             lbFelhasznalo.Text = "Felhasználónév";
             // 
-            // panel2
-            // 
-            panel2.Controls.Add(label1);
-            panel2.Controls.Add(label2);
-            panel2.Location = new Point(0, 65);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(118, 384);
-            panel2.TabIndex = 1;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(3, 10);
-            label2.Name = "label2";
-            label2.Size = new Size(110, 21);
-            label2.TabIndex = 0;
-            label2.Text = "Szolgáltatások";
-            // 
-            // lbHotelName
-            // 
-            lbHotelName.AutoSize = true;
-            lbHotelName.Location = new Point(15, 15);
-            lbHotelName.Name = "lbHotelName";
-            lbHotelName.Size = new Size(78, 15);
-            lbHotelName.TabIndex = 2;
-            lbHotelName.Text = "lbHotelName";
-            // 
             // pHotelInfo
             // 
-            pHotelInfo.Controls.Add(vScrollBar1);
-            pHotelInfo.Controls.Add(panel3);
-            pHotelInfo.Controls.Add(lbCity);
-            pHotelInfo.Controls.Add(lbEmail);
-            pHotelInfo.Controls.Add(lbPhoneNumber);
-            pHotelInfo.Controls.Add(lbAddress);
-            pHotelInfo.Controls.Add(lbHotelName);
-            pHotelInfo.Location = new Point(124, 65);
+            pHotelInfo.AllowDrop = true;
+            pHotelInfo.AutoScroll = true;
+            pHotelInfo.Location = new Point(10, 70);
             pHotelInfo.Name = "pHotelInfo";
-            pHotelInfo.Size = new Size(666, 384);
+            pHotelInfo.Size = new Size(780, 380);
             pHotelInfo.TabIndex = 3;
             pHotelInfo.Visible = false;
-            // 
-            // lbCity
-            // 
-            lbCity.AutoSize = true;
-            lbCity.Location = new Point(15, 40);
-            lbCity.Name = "lbCity";
-            lbCity.Size = new Size(38, 15);
-            lbCity.TabIndex = 6;
-            lbCity.Text = "lbCity";
-            // 
-            // lbEmail
-            // 
-            lbEmail.AutoSize = true;
-            lbEmail.Location = new Point(15, 115);
-            lbEmail.Name = "lbEmail";
-            lbEmail.Size = new Size(46, 15);
-            lbEmail.TabIndex = 5;
-            lbEmail.Text = "lbEmail";
-            // 
-            // lbPhoneNumber
-            // 
-            lbPhoneNumber.AutoSize = true;
-            lbPhoneNumber.Location = new Point(15, 90);
-            lbPhoneNumber.Name = "lbPhoneNumber";
-            lbPhoneNumber.Size = new Size(95, 15);
-            lbPhoneNumber.TabIndex = 4;
-            lbPhoneNumber.Text = "lbPhoneNumber";
-            // 
-            // lbAddress
-            // 
-            lbAddress.AutoSize = true;
-            lbAddress.Location = new Point(15, 65);
-            lbAddress.Name = "lbAddress";
-            lbAddress.Size = new Size(59, 15);
-            lbAddress.TabIndex = 3;
-            lbAddress.Text = "lbAddress";
-            // 
-            // panel3
-            // 
-            panel3.Location = new Point(15, 142);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(627, 52);
-            panel3.TabIndex = 7;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(3, 40);
-            label1.Name = "label1";
-            label1.Size = new Size(108, 21);
-            label1.TabIndex = 1;
-            label1.Text = "Alkalmazottak";
-            // 
-            // vScrollBar1
-            // 
-            vScrollBar1.Location = new Point(645, 10);
-            vScrollBar1.Name = "vScrollBar1";
-            vScrollBar1.Size = new Size(17, 366);
-            vScrollBar1.TabIndex = 8;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(804, 461);
             Controls.Add(pHotelInfo);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
@@ -195,19 +126,13 @@
             Load += Main_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            pHotelInfo.ResumeLayout(false);
-            pHotelInfo.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panel1;
-        private Panel panel2;
         private Label lbFelhasznalo;
-        private Label label2;
         private ComboBox cbHotelek;
         private Label lbHotelName;
         private Panel pHotelInfo;
@@ -215,8 +140,8 @@
         private Label lbPhoneNumber;
         private Label lbEmail;
         private Label lbCity;
-        private Panel panel3;
+        private Label label2;
+        private ComboBox cbModositas;
         private Label label1;
-        private VScrollBar vScrollBar1;
     }
 }
