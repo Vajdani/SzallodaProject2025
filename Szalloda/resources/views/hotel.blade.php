@@ -16,6 +16,12 @@
             <div>
                 <h2>A szállodáról</h2>
                 <hr>
+                {{-- <p>{{$hotel->description}}</p> --}}
+                @for ($i = 0; $i < count($hotel_description); $i++)
+                    <p>{{ $hotel_description[$i]}}</p>
+                    <br>
+                @endfor
+                <hr>
             </div>
             <div>
                 <p>Adatok:</p>
@@ -113,7 +119,7 @@
                 <div>
                     <h3>{{ $city->cityName }}</h3>
                     <p>
-                       {{ $description }}
+                       {{ $city_description }}
                     </p>
                 </div>
                 <img src="{{ asset("img/cities/$city->city_id.jpg") }}" alt="{{ $city->cityName }}" title="{{ $city->cityName }}" class="img-fluid">
