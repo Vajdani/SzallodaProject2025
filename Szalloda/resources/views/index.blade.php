@@ -33,7 +33,7 @@
                                 title="{{ $city->cityName }}">
                             <div class="carousel-caption">
                                 <h3>{{ $city->cityName }}</h3>
-                                <p>{{ $city->country }}</p>
+                                <p class="text-center">{{ $city->country }}</p>
                             </div>
                         </a>
                 </div>

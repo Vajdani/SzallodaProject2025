@@ -9,9 +9,9 @@
         <section>
             <h1>{{ $city->cityName }}</h1>
             <img src="{{ asset('img/cities/' . $city->city_id . '.jpg') }}" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid" width="600px" height="400px">
-           @for ($i = 0; $i < count($description); $i++)
+            @for ($i = 0; $i < count($description); $i++)
                 <p>{{ $description[$i] }}</p>
-           @endfor
+            @endfor
         </section>
         <div class="citySection">
             @foreach ($hotels as $hotel)
@@ -28,7 +28,7 @@
                                 <p>Nincsenek értékelések.</p>
                             @else
                                 <span class="starTicked">{{ str_repeat('★', $hotel->rating) }}</span><span class="starTicked">{{ str_repeat('⯪', ceil($hotel->rating - floor($hotel->rating))) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - ceil($hotel->rating)) }} - {{ $hotel->rating }}</span>
-                                <p>{{$hotel->ratingCount}} értékelés</p>
+                                <p>{{ $hotel->ratingCount }} értékelés</p>
                             @endif
                         </p>
                     </div>

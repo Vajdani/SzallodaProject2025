@@ -14,7 +14,27 @@
 
 <body>
     <main>
-        @yield("content")
+        <div class="w-100">
+            @if (Session::has("sv"))
+                <div class='info-popup' id='popup'>
+                    <div>
+                        <p>{{Session::get("sv")}}</p>
+                        <button onclick="document.getElementById('popup').remove()">X</button>
+                    </div>
+                </div>
+
+                <script>
+                    setTimeout(() => {
+                        let popup = document.getElementById('popup')
+                        if (popup) {
+                            popup.remove()
+                        }
+                    }, (5000));
+                </script>
+            @endif
+
+            @yield("content")
+        </div>
         <div class="sidebar">
             <div class="sidebarHeader">
                 <h2>Szálloda</h2>
@@ -26,7 +46,7 @@
             <div class="sidebarCollapsableContent">
                 <hr>
             <ul class="sidebarLinks">
-                
+
                 <li><a href="/">Főoldal</a></li>
                 @auth
                     <li><a href="/profil">Profilom</a></li>
@@ -58,11 +78,6 @@
     <footer>
         <p>Footer text</p>
     </footer>
-
-    @php
-        if (Session::has("sv"))
-            echo "<script>window.addEventListener('load', () => { alert('".Session::get("sv")."'); });</script>"
-    @endphp
 </body>
 
 </html>
