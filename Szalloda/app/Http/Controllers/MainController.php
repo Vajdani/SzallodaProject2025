@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\City;
 use App\Models\Hotel;
 use App\Models\Room;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -37,6 +38,13 @@ class MainController extends Controller
                     reviews.user_id = user.user_id and
                     hotel.hotel_id = $id
                 "),
+            "services" => Service::fromQuery("
+                select servicecategory.serviceName, service.price, service.available, service.allYear, service.startDate, service.endDate, service.openTime, service.closeTime
+                from service, servicecategory
+                where
+                    service.hotel_id = $id and
+                    service.category_id = servicecategory.serviceCategory_id
+            "),
             "description" => City::find($hotel->city_id)->description_short
         ]);
     }

@@ -43,8 +43,6 @@
                 </table>
                 <hr>
             </div>
-
-
             <div>
                 <p>Képek</p>
                 <div class="szallodaImgGrid">
@@ -77,6 +75,26 @@
                 </table>
                 <hr>
             </div>
+            <div>
+                <p>Szolgáltatások</p>
+                <table class="roomsTable">
+                    <tr>
+                        <th>Név</th>
+                        <th>Ár</th>
+                        <th>Jelenleg elérhető-e</th>
+                        <th>Egész évben elérhető-e</th>
+                    </tr>
+                    @foreach ($services as $service)
+                        <tr>
+                            <td>{{$service->serviceName}}</td>
+                            <td>{{$service->price}} Ft</td>
+                            <td>{{$service->available == 1 ? "Igen" : "Nem"}}</td>
+                            <td>{{$service->allYear == 1 ? "Igen" : "Nem"}}</td>
+                        </tr>
+                    @endforeach
+                </table>
+                <hr>
+            </div>
         </section>
         <section>
             <h2>Értékelések</h2>
@@ -93,7 +111,7 @@
             <h2>A városról</h2>
             <div class="varosGrid">
                 <div>
-                    <p>{{ $city->cityName }}</p>
+                    <h3>{{ $city->cityName }}</h3>
                     <p>
                        {{ $description }}
                     </p>
