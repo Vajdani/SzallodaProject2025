@@ -44,7 +44,9 @@ input:not(input[type=checkbox]) {
     padding: 5px;
 }
 
-
+.save-button:hover {
+    background-color: var(--colour_sidebar);
+}
 
 .delete-button{
     border-radius: 15px;

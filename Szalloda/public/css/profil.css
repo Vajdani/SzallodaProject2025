@@ -70,8 +70,12 @@
     height: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 2px solid black;
 }
 
+.save-button:hover {
+    background-color: var(--colour_sidebar);
+}
 
 .review-button {
     border-radius: 15px;

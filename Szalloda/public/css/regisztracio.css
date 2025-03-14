@@ -49,6 +49,11 @@
     height: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 2px solid black;
+}
+
+.form-design button:hover {
+    background-color: var(--colour_sidebar);
 }
 
 .error{
