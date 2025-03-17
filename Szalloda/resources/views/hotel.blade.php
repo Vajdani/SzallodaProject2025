@@ -47,6 +47,7 @@
                         <td>{{ $hotel->email }}</td>
                     </tr>
                 </table>
+                <br>
                 <hr>
             </div>
             <div>
