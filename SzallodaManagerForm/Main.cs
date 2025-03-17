@@ -52,12 +52,18 @@
             this.Controls.Add(szobak);
             this.Controls.Add(szolgaltatasok);
 
+            cbModositas.Items.Clear();
+            cbModositas.Items.Add("Szobák");
+            cbModositas.Items.Add("Szolgáltatások");
+
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 2) //Manager vagy Owner
             {
                 alkalmazottak = new();
                 this.Controls.Add(alkalmazottak);
                 alkalmazottak.BackColor = Color.RebeccaPurple;
+
+                cbModositas.Items.Add("Alkalmazottak");
 
                 current = alkalmazottak;
             }
