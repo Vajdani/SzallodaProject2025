@@ -46,8 +46,10 @@
             szolgaltatasok?.Dispose();
 
 
-            szobak = new();
-            szolgaltatasok = new();
+            szobak = new(this.Size);
+            szolgaltatasok = new(this.Size);
+
+            szolgaltatasok.BackColor = Color.RebeccaPurple;
 
             this.Controls.Add(szobak);
             this.Controls.Add(szolgaltatasok);
@@ -59,7 +61,7 @@
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 2) //Manager vagy Owner
             {
-                alkalmazottak = new();
+                alkalmazottak = new(this.Size);
                 this.Controls.Add(alkalmazottak);
                 alkalmazottak.BackColor = Color.RebeccaPurple;
 

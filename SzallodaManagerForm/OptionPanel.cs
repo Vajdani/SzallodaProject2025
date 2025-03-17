@@ -12,16 +12,19 @@ namespace SzallodaManagerForm
     {
 
         Panel itemPanelCon;
+        Size parentsize;
 
-        public OptionPanel() 
+        public OptionPanel(Size parent) 
         {
-            this.Size = new Size(880, 500);
-            this.Location = new Point(11, 90);
+            parentsize = parent;
+            this.Size = new Size(parent.Width, parent.Height-70);
+            this.Location = new Point(0, 70);
             this.Visible = false;
 
             itemPanelCon = new Panel();
-            itemPanelCon.Size = new Size(870, 420);
-            itemPanelCon.Location = new Point(1, 1);
+            itemPanelCon.BackColor = Color.Red;
+            itemPanelCon.Size = new Size(this.Size.Width-20, (parent.Height-170));
+            itemPanelCon.Location = new Point(0, 50);
             itemPanelCon.AutoScroll = true;
             this.Controls.Add(itemPanelCon);
         }
@@ -34,14 +37,27 @@ namespace SzallodaManagerForm
             //scrollability test
             for (int i = 0; i < 20; i++)
             {
-                curr = new ItemPanel(i.ToString());
-                curr.Location = new Point(0, 50+(i*52));
+                curr = new ItemPanel(this.Size);
+                curr.ChangeText(i.ToString());
+                curr.Location = new Point(0, (i*52));
                 
                 this.itemPanelCon.Controls.Add(curr);
             }
 
-
+            
             this.Visible = true;
+        }
+
+        public void ResizePanel(Size parent)
+        {
+            this.Size = new Size(parent.Width, parent.Height - 70);
+            itemPanelCon.Size = new Size(this.Size.Width - 20, (parent.Height - 170));
+
+            foreach(var ItP in itemPanelCon.Controls)
+            {
+                // Ha az aktuális item ItemPanel, resize function meghívása rajta
+                if(ItP is ItemPanel) {}
+            }
         }
     }
 }
