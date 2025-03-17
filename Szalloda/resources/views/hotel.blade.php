@@ -10,7 +10,7 @@
     <div class="mainContent">
         <section>
             <h1>{{ $hotel->hotelName }}</h1>
-            <img src="https://placehold.co/600x400" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid">
+            <img src="{{asset('img/hotels/'.$hotel->hotel_id.'.jpg')}}" alt="{{$hotel->hotel_i}}" title="Szálloda" class="szallodaMainImg img-fluid">
         </section>
         <section class="szallodaAdatSection">
             <div>
@@ -53,12 +53,9 @@
             <div>
                 <p>Képek</p>
                 <div class="szallodaImgGrid">
-                    <img src="https://placehold.co/600x400" alt="szalloda_kep_1" title="Szálloda 1.kép" class="img-fluid">
-                    <img src="https://placehold.co/600x400" alt="szalloda_kep_2" title="Szálloda 2.kép" class="img-fluid">
-                    <img src="https://placehold.co/600x400" alt="szalloda_kep_3" title="Szálloda 3.kép" class="img-fluid">
-                    <img src="https://placehold.co/600x400" alt="szalloda_kep_4" title="Szálloda 4.kép" class="img-fluid">
-                    <img src="https://placehold.co/600x400" alt="szalloda_kep_5" title="Szálloda 5.kép" class="img-fluid">
-                    <img src="https://placehold.co/600x400" alt="szalloda_kep_6" title="Szálloda 6.kép" class="img-fluid">
+                    @for ($i = 1; $i < 7; $i++)
+                    <img src="{{asset('img/hotels/'.$hotel->hotel_id.'_'.$i.'.jpg')}}" alt="szalloda_kep_{{$i}}" title="Szálloda 1.kép" class="img-fluid">
+                    @endfor
                 </div>
                 <hr>
             </div>
