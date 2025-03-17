@@ -31,48 +31,34 @@
                 </div>
             </div>
             <div class="profile-body">
-                @if ($userActive)
+                @if ($userActive && $hasPermission)
                     <div class="user-information">
                         <h2>Felhasználói Adatok</h2>
                         <form action="/profil/adat" method="post">
                             @csrf
                             <div class="user-data">
-                                @if ($hasPermission)
-                                    <label for="email">Email-cím</label>
-                                    <input type="text" value="{{ $user->email }}" name="email" id="email">
-                                    @error('email')
-                                        <p class="error">{{ $message }}</p>
-                                    @enderror
-                                @else
-                                    <p>Email-cím: {{ $user->email }}</p>
-                                @endif
+                                <label for="email">Email-cím</label>
+                                <input type="text" value="{{ $user->email }}" name="email" id="email">
+                                @error('email')
+                                    <p class="error">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="user-data">
-                                @if ($hasPermission)
-                                    <label for="username">Felhasználónév</label>
-                                    <input type="text" value="{{ $user->username }}" name="username" id="username">
-                                    @error('username')
-                                        <p class="error">{{ $message }}</p>
-                                    @enderror
-                                @else
-                                    <p>Felhasználónév: {{ $user->username }}</p>
-                                @endif
+                                <label for="username">Felhasználónév</label>
+                                <input type="text" value="{{ $user->username }}" name="username" id="username">
+                                @error('username')
+                                    <p class="error">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="user-data">
-                                @if ($hasPermission)
-                                    <label for="realname">Polgári név</label>
-                                    <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname" id="realname">
-                                    @error('realname')
-                                        <p class="error">{{ $message }}</p>
-                                    @enderror
-                                @else
-                                    <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>
-                                @endif
+                                <label for="realname">Polgári név</label>
+                                <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname" id="realname">
+                                @error('realname')
+                                    <p class="error">{{ $message }}</p>
+                                @enderror
                             </div>
 
-                            @if ($hasPermission)
-                                <button class="save-button" type="submit">Mentés</button>
-                            @endif
+                            <button class="save-button" type="submit">Mentés</button>
                         </form>
                     </div>
                 @endif
