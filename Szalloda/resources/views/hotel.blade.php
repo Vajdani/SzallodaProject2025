@@ -109,9 +109,15 @@
             <div class="ratingSection center" id="ratingSection">
                 <script src="{{ asset('js/reviews.js') }}"></script>
                 @foreach ($reviews as $r)
-                    <script>
-                        renderRating("", "{{ $r->username }} - {{ $r->hotelName }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
-                    </script>
+                    @if ($r->active == 1)
+                        <script>
+                            renderRating("", "{{ $r->username }} - {{ $r->hotelName }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
+                        </script>
+                    @else
+                        <script>
+                            renderRating("", "Törölt fiók - {{ $r->hotelName }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
+                        </script>
+                    @endif
                 @endforeach
             </div>
         </section>
