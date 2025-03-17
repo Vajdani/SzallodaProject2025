@@ -5,7 +5,8 @@
         public enum AuthorityLevel
         {
             Employee,
-            Manager
+            Manager,
+            Owner
         }
 
         public static User? ActiveUser;
@@ -54,9 +55,20 @@
         {
             return authLevel switch
             {
+                "owner" => AuthorityLevel.Owner,
                 "manager" => AuthorityLevel.Manager,
                 _ => AuthorityLevel.Employee,
             };
+        }
+
+        public static AuthorityLevel GetHotelAuthorityLevel(int hotel_id)
+        {
+            if (ActiveUser == null)
+            {
+                throw new Exception("User hasn't logged in yet!");
+            }
+
+            return ActiveUser.authorityLevels[hotel_id];
         }
     }
 }

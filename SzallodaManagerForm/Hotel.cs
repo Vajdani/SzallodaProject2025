@@ -2,7 +2,7 @@
 {
     internal class Hotel
     {
-        private int hotel_id;
+        public int hotel_id;
         public string Name { get; private set; }
         public int city_id { get; private set; }
         public string Address { get; private set; }
