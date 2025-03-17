@@ -86,7 +86,7 @@
                 @enderror
             </div>
 
-            <button type="submit">Bejelentkezés</button>
+            <button type="submit">Regisztráció</button>
         </form>
     </div>
 @endsection

@@ -73,8 +73,16 @@
                     </tr>
                     @foreach ($rooms as $room)
                         <tr>
-                            <td>{{$room->floor}}. emelet</td>
-                            <td>{{$room->roomNumber}}. szoba</td>
+                            <td>
+                                @if ($room->floor != null)
+                                {{$room->floor}}. emelet
+                                @elseif($room->floor === 0)
+                                fsz.
+                                @else
+                                —
+                                @endif
+                            </td>
+                            <td>{{$room->roomNumber}}</td>
                             <td>{{$room->capacity}} fő</td>
                             <td>{{$room->pricepernight}} Ft</td>
                         </tr>

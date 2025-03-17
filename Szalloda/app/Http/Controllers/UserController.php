@@ -142,7 +142,7 @@ class UserController extends Controller
                 "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
                 "unique:user,email"
             ],
-            "phonenumber" => "required|min:10|max:15",
+            "phonenumber" => "required|min:10|max:15|unique:user,phonenumber",
             "password" => [
                 "required",
                 Password::min(self::$minPasswordLength)->letters()->mixedCase()->numbers()->symbols(),
@@ -162,9 +162,11 @@ class UserController extends Controller
             "email.regex" => "Nem e-mail címet adott meg!",
             "email.unique" => "Ezzel az e-mail címmel már regisztrált fiókot!",
 
+
             "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
             "phonenumber.min" => "A telefonszámnak legalább 10 számjegy hosszúnak kell lennie!",
             "phonenumber.max" => "A telefonszám legfeljebb 15 számjegy hosszú lehet!",
+            "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
 
             "password.required" => "Muszáj megadnia a jelszavát!",
             "password.min" => "A jelszónak legalább ".self::$minPasswordLength." karakter hosszúnak kell lennie!",
