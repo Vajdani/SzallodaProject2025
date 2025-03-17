@@ -77,21 +77,6 @@
     background-color: var(--colour_sidebar);
 }
 
-.review-button {
-    border-radius: 15px;
-    height: 30px;
-    min-width: 15%;
-    background-color: var(--colour_randomgreen3);
-    box-shadow: none;
-    border: 2px solid black;
-    margin: 10px 0 10px 0;
-    padding: 0 10px 0 10px;
-}
-
-.review-button:hover {
-    background-color: var(--colour_randomgreen6);
-}
-
 .user-information form {
     width: 100%;
     display: flex;

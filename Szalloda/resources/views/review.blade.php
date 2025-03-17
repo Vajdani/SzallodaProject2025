@@ -13,11 +13,16 @@
                 @csrf
                 <label for="hotel">Melyik hotelünkhöz szeretne értékelést írni?</label>
                 <br>
-                <select name="hotel" id="hotel">
-                    @foreach ($hotels as $hotel)
-                        <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>
-                    @endforeach
-                </select>
+                @isset($hotel)
+                    <input type="text" name="hotel" id="hotel" value="{{$hotel->hotel_id}}" style="display:none">
+                    <p>{{$hotel->hotelName}}</p>
+                @else
+                    <select name="hotel" id="hotel">
+                        @foreach ($hotels as $hotel)
+                            <option value="{{$hotel->hotel_id}}">{{$hotel->hotelName}}</option>
+                        @endforeach
+                    </select>
+                @endisset
                 <br>
                 <p>Értékelés</p>
                 <p id="rating"><span onclick="reviewstar(1)">★</span><span onclick="reviewstar(2)">★</span><span onclick="reviewstar(3)">★</span><span onclick="reviewstar(4)">★</span><span onclick="reviewstar(5)">★</span></p>

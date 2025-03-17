@@ -23,6 +23,7 @@ Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::post('/profil/adat', [UserController::class, "profilePost"]);
     Route::post('/profil/pfp', [UserController::class, "profilePfp"]);
     Route::get('/ertekeles', [UserController::class, "review"]);
+    Route::get('/ertekeles/{id}', [UserController::class, "reviewById"]);
     Route::post('/ertekeles', [UserController::class, "reviewPost"]);
     Route::get('/jelszovaltoztatas', [UserController::class, "changePassword"]);
     Route::post('/jelszovaltoztatas', [UserController::class, "changePasswordPost"]);

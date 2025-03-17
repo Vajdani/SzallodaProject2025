@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Hotel;
+use App\Rules\RealNameRule;
 use Carbon\Carbon;
 
 
@@ -22,12 +23,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function profilePfp(Request $req){
-        $data = User::find(Auth::user()->user_id);
-        $data->profilePic = $req->pfp;
-        $data->save();
-        return redirect("/profil");
-
+    public function reviewById($id){
+        return view("review", [
+            "hotel" => Hotel::find($id)
+        ]);
     }
 
     public function reviewPost(Request $req){
@@ -46,7 +45,8 @@ class UserController extends Controller
         $review->reviewText = $req->comment;
         $review->created_at = Carbon::now('Europe/Budapest');
         $review->Save();
-        return redirect("/profil");
+
+        return redirect("/szalloda/$req->hotel");
     }
 
     public function profile() {
@@ -66,10 +66,14 @@ class UserController extends Controller
         ]);
     }
 
+
     public function profilePost(Request $req) {
         $req->validate([
             'username' => 'required',
-            'realname' => 'required',
+            'realname' => [
+                'required',
+                new RealNameRule()
+            ],
             "email" => [
                 "required",
                 "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
@@ -84,16 +88,19 @@ class UserController extends Controller
         ]);
         $data = User::find(Auth::user()->user_id);
         $data->username = $req->username;
-        $nev = explode(' ', $req->realname, $limit = 2);
-        if(count($nev) < 2){
-            return redirect("/profil");
-        }
-        else{
-            $data->lastName = $nev[0];
-            $data->firstName = $nev[1];
-            $data->email = $req->email;
-            $data->Save();
-        }
+        $nev = explode(' ', $req->realname, 2);
+        $data->lastName = $nev[0];
+        $data->firstName = $nev[1];
+        $data->email = $req->email;
+        $data->Save();
+
+        return redirect("/profil");
+    }
+
+    public function profilePfp(Request $req){
+        $data = User::find(Auth::user()->user_id);
+        $data->profilePic = $req->pfp;
+        $data->save();
 
         return redirect("/profil");
     }
