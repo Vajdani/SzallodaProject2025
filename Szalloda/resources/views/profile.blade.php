@@ -73,7 +73,7 @@
                         <script src="{{ asset('js/reviews.js') }}"></script>
                         @foreach ($reviews as $r)
                             <script>
-                                renderRating("", "{{ $r->hotelName }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
+                                renderRating("", "{{ $r->hotelName }}", "{{ $r->hotel_id }}", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
                             </script>
                         @endforeach
                     </div>

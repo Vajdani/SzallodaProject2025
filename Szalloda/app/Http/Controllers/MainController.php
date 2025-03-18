@@ -34,7 +34,7 @@ class MainController extends Controller
             "rooms" => Room::where("hotel_id", $id)->get(),
             "city" => City::find($hotel->city_id),
             "reviews" => Review::fromQuery("
-                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.user_id, user.active
+                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active
                 from reviews, hotel, user
                 where
                     reviews.hotel_id = hotel.hotel_id and
@@ -94,7 +94,7 @@ class MainController extends Controller
     public function reviews() {
         return view("reviews",[
             "reviews" => Review::fromQuery("
-                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.user_id, user.active
+                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active
                 from reviews, hotel, user
                 where
                     reviews.hotel_id = hotel.hotel_id and
@@ -107,7 +107,7 @@ class MainController extends Controller
 
     public function reviewsFilter($stars, $city, $hotel) {
         $reviewQuery = "
-            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, user.username, user.profilePic, user.active
+            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.active
             from reviews, hotel, user
             where
                 reviews.hotel_id = hotel.hotel_id and

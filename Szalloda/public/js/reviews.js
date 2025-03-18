@@ -6,7 +6,7 @@ const ratingSection = document.getElementById("ratingSection")
 let lastSzalloda = 0
 let varosChanged = false
 
-function renderRating(username, hotelName, rating, created_at, review, pfp, user_id, userActive) {
+function renderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -18,7 +18,7 @@ function renderRating(username, hotelName, rating, created_at, review, pfp, user
                 <p class="text-center">` + (userActive ? username : "Törölt fiók") + `</p>
             </div>
             <div class="ratingData">
-                <h3 style="text-wrap:auto">` + hotelName + `</h3>
+                <h3 style="text-wrap:auto"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
                 <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
                 <p>` + created_at + `</p>
                 <p style="text-wrap:auto;text-align:justify">` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
@@ -66,7 +66,7 @@ async function updateContents() {
         }
         else {
             reviews.forEach(element => {
-                renderRating(element.username, element.hotelName, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
+                renderRating(element.username, element.hotelName, element.hotel_id, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
             });
         }
 
