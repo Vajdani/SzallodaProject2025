@@ -10,7 +10,7 @@
     <div class="mainContent">
         <section>
             <h1>{{ $hotel->hotelName }}</h1>
-            <img src="{{asset('img/hotels/'.$hotel->hotel_id.'.jpg')}}" alt="{{$hotel->hotel_i}}" title="Szálloda" class="szallodaMainImg img-fluid">
+            <img src="{{asset('img/hotels/'.$hotel->hotel_id.'.jpg')}}" alt="{{$hotel->hotel_id}}.jpg" title="{{$hotel->hotelName}}" class="szallodaMainImg img-fluid">
         </section>
         <section class="szallodaAdatSection">
             <div>
@@ -54,7 +54,7 @@
                 <p>Képek</p>
                 <div class="szallodaImgGrid">
                     @for ($i = 1; $i < 7; $i++)
-                    <img src="{{asset('img/hotels/'.$hotel->hotel_id.'_'.$i.'.jpg')}}" alt="szalloda_kep_{{$i}}" title="Szálloda 1.kép" class="img-fluid">
+                    <img src="{{asset('img/hotels/'.$hotel->hotel_id.'_'.$i.'.jpg')}}" alt="{{$hotel->hotelName}}_{{$i}}" title="{{$hotel->hotelName}} {{$i}}. kép" class="img-fluid">
                     @endfor
                 </div>
                 <hr>
