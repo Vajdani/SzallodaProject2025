@@ -10,12 +10,21 @@ namespace SzallodaManagerForm
 {
     internal class OptionPanel : Panel
     {
+        public enum ItemPanelCategory
+        {
+            Rooms,
+            Employees,
+            Services
+        }
 
         Panel itemPanelCon;
         Size parentsize;
-
-        public OptionPanel(Size parent) 
+        public ItemPanelCategory Category { get; private set; }
+        
+        public OptionPanel(Size parent, ItemPanelCategory category) 
         {
+            this.Category = category;
+
             parentsize = parent;
             this.Size = new Size(parent.Width, parent.Height-70);
             this.Location = new Point(0, 70);
@@ -34,11 +43,40 @@ namespace SzallodaManagerForm
 
             this.itemPanelCon.Controls.Clear();
             ItemPanel curr;
+            Database ab;
+            string lekerdezes;
+
+            switch (Category)
+            {
+                case ItemPanelCategory.Employees:
+                    lekerdezes = "";
+                    ab = new(lekerdezes);
+                    while (ab.Reader.Read())
+                    {
+                        curr = new EmployeePanel(this.Size);
+                    }
+                    break;
+                case ItemPanelCategory.Services:
+                    lekerdezes = "";
+                    ab = new(lekerdezes);
+                    while (ab.Reader.Read())
+                    {
+                        curr = new ServicePanel(this.Size, ab.Reader["megnevezes"].ToString(), Convert.ToInt32(ab.Reader["elerhetoseg"]) == 1);
+                    }
+                    break;
+                case ItemPanelCategory.Rooms:
+                    lekerdezes = "";
+                    ab = new(lekerdezes);
+                    while (ab.Reader.Read())
+                    {
+                        curr = new RoomPanel(this.Size, Convert.ToInt32(ab.Reader["szobaszam"]), Convert.ToInt32(ab.Reader["ar"]), Convert.ToInt32(ab.Reader["reserved"]) == 1);
+                    }
+                    break;
+            }
             //scrollability test
             for (int i = 0; i < 20; i++)
             {
-                curr = new ItemPanel(this.Size);
-                curr.ChangeText(i.ToString());
+                curr = new ServicePanel(this.Size, i.ToString(), i % 10 == 0 ? true : false);
                 curr.Location = new Point(0, (i*52));
                 
                 this.itemPanelCon.Controls.Add(curr);

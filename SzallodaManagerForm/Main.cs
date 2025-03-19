@@ -46,8 +46,8 @@
             szolgaltatasok?.Dispose();
 
 
-            szobak = new(this.Size);
-            szolgaltatasok = new(this.Size);
+            szobak = new(this.Size, OptionPanel.ItemPanelCategory.Rooms);
+            szolgaltatasok = new(this.Size, OptionPanel.ItemPanelCategory.Services);
 
             szolgaltatasok.BackColor = Color.RebeccaPurple;
 
@@ -61,12 +61,11 @@
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 2) //Manager vagy Owner
             {
-                alkalmazottak = new(this.Size);
+                alkalmazottak = new(this.Size, OptionPanel.ItemPanelCategory.Employees);
                 this.Controls.Add(alkalmazottak);
                 alkalmazottak.BackColor = Color.RebeccaPurple;
 
                 cbModositas.Items.Add("Alkalmazottak");
-
                 current = alkalmazottak;
             }
             else
