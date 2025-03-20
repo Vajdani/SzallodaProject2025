@@ -44,7 +44,7 @@ namespace SzallodaManagerForm
                 userQuery = new($"select user.user_id, user.password from user, employee " +
                                 $"where (username like '{tbUsername.Text}' or email like '{tbUsername.Text}') and " +
                                 $"employee.user_id = user.user_id;");
-                if (!userQuery.Reader.Read())
+                if (!userQuery.Read())
                 {
                     MessageBox.Show("Sikertelen bejelentkezés! Rossz felhasználónevet vagy jelszavat adott meg!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -56,7 +56,7 @@ namespace SzallodaManagerForm
                 return;
             }
 
-            if (BCrypt.Net.BCrypt.Verify(tbPassword.Text, userQuery.Reader["password"].ToString()))
+            if (BCrypt.Net.BCrypt.Verify(tbPassword.Text, userQuery.GetString("password")))
             {
                 int user_id = userQuery.GetInt("user_id");
                 userQuery.Close();

@@ -42,8 +42,7 @@
                 throw new Exception("A user is already logged in!");
             }
 
-            User user = new(user_id);
-            ActiveUser = user;
+            ActiveUser = new(user_id);
         }
 
         public static void OnUserLogout()
@@ -58,6 +57,26 @@
                 "owner" => AuthorityLevel.Owner,
                 "manager" => AuthorityLevel.Manager,
                 _ => AuthorityLevel.Employee,
+            };
+        }
+
+        public string GetAuthorityLevelName(AuthorityLevel level)
+        {
+            return level switch
+            {
+                AuthorityLevel.Owner => "Owner",
+                AuthorityLevel.Manager => "Manager",
+                _ => "Employee",
+            };
+        }
+
+        public string GetAuthorityLevelName(int hotel_id)
+        {
+            return authorityLevels[hotel_id] switch
+            {
+                AuthorityLevel.Owner => "Owner",
+                AuthorityLevel.Manager => "Manager",
+                _ => "Employee",
             };
         }
 

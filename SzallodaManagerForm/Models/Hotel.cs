@@ -11,17 +11,14 @@
 
         public List<Room> Rooms { get; private set; }
         public List<Service> Services { get; private set; }
+        public List<(string username, string userType)> Employees { get; private set; }
 
 
         public static List<Hotel> userHotels = [];
 
-        public Hotel(int id)
+        public Hotel(Database DB)
         {
-            hotel_id = id;
-
-            using Database DB = new($"select * from hotel where hotel_id = {hotel_id}");
-            DB.Read();
-
+            hotel_id = DB.GetInt("hotel_id");
             city_id = DB.GetInt("city_id");
             Name = DB.GetString("hotelName");
             Address = DB.GetString("address");
@@ -29,16 +26,25 @@
             Email = DB.GetString("email");
 
             Rooms = Database.ReadAll<Room>($"select * from room where hotel_id = {hotel_id}");
-            Services = Database.ReadAll<Service>($"select * from service where hotel_id = {hotel_id}");
+            Services = Database.ReadAll<Service>(
+                "select service.service_id, service.hotel_id, servicecategory.serviceName, service.price, service.available, service.allYear," +
+                "service.startDate, service.endDate, service.openTime, service.closeTime " +
+                "from service, servicecategory " +
+                $"where service.category_id = servicecategory.serviceCategory_id and hotel_id = {hotel_id}");
+            Employees = Database.ReadAll<(string username, string userType)>(
+                "select user.username, employee.userType " +
+                "from employee, user " +
+                $"where user.user_id = employee.user_id and userType <> 'owner' and hotel_id = {hotel_id}"
+            );
         }
 
         public static void OnUserLogin(int user_id)
         {
-            using Database hotelQuery = new($"select hotel_id, userType from employee where user_id = {user_id}");
-            while (hotelQuery.Read())
-            {
-                userHotels.Add(new(hotelQuery.GetInt("hotel_id")));
-            }
+            userHotels = Database.ReadAll<Hotel>(
+                "select hotel.hotel_id, hotel.city_id, hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, hotel.description " +
+                "from hotel, employee " +
+                $"where hotel.hotel_id = employee.hotel_id and employee.user_id = {user_id};"
+            );
         }
 
         public static void OnUserLogout()

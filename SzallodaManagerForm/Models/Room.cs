@@ -1,6 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-
-namespace SzallodaManagerForm.Models
+﻿namespace SzallodaManagerForm.Models
 {
     internal class Room
     {

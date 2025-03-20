@@ -9,12 +9,8 @@ namespace SzallodaManagerForm
         OptionPanel szobak;
         OptionPanel szolgaltatasok;
 
-        public static Main Instance { get; private set; }
-
         public Main()
         {
-            Instance = this;
-
             InitializeComponent();
         }
 
@@ -51,14 +47,14 @@ namespace SzallodaManagerForm
             szobak?.Dispose();
             szolgaltatasok?.Dispose();
 
+            szobak = new(Size, OptionPanel.ItemPanelCategory.Rooms);
+            szolgaltatasok = new(Size, OptionPanel.ItemPanelCategory.Services)
+            {
+                BackColor = Color.RebeccaPurple
+            };
 
-            szobak = new(this.Size, OptionPanel.ItemPanelCategory.Rooms);
-            szolgaltatasok = new(this.Size, OptionPanel.ItemPanelCategory.Services);
-
-            szolgaltatasok.BackColor = Color.RebeccaPurple;
-
-            this.Controls.Add(szobak);
-            this.Controls.Add(szolgaltatasok);
+            Controls.Add(szobak);
+            Controls.Add(szolgaltatasok);
 
             cbModositas.Items.Clear();
             cbModositas.Items.Add("Szobák");
@@ -67,8 +63,8 @@ namespace SzallodaManagerForm
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 2) //Manager vagy Owner
             {
-                alkalmazottak = new(this.Size, OptionPanel.ItemPanelCategory.Employees);
-                this.Controls.Add(alkalmazottak);
+                alkalmazottak = new(Size, OptionPanel.ItemPanelCategory.Employees);
+                Controls.Add(alkalmazottak);
                 alkalmazottak.BackColor = Color.RebeccaPurple;
 
                 cbModositas.Items.Add("Alkalmazottak");

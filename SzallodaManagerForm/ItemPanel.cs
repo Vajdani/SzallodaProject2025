@@ -5,29 +5,31 @@ namespace SzallodaManagerForm
     internal class ItemPanel : Panel
     {
         public int ItemID { get; private set; } 
-        public ItemPanel()
+        public ItemPanel(Panel parent, int verticalPadding = 10)
         {
-            this.Size = new Size(Convert.ToInt32(Math.Floor(Main.Instance.Width * 0.95)), 50);
-            this.Location = new Point(10, 50);
-            this.BackColor = Color.Aqua;
-            this.Visible = true;
+            ResizePanel(parent.Size);
+            Location = new Point(10, (50 + verticalPadding) * parent.Controls.Count);
+            BackColor = Color.Aqua;
+            Visible = true;
         }
 
         public void ResizePanel(Size parentSize)
         {
-            this.Size = new Size(Convert.ToInt32(Math.Floor(parentSize.Width * 0.95)), 50);
+            Size = new Size(Convert.ToInt32(Math.Floor(parentSize.Width * 0.95)), 50);
         }
 
         public void PositionElemenet(Control control, int position)
         {
-            control.Location = new Point(position, (this.Size.Height/2)-(control.Size.Height/2));
+            control.Location = new Point(position, (Size.Height/2)-(control.Size.Height/2));
         }
 
-        public void PositionElementsEvenly(List<Control> controls, int sidePadding = 20)
+        public void PositionElementsEvenly(int sidePadding = 20)
         {
-            int width = this.Size.Width-sidePadding*2;
-            int elementWidth = controls.Sum(c => c.Size.Width);
-            int gapSize = (int)Math.Round((double)((this.Size.Width - sidePadding * 2) - controls.Sum(c => c.Size.Width))/controls.Count);
+            var controls = Controls.Cast<Control>().ToList();
+
+            int width = Size.Width-sidePadding*2;
+            int totalWidth = controls.Sum(c => c.Size.Width);
+            int gapSize = (int)Math.Round((double)(Size.Width - sidePadding * 2 - totalWidth)/controls.Count);
             int currentX = sidePadding;
 
             foreach (Control c in controls)
@@ -35,7 +37,6 @@ namespace SzallodaManagerForm
                 PositionElemenet(c, currentX);
                 currentX = currentX + gapSize + c.Size.Width;
             }
-
         }
     }
 
@@ -45,16 +46,16 @@ namespace SzallodaManagerForm
         Label lbUserType;
         Button btnEdit;
 
-        public EmployeePanel(Database db) : base()
+        public EmployeePanel(Panel parent, (string username, string userType) employee) : base(parent)
         {
             lbUsername = new()
             {
-                Text = db.GetString("username")
+                Text = employee.username
             };
 
             lbUserType = new()
             { 
-                Text = db.GetString("userType")
+                Text = employee.userType
             };
 
             btnEdit = new Button();
@@ -73,11 +74,9 @@ namespace SzallodaManagerForm
         public ComboBox Availability { get; private set; }
         public TextBox Price { get; private set; }
 
-        bool isTaken = false;
-
         Button btnSave;
 
-        public RoomPanel(Room room) : base()
+        public RoomPanel(Panel parent, Room room) : base(parent)
         {
             RoomNumber = new() { 
                 Text = room.RoomNumber,
@@ -85,7 +84,11 @@ namespace SzallodaManagerForm
             };
 
             Availability = new() { 
-                Enabled = !room.Reserved
+                Enabled = !room.Reserved,
+                Items = {
+                    "Elérhető",
+                    "Nem elérhető"
+                }
             };
 
             Price = new() {
@@ -96,15 +99,16 @@ namespace SzallodaManagerForm
 
             btnSave = new() { 
                 Text = "Mentés",
-                Size = new((int)Math.Round(this.Size.Width * 0.24), (int)Math.Round(this.Size.Height * 0.6))
+                Size = new((int)Math.Round(Size.Width * 0.24), (int)Math.Round(Size.Height * 0.6))
             };
             btnSave.Click += SaveData;
 
-            PositionElementsEvenly([ RoomNumber, Availability, Price, btnSave ]);
             Controls.Add(RoomNumber);
             Controls.Add(Availability);
             Controls.Add(Price);
             Controls.Add(btnSave);
+
+            PositionElementsEvenly();
         }
 
         void SaveData(object? sender, EventArgs e)
@@ -122,14 +126,16 @@ namespace SzallodaManagerForm
         public Label Availability { get; private set; }
         Button btnEdit;
 
-        public ServicePanel(Size parentSize, string servName, bool isAvaible) : base(parentSize)
+        public ServicePanel(Panel parent, Service service) : base(parent)
         {
-            serviceName = new Label();
-            serviceName.Text = servName.ToString();
-            serviceName.TextAlign = ContentAlignment.MiddleCenter;
+            serviceName = new Label
+            {
+                Text = service.Name,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
 
             Availability = new Label();
-            if(isAvaible)
+            if(service.Available)
             {
                 Availability.Text = "Elérhető";
                 Availability.ForeColor = Color.Green;
@@ -140,21 +146,23 @@ namespace SzallodaManagerForm
                 Availability.ForeColor = Color.DarkRed;
             }
 
-            btnEdit = new Button();
-            btnEdit.Text = "Módosítás";
-            btnEdit.Size = new((int)Math.Round(this.Size.Width * 0.24), (int)Math.Round(this.Size.Height * 0.6));
+            btnEdit = new Button
+            {
+                Text = "Módosítás",
+                Size = new((int)Math.Round(Size.Width * 0.24), (int)Math.Round(Size.Height * 0.6))
+            };
 
-            PositionElementsEvenly(new() { serviceName, Availability, btnEdit});
-            this.Controls.Add(serviceName);
-            this.Controls.Add(Availability);
-            this.Controls.Add(btnEdit);
+            Controls.Add(serviceName);
+            Controls.Add(Availability);
+            Controls.Add(btnEdit);
 
+            PositionElementsEvenly();
 
             btnEdit = new Button();
             btnEdit.Click += OpenEditForm;
         }
 
-        void OpenEditForm(object sender, EventArgs e)
+        void OpenEditForm(object? sender, EventArgs e)
         {
             //Szolgáltatás adatok form, ha lesz
         }

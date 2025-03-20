@@ -12,24 +12,24 @@ namespace SzallodaManagerForm
         }
 
         Panel itemPanelCon;
-        Size parentsize;
         public ItemPanelCategory Category { get; private set; }
         
         public OptionPanel(Size parent, ItemPanelCategory category) 
         {
-            this.Category = category;
+            Category = category;
 
-            parentsize = parent;
-            this.Size = new Size(parent.Width, parent.Height-70);
-            this.Location = new Point(0, 70);
-            this.Visible = false;
+            Size = new Size(parent.Width, parent.Height-70);
+            Location = new Point(0, 70);
+            Visible = false;
 
-            itemPanelCon = new Panel();
-            itemPanelCon.BackColor = Color.Red;
-            itemPanelCon.Size = new Size(this.Size.Width-20, (parent.Height-170));
-            itemPanelCon.Location = new Point(0, 50);
-            itemPanelCon.AutoScroll = true;
-            this.Controls.Add(itemPanelCon);
+            itemPanelCon = new Panel
+            {
+                BackColor = Color.Red,
+                Size = new Size(Size.Width - 20, (parent.Height - 170)),
+                Location = new Point(0, 50),
+                AutoScroll = true
+            };
+            Controls.Add(itemPanelCon);
         }
 
         public void UpdateNShow(Hotel? hotel)
@@ -38,52 +38,49 @@ namespace SzallodaManagerForm
 
             if (hotel == null) { return; }
 
-            int hotel_id = hotel.hotel_id;
             switch (Category)
             {
                 case ItemPanelCategory.Employees:
-                    var employeePanels = Database.ReadAll<EmployeePanel>($"select user.username, employee.userType from employee, user where user.user_id = employee.user_id and userType <> 'owner' and hotel_id = {hotel_id}");
-                    foreach(EmployeePanel panel in employeePanels)
+                    foreach (var employee in hotel.Employees)
                     {
-                        itemPanelCon.Controls.Add(panel);
+                        itemPanelCon.Controls.Add(new EmployeePanel(itemPanelCon, employee));
                     }
 
                     break;
                 case ItemPanelCategory.Services:
-                    var servicePanels = Database.ReadAll<ServicePanel>($"select service.available, servicecategory.serviceName from service, servicecategory where service.category_id = servicecategory.serviceCategory_id and service.hotel_id = {hotel_id}");
-                    foreach (ServicePanel panel in servicePanels)
+                    foreach (Service service in hotel.Services)
                     {
-                        itemPanelCon.Controls.Add(panel);
+                        itemPanelCon.Controls.Add(new ServicePanel(itemPanelCon, service));
                     }
 
                     break;
-                case ItemPanelCategory.Rooms:;
-                    foreach (Room room in Hotel.userHotels[hotel_id].Rooms)
+                case ItemPanelCategory.Rooms:
+                    foreach (Room room in hotel.Rooms)
                     {
-                        itemPanelCon.Controls.Add(new RoomPanel(room));
+                        itemPanelCon.Controls.Add(new RoomPanel(itemPanelCon, room));
                     }
 
                     break;
             }
 
             //scrollability test
-            for (int i = 0; i < 20; i++)
-            {
-                ServicePanel panel = new(this.Size, i.ToString(), i % 10 == 0)
-                {
-                    Location = new Point(0, (i * 52))
-                };
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    ServicePanel panel = new(Size, i.ToString(), i % 10 == 0)
+            //    {
+            //        Location = new Point(0, (i * 52))
+            //    };
 
-                itemPanelCon.Controls.Add(panel);
-            }
+            //    itemPanelCon.Controls.Add(panel);
+            //}
 
             Visible = true;
         }
 
         public void ResizePanel(Size parent)
         {
-            this.Size = new Size(parent.Width, parent.Height - 70);
-            itemPanelCon.Size = new Size(this.Size.Width - 20, (parent.Height - 170));
+            Size = new Size(parent.Width, parent.Height - 70);
+            itemPanelCon.Size = new Size(Size.Width - 20, (parent.Height - 170));
 
             foreach(var ItP in itemPanelCon.Controls)
             {
