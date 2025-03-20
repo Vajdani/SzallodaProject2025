@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using SzallodaManagerForm.Models;
 
 namespace SzallodaManagerForm
 {
@@ -38,52 +32,52 @@ namespace SzallodaManagerForm
             this.Controls.Add(itemPanelCon);
         }
 
-        public void UpdateNShow()
+        public void UpdateNShow(Hotel? hotel)
         {
+            itemPanelCon.Controls.Clear();
 
-            this.itemPanelCon.Controls.Clear();
-            ItemPanel curr;
-            Database ab;
-            string lekerdezes;
+            if (hotel == null) { return; }
 
+            int hotel_id = hotel.hotel_id;
             switch (Category)
             {
                 case ItemPanelCategory.Employees:
-                    lekerdezes = "";
-                    ab = new(lekerdezes);
-                    while (ab.Reader.Read())
+                    var employeePanels = Database.ReadAll<EmployeePanel>($"select user.username, employee.userType from employee, user where user.user_id = employee.user_id and userType <> 'owner' and hotel_id = {hotel_id}");
+                    foreach(EmployeePanel panel in employeePanels)
                     {
-                        curr = new EmployeePanel(this.Size);
+                        itemPanelCon.Controls.Add(panel);
                     }
+
                     break;
                 case ItemPanelCategory.Services:
-                    lekerdezes = "";
-                    ab = new(lekerdezes);
-                    while (ab.Reader.Read())
+                    var servicePanels = Database.ReadAll<ServicePanel>($"select service.available, servicecategory.serviceName from service, servicecategory where service.category_id = servicecategory.serviceCategory_id and service.hotel_id = {hotel_id}");
+                    foreach (ServicePanel panel in servicePanels)
                     {
-                        curr = new ServicePanel(this.Size, ab.Reader["megnevezes"].ToString(), Convert.ToInt32(ab.Reader["elerhetoseg"]) == 1);
+                        itemPanelCon.Controls.Add(panel);
                     }
+
                     break;
-                case ItemPanelCategory.Rooms:
-                    lekerdezes = "";
-                    ab = new(lekerdezes);
-                    while (ab.Reader.Read())
+                case ItemPanelCategory.Rooms:;
+                    foreach (Room room in Hotel.userHotels[hotel_id].Rooms)
                     {
-                        curr = new RoomPanel(this.Size, Convert.ToInt32(ab.Reader["szobaszam"]), Convert.ToInt32(ab.Reader["ar"]), Convert.ToInt32(ab.Reader["reserved"]) == 1);
+                        itemPanelCon.Controls.Add(new RoomPanel(room));
                     }
+
                     break;
             }
+
             //scrollability test
             for (int i = 0; i < 20; i++)
             {
-                curr = new ServicePanel(this.Size, i.ToString(), i % 10 == 0 ? true : false);
-                curr.Location = new Point(0, (i*52));
-                
-                this.itemPanelCon.Controls.Add(curr);
+                ServicePanel panel = new(this.Size, i.ToString(), i % 10 == 0)
+                {
+                    Location = new Point(0, (i * 52))
+                };
+
+                itemPanelCon.Controls.Add(panel);
             }
 
-            
-            this.Visible = true;
+            Visible = true;
         }
 
         public void ResizePanel(Size parent)

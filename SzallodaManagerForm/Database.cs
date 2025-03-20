@@ -20,6 +20,18 @@ namespace SzallodaManagerForm
             reader = cmd.ExecuteReader();
         }
 
+        public static List<T> ReadAll<T>(string query)
+        {
+            List<T> list = [];
+            using Database db = new(query);
+            while (db.Read())
+            {
+                list.Add((T)Activator.CreateInstance(typeof(T), db)!);
+            }
+
+            return list;
+        }
+
         ~Database()
         {
             Close();
@@ -42,11 +54,21 @@ namespace SzallodaManagerForm
 
         public string GetString(string key)
         {
+            if (Convert.IsDBNull(reader[key]))
+            {
+                return "";
+            }
+
             return reader.GetString(key);
         }
 
         public int GetInt(string key)
         {
+            if (Convert.IsDBNull(reader[key]))
+            {
+                return int.MinValue;
+            }
+
             return reader.GetInt32(key);
         }
     }

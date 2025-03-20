@@ -1,4 +1,6 @@
-﻿namespace SzallodaManagerForm
+﻿using SzallodaManagerForm.Models;
+
+namespace SzallodaManagerForm
 {
     public partial class Main : Form
     {
@@ -7,8 +9,12 @@
         OptionPanel szobak;
         OptionPanel szolgaltatasok;
 
+        public static Main Instance { get; private set; }
+
         public Main()
         {
+            Instance = this;
+
             InitializeComponent();
         }
 
@@ -73,7 +79,7 @@
                 current = szobak;
             }
 
-            current.UpdateNShow();
+            current.UpdateNShow(Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!));
             cbModositas.SelectedIndex = 0;
         }
 
@@ -94,7 +100,7 @@
                     break;
             }
 
-            current.UpdateNShow();
+            current.UpdateNShow(Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!));
         }
     }
 }

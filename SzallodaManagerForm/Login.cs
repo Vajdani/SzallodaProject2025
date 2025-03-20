@@ -1,3 +1,5 @@
+using SzallodaManagerForm.Models;
+
 namespace SzallodaManagerForm
 {
     public partial class Login : Form
@@ -56,7 +58,7 @@ namespace SzallodaManagerForm
 
             if (BCrypt.Net.BCrypt.Verify(tbPassword.Text, userQuery.Reader["password"].ToString()))
             {
-                int user_id = Convert.ToInt32(userQuery.Reader["user_id"]);
+                int user_id = userQuery.GetInt("user_id");
                 userQuery.Close();
 
                 User.OnUserLogin(user_id);

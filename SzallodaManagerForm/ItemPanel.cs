@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+﻿using SzallodaManagerForm.Models;
 
 namespace SzallodaManagerForm
 {
     internal class ItemPanel : Panel
     {
         public int ItemID { get; private set; } 
-        public ItemPanel(Size parent)
+        public ItemPanel()
         {
-
-            this.Size = new Size(Convert.ToInt32(Math.Floor(parent.Width * 0.95)), 50);
+            this.Size = new Size(Convert.ToInt32(Math.Floor(Main.Instance.Width * 0.95)), 50);
             this.Location = new Point(10, 50);
             this.BackColor = Color.Aqua;
             this.Visible = true;
@@ -51,16 +45,23 @@ namespace SzallodaManagerForm
         Label lbUserType;
         Button btnEdit;
 
-        public EmployeePanel(Size parentSize) : base(parentSize)
+        public EmployeePanel(Database db) : base()
         {
-            lbUsername = new Label();
-            lbUserType = new Label();
+            lbUsername = new()
+            {
+                Text = db.GetString("username")
+            };
+
+            lbUserType = new()
+            { 
+                Text = db.GetString("userType")
+            };
 
             btnEdit = new Button();
             btnEdit.Click += OpenEditForm;
         }
 
-        void OpenEditForm(object sender, EventArgs e)
+        void OpenEditForm(object? sender, EventArgs e)
         {
             //Alkalmazott adatok form, ha lesz
         }
@@ -76,34 +77,37 @@ namespace SzallodaManagerForm
 
         Button btnSave;
 
-        public RoomPanel(Size parentSize, int roomNumber, int price, bool isOccupied) : base(parentSize)
+        public RoomPanel(Room room) : base()
         {
-            RoomNumber = new Label();
-            RoomNumber.Text = roomNumber.ToString();
-            RoomNumber.TextAlign = ContentAlignment.MiddleCenter;
+            RoomNumber = new() { 
+                Text = room.RoomNumber,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
 
-            Availability = new ComboBox();
-            Availability.Enabled = !isOccupied;
+            Availability = new() { 
+                Enabled = !room.Reserved
+            };
 
+            Price = new() {
+                MaxLength = 6,
+                Text = room.PricePerNight.ToString(),
+                Enabled = !room.Reserved
+            };
 
-            Price = new TextBox();
-            Price.MaxLength = 6;
-            Price.Text = price.ToString();
-            Price.Enabled = !isOccupied;
-
-            btnSave = new Button();
-            btnSave.Text = "Mentés";
-            btnSave.Size = new((int)Math.Round(this.Size.Width * 0.24), (int)Math.Round(this.Size.Height * 0.6));
+            btnSave = new() { 
+                Text = "Mentés",
+                Size = new((int)Math.Round(this.Size.Width * 0.24), (int)Math.Round(this.Size.Height * 0.6))
+            };
             btnSave.Click += SaveData;
 
-            PositionElementsEvenly(new() { RoomNumber, Availability, Price, btnSave });
-            this.Controls.Add(RoomNumber);
-            this.Controls.Add(Availability);
-            this.Controls.Add(Price);
-            this.Controls.Add(btnSave);
+            PositionElementsEvenly([ RoomNumber, Availability, Price, btnSave ]);
+            Controls.Add(RoomNumber);
+            Controls.Add(Availability);
+            Controls.Add(Price);
+            Controls.Add(btnSave);
         }
 
-        void SaveData(object sender, EventArgs e)
+        void SaveData(object? sender, EventArgs e)
         {
             // Nem falfejelős tryparse price-ra
 
