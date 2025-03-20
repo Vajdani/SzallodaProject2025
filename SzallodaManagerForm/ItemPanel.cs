@@ -20,16 +20,16 @@ namespace SzallodaManagerForm
 
         public void PositionElemenet(Control control, int position)
         {
-            control.Location = new Point(position, (Size.Height/2)-(control.Size.Height/2));
+            control.Location = new Point(position, (Size.Height - control.Size.Height) / 2);
         }
 
-        public void PositionElementsEvenly(int sidePadding = 20)
+        public void AlignElementsHorizontally(int sidePadding = 20)
         {
             var controls = Controls.Cast<Control>().ToList();
 
-            int width = Size.Width-sidePadding*2;
+            int width = Size.Width - sidePadding * 2;
             int totalWidth = controls.Sum(c => c.Size.Width);
-            int gapSize = (int)Math.Round((double)(Size.Width - sidePadding * 2 - totalWidth)/controls.Count);
+            int gapSize = (int)Math.Round((double)(Size.Width - sidePadding * 2 - totalWidth) / controls.Count);
             int currentX = sidePadding;
 
             foreach (Control c in controls)
@@ -88,7 +88,8 @@ namespace SzallodaManagerForm
                 Items = {
                     "Elérhető",
                     "Nem elérhető"
-                }
+                },
+                SelectedIndex = 0
             };
 
             Price = new() {
@@ -108,7 +109,7 @@ namespace SzallodaManagerForm
             Controls.Add(Price);
             Controls.Add(btnSave);
 
-            PositionElementsEvenly();
+            AlignElementsHorizontally();
         }
 
         void SaveData(object? sender, EventArgs e)
@@ -151,15 +152,13 @@ namespace SzallodaManagerForm
                 Text = "Módosítás",
                 Size = new((int)Math.Round(Size.Width * 0.24), (int)Math.Round(Size.Height * 0.6))
             };
+            btnEdit.Click += OpenEditForm;
 
             Controls.Add(serviceName);
             Controls.Add(Availability);
             Controls.Add(btnEdit);
 
-            PositionElementsEvenly();
-
-            btnEdit = new Button();
-            btnEdit.Click += OpenEditForm;
+            AlignElementsHorizontally();
         }
 
         void OpenEditForm(object? sender, EventArgs e)
