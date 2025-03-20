@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 17, 2025 at 09:39 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2025. Már 20. 10:06
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `szalloda`
+-- Adatbázis: `szalloda`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `billing`
+-- Tábla szerkezet ehhez a táblához `billing`
 --
 
 CREATE TABLE `billing` (
@@ -45,7 +45,7 @@ CREATE TABLE `billing` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booking`
+-- Tábla szerkezet ehhez a táblához `booking`
 --
 
 CREATE TABLE `booking` (
@@ -61,7 +61,7 @@ CREATE TABLE `booking` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `city`
+-- Tábla szerkezet ehhez a táblához `city`
 --
 
 CREATE TABLE `city` (
@@ -73,7 +73,7 @@ CREATE TABLE `city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `city`
+-- A tábla adatainak kiíratása `city`
 --
 
 INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `description_short`) VALUES
@@ -85,7 +85,7 @@ INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `descriptio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Tábla szerkezet ehhez a táblához `employee`
 --
 
 CREATE TABLE `employee` (
@@ -94,10 +94,17 @@ CREATE TABLE `employee` (
   `userType` enum('employee','manager','owner') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `employee`
+--
+
+INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
+(1, 10, 'owner');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hotel`
+-- Tábla szerkezet ehhez a táblához `hotel`
 --
 
 CREATE TABLE `hotel` (
@@ -111,7 +118,7 @@ CREATE TABLE `hotel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `hotel`
+-- A tábla adatainak kiíratása `hotel`
 --
 
 INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber`, `email`, `description`) VALUES
@@ -126,7 +133,7 @@ INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loyalty`
+-- Tábla szerkezet ehhez a táblához `loyalty`
 --
 
 CREATE TABLE `loyalty` (
@@ -140,7 +147,7 @@ CREATE TABLE `loyalty` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loyaltyrank`
+-- Tábla szerkezet ehhez a táblához `loyaltyrank`
 --
 
 CREATE TABLE `loyaltyrank` (
@@ -152,7 +159,7 @@ CREATE TABLE `loyaltyrank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `loyaltyrank`
+-- A tábla adatainak kiíratása `loyaltyrank`
 --
 
 INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) VALUES
@@ -164,7 +171,7 @@ INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reviews`
+-- Tábla szerkezet ehhez a táblához `reviews`
 --
 
 CREATE TABLE `reviews` (
@@ -177,7 +184,7 @@ CREATE TABLE `reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `reviews`
+-- A tábla adatainak kiíratása `reviews`
 --
 
 INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`) VALUES
@@ -193,7 +200,7 @@ INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room`
+-- Tábla szerkezet ehhez a táblához `room`
 --
 
 CREATE TABLE `room` (
@@ -207,7 +214,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `room`
+-- A tábla adatainak kiíratása `room`
 --
 
 INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `pricepernight`, `reserved`) VALUES
@@ -309,7 +316,7 @@ INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service`
+-- Tábla szerkezet ehhez a táblához `service`
 --
 
 CREATE TABLE `service` (
@@ -326,7 +333,7 @@ CREATE TABLE `service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `service`
+-- A tábla adatainak kiíratása `service`
 --
 
 INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `available`, `allYear`, `startDate`, `endDate`, `openTime`, `closeTime`) VALUES
@@ -340,7 +347,7 @@ INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `availa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `servicecategory`
+-- Tábla szerkezet ehhez a táblához `servicecategory`
 --
 
 CREATE TABLE `servicecategory` (
@@ -349,7 +356,7 @@ CREATE TABLE `servicecategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `servicecategory`
+-- A tábla adatainak kiíratása `servicecategory`
 --
 
 INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
@@ -369,7 +376,7 @@ INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tábla szerkezet ehhez a táblához `user`
 --
 
 CREATE TABLE `user` (
@@ -383,36 +390,36 @@ CREATE TABLE `user` (
   `password` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `userType` enum('guest','employee','manager','owner') DEFAULT 'guest',
   `active` tinyint(1) DEFAULT 1,
   `profilePic` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- A tábla adatainak kiíratása `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`, `phonenumber`, `email`, `password`, `created_at`, `updated_at`, `userType`, `active`, `profilePic`) VALUES
-(1, 'Misike28', 'Kovács', 'Mihály Dániel', '2024-05-17', '+36709477699', 'Szekelymegafia@freemail.com', '$2y$12$U.6/gsWyUXQkxD2TSibXne5OqQ1lPVKJ2oYu5FXgX6KeA89td3ffy', '2025-02-24 09:55:37', '2025-03-05 15:52:24', 'guest', 1, 1),
-(2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-02-24 11:19:42', 'guest', 1, 0),
-(3, 'Mikudayoo', 'Hatsune', 'Miku', '2007-08-31', '+36701234567', 'hatsunemiku@vocaloid.com', '$2y$12$LQyV6fWT83nezYRP53EPDO6aiXmFzA0zHj6uYFzzs/rWWb1BwJrdW', '2025-03-05 16:37:16', '2025-03-05 16:37:52', 'guest', 1, 2),
-(4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 'guest', 0, 1),
-(5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-03-05 16:53:08', 'guest', 1, 0),
-(9, 'horvathAti', 'Dr.', 'Horváth Attila', '1980-04-01', '+36307672240', 'horvath.attila@verebelyszki.hu', '$2y$12$aZDS/wu./xR5FRm9.OC52uYh8AMN4ANxPG4WK72SwSiv0E.1kzZPO', '2025-03-17 11:05:58', '2025-03-17 11:13:15', 'guest', 1, 1);
+INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`, `phonenumber`, `email`, `password`, `created_at`, `updated_at`, `active`, `profilePic`) VALUES
+(1, 'Misike28', 'Kovács', 'Mihály Dániel', '2024-05-17', '+36709477699', 'Szekelymegafia@freemail.com', '$2y$12$U.6/gsWyUXQkxD2TSibXne5OqQ1lPVKJ2oYu5FXgX6KeA89td3ffy', '2025-02-24 09:55:37', '2025-03-05 15:52:24', 1, 1),
+(2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-02-24 11:19:42', 1, 0),
+(3, 'Mikudayoo', 'Hatsune', 'Miku', '2007-08-31', '+36701234567', 'hatsunemiku@vocaloid.com', '$2y$12$LQyV6fWT83nezYRP53EPDO6aiXmFzA0zHj6uYFzzs/rWWb1BwJrdW', '2025-03-05 16:37:16', '2025-03-05 16:37:52', 1, 2),
+(4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 0, 1),
+(5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-03-05 16:53:08', 1, 0),
+(9, 'horvathAti', 'Dr.', 'Horváth Attila', '1980-04-01', '+36307672240', 'horvath.attila@verebelyszki.hu', '$2y$12$aZDS/wu./xR5FRm9.OC52uYh8AMN4ANxPG4WK72SwSiv0E.1kzZPO', '2025-03-17 11:05:58', '2025-03-17 11:13:15', 1, 1),
+(10, 'Boss', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 0);
 
 --
--- Indexes for dumped tables
+-- Indexek a kiírt táblákhoz
 --
 
 --
--- Indexes for table `billing`
+-- A tábla indexei `billing`
 --
 ALTER TABLE `billing`
   ADD PRIMARY KEY (`billing_id`),
   ADD KEY `booking_id` (`booking_id`);
 
 --
--- Indexes for table `booking`
+-- A tábla indexei `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
@@ -420,27 +427,27 @@ ALTER TABLE `booking`
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indexes for table `city`
+-- A tábla indexei `city`
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`city_id`);
 
 --
--- Indexes for table `employee`
+-- A tábla indexei `employee`
 --
 ALTER TABLE `employee`
   ADD KEY `hotel_id` (`hotel_id`,`user_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `hotel`
+-- A tábla indexei `hotel`
 --
 ALTER TABLE `hotel`
   ADD PRIMARY KEY (`hotel_id`),
   ADD KEY `city_id` (`city_id`) USING BTREE;
 
 --
--- Indexes for table `loyalty`
+-- A tábla indexei `loyalty`
 --
 ALTER TABLE `loyalty`
   ADD PRIMARY KEY (`loyalty_id`),
@@ -448,13 +455,13 @@ ALTER TABLE `loyalty`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `loyaltyrank`
+-- A tábla indexei `loyaltyrank`
 --
 ALTER TABLE `loyaltyrank`
   ADD PRIMARY KEY (`rank_id`);
 
 --
--- Indexes for table `reviews`
+-- A tábla indexei `reviews`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`review_id`),
@@ -462,14 +469,14 @@ ALTER TABLE `reviews`
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- Indexes for table `room`
+-- A tábla indexei `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`room_id`),
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- Indexes for table `service`
+-- A tábla indexei `service`
 --
 ALTER TABLE `service`
   ADD PRIMARY KEY (`service_id`),
@@ -477,13 +484,13 @@ ALTER TABLE `service`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `servicecategory`
+-- A tábla indexei `servicecategory`
 --
 ALTER TABLE `servicecategory`
   ADD PRIMARY KEY (`serviceCategory_id`);
 
 --
--- Indexes for table `user`
+-- A tábla indexei `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
@@ -492,127 +499,127 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- A kiírt táblák AUTO_INCREMENT értéke
 --
 
 --
--- AUTO_INCREMENT for table `billing`
+-- AUTO_INCREMENT a táblához `billing`
 --
 ALTER TABLE `billing`
   MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `booking`
+-- AUTO_INCREMENT a táblához `booking`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `city`
+-- AUTO_INCREMENT a táblához `city`
 --
 ALTER TABLE `city`
   MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `hotel`
+-- AUTO_INCREMENT a táblához `hotel`
 --
 ALTER TABLE `hotel`
   MODIFY `hotel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `loyalty`
+-- AUTO_INCREMENT a táblához `loyalty`
 --
 ALTER TABLE `loyalty`
   MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `loyaltyrank`
+-- AUTO_INCREMENT a táblához `loyaltyrank`
 --
 ALTER TABLE `loyaltyrank`
   MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `reviews`
+-- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `room`
+-- AUTO_INCREMENT a táblához `room`
 --
 ALTER TABLE `room`
   MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT for table `service`
+-- AUTO_INCREMENT a táblához `service`
 --
 ALTER TABLE `service`
   MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `servicecategory`
+-- AUTO_INCREMENT a táblához `servicecategory`
 --
 ALTER TABLE `servicecategory`
   MODIFY `serviceCategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Megkötések a kiírt táblákhoz
 --
 
 --
--- Constraints for table `billing`
+-- Megkötések a táblához `billing`
 --
 ALTER TABLE `billing`
   ADD CONSTRAINT `billing_ibfk_1` FOREIGN KEY (`billing_id`) REFERENCES `booking` (`booking_id`);
 
 --
--- Constraints for table `booking`
+-- Megkötések a táblához `booking`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
 
 --
--- Constraints for table `employee`
+-- Megkötések a táblához `employee`
 --
 ALTER TABLE `employee`
   ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Constraints for table `hotel`
+-- Megkötések a táblához `hotel`
 --
 ALTER TABLE `hotel`
   ADD CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`);
 
 --
--- Constraints for table `loyalty`
+-- Megkötések a táblához `loyalty`
 --
 ALTER TABLE `loyalty`
   ADD CONSTRAINT `loyalty_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `loyalty_ibfk_2` FOREIGN KEY (`rank_id`) REFERENCES `loyaltyrank` (`rank_id`);
 
 --
--- Constraints for table `reviews`
+-- Megkötések a táblához `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Constraints for table `room`
+-- Megkötések a táblához `room`
 --
 ALTER TABLE `room`
   ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Constraints for table `service`
+-- Megkötések a táblához `service`
 --
 ALTER TABLE `service`
   ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `servicecategory` (`serviceCategory_id`),
