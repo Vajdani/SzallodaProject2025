@@ -71,12 +71,18 @@
                     @foreach ($rooms as $room)
                         <tr>
                             <td>
-                                @if ($room->floor != null)
-                                {{$room->floor}}. emelet
-                                @elseif($room->floor === 0)
-                                fsz.
-                                @else
-                                —
+                                @if ($room->hotel_id == 5)
+                                    {{$room->floor}}. vágány
+                                @elseif($room->hotel_id == 3)
+                                    {{$oceanfloor[$room->floor*-1-1]}} ({{$room->floor}}. emelet)
+                                @else    
+                                    @if ($room->floor != null)
+                                    {{$room->floor}}. emelet
+                                    @elseif($room->floor === 0)
+                                    fsz.
+                                    @else
+                                    —
+                                    @endif
                                 @endif
                             </td>
                             <td>{{$room->roomNumber}}</td>

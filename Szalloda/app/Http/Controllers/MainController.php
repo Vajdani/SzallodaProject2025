@@ -28,6 +28,7 @@ class MainController extends Controller
         }
         $desc = hotel::find($id)->description;
         $desc = explode('{break}', $desc);
+        $oceanfloor = array("Teknős","Bohóchal","Cápa","Horgászhal");
 
         return view("hotel", [
             "hotel" => $hotel,
@@ -49,7 +50,8 @@ class MainController extends Controller
                     service.category_id = servicecategory.serviceCategory_id
             "),
             "city_description" => City::find($hotel->city_id)->description_short,
-            "hotel_description" => $desc
+            "hotel_description" => $desc,
+            "oceanfloor" => $oceanfloor
         ]);
     }
 
