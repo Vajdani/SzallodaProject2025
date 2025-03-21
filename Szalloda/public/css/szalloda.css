@@ -45,6 +45,17 @@
         justify-content: unset;
     }
 }
+.book-button {
+    border-radius: 25px;
+    width: 40%;
+    border: none;
+    background-color: var(--colour_randomgreen1);
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid black;
+    color: white;
+}
 
 table {
     text-align: justify;

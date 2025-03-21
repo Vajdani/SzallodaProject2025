@@ -81,7 +81,7 @@
             </p>
         </section>
         <section>
-            <h2>Miért válasszon minket?</h2>
+            <h2>Rólunk:</h2>
             <hr>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget porta tellus. Vestibulum

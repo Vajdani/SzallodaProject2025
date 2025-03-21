@@ -8,10 +8,14 @@
     <div class="mainContent">
         <section>
             <h1>{{ $city->cityName }}</h1>
-            <img src="{{ asset('img/cities/' . $city->city_id . '.jpg') }}" alt="szalloda_kep_0" title="Szálloda" class="szallodaMainImg img-fluid" width="600px" height="400px">
-            @for ($i = 0; $i < count($description); $i++)
-                <p>{{ $description[$i] }}</p>
-            @endfor
+            <img src="{{ asset('img/cities/' . $city->city_id . '.jpg') }}" alt="{{$city->cityName}}.jpg" title="{{$city->cityName}}" class="szallodaMainImg img-fluid" width="600px" height="400px">
+            <div style="background-color:teal ">
+                @for ($i = 0; $i < count($description); $i++)
+                    <p>{{ $description[$i] }}</p>
+                    <br>
+                @endfor
+            </div>
+
         </section>
         <div class="citySection">
             @foreach ($hotels as $hotel)
@@ -20,8 +24,8 @@
                         <h2>{{ $hotel->hotelName }}</h2>
                     </a>
                     <div class="cityImgContainer">
-                        <a href="/szalloda/{{ $hotel->hotel_id }}">
-                            <img src="https://placehold.co/400" alt="telepules" title="{{ $hotel->hotelName }}" class="img-fluid">
+                        <a href="/szalloda/{{ $hotel->hotel_id }}">     
+                            <img src="{{asset('img/hotels/'.$hotel->hotel_id.'.jpg')}}" alt="{{$hotel->hotelName}}" title="{{ $hotel->hotelName }}" class="img-fluid">
                         </a>
                         <p>
                             @if ($hotel->rating == '')

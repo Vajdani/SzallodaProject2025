@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 20. 10:06
+-- Létrehozás ideje: 2025. Már 21. 11:16
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -77,9 +77,9 @@ CREATE TABLE `city` (
 --
 
 INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `description_short`) VALUES
-(1, 'Oslo', 'Norvégia', '', ''),
-(2, 'Malé', 'Maldív-szigetek', '', ''),
-(3, 'Zermatt', 'Svájc', '', ''),
+(1, 'Oslo', 'Norvégia', 'Oslo, Norvégia fővárosa, egyedülálló élményeket kínál minden látogatónak. A város a festői Oslofjord partján helyezkedik el, és zöldellő hegyek, erdők övezik, így a természet és a modern városi élet tökéletes harmóniában találkozik. A városban járva a látogatók élvezhetik a friss levegőt, miközben a kultúra, a művészetek és a gasztronómia kínálata is lenyűgöző. {break} A város gazdag kulturális örökséggel rendelkezik. A világhírű Munch Múzeumban az egyik legnagyobb norvég művész, Edvard Munch alkotásai várják a látogatókat, köztük a híres \"A sikoly\" festmény. Az Oslói Opera Ház modern építészete és lenyűgöző belső tere szintén kihagyhatatlan látnivaló, ahogy a Vigeland Park is, mely a világ legnagyobb emberi szoborparkja, és 200-nál is több szobrával Gustav Vigeland művész egyedülálló alkotásai révén egy különleges élményt biztosít. {break} Oslo nemcsak a kultúra szerelmeseinek, hanem a természetkedvelőknek is bőven tartogat látnivalókat. A város körüli hegyek és erdők számos túrázási, biciklizési és síelési lehetőséget kínálnak. A Holmenkollen síugrósánc és sípályák télen ideális helyszínt biztosítanak a téli sportok szerelmeseinek. Az Oslofjord vizein pedig hajókirándulások során élvezhetjük a város és a természet lenyűgöző összhangját. {break} A város gasztronómiája is egyedülálló élményt nyújt. Az éttermekben és kávézókban friss, helyben beszerzett alapanyagokkal dolgoznak, és a tenger gyümölcsei mellett számos norvég specialitást kóstolhatunk meg, mint a halgombóc vagy az erjesztett hal, rakfisk. Az osztriga és a friss halételek iránt érdeklődőknek különleges ínycsiklandó fogásokban lesz részük. {break} Oslo számos szálláslehetőséget kínál, amelyek minden igényt kielégítenek. A város szállodái között megtalálhatóak a luxus hotelek, a kényelmes boutique szállodák és a családbarát helyek is. A szállások elhelyezkedése változatos, így akár a város szívében, akár a természet közvetlen közelében szeretne megszállni, Oslo mindenki számára biztosít kényelmes és pihentető tartózkodást. {break} A város varázslatos atmoszférája, gazdag kulturális kínálata, és a természeti szépségek mindenkit magukkal ragadnak. Akár egy romantikus hétvégére, egy családi nyaralásra, akár egy üzleti útra érkezik, Oslo minden látogatót különleges élményekkel ajándékoz meg.', 'Oslo, Norvégia fővárosa, lenyűgöző módon ötvözi a modern városi életet és a természeti szépségeket. A festői Oslofjord partján elhelyezkedő város gazdag kulturális örökséggel rendelkezik, mint a híres Munch Múzeum és a Vigeland Park, melyek egyedülálló művészeti élményeket kínálnak. A város körüli hegyek és erdők ideális helyszínt biztosítanak túrázáshoz, biciklizéshez és téli sportokhoz, míg a friss tenger gyümölcsei és hagyományos norvég fogásai gasztronómiai élvezeteket nyújtanak. Oslo változatos szálláslehetőségei, a luxushotelektől a kényelmes boutique szállodákig, minden igényt kielégítenek, így a látogatók tökéletes kényelmet találhatnak a város szívében vagy annak zöldövezeteiben. A norvég főváros mindenki számára felejthetetlen élményeket kínál, legyen szó pihenésről, felfedezésről vagy üzleti útról.'),
+(2, 'Malé', 'Maldív-szigetek', 'Malé, a Maldív-szigetek fővárosa, egy igazán különleges trópusi város, amely a csendes-óceáni szigetvilág szívében található. A város, bár kicsi, rengeteg látnivalót és élményt kínál, amelyek azonnal magukkal ragadják az ide látogatókat. Malé szigete tele van vibráló piacokkal, hagyományos bazárokkal és színes épületekkel, amelyek a maldív kultúra gazdagságát tükrözik. A város szűk utcáin sétálva, a gyönyörű helyi építészeti stílusban gyönyörködhetünk, miközben felfedezzük a vallási és történelmi jelentőségű helyszíneket is, mint például a Hukuru Miskiy, a Vén templom, mely az egyik legrégebbi és legfontosabb iszlám vallási épület a szigeteken. {break} A tengerparti sétányok és strandok varázslatos panorámát nyújtanak, ahol az kristálytiszta víz és a fehér homokos partok hívogatják a látogatókat. A város közelében fekvő apró szigetek egyedülálló élményeket kínálnak a vízi sportok kedvelőinek, mint például a snorkeling, búvárkodás vagy a hajókirándulások. Malé a vízisportok paradicsoma, mivel a vizek tele vannak színes korallzátonyokkal és változatos tengeri élettel. A sziget legnépszerűbb tevékenységei közé tartozik a vitorlázás, a kajakozás és a vízi túrák, melyek mind lehetőséget adnak arra, hogy a látogatók igazán közelről megismerkedjenek a Maldív-szigetek természeti csodáival. {break} Malé nyújtja a helyi maldív élet igazi ínycsiklandó élményét is, hiszen a szigeten található éttermek és kávézók különleges tengeri fogásokat kínálnak, amelyek friss tenger gyümölcseivel, egzotikus fűszerekkel és helyi alapanyagokkal készült ételekkel várják az ínycsiklandó élvezeteket kereső vendégeket. A város színes piacai és a helyi étkezési kultúra olyan autentikus élményeket adnak, amelyeket nem érdemes kihagyni. Malé olyan hely, ahol a helyi lakosok mindennapi élete, a hagyományos maldív vendégszeretet és a modern városi dinamika tökéletes harmóniában találkozik. {break} Malé szállásai is kényelmesek és jól felszereltek, számos szállodával és üdülőhelyekkel rendelkezik, így mindenki megtalálhatja az ideális helyet, hogy pihenjen és élvezze a szigetek varázslatos atmoszféráját. A város tökéletes bázist biztosít azok számára, akik szeretnék felfedezni a Maldív-szigetek szépségeit, miközben minden kényelmet és szolgáltatást élvezhetnek, amit egy nagyváros tud nyújtani. {break} Malé egy igazán különleges hely, ahol a trópusi paradicsom szépsége és a maldív kultúra egyedülálló keveredése nyújt felejthetetlen élményeket, így minden látogatónak garantáltan maradandó élményeket kínál.', 'Malé, a Maldív-szigetek szíve, egy kis, de nyüzsgő város, mely a trópusi szépségeket és a helyi kultúra gazdagságát ötvözi. A város szűk utcáin sétálva felfedezhetjük a tradicionális maldív építészeti stílust, miközben a város piacon friss tengeri fogásokat és egzotikus gyümölcsöket vásárolhatunk. Malé tengerparti területei ideálisak a napozáshoz, úszáshoz és snorkelinghez, míg a közeli szigetek számos luxus üdülőhelyet kínálnak a kikapcsolódásra. A híres Maldives Islamic Centre és a Nemzeti Múzeum betekintést nyújtanak a maldív történelembe és vallási örökségbe, így Malé tökéletes kiindulópont a Maldív-szigetek felfedezéséhez, miközben minden igényt kielégítő kényelmet biztosít az ide látogatóknak.'),
+(3, 'Zermatt', 'Svájc', 'Zermatt, a svájci Alpok egyik legelbűvölőbb városa, egy varázslatos hely, amely a hegyek és a friss alpesi levegő szerelmeseinek igazi paradicsoma. A város a híres Matterhorn hegy lábánál terül el, és bár kicsi, minden szempontból impozáns. Zermatt nemcsak a természet szépségeivel, hanem a gazdag történelmével és kultúrájával is elbűvöli a látogatókat. Az autómentes övezetnek köszönhetően a város tiszta, nyugodt légkört biztosít, így ideális helyszín a pihenésre, feltöltődésre, vagy éppen a kalandok keresésére. {break} Zermatt igazi alpesi kisváros, amely tele van bájos, tradicionális svájci faházakkal, helyi éttermekkel és elegáns üzletekkel, melyek mind az alpesi stílust tükrözik. A város hangulata tökéletes egyedülálló kombinációja a tradicionális hegyi kultúrának és a modern luxusnak. A látogatók felfedezhetik a helyi múzeumokat, mint a Zermatt Múzeum, ahol betekintést nyerhetnek a város történetébe, a hegymászás hagyományaiba és a régió kulturális örökségébe. Zermatt a hegymászás és túrázás rajongóinak is kedvez, mivel számos híres túraútvonal vezet a környező hegyekbe, és a Matterhorn fenséges látványa mindenki számára örök emlék marad. {break} A hegyi túrák mellett Zermatt különleges téli sport lehetőségekkel is büszkélkedhet. A város híres sípályái és sífelvonói az Alpok egyik legjobb síparadicsomának számítanak. A régió rengeteg lehetőséget kínál a síelésre, snowboardozásra, de akár a sífutásra és a hócipős túrákra is. A Zermatt környékén fekvő Gornergrat vasútvonal, amely a hegycsúcsra vezet, mesés panorámát biztosít a látogatóknak, ahonnan lenyűgöző kilátás nyílik a Matterhornra és a környező hegyekre. {break} Nyáron Zermatt egy igazi túrázó paradicsommá válik, a hegyekben való sétálás és a kerékpározás remek módja annak, hogy a látogatók felfedezzék a festői tájat. A híres Matterhorn Glacier Paradise, amely Európa legmagasabb hegyi állomása, szintén egyedülálló élményt kínál, ahol a látogatók lélegzetelállító kilátásban gyönyörködhetnek, és akár a gleccseren is sétálhatnak. A város környékén található tavak és alpesi rétek tökéletes helyszínt biztosítanak a piknikezéshez vagy egy pihentető délutáni sétához. {break} Zermatt nemcsak természetjáróknak és sportolóknak, hanem a gasztronómia kedvelőinek is számos lehetőséget kínál. A helyi éttermekben a svájci és alpesi konyha remekei közül válogathatunk, mint a fondü, raclette, vagy a friss alpesi sajtok. Az ínycsiklandó étkezések mellett Zermatt kávézói és bájai a pihenésre vágyókat várják, hogy élvezzék a hegyi tájat, miközben egy csésze forró csokoládét vagy egy pohár helyi bort kortyolgatnak. {break} A szálláslehetőségek Zermattban a luxustól a barátságos családi hotelekig terjednek, így mindenki megtalálhatja a számára ideális helyet, ahol kényelmesen pihenhet és felfrissülhet. A város szállodái a hegyi tájra orientáltak, és a látogatók élvezhetik a gyönyörű kilátásokat, miközben élvezhetik a magas szintű szolgáltatásokat. Az autómentes város minden sarkában a nyugalom és a friss hegyi levegő garantálja a tökéletes kikapcsolódást. {break} Zermatt valóban egy olyan hely, ahol a természet, a kaland és a pihenés egyedülálló harmóniában találkozik. Akár télen a sípályákra vágyik, akár nyáron a túrákra, Zermatt minden évszakban varázslatos élményeket kínál, amelyeket sosem fog elfelejteni.', 'Zermatt, a svájci Alpok szívében fekvő kisváros, a híres Matterhorn hegy lábánál található, és lenyűgöző panorámát, valamint számos szabadtéri kalandot kínál. A város autómentes övezete biztosítja a nyugodt légkört, ahol a látogatók élvezhetik a friss alpesi levegőt, miközben felfedezik a tradicionális svájci építészeti stílust és a helyi kultúrát. Zermatt híres téli sportparadicsom, sípályáival és sífelvonóival, de nyáron is ideális helyszín túrázáshoz, hegyi kerékpározáshoz és gleccsertúrákhoz. A város gasztronómiai élvezetekkel is várja a látogatókat, ahol a svájci alapételek mellett friss alpesi sajtokat és helyi borokat is kóstolhatunk. Zermatt tökéletes választás mindenki számára, aki a természet, a sport és a pihenés harmóniáját keresni.'),
 (4, 'Tokió', 'Japán', 'Tokió, Japán fővárosa, a világ egyik legizgalmasabb és legdinamikusabb metropolisza, amely a múlt és a jövő harmonikus egyesülését kínálja. A város modern felhőkarcolóival és csúcstechnológiai vívmányaival együtt számos történelmi helyszínt is magában foglal, így egyedülálló élményt biztosít minden látogató számára. A hagyományos japán kultúra szelleme, mint a templomok és szentélyek, tökéletesen megfér a modern életstílussal, ami igazán különlegessé teszi Tokiót.\n{break}\nA város közlekedési rendszere példaértékű, így a látogatók könnyedén elérhetik a különböző városrészeket és látnivalókat. A Tokiói metróhálózat és a jól kiépített vasúti rendszer lehetővé teszi, hogy a turisták könnyedén felfedezhessék a város minden szegletét, legyen szó a híres Shibuya Crossing átkelőhelyről, vagy a gazdag éjszakai életéről híres Shinjukuról. Minden sarkon új élmények várják a látogatókat, a vásárlónegyedektől kezdve a lenyűgöző éttermeken át a történelmi templomokig.\n{break}\nTokió nemcsak a látványos városi tájakkal és az izgalmas kulturális élményekkel vonzza a turistákat, hanem a gasztronómiai élményekkel is. A város étkezési kultúrája világszerte elismert, és minden étkezés egy újabb felfedezés. A japán konyha ínycsiklandó fogásai, mint a sushi, ramen vagy tempura, mindenki számára különleges élményt nyújtanak. A Michelin-csillagos éttermek és a helyi utcai étkezők egyaránt egyedülálló gasztronómiai kalandra hívják az ínyenceket.\n{break}\nA szállások terén Tokió számos lehetőséget kínál, hogy mindenki megtalálja a számára legmegfelelőbb pihenési formát. Az ötcsillagos luxus szállodáktól kezdve a középkategóriás hotelekig és a tradicionális japán stílusú ryokan szállásokig minden igényt kielégítő opciók közül választhatnak a látogatók. A szállodák magas színvonalú szolgáltatásokat, modern kényelmet és egyedülálló atmoszférát biztosítanak, hogy a vendégek valóban feltöltődve térjenek haza.\n{break}\nSzállodánk tökéletes választás, ha Tokióban szeretne pihenni, miközben felfedezi a város különleges látnivalóit és kulturális örökségét. A kényelmes szobák, a wellness-részleg és a figyelmes személyzet mind hozzájárulnak ahhoz, hogy tartózkodása valóban felejthetetlen élményt nyújtson. Akár üzleti, akár szabadidős utazásról van szó, nálunk minden adott ahhoz, hogy teljes körű kényelmet és élményt biztosítsunk a vendégeink számára.', 'Tokió, Japán pezsgő fővárosa, ahol a futurisztikus technológia és a hagyományos kultúra találkozik. A város híres látványosságairól, mint a Shibuya keresztutca, a történelmi Senso-ji templom és a zöld Odaiba-sziget. Tokió gasztronómiája világhírű, a legjobb sushi éttermektől a helyi ramen bárokig mindenki megtalálja a kedvére való ínycsiklandó fogásokat. Szállodáink kényelmes helyszínt biztosítanak a város felfedezéséhez, legyen szó üzleti útról vagy nyaralásról.');
 
 -- --------------------------------------------------------
@@ -99,7 +99,13 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
-(1, 10, 'owner');
+(1, 10, 'owner'),
+(2, 10, 'owner'),
+(3, 10, 'owner'),
+(4, 10, 'owner'),
+(5, 10, 'owner'),
+(6, 10, 'owner'),
+(7, 10, 'owner');
 
 -- --------------------------------------------------------
 
@@ -125,7 +131,7 @@ INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber
 (1, 1, 'Frozen Retreat', 'Glacier Avenue 123, 1010', '+47 22 333 444', 'info@frozenretreat.no', 'A Frozen Retreat Hotel egy olyan különleges szálláshely, amely a hideg és a minimalista életstílus szerelmeseinek lett megálmodva. Az Oslo környékén található szálloda különleges jeges esztétikájával és egyedülálló elrendezésével igazi menedéket nyújt mindenkinek, aki szeretne egy kis pihenőt a mindennapok folyamatos forgásától, és egy hűvösebb világba menekülni.\n{break}\nA szálloda hagyományos szobák helyett iglukat biztosít a vendékegnek, amelyeket a tradicionális északi sarki igluk ihlettek. Minden szoba egyedi és kényelmesen berendezett, miközben megőrzi az igluk hagyományos, minimalista stílusát. Az igluk belső terében a jég és a hó elemeit ötvözik a meleg, kényelmes textilek és a meghitt világítás, így a vendégek egyszerre élvezhetik a téli táj varázsát és a pihentető kikapcsolódást.\n{break}\n A Frozen Retreat erős hangsúlyt fektet a jeges esztétikára, az egész szálloda külseje és belső terei egyaránt a természetes jégvilágot tükrözik, amelyet különféle művészeti alkotások, jégszobrok és világító elemek díszítenek. Az igluk belső terében is érezhető a hideg hangulat, mégis biztosítja a maximális kényelmet és melegséget a vendégek számára.\n{break}\n A szállodában különféle wellness szolgáltatások is elérhetőek, amelyek segítenek felfrissíteni a testet és a lelket természetes környezetben. Emellett a hotel környezetében számos téli sportolási lehetőség kínálkozik, mint a síelés, hószánkózás vagy éppen a hófödte tájak felfedezése.\n{break}\n A Frozen Retreat Hotel ideális választás mindazoknak, akik szeretnének egy igazán egyedi élményben részesülni, és szeretnék megtapasztalni a természetes hideg varázsát, miközben kényelmes és pihentető környezetben élvezhetik az északi táj szépségeit.'),
 (2, 1, 'King\'s Castle', '456 Royal Road, 0123', '+47 22 185 423', 'reservations@kingscastle.no', 'A King\'s Castle Hotel Oslo szívében, Norvégiában található, egy autentikus és impozáns régi norvég kastély falai között. A szálloda egyedülálló módon ötvözi a történelem és a modern luxus elemeit, így vendégei egy felejthetetlen élményben részesülhetnek, miközben a kastély díszes belső terében pihenhetnek. {break} A King\'s Castle Hotel elegáns szobái a hagyományos norvég építészeti stílust tükrözik, miközben minden modern kényelmet biztosítanak a látogatók számára. Az impozáns termek, a festői kilátás és a történelmi légkör ideális helyszínt biztosítanak a pihenéshez, valamint egy különleges szállásélményt nyújtanak minden látogatónak. {break} A kastély lenyűgöző atmoszférája, a klasszikus bútorok és a finom részletek ötvözete egy mesés utazást biztosít a történelem és a luxus világában. A szálloda exkluzív éttermében a norvég gasztronómia remekeit kóstolhatják meg a vendégek, miközben a történelem egy darabja veszi körül őket. {break} A King\'s Castle Hotel nemcsak egy szálláshely, hanem egy különleges élmény, amely lehetőséget ad arra, hogy a vendégek valóban átéljék Norvégia királyi múltját, miközben élvezhetik a modern kényelem minden előnyét. Ha egy különleges, történelmi hangulatú helyen szeretne pihenni, a King\'s Castle Hotel a tökéletes választás.'),
 (3, 2, 'Oceanview Hotel', '789 Coral Reef Drive 20001', '+960 333 4444', 'contact@oceanviewhotel.mv', 'Az Oceanview Hotel a Maldív-szigetek szívében, Malé városában található, és egyedülálló élményt kínál azoknak, akik szeretnék egyesíteni a luxust és a természeti csodákat. A szálloda különleges vízalatti elhelyezkedésével valóban egyedülálló élményt biztosít, hiszen nemcsak egy pihentető szállás, hanem egy igazi akvárium is egyben. {break} A vízalatti szobák és közösségi terek lehetővé teszik a vendégek számára, hogy a szálloda belsejéből szemléljék a lenyűgöző tengeri élővilágot. A kristálytiszta vízben úszó színes halak, tengeri teknősök és egyéb csodálatos vízi lények mind-mind a szobák ablakán keresztül csodálhatók meg, így a vendégek egy egészen különleges, víz alatti világban érezhetik magukat. {break} Az Oceanview Hotel nemcsak a vizuális élményről szól, hanem a pihenésről és a kikapcsolódásról is. Az exkluzív szolgáltatások, mint a víz alatti étterem, ahol a vendégek miközben a tengeri életet figyelik, élvezhetik a friss tengeri étkeket, vagy a relaxáló wellness-kezelések, mind hozzájárulnak ahhoz, hogy az itt töltött idő valóban felejthetetlen legyen. {break} A szálloda modern dizájnja és a természetes környezet harmóniájának köszönhetően az Oceanview Hotel a tökéletes választás mindazok számára, akik szeretnék egyesíteni a luxust a természet közelségével, miközben egy varázslatos tengeri világban pihenhetnek. Ha valami igazán különleges élményre vágyik, ne habozzon meglátogatni az Oceanview Hotel-t – a Maldív-szigetek egyik legkülönlegesebb szállodáját.'),
-(4, 3, ' Rocky Ridge Lodge', '101 Alpine Heights 3920', '+41 27 123 4567', ' info@rockyridgelodge.ch', 'A Rocky Ridge Lodge Svájc gyönyörű Alpokjai között helyezkedik el, és egyedülálló élményt kínál mindazok számára, akik a természet közvetlen közelében szeretnének pihenni. A szálloda különlegessége, hogy nem hagyományos szobákat kínál, hanem üveg kapszulákat, amelyek közvetlenül a hegy oldalára vannak rögzítve. Ezek a kapszulák lehetővé teszik, hogy a vendégek páratlan panorámában gyönyörködjenek, miközben több száz méter magasban élvezhetik a nyugalmat és a friss alpesi levegőt. {break} A kapszulák különleges, teljesen átlátszó üvegből készültek, így minden szögből csodálhatók a lenyűgöző hegyi tájak, a hófödte csúcsok, a zöldellő völgyek és a kristálytiszta égbolt. A vendégek igazi természetközeli élményben részesülnek, miközben kényelmesen pihenhetnek, mintha a hegyek csúcsán lebegnének. {break} Minden kapszula modern dizájnnal és kényelmes felszereltséggel rendelkezik, hogy biztosítsa a maximális pihenést és komfortot. Az éjszakai égbolt alatt, a hegyekre nyíló panorámával való alvás egy igazán felejthetetlen élményt kínál. {break} A Rocky Ridge Lodge ideális választás azok számára, akik el szeretnének szakadni a hétköznapoktól, és egy igazán különleges, természetközeli pihenést keresnek. Legyen szó romantikus kikapcsolódásról vagy egy kalandos alpesi élményről, a Rocky Ridge Lodge egy varázslatos hely, ahol a hegyek nyújtotta szépség és a modern kényelem tökéletes harmóniában találkozik.'),
+(4, 3, 'Rocky Ridge Lodge', '101 Alpine Heights 3920', '+41 27 123 4567', ' info@rockyridgelodge.ch', 'A Rocky Ridge Lodge Svájc gyönyörű Alpokjai között helyezkedik el, és egyedülálló élményt kínál mindazok számára, akik a természet közvetlen közelében szeretnének pihenni. A szálloda különlegessége, hogy nem hagyományos szobákat kínál, hanem üveg kapszulákat, amelyek közvetlenül a hegy oldalára vannak rögzítve. Ezek a kapszulák lehetővé teszik, hogy a vendégek páratlan panorámában gyönyörködjenek, miközben több száz méter magasban élvezhetik a nyugalmat és a friss alpesi levegőt. {break} A kapszulák különleges, teljesen átlátszó üvegből készültek, így minden szögből csodálhatók a lenyűgöző hegyi tájak, a hófödte csúcsok, a zöldellő völgyek és a kristálytiszta égbolt. A vendégek igazi természetközeli élményben részesülnek, miközben kényelmesen pihenhetnek, mintha a hegyek csúcsán lebegnének. {break} Minden kapszula modern dizájnnal és kényelmes felszereltséggel rendelkezik, hogy biztosítsa a maximális pihenést és komfortot. Az éjszakai égbolt alatt, a hegyekre nyíló panorámával való alvás egy igazán felejthetetlen élményt kínál. {break} A Rocky Ridge Lodge ideális választás azok számára, akik el szeretnének szakadni a hétköznapoktól, és egy igazán különleges, természetközeli pihenést keresnek. Legyen szó romantikus kikapcsolódásról vagy egy kalandos alpesi élményről, a Rocky Ridge Lodge egy varázslatos hely, ahol a hegyek nyújtotta szépség és a modern kényelem tökéletes harmóniában találkozik.'),
 (5, 3, 'Locomotive Lounge', '202 Railway Station Avenue', '+41 27 765 4321', 'bookings@locomotivelounge.ch', 'A Locomotive Lounge Zermatt városában található, egy olyan különleges szálloda, amely a vasúti történelem szerelmeseinek és azoknak kínál valami igazán egyedit, akik szeretnék a múltat és a jelent ötvözni. A szálloda egy régi, már nem használt pályaudvar területén helyezkedik el, ahol a forgalomból kivont, legendás vonatok kaptak új életet hotelszobákként. {break} A Locomotive Lounge minden egyes szobája egy-egy átalakított, egykori vonat kocsi, amely még a vasúti korszak hangulatát idézi. Az autentikus vonatbelsők modern kényelmi szolgáltatásokkal lettek felszerelve, hogy a vendégek egyedülálló élményben részesülhessenek. A vonat kocsik hangulatos, nosztalgikus légkört biztosítanak, miközben minden modern igényt kielégítenek, így a vendégek valódi \"utazásra\" indulhatnak a kényelem és a történelem ötvözetében. {break} A szállodában a vendégek nemcsak a vonatok különleges atmoszféráját élvezhetik, hanem egyedi étkezési élményeket is kínál. A vasúti étterem modern ínycsiklandó fogásokat kínál, miközben a vendégek élvezhetik a pályaudvarra jellemző hangulatot. {break} A Locomotive Lounge tehát tökéletes választás mindazok számára, akik szeretnék átélni a régi idők vasúti kalandjait, miközben a modern kényelmet élvezik. Az egyedülálló történelmi háttér és a szálloda különleges dizájnja felejthetetlen élményt nyújt a látogatók számára, és egy utazás a múltba egyben a mai világ luxusával.'),
 (6, 4, 'Kitty Cove', '12 Meow Street, Shibuya, 150-0001', '+81 3 1234 5678', 'hello@kittycove.jp', 'A Kitty Cove egy bájos és különleges szálloda Tokió szívében, amely a macskák szerelmeseinek kínál egy igazán egyedülálló élményt. Bár az épület kívülről egy átlagos hotelnek tűnhet, az egyedülálló jellemzője, hogy a szálloda területén számos barátságos macska él, akik a vendégek társaságában várják a közönséget. {break} A Kitty Cove különleges hangulata egyedülálló lehetőséget ad arra, hogy a látogatók ne csak pihenjenek, hanem élvezzék a macskák társaságát is. A vendégek szabadon játszhatnak, simogathatják és interakcióba léphetnek a szálloda macskáival, akik igazi kedvencek és mindig készen állnak egy kis figyelemre. {break} A szálloda további különlegessége, hogy a vendégek kérvényezhetik, hogy egy adott macska személyesen a szobájukban tartózkodjon, így még intimebb kapcsolatba kerülhetnek a kis kedvencekkel. Ez tökéletes lehetőség azok számára, akik szeretnének egy kis nyugalmat és boldogságot találni a macskák társaságában, miközben élvezhetik a szálloda kényelmét. {break} Ezek felett a Kitty Cove együttműködik egy helyi állatmenhellyel is, így amennyiben egy látogató kialakít egy különleges kapcsolatot szállodánk valamelyik macskájával, kérvényezheti annak örökbe fogadását is! {break} A Kitty Cove nemcsak egy szálloda, hanem egy igazi menedék a macskák szerelmeseinek, ahol mindenki megtalálhatja a saját kis szórakozását, pihenését és örök barátját. Legyen szó pihenésről vagy egy kis vidám szórakozásról a macskákkal, a Kitty Cove a tökéletes választás azok számára, akik egy különleges és szórakoztató szállásélményt keresnek Tokióban.'),
 (7, 4, 'Cave Haven', ' 34 Stalactite Lane, Minato, 108-0073', '+81 3 8765 4321', 'info@cavehaven.jp', 'A Cave Haven egy igazán egyedülálló és különleges szálloda Japán egyik lenyűgöző barlangjában, egy már felfedezett bányában található. Ez a titokzatos szálloda azok számára kínál felejthetetlen élményt, akik szeretnék egyesíteni a természet csodáit a modern kényelemmel. A szálloda egy régi bányában került kialakításra, amely a föld mélyén rejlő varázslatos atmoszférájával varázsolja el a látogatókat. {break} A Cave Haven szobái a barlang egyes természetes formációinak figyelembevételével lettek kialakítva, így a vendégek egy olyan egyedülálló környezetben pihenhetnek, amely a természet adta szépséget ötvözi a kényelmes, modern dizájnnal. A szobák mennyezetét a barlang természetes kőzetformái díszítik, és az ambient világításnak köszönhetően igazán különleges hangulatot biztosítanak. {break} A szálloda emellett számos egyedülálló szolgáltatással rendelkezik. A vendégek élvezhetik a barlanghőmérsékletet és a hűvös levegőt, miközben a természet és a történelem különleges harmóniáját tapasztalják meg. A szálloda étterme is egyedülálló élményt kínál, ahol a helyi ételek mellett a barlang különleges atmoszféráját élvezhetik. {break} A Cave Haven ideális választás mindazok számára, akik szeretnék eltölteni az éjszakát egy természetes, ősi környezetben, miközben a modern kényelem és a bányászhagyományok varázslatos keverékét élvezhetik. Ha egy igazán különleges és mesés élményre vágyik, a Cave Haven biztosan felejthetetlen élményben részesíti.');
@@ -188,13 +194,13 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`) VALUES
-(2, 1, 2, 5, 'Nagyon faszánkos a hely', '2025-02-24 11:16:52'),
+(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52'),
 (3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23'),
 (4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04'),
-(5, 1, 2, 1, 'SZAR', '2025-02-24 13:27:18'),
-(6, 3, 4, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33'),
+(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18'),
+(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33'),
 (7, 4, 3, 4, NULL, '2025-03-05 17:49:56'),
-(8, 4, 7, 5, 'fhsdjkfhsjsdkfhsdjkfhsdjks', '2025-03-05 17:50:08'),
+(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08'),
 (9, 9, 4, 3, NULL, '2025-03-17 12:10:18');
 
 -- --------------------------------------------------------
@@ -299,19 +305,19 @@ INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `p
 (79, 6, '305. szoba', 3, 6, 115000, 0),
 (80, 7, 'Kőszivárvány Szoba 1', 1, 2, 40000, 0),
 (81, 7, 'Kőszivárvány Szoba 2', 1, 2, 42000, 0),
-(82, 7, 'Barlangi Kényelem 1', 2, 2, 45000, 0),
-(83, 7, 'Barlangi Kényelem 2', 2, 2, 45000, 0),
-(84, 7, 'Mélységi Nyugalom 1', 3, 2, 48000, 0),
-(85, 7, 'Mélységi Nyugalom 2', 3, 2, 48000, 0),
-(86, 7, 'Földi Harmónia 1', 1, 2, 40000, 0),
-(87, 7, 'Földi Harmónia 2', 1, 2, 42000, 0),
+(82, 7, 'Barlangi Kényelem 1', 1, 2, 45000, 0),
+(83, 7, 'Barlangi Kényelem 2', 1, 2, 45000, 0),
+(84, 7, 'Mélységi Nyugalom 1', 1, 2, 48000, 0),
+(85, 7, 'Mélységi Nyugalom 2', 1, 2, 48000, 0),
+(86, 7, 'Földi Harmónia 1', 2, 2, 40000, 0),
+(87, 7, 'Földi Harmónia 2', 2, 2, 42000, 0),
 (88, 7, 'Bányász Panoráma 1', 2, 2, 47000, 0),
 (89, 7, 'Bányász Panoráma 2', 2, 2, 47000, 0),
 (90, 7, 'Ősi Barlang 1', 3, 2, 50000, 0),
 (91, 7, 'Ősi Barlang 2', 3, 2, 50000, 0),
-(92, 7, 'Kőszikla Lak 1', 1, 3, 55000, 0),
-(93, 7, 'Kőszikla Lak 2', 1, 3, 55000, 0),
-(94, 7, 'Csendes Mély', 2, 2, 43000, 0);
+(92, 7, 'Kőszikla Lak 1', 3, 3, 55000, 0),
+(93, 7, 'Kőszikla Lak 2', 3, 3, 55000, 0),
+(94, 7, 'Csendes Mély', 3, 2, 43000, 0);
 
 -- --------------------------------------------------------
 
@@ -337,12 +343,49 @@ CREATE TABLE `service` (
 --
 
 INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `available`, `allYear`, `startDate`, `endDate`, `openTime`, `closeTime`) VALUES
-(1, 6, 1, 15000, 1, 1, NULL, NULL, NULL, NULL),
-(2, 6, 2, 25000, 1, 1, NULL, NULL, NULL, NULL),
-(3, 6, 6, 5000, 1, 1, NULL, NULL, NULL, NULL),
-(4, 6, 8, 7500, 1, 1, NULL, NULL, NULL, NULL),
-(5, 6, 9, 8000, 1, 1, NULL, NULL, NULL, NULL),
-(6, 6, 11, 10000, 1, 1, NULL, NULL, NULL, NULL);
+(1, 1, 1, 13500, 1, 1, NULL, NULL, NULL, NULL),
+(2, 1, 2, 20000, 1, 1, NULL, NULL, NULL, NULL),
+(3, 1, 9, 8000, 1, 1, NULL, NULL, '07:00:00', '20:00:00'),
+(4, 1, 13, 10000, 1, 0, '0100-04-05', '0100-11-30', NULL, NULL),
+(5, 1, 14, 7500, 1, 1, NULL, NULL, '12:00:00', '00:00:00'),
+(6, 1, 15, 12500, 1, 0, '0100-12-05', '0100-04-10', '06:00:00', '18:00:00'),
+(7, 1, 17, 8000, 1, 1, NULL, NULL, '17:00:00', '19:00:00'),
+(8, 2, 1, 16000, 1, 1, NULL, NULL, NULL, NULL),
+(9, 2, 2, 24000, 1, 1, NULL, NULL, NULL, NULL),
+(10, 2, 3, 2500, 1, 1, NULL, NULL, NULL, NULL),
+(11, 2, 4, 7000, 1, 0, '0100-05-30', '0100-09-15', '07:30:00', '21:00:00'),
+(12, 2, 7, 4000, 1, 1, NULL, NULL, '07:30:00', '23:00:00'),
+(13, 2, 16, 8750, 1, 1, NULL, NULL, '18:00:00', '21:00:00'),
+(14, 2, 17, 10000, 1, 1, NULL, NULL, '14:00:00', '15:00:00'),
+(15, 3, 1, 15000, 1, 1, NULL, NULL, NULL, NULL),
+(16, 3, 2, 24750, 1, 1, NULL, NULL, NULL, NULL),
+(17, 3, 3, 4500, 1, 1, NULL, NULL, NULL, NULL),
+(18, 3, 4, 5000, 1, 1, NULL, NULL, NULL, NULL),
+(19, 3, 5, 4500, 1, 1, NULL, NULL, '10:00:00', '20:00:00'),
+(20, 3, 7, 4000, 1, 1, NULL, NULL, '06:00:00', '20:00:00'),
+(21, 3, 10, 8000, 1, 1, NULL, NULL, NULL, NULL),
+(22, 3, 18, 17500, 1, 0, '0100-10-01', '0100-04-20', '14:00:00', '18:00:00'),
+(23, 4, 1, 20000, 1, 1, NULL, NULL, NULL, NULL),
+(24, 4, 2, 27500, 1, 1, NULL, NULL, NULL, NULL),
+(25, 4, 19, 22000, 1, 1, NULL, NULL, '13:00:00', '16:00:00'),
+(26, 4, 20, 17500, 1, 0, '0100-03-12', '0100-10-24', '08:00:00', '19:00:00'),
+(27, 5, 1, 12000, 1, 1, NULL, NULL, NULL, NULL),
+(28, 5, 2, 19000, 1, 1, NULL, NULL, NULL, NULL),
+(29, 5, 5, 4000, 1, 1, NULL, NULL, '13:30:00', '20:00:00'),
+(30, 5, 6, 2500, 1, 1, NULL, NULL, '09:00:00', '21:30:00'),
+(31, 5, 21, 8500, 1, 1, NULL, NULL, '14:00:00', '15:00:00'),
+(32, 6, 1, 15000, 1, 1, NULL, NULL, NULL, NULL),
+(33, 6, 2, 25000, 1, 1, NULL, NULL, NULL, NULL),
+(34, 6, 6, 5000, 1, 1, NULL, NULL, '07:00:00', '21:00:00'),
+(35, 6, 8, 7500, 1, 1, NULL, NULL, '10:00:00', '20:00:00'),
+(36, 6, 9, 8000, 1, 1, NULL, NULL, '07:30:00', '20:00:00'),
+(37, 6, 11, 10000, 1, 1, NULL, NULL, NULL, NULL),
+(38, 7, 1, 12000, 1, 1, NULL, NULL, NULL, NULL),
+(39, 7, 2, 17500, 1, 1, NULL, NULL, NULL, NULL),
+(40, 7, 4, 5000, 1, 0, '0100-04-14', '0100-09-15', '11:00:00', '20:00:00'),
+(41, 7, 5, 6000, 1, 1, NULL, NULL, '17:00:00', '01:00:00'),
+(42, 7, 22, 17500, 1, 1, NULL, NULL, '14:00:00', '16:00:00'),
+(43, 7, 23, 9000, 1, 1, NULL, NULL, '18:00:00', '20:00:00');
 
 -- --------------------------------------------------------
 
@@ -371,7 +414,18 @@ INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
 (9, 'Thai masszázs'),
 (10, 'Háziállat barát'),
 (11, 'Szobamacska'),
-(12, 'Várostúra részvétel');
+(12, 'Várostúra részvétel'),
+(13, 'Fóka simogatás'),
+(14, 'Ice Bar'),
+(15, 'Sífelszerelés biztosítás'),
+(16, 'Királyi vacsora'),
+(17, 'Jegy előadásra'),
+(18, 'Búvárkodás'),
+(19, 'Hegyi túra'),
+(20, 'Drótkötélpálya'),
+(21, 'Vezetőfülke túra'),
+(22, 'Bánya túra'),
+(23, 'Érc bemutató');
 
 -- --------------------------------------------------------
 
@@ -554,13 +608,13 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT a táblához `service`
 --
 ALTER TABLE `service`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT a táblához `servicecategory`
 --
 ALTER TABLE `servicecategory`
-  MODIFY `serviceCategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `serviceCategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT a táblához `user`
