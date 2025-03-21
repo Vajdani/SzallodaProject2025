@@ -82,15 +82,20 @@ class MainController extends Controller
         if ($hotel == null) {
             return redirect("/foglalas");
         }
-        $service = Service::fromQuery("select sc.serviceName, s.price,s.available,s.allYear,s.startDate,s.endDate,s.openTime,s.closeTime
+        $service = Service::fromQuery("select s.service_id, sc.serviceName, s.price,s.available,s.allYear,s.startDate,s.endDate,s.openTime,s.closeTime
                                         from service s
-                                        inner join servicecategory sc on sc.serviceCategory_id = s.service_id
+                                        inner join servicecategory sc on sc.serviceCategory_id = s.category_id
                                         inner join hotel h on h.hotel_id = s.hotel_id
                                         where h.hotel_id = $id;");
+        $rooms = Room::fromQuery("select * from room r
+                                inner join hotel h on r.hotel_id = h.hotel_id
+                                where h.hotel_id = $id;");
+
 
         return view("reservation", [
             "hotel" => $hotel,
-            "services" => $service
+            "services" => $service,
+            "room" => $rooms
         ]);
     }
 
