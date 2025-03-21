@@ -60,7 +60,17 @@
             };
         }
 
-        public string GetAuthorityLevelName(AuthorityLevel level)
+        public static AuthorityLevel GetHotelAuthorityLevel(int hotel_id)
+        {
+            if (ActiveUser == null)
+            {
+                throw new Exception("User hasn't logged in yet!");
+            }
+
+            return ActiveUser.authorityLevels[hotel_id];
+        }
+
+        public static string GetAuthorityLevelName(AuthorityLevel level)
         {
             return level switch
             {
@@ -70,7 +80,7 @@
             };
         }
 
-        public string GetAuthorityLevelName(int hotel_id)
+        public string GetHotelAuthorityLevelName(int hotel_id)
         {
             return authorityLevels[hotel_id] switch
             {
@@ -78,16 +88,6 @@
                 AuthorityLevel.Manager => "Manager",
                 _ => "Employee",
             };
-        }
-
-        public static AuthorityLevel GetHotelAuthorityLevel(int hotel_id)
-        {
-            if (ActiveUser == null)
-            {
-                throw new Exception("User hasn't logged in yet!");
-            }
-
-            return ActiveUser.authorityLevels[hotel_id];
         }
     }
 }

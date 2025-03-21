@@ -46,7 +46,7 @@ namespace SzallodaManagerForm
         Label lbUserType;
         Button btnEdit;
 
-        public EmployeePanel(Panel parent, (string username, string userType) employee) : base(parent)
+        public EmployeePanel(Panel parent, Employee employee) : base(parent)
         {
             lbUsername = new()
             {
@@ -55,7 +55,7 @@ namespace SzallodaManagerForm
 
             lbUserType = new()
             { 
-                Text = employee.userType
+                Text = User.GetAuthorityLevelName(employee.AuthorityLevel)
             };
 
             btnEdit = new Button();

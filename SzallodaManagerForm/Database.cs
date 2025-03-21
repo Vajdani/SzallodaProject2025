@@ -20,6 +20,18 @@ namespace SzallodaManagerForm
             reader = cmd.ExecuteReader();
         }
 
+        public static List<T> ReadAllWithArgs<T>(string query, params object?[] args)
+        {
+            List<T> list = [];
+            using Database db = new(query);
+            while (db.Read())
+            {
+                list.Add((T)Activator.CreateInstance(typeof(T), db, args)!);
+            }
+
+            return list;
+        }
+
         public static List<T> ReadAll<T>(string query)
         {
             List<T> list = [];
