@@ -54,22 +54,30 @@ namespace SzallodaManagerForm
 
         public string GetString(string key)
         {
-            if (Convert.IsDBNull(reader[key]))
-            {
-                return "";
-            }
+            if (Convert.IsDBNull(reader[key])) { return ""; }
 
             return reader.GetString(key);
         }
 
         public int GetInt(string key)
         {
-            if (Convert.IsDBNull(reader[key]))
-            {
-                return int.MinValue;
-            }
+            if (Convert.IsDBNull(reader[key])) { return int.MinValue; }
 
             return reader.GetInt32(key);
+        }
+
+        public TimeSpan GetTimeSpan(string key)
+        {
+            if (Convert.IsDBNull(reader[key])) { return TimeSpan.MinValue; }
+
+            return reader.GetTimeSpan(key);
+        }
+
+        public DateTime GetDateTime(string key)
+        {
+            if (Convert.IsDBNull(reader[key])) { return DateTime.MinValue; }
+
+            return reader.GetDateTime(key);
         }
     }
 }

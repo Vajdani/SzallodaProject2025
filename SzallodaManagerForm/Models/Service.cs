@@ -22,24 +22,10 @@
             Available = db.GetInt("available") == 1;
             AllYear = db.GetInt("allYear") == 1;
 
-            SetupDate(db.GetString("startDate"), ref StartDate);
-            SetupDate(db.GetString("endDate"),   ref EndDate);
-            SetupTime(db.GetString("openTime"),  ref OpenTime);
-            SetupTime(db.GetString("closeTime"), ref CloseTime);
-        }
-
-        void SetupDate(string dbVal, ref DateTime? date)
-        {
-            if (dbVal == "") { return; }
-
-            date = Convert.ToDateTime(dbVal);
-        }
-
-        void SetupTime(string dbVal, ref TimeSpan? date)
-        {
-            if (dbVal == "") { return; }
-
-            date = TimeSpan.Parse(dbVal);
+            StartDate = db.GetDateTime("startDate");
+            EndDate = db.GetDateTime("endDate");
+            OpenTime = db.GetTimeSpan("openTime");
+            CloseTime = db.GetTimeSpan("closeTime");
         }
     }
 }

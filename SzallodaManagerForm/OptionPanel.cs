@@ -32,7 +32,7 @@ namespace SzallodaManagerForm
             Controls.Add(itemPanelCon);
         }
 
-        public void UpdateNShow(Hotel? hotel)
+        public void UpdatePanel(Hotel? hotel)
         {
             itemPanelCon.Controls.Clear();
 
@@ -62,17 +62,6 @@ namespace SzallodaManagerForm
 
                     break;
             }
-
-            //scrollability test
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    ServicePanel panel = new(Size, i.ToString(), i % 10 == 0)
-            //    {
-            //        Location = new Point(0, (i * 52))
-            //    };
-
-            //    itemPanelCon.Controls.Add(panel);
-            //}
 
             Visible = true;
         }
