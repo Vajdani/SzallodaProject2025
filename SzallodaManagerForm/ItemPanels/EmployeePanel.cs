@@ -20,8 +20,18 @@ namespace SzallodaManagerForm.ItemPanels
                 Text = User.GetAuthorityLevelName(employee.AuthorityLevel)
             };
 
-            btnEdit = new Button();
+            btnEdit = new()
+            {
+                Text = "Módosítás",
+                Size = new((int)Math.Round(Size.Width * 0.24), (int)Math.Round(Size.Height * 0.6))
+            };
             btnEdit.Click += OpenEditForm;
+ 
+            Controls.Add(lbUsername);
+            Controls.Add(lbUserType);
+            Controls.Add(btnEdit);
+
+            AlignElementsHorizontally();
         }
 
         void OpenEditForm(object? sender, EventArgs e)
