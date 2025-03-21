@@ -1,4 +1,5 @@
-﻿using SzallodaManagerForm.Models;
+﻿using SzallodaManagerForm.ItemPanels;
+using SzallodaManagerForm.Models;
 
 namespace SzallodaManagerForm
 {

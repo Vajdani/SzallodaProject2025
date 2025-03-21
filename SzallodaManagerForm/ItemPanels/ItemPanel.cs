@@ -1,0 +1,40 @@
+﻿namespace SzallodaManagerForm.ItemPanels
+{
+    internal class ItemPanel : Panel
+    {
+        public int ItemID { get; private set; }
+        public ItemPanel(Panel parent, int verticalPadding = 10)
+        {
+            ResizePanel(parent.Size);
+            Location = new Point(10, (50 + verticalPadding) * parent.Controls.Count);
+            BackColor = Color.Aqua;
+            Visible = true;
+        }
+
+        public void ResizePanel(Size parentSize)
+        {
+            Size = new Size(Convert.ToInt32(Math.Floor(parentSize.Width * 0.95)), 50);
+        }
+
+        public void PositionElemenet(Control control, int position)
+        {
+            control.Location = new Point(position, (Size.Height - control.Size.Height) / 2);
+        }
+
+        public void AlignElementsHorizontally(int sidePadding = 20)
+        {
+            var controls = Controls.Cast<Control>().ToList();
+
+            int width = Size.Width - sidePadding * 2;
+            int totalWidth = controls.Sum(c => c.Size.Width);
+            int gapSize = (int)Math.Round((double)(Size.Width - sidePadding * 2 - totalWidth) / controls.Count);
+            int currentX = sidePadding;
+
+            foreach (Control c in controls)
+            {
+                PositionElemenet(c, currentX);
+                currentX = currentX + gapSize + c.Size.Width;
+            }
+        }
+    }
+}
