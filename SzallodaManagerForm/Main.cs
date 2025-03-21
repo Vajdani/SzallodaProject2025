@@ -12,6 +12,22 @@ namespace SzallodaManagerForm
         public Main()
         {
             InitializeComponent();
+
+            szobak = new(Size, OptionPanel.ItemPanelCategory.Rooms);
+            szolgaltatasok = new(Size, OptionPanel.ItemPanelCategory.Services)
+            {
+                BackColor = Color.RebeccaPurple
+            };
+            alkalmazottak = new(Size, OptionPanel.ItemPanelCategory.Employees)
+            { 
+                BackColor = Color.RebeccaPurple
+            };
+            
+            Controls.Add(szobak);
+            Controls.Add(szolgaltatasok);
+            Controls.Add(alkalmazottak);
+
+            current = szobak;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -43,19 +59,6 @@ namespace SzallodaManagerForm
             Hotel? hotel = Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!);
             if (hotel == null) { return; }
 
-            alkalmazottak?.Dispose();
-            szobak?.Dispose();
-            szolgaltatasok?.Dispose();
-
-            szobak = new(Size, OptionPanel.ItemPanelCategory.Rooms);
-            szolgaltatasok = new(Size, OptionPanel.ItemPanelCategory.Services)
-            {
-                BackColor = Color.RebeccaPurple
-            };
-
-            Controls.Add(szobak);
-            Controls.Add(szolgaltatasok);
-
             cbModositas.Items.Clear();
             cbModositas.Items.Add("Szobák");
             cbModositas.Items.Add("Szolgáltatások");
@@ -63,19 +66,10 @@ namespace SzallodaManagerForm
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 2) //Manager vagy Owner
             {
-                alkalmazottak = new(Size, OptionPanel.ItemPanelCategory.Employees);
-                Controls.Add(alkalmazottak);
-                alkalmazottak.BackColor = Color.RebeccaPurple;
-
                 cbModositas.Items.Add("Alkalmazottak");
-                current = alkalmazottak;
-            }
-            else
-            {
-                current = szobak;
             }
 
-            current.UpdateNShow(Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!));
+            current = szobak;
             cbModositas.SelectedIndex = 0;
         }
 
@@ -96,7 +90,7 @@ namespace SzallodaManagerForm
                     break;
             }
 
-            current.UpdateNShow(Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!));
+            current.UpdatePanel(Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!));
         }
     }
 }
