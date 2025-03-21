@@ -40,6 +40,12 @@
 
         public static void OnUserLogin(int user_id)
         {
+            var rooms = Database.ReadAll<Room>($"select * from room").GroupBy(r => r.hotel_id).ToDictionary(r => r.Key, r => r.ToList());
+            var services = Database.ReadAll<Service>($"select * from service").GroupBy(s => s.hotel_id).ToDictionary(s => s.Key, s => s.ToList());
+            var employees = Database.ReadAll<(string username, string userType)>($"select * from room").GroupBy(r => r.hotel_id).ToDictionary(r => r.Key, r => r.ToList());
+
+
+
             userHotels = Database.ReadAll<Hotel>(
                 "select hotel.hotel_id, hotel.city_id, hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, hotel.description " +
                 "from hotel, employee " +
