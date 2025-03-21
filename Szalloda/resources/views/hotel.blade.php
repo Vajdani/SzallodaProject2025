@@ -93,7 +93,7 @@
                 </table>
                 <hr>
             </div>
-            <div>
+            <!--<div>
                 <p>Szolgáltatások</p>
                 <table class="roomsTable">
                     <tr>
@@ -112,6 +112,10 @@
                     @endforeach
                 </table>
                 <hr>
+            </div>
+            -->
+            <div class="text-center">
+            <button class="book-button " type="submit">Foglalok!</button>
             </div>
         </section>
         <section>
@@ -142,7 +146,9 @@
                        {{ $city_description }}
                     </p>
                 </div>
-                <img src="{{ asset("img/cities/$city->city_id.jpg") }}" alt="{{ $city->cityName }}" title="{{ $city->cityName }}" class="img-fluid">
+                <a href="/telepules/{{ $city->city_id }}">
+                    <img src="{{ asset("img/cities/$city->city_id.jpg") }}" alt="{{ $city->cityName }}" title="{{ $city->cityName }}" class="img-fluid">
+                </a>
             </div>
         </section>
     </div>
