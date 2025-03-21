@@ -115,7 +115,7 @@
             </div>
             -->
             <div class="text-center">
-            <button class="book-button " type="submit">Foglalok!</button>
+            <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button " type="submit">Foglalok!</button></a>
             </div>
         </section>
         <section>

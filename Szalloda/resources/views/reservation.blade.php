@@ -11,29 +11,16 @@
             <form action="/" method="post" class="center">
                 <div class="form">
                     <label for="szalloda">Szálloda neve:</label>
-                    @isset($hotel_id)
-                        <input type="text" name="szalloda" id="szalloda" style="display:none" value="{{$hotel_id}}">
-                        <p>{{$hotelName}}</p>
-                    @else
-                        <select name="szalloda" id="szalloda">
-                            @foreach ($hotels as $hotel)
-                                <option value="{{$hotel["hotel_id"]}}">{{$hotel["hotelName"]}}</option>
-                            @endforeach
-                        </select>
-                    @endisset                    
-                    <p>Ellátás típusa</p>
-                    <div class="ellatas-opcio">
-                        <label for="full" class="inline">Teljes ellátás</label> <input type="radio" name="ellatas"
-                            id="full"><span></span>
-                    </div>
-                    <div class="ellatas-opcio">
-                        <label for="half" class="inline">Fél panzió</label> <input type="radio" name="ellatas"
-                            id="half"><span></span>
-                    </div>
-                    <div class="ellatas-opcio">
-                        <label for="none" class="inline">Nincs</label> <input type="radio" name="ellatas"
-                            id="none">
-                    </div>
+                        <input type="text" name="szalloda" id="szalloda" style="display:none" value="{{$hotel->hotel_id}}">
+                        <p>{{$hotel->hotelName}}</p>
+                         
+                    <p>Szolgálatások:</p>
+                    <select name="service" id="service">
+                        @foreach ($service as $s)
+                            
+                        @endforeach
+                    </select>
+               
                     <p>Dátum</p>
                     <input type="date">
                     <p class="inline">—</p> <input type="date">
