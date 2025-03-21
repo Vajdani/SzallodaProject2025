@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="{{ asset("css/carousel.css") }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/26a3e6423d.js"crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     @yield("css")
-    <title>Szálloda</title>
+    <title>RushWave Retreat</title>
 </head>
 
 <body>
@@ -37,7 +38,7 @@
         </div>
         <div class="sidebar">
             <div class="sidebarHeader">
-                <h2>Szálloda</h2>
+                <h2>RushWave Retreat</h2>
                 <label for="toggleButtonCheckbox" class="toggleButtonCon">
                     <input name="toggleButtonCheckbox" type="checkbox" id="toggleButtonCheckbox" class="toggleButtonCheckbox">
                     <p>≡</p>
@@ -54,9 +55,6 @@
 
                 <li><a href="/ertekelesek">Értékelések</a></li>
                 <li><a href="/szalloda/veletlenszeru">Nyaraló ajánlás</a></li>
-                @auth
-                    <li><a href="/foglalas">Foglalás</a></li>
-                @endauth
                 <li><hr></li>
                 @auth
                     <li><a href="/kijelentkezes">Kijelentkezés</a></li>
@@ -69,8 +67,13 @@
             <hr>
             <ul class="sidebarContacts">
                 <li>Elérhetőségeink</li>
-                <li>Tel: <a href="tel:+3620111111">06 20 111 111</a></li>
-                <li>E-mail: <a href="mailto:valaki@pelda.hu">valaki@pelda.hu</a></li>
+                <i class="fa-solid fa-phone"></i><li>Tel: <a href="tel:+36203568954">06 20 356 8954</a></li>
+                <i class="fa-regular fa-envelope"></i><li>E-mail: <a href="mailto:RushWaveRetreat@hotelchain.hu">valaki@pelda.hu</a></li>
+                <li>Közösségi médiáink:</li>
+                <a target="_blank" href="https://facebook.com/RushWave_Retreat" class="white"><i class="fa-brands fa-facebook"></i></a>
+                <a target="_blank" href="https://reddit.com/RushWave_Retreat" class="white"><i class="fa-brands fa-reddit-alien"></i></a>
+                <a target="_blank" href="https://twitter.com/RushWave_Retreat" class="white"><i class="fa-brands fa-twitter"></i></a>
+
             </ul>
             </div>
         </div>

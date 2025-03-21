@@ -41,6 +41,10 @@ main {
     /* min-height: 92vh; */
 }
 
+.white{
+    color: var(--colour_lightwhite);
+}
+
 section{
     padding: 10px;
 }
