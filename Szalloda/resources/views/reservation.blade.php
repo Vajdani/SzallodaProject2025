@@ -10,29 +10,40 @@
     <div class="mainContent">
         <section>
             <h1>Foglalás</h1>
-            <form action="/" method="post" class="center">
+            <form action="/foglalas" method="post" class="center">
                 <div class="form">
-                    <label for="szalloda">Szálloda neve:</label>
-                        <input type="text" name="szalloda" id="szalloda" style="display:none" value="{{$hotel->hotel_id}}">
-                        <p>{{$hotel->hotelName}}</p>
+                    @csrf
+                    <label for="hotel_id">Szálloda neve:</label>
+                    <input type="text" name="hotel_id" id="hotel_id" style="display:none" value="{{$hotel->hotel_id}}">
+                    <p>{{$hotel->hotelName}}</p>
 
-                    <label for="service">Szolgálatások:</label>
-                    <select name="service" id="service">
+                    <label {{--for="service"--}}>Szolgálatások:</label>
+                    {{-- <select name="service" id="service">
                         @foreach ($services as $s)
                             <option value="{{$s->service_id}}">{{$s->serviceName}}</option>
                         @endforeach
-                    </select>
+                    </select> --}}
+                    <div>
+                        @foreach ($services as $s)
+                            <div>
+                                <input type="checkbox" name="service_{{$s->service_id}}" id="service_{{$s->service_id}}">
+                                <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
+                            </div>
+                        @endforeach
+                    </div>
 
                     <label for="rooms">Szoba:</label>
                     <select name="rooms" id="rooms">
                         @foreach ($room as $r)
-                        <option value="{{$r->room_id}}">{{$r->roomNumber}}</option>
+                            <option value="{{$r->room_id}}">{{$r->roomNumber}}</option>
                         @endforeach
                     </select>
                     <p>Dátum</p>
-                    <input type="date">
-                    <p class="inline">—</p>
-                    <input type="date">
+                    <div style="display:flex;justify-content:space-between">
+                        <input type="date" id="startDate" style="display: inline">
+                        <p class="inline">—</p>
+                        <input type="date" id="endDate" style="display: inline">
+                    </div>
                     <br>
                     <br>
                     <p >Létszám: <span id="letszam"></span></p>
