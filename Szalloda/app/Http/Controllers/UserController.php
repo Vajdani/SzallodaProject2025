@@ -36,6 +36,7 @@ class UserController extends Controller
         $req->validate([
             'hotel' => 'required',
             'star' => 'required',
+            "comment" => "max:1000"
         ], [
             'hotel.required' => 'Muszáj választania egy szállodát!',
             'star.required' => 'Muszáj értékelnie a szállodát!',

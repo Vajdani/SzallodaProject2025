@@ -3,45 +3,56 @@ const varos = document.getElementById("varos")
 const szalloda = document.getElementById("szalloda")
 const ratingSection = document.getElementById("ratingSection")
 
-let lastSzalloda = 0
-let varosChanged = false
+const MAXVISIBLEREVIEWLENGTH = 250
+const MAXFULLREVIEWLENGTH = 1000
 
-function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
-    const starT = "<span class='starTicked'>★</span>"
-    const starU = "<span class='starUnTicked'>★</span>"
+let LASTHOTELID = 0
+let CITYCHANGED = false
+let RATINGS = {}
+let ACTIVEUSERID
+
+function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
+    const reviewIsNull = (review == "" || review == "null" || review == null)
+    const profilePictureId = userActive ? pfp : 0
+    const finalUserName = userActive ? username : "Törölt fiók"
+    const ratingStars = ("<span class='starTicked'>★</span>").repeat(rating) + ("<span class='starUnTicked'>★</span>").repeat(5 - rating)
+    const finalReviewText = (reviewIsNull ? "" : (review.length > maxReviewLength ? review.substring(0, maxReviewLength) + "..." : review))
+    const footer = `
+        <div class="reviewFooter" id="reviewFooter_` + review_id + `">
+            ` + (!reviewIsNull && review.length > 250 ? `<button onclick="OpenFullReview(` + review_id + `)">Értékelés kinagyítása</button>` : "") + `
+            ` + (user_id_active == user_id ? `<button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash white"></i></button>` : ``) + `
+        </div>
+    `
 
     const div = document.createElement("div")
     div.id = "review_" + review_id
     div.innerHTML = `
         <div class="ratingUser">
             <div class="profilePicture">
-                <a href="/profil/` + user_id + `"><img src="/img/pfp/` + (userActive ? pfp : 0) + `.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
-                <p class="text-center">` + (userActive ? username : "Törölt fiók") + `</p>
+                <a href="/profil/` + user_id + `"><img src="/img/pfp/` + profilePictureId + `.png" alt="profilkep" title="` + finalUserName + ` profilképe" class="img-fluid profile-picture"></a>
+                <p class="text-center">` + finalUserName + `</p>
             </div>
             <div class="ratingData">
                 <h3 style="text-wrap:auto"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
-                <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
+                <p>` + ratingStars + `</p>
                 <p style="text-wrap:auto">` + created_at + `</p>
-                <p style="text-wrap:auto">` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
-                ` + (user_id_active == user_id ? `
-                <div class="deleteRating" id="review_deleteRating_` + review_id + `">
-                    <button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash white"></i></button>
-                </div>` : ``) + `
+                <p style="text-wrap:auto">` + finalReviewText + `</p>
+                ` + (disableFooter == true ? "" : footer) + `
             </div>
         </div>
     `
 
     div.classList.add("rating", "center")
 
-    ratingSection.appendChild(div)
+    return div
 }
 
-function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
-    RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id)
+function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
+    return RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter)
 }
 
-function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
-    RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id)
+function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
+    return RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter)
 }
 
 function RenderNone(noneText) {
@@ -67,20 +78,29 @@ const reviewData = {
     }
 }
 
-function RenderReviewSection(reviews, reviewType) {
+function RenderReviewSection(reviews, reviewType, user_id_active) {
     if (typeof(reviews) == "string") {
         reviews = JSON.parse(reviews)
     }
 
+    RATINGS = reviews;
+    ACTIVEUSERID = user_id_active
+
     ratingSection.innerHTML = ""
 
     let data = reviewData[reviewType]
-    if (reviews.length == 0) {
+    if (RATINGS.length == 0) {
         RenderNone(data.noneText)
     }
     else {
-        reviews.forEach(element => {
-            data.render(element.username, element.hotelName, element.hotel_id, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
+        RATINGS.forEach(element => {
+            let rating = data.render(
+                element.username, element.hotelName, element.hotel_id, element.rating,
+                element.created_at, element.reviewText, element.profilePic, element.user_id,
+                element.active == 1, ACTIVEUSERID, element.review_id, MAXVISIBLEREVIEWLENGTH
+            )
+
+            ratingSection.appendChild(rating)
         });
     }
 }
@@ -95,7 +115,7 @@ function RenderHotelOption(hotelName, hotelId) {
 
 async function UpdateContents() {
     //"/ertekelesek/ertek/"+ csillagok.value +"/varos/"+ varos.value +"/szalloda/"+ szalloda.value
-    lastSzalloda = szalloda.value
+    LASTHOTELID = szalloda.value
     await fetch("/ertekelesek/" + csillagok.value + "/" + varos.value + "/" + szalloda.value).then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -114,11 +134,11 @@ async function UpdateContents() {
             });
         }
 
-        if (!varosChanged) {
-            szalloda.value = lastSzalloda
+        if (!CITYCHANGED) {
+            szalloda.value = LASTHOTELID
         }
 
-        varosChanged = false
+        CITYCHANGED = false
     }).catch((error) => {
         console.error('Fetch error:', error);
     })
@@ -127,7 +147,7 @@ async function UpdateContents() {
 if (csillagok != null) {
     csillagok.onchange = UpdateContents
     varos.onchange = () => {
-        varosChanged = true
+        CITYCHANGED = true
         szalloda.value = 0
         UpdateContents()
     }
@@ -147,7 +167,7 @@ function OpenReviewDeleteMenu(review_id) {
     const form = document.createElement("div")
     form.style = "background-color: var(--colour_randomgreen2);border-radius: 25px;padding: 25px;max-width: 500px;height: 30vh"
     form.innerHTML = `
-        <p>Biztos hogy törölni szeretné az értékelését?</p>
+        <h1>Biztos hogy törölni szeretné az értékelését?</h1>
 
         <div id="reviewHolder"></div>
 
@@ -160,13 +180,13 @@ function OpenReviewDeleteMenu(review_id) {
     panel.appendChild(form)
     document.getElementsByTagName("main")[0].appendChild(panel)
 
-    //hide trash can icon for the cloning, then unhide after cloning
-    let trashButton = document.getElementById("review_deleteRating_" + review_id)
-    trashButton.style.display = "none"
+    let review = GetReviewById(review_id)
+    document.getElementById("reviewHolder").appendChild(RenderHotelRating(
+        review.username, review.hotelName, review.hotel_id, review.rating,
+        review.created_at, review.reviewText, review.profilePic, review.user_id,
+        review.active == 1, ACTIVEUSERID, review.review_id, MAXVISIBLEREVIEWLENGTH, true
+    ))
 
-    document.getElementById("reviewHolder").appendChild(document.getElementById("review_" + review_id).cloneNode(true))
-
-    trashButton.style.display = "flex"
 }
 
 function CloseReviewDeleteMenu() {
@@ -176,8 +196,61 @@ function CloseReviewDeleteMenu() {
     }
 }
 
+
+
+function OpenFullReview(review_id) {
+    if (document.getElementById("fullReviewMenu")) { return }
+
+    let panel = document.createElement("div")
+    panel.id = "fullReviewMenu"
+    panel.className = "reviewDeleteMenu"
+    panel.onclick = CloseFullReviewMenu
+
+    const form = document.createElement("div")
+    form.style = "background-color: var(--colour_randomgreen2);border-radius: 25px;padding: 25px;max-width: 500px;height: content-max"
+    form.innerHTML = `
+        <div id="reviewHolder"></div>
+
+        <button onclick="CloseFullReviewMenu()" class="delete-button" style="float:right">Bezárás</button>
+    `
+
+    panel.appendChild(form)
+    document.getElementsByTagName("main")[0].appendChild(panel)
+
+    let review = GetReviewById(review_id)
+    document.getElementById("reviewHolder").appendChild(RenderHotelRating(
+        review.username, review.hotelName, review.hotel_id, review.rating,
+        review.created_at, review.reviewText, review.profilePic, review.user_id,
+        review.active == 1, ACTIVEUSERID, review.review_id, MAXFULLREVIEWLENGTH, true
+    ))
+}
+
+function CloseFullReviewMenu() {
+    let menu = document.getElementById("fullReviewMenu")
+    if (menu) {
+        menu.remove()
+    }
+}
+
+
+
 document.addEventListener("keydown", (e) => {
     if (e.key == "Escape") {
         CloseReviewDeleteMenu()
+        CloseFullReviewMenu()
     }
 })
+
+
+
+function GetReviewById(review_id) {
+    let i = 0;
+    while (i < RATINGS.length) {
+        const element = RATINGS[i];
+        if (element.review_id == review_id) {
+            return element
+        }
+
+        i++
+    }
+}

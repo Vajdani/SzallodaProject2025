@@ -134,14 +134,16 @@ select {
     }
 }
 
-.deleteRating {
+.reviewFooter {
     height: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    gap: 10px;
+    margin: 5px 0 0 0;
 }
 
-.deleteRating a i {
+.reviewFooter a i {
     color: white;
     margin: 5px 0 0 0;
 }
@@ -173,4 +175,8 @@ select {
 
 .delete-button:hover {
     background-color: var(--colour_error_intense);
+}
+
+.fa-trash:hover {
+    color: var(--colour_randomgreen1);
 }

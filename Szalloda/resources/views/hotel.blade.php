@@ -127,7 +127,7 @@
             <div class="ratingSection center" id="ratingSection">
                 <script src="{{ asset('js/reviews.js') }}"></script>
                 <script>
-                    RenderReviewSection(`{!! json_encode($reviews) !!}`, 1)
+                    RenderReviewSection(`{!! json_encode($reviews) !!}`, 1, @auth "{{ Auth::user()->user_id }}" @else "-1" @endauth)
                 </script>
             </div>
         </section>
