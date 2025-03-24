@@ -45,35 +45,33 @@
             </div>
             <div class="sidebarCollapsableContent">
                 <hr>
-            <ul class="sidebarLinks">
+                <ul class="sidebarLinks">
 
-                <li><a href="/">Főoldal</a></li>
-                @auth
-                    <li><a href="/profil">Profilom</a></li>
-                @endauth
+                    <li><a href="/">Főoldal</a></li>
+                    @auth
+                        <li><a href="/profil">Profilom</a></li>
+                    @endauth
 
-                <li><a href="/ertekelesek">Értékelések</a></li>
-                <li><a href="/szalloda/veletlenszeru">Nyaraló ajánlás</a></li>
-                <li><hr></li>
-                @auth
-                    <li><a href="/kijelentkezes">Kijelentkezés</a></li>
-                @else
-                    <li><a href="/regisztracio">Regisztráció</a></li>
-                    <li><a href="/bejelentkezes">Bejelentkezés</a></li>
-
-                @endauth
-            </ul>
-            <hr>
-            <ul class="sidebarContacts">
-                <li>Elérhetőségeink</li>
-                <li><i class="fa-solid fa-phone"></i> : <a href="tel:+36203568954">06 20 356 8954</a></li>
-                <li><i class="fa-regular fa-envelope"></i>: <a href="mailto:RushWaveRetreat@hotelchain.hu">valaki@pelda.hu</a></li>
-                <li>Közösségi médiáink:</li>
-                <a target="_blank" href="https://facebook.com/RushWave_Retreat" class="white"><i class="fa-brands fa-facebook"></i></a>
-                <a target="_blank" href="https://reddit.com/RushWave_Retreat" class="white"><i class="fa-brands fa-reddit-alien"></i></a>
-                <a target="_blank" href="https://twitter.com/RushWave_Retreat" class="white"><i class="fa-brands fa-twitter"></i></a>
-
-            </ul>
+                    <li><a href="/ertekelesek">Értékelések</a></li>
+                    <li><a href="/szalloda/veletlenszeru">Nyaraló ajánlás</a></li>
+                    <li><hr></li>
+                    @auth
+                        <li><a href="/kijelentkezes">Kijelentkezés</a></li>
+                    @else
+                        <li><a href="/regisztracio">Regisztráció</a></li>
+                        <li><a href="/bejelentkezes">Bejelentkezés</a></li>
+                    @endauth
+                </ul>
+                <hr>
+                <ul class="sidebarContacts">
+                    <li>Elérhetőségeink</li>
+                    <li><i class="fa-solid fa-phone"></i> : <a href="tel:+36203568954">06 20 356 8954</a></li>
+                    <li><i class="fa-regular fa-envelope"></i>: <a href="mailto:RushWaveRetreat@hotelchain.hu">valaki@pelda.hu</a></li>
+                    <li>Közösségi médiáink:</li>
+                    <a target="_blank" href="https://facebook.com/RushWave_Retreat" class="white"><i class="fa-brands fa-facebook"></i></a>
+                    <a target="_blank" href="https://reddit.com/RushWave_Retreat" class="white"><i class="fa-brands fa-reddit-alien"></i></a>
+                    <a target="_blank" href="https://twitter.com/RushWave_Retreat" class="white"><i class="fa-brands fa-twitter"></i></a>
+                </ul>
             </div>
         </div>
     </main>
