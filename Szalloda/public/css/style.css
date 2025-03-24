@@ -238,6 +238,11 @@ hr {
     border-radius: 25px;
     margin: 15px auto 0 auto;
     width: fit-content;
+    position: absolute;
+    top: 50px;
+    transform: translate(-100%, 0);
+    left: 50%;
+    z-index: 10;
 }
 
 .info-popup div {
@@ -272,4 +277,10 @@ hr {
 
 .w-100 {
     width: 100%
+}
+
+nav {
+    background-color: var(--colour_sidebar);
+    padding: 10px;
+    text-align: center;
 }

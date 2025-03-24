@@ -7,8 +7,11 @@
 
 @section('content')
     <div class="mainContent">
-        <section>
+        <nav>
             <h1>Értékelés írása</h1>
+
+        </nav>
+        <section>
             <form action="/ertekeles" method="post" class="center">
                 @csrf
                 <label for="hotel">Melyik hotelünkhöz szeretne értékelést írni?</label>

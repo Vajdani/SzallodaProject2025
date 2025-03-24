@@ -6,8 +6,10 @@
 
 @section('content')
     <div class="mainContent">
-        <section>
+        <nav>
             <h1>Felhasználói fiók törlése</h1>
+        </nav>
+        <section>
             <div class="center form">
                 <p>Biztos hogy meg szeretne válni a fiókjától?</p>
                 <a href="/fioktorles/megerositem"><button class="save-button">Igen, törlöm a fiókom</button></a>

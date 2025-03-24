@@ -7,9 +7,11 @@
 @endsection
 
 @section('content')
+    <nav>
+        <h1>{{ $hotel->hotelName }} szálloda</h1>
+    </nav>
     <div class="mainContent">
         <section>
-            <h1>{{ $hotel->hotelName }}</h1>
             <img src="{{asset('img/hotels/'.$hotel->hotel_id.'.jpg')}}" alt="{{$hotel->hotel_id}}.jpg" title="{{$hotel->hotelName}}" class="szallodaMainImg img-fluid">
         </section>
         <section class="szallodaAdatSection">
@@ -75,7 +77,7 @@
                                     {{$room->floor}}. vágány
                                 @elseif($room->hotel_id == 3)
                                     {{$oceanfloor[$room->floor*-1-1]}} ({{$room->floor}}. emelet)
-                                @else    
+                                @else
                                     @if ($room->floor != null)
                                     {{$room->floor}}. emelet
                                     @elseif($room->floor === 0)

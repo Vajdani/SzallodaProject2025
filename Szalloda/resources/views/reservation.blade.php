@@ -8,8 +8,10 @@
 
 @section('content')
     <div class="mainContent">
-        <section>
+        <nav>
             <h1>Foglalás</h1>
+        </nav>
+        <section>
             <form action="/foglalas" method="post" class="center">
                 <div class="form">
                     @csrf

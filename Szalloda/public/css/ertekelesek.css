@@ -10,6 +10,10 @@
     gap: 10px
 }
 
+.ratingSection:nth-last-child(1) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 @media only screen and (max-width: 1500px) {
     .ratingSection {
         grid-template-columns: repeat(2, minmax(0, 1fr));
