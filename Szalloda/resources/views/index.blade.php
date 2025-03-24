@@ -84,9 +84,15 @@
             <h2>Miért válasszon minket?</h2>
             <hr>
             <p>
-                A RushWave Retreat egyéni élményeket kínál
+                A RushWave Retreat egyéni élményeket kínál minden vendégének, hiszen cégünk célja hogy az ön nyaralása az átlagtól eltérő legyen. Törekszünk arra hogy minden szállodánk speciális atmoszférát nyújtson, ezzel különlegessé téve az ön nyaralási élményét.
 
+                Szállodáink minden igényt kielégítenek, miközben megőrzik a szokatlan környezet izgalmait. Modern dizájnjaink és a természet közelsége biztosítja, hogy minden vendégünk különleges élményben részesüljön. A helyi kalandok és a különleges aktivitások mind hozzájárulnak a felejthetetlen élményekhez, amelyekkel gazdagodhatnak a nálunk töltött napok során.
+
+                Csapatunk minden nap dolgozik azon hogy minden vendégünk a legmagasabb szintű kényelmet kapja. Figyelmességünk és személyre szabott szolgáltatásaink segítségével érjük el azt, hogy minden pillanat a lehető legélvezetesebb legyen. Az egyszerű, hatékony és gyors foglalási rendszerünk segítségével akár percek alatt is sikeresen lefoglalhatja az ön számára tökéletes szállást.
+
+                Válassza a RushWave Retreat-et, ha szeretné hogy a következő nyaralása különleges legyen amely egyesíti a pihenést és az izgalmat, miközben maximális kényelemben van része
             </p>
+
         </section>
     </div>
 @endsection

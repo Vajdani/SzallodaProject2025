@@ -86,16 +86,24 @@ class MainController extends Controller
             return redirect("/foglalas");
         }
         $service = Service::fromQuery("
-            select s.service_id, sc.serviceName, s.price,s.available,s.allYear,s.startDate,s.endDate,s.openTime,s.closeTime
+            select s.service_id, sc.serviceName, s.price,s.available,s.allYear,s.startDate,s.endDate,s.openTime,s.closeTime,s.category_id
             from service s
             inner join servicecategory sc on sc.serviceCategory_id = s.category_id
             inner join hotel h on h.hotel_id = s.hotel_id
             where h.hotel_id = $id;
         ");
+        $start = "2025-03-15";
+        $end = "2025-03-16";
         $rooms = Room::fromQuery("
-            select * from room r
-            inner join hotel h on r.hotel_id = h.hotel_id
-            where h.hotel_id = $id;
+                select * from room r
+                inner join hotel h on r.hotel_id = h.hotel_id
+                where h.hotel_id = $id
+                and r.roomNumber not in (
+                select r.roomNumber
+                from room r
+                inner join booking b on b.room_id = r.room_id
+                where '$start' BETWEEN b.bookStart and b.bookEnd
+                or '$end' BETWEEN b.bookStart and b.bookEnd);
         ");
 
         return view("reservation", [
@@ -105,10 +113,15 @@ class MainController extends Controller
         ]);
     }
 
-    public function reservationPost(Request $request) {
-        dd($request);
-
-        return redirect("/");
+    public function reservationPost(Request $req) {
+        $req->validate([
+            'startDate' => 'required',
+            'endDate' => 'required|after:startDate'
+        ],[
+            'startDate.required' => 'Adja meg a kezdő dátumot!',
+            'endDate.required' => 'adja meg a vég dátumot!',
+            'endDate.after' => 'A kezdő dátum nem lehet korábban mint a végdátum!'
+        ]);
     }
 
     public function reviews() {
