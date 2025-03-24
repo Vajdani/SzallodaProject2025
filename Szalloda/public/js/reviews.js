@@ -44,7 +44,6 @@ function renderHotel(hotelName, hotelId) {
     szalloda.appendChild(option);
 }
 
-
 function renderNone() {
     const div = document.createElement("div")
     div.innerHTML = `
@@ -53,6 +52,22 @@ function renderNone() {
         </div>
     `
     ratingSection.appendChild(div)
+}
+
+function RenderReviewSection(reviews) {
+    if (typeof(reviews) == "string") {
+        reviews = JSON.parse(reviews)
+    }
+
+    ratingSection.innerHTML = ""
+    if (reviews.length == 0) {
+        renderNone()
+    }
+    else {
+        reviews.forEach(element => {
+            renderRating(element.username, element.hotelName, element.hotel_id, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
+        });
+    }
 }
 
 async function updateContents() {
@@ -64,16 +79,7 @@ async function updateContents() {
         }
         return response.json();
     }).then((data) => {
-        let reviews = data.reviews
-        ratingSection.innerHTML = ""
-        if (reviews.length == 0) {
-            renderNone()
-        }
-        else {
-            reviews.forEach(element => {
-                renderRating(element.username, element.hotelName, element.hotel_id, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
-            });
-        }
+        RenderReviewSection(data.reviews)
 
         szalloda.innerHTML = ""
 

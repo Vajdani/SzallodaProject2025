@@ -126,7 +126,10 @@
             @endauth</h2>
             <div class="ratingSection center" id="ratingSection">
                 <script src="{{ asset('js/reviews.js') }}"></script>
-                @foreach ($reviews as $r)
+                <script>
+                    RenderReviewSection(`{!! json_encode($reviews) !!}`)
+                </script>
+                {{-- @foreach ($reviews as $r)
                     @if ($r->active == 1)
                         <script>
                             renderRating(
@@ -143,7 +146,7 @@
                             )
                         </script>
                     @endif
-                @endforeach
+                @endforeach --}}
             </div>
         </section>
         <section>
