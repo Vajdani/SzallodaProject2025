@@ -44,7 +44,15 @@ namespace SzallodaManagerForm.ItemPanels
 
         void OpenEditForm(object? sender, EventArgs e)
         {
-            UpdateForm serviceUpdateForm = new UpdateForm();
+            List<InputRow> test = new List<InputRow>()
+            {
+                new ComboBoxRow("AAAAA", ["Alma", "Körte", "Teto"]),
+                new TextBoxRow("BBBB"),
+                new TextBoxRow("CCCCC", true),
+                new TimePickerRow("Elérhetőség", TimePickerRow.PickMethod.Day),
+                new TimePickerRow("Nyitás", TimePickerRow.PickMethod.Time)
+        };
+            UpdateForm serviceUpdateForm = new UpdateForm("Szolgáltatás Módosítása", test);
             serviceUpdateForm.ShowDialog();
         }
     }

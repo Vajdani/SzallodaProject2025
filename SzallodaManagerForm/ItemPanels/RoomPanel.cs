@@ -25,7 +25,8 @@ namespace SzallodaManagerForm.ItemPanels
                     "Elérhető",
                     "Nem elérhető"
                 },
-                SelectedIndex = 0
+                SelectedIndex = 0,
+                DropDownStyle = ComboBoxStyle.DropDownList
             };
 
             Price = new()

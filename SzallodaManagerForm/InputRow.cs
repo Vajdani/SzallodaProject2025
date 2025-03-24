@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SzallodaManagerForm
 {
-    internal class InputRow
+    public class InputRow
     {
         public Label Text { get; private set; }
         public Label ErrorLabel { get; private set; }
@@ -46,14 +46,14 @@ namespace SzallodaManagerForm
     {
         public ComboBox ItemBox { get; private set; }
 
-        public ComboBoxRow(string text, string[] items) : base(text)
+        public ComboBoxRow(string text, string[] items, int selected = 0) : base(text)
         {
             ItemBox = new ComboBox();
 
             foreach (string item in items) { ItemBox.Items.Add(item); }
 
             ItemBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            ItemBox.SelectedIndex = 0;
+            ItemBox.SelectedIndex = selected;
         }
 
         public override void UpdatePosition(Size parentSize, int y)
@@ -76,11 +76,13 @@ namespace SzallodaManagerForm
     {
         public TextBox ValueTextBox { get; private set; }
         bool numOnly;
+        bool IsNullable;
 
-        public TextBoxRow(string text, bool NumOnly = false) : base(text)
+        public TextBoxRow(string text, bool NumOnly = false, bool canBnull = false) : base(text)
         {
             ValueTextBox = new TextBox();
             numOnly = NumOnly;
+            IsNullable = canBnull; 
 
             ValueTextBox.TextChanged += NumberValidation;
         }
@@ -138,7 +140,7 @@ namespace SzallodaManagerForm
             switch (pick)
             {
                 case PickMethod.Day: Timepicker.CustomFormat = "MM-dd"; break;
-                case PickMethod.Time: Timepicker.CustomFormat = "hh:mm:ss"; break;
+                case PickMethod.Time: Timepicker.CustomFormat = "hh:mm"; break;
             }
         }
 
@@ -155,6 +157,27 @@ namespace SzallodaManagerForm
         {
             base.ApplyElements(control);
             control.Add(Timepicker);
+        }
+    }
+
+    class MultipleRows : InputRow
+    {
+        ComboBox Selector;
+        Panel ItemPanel;
+
+        public MultipleRows(string basetext, string closedText, string openText, InputRow[] inputs, int baseState = 0) : base(basetext) {
+
+            //Comboboxtól függ hogy látszik-e a többi elem
+            Selector = new()
+            {
+                SelectedIndex = baseState,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Items =
+                {
+                    closedText,
+                    openText
+                }
+            };
         }
     }
 }

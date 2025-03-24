@@ -22,7 +22,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             btnEdit = new()
             {
-                Text = "Módosítás",
+                Text = "Kirugás",
                 Size = new((int)Math.Round(Size.Width * 0.24), (int)Math.Round(Size.Height * 0.6))
             };
             btnEdit.Click += OpenEditForm;
