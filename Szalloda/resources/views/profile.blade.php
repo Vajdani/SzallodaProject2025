@@ -71,16 +71,9 @@
                     @endif
                     <div class="ratingSection center" id="ratingSection">
                         <script src="{{ asset('js/reviews.js') }}"></script>
-                        @foreach ($reviews as $r)
-                            <script>
-                                renderRating(
-                                    "", "{{ $r->hotelName }}", "{{ $r->hotel_id }}", "{{ $r->rating }}",
-                                    "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}",
-                                    "{{ $r->user_id }}", "{{ $r->active == 1 }}", @auth "{{ Auth::user()->user_id }}" @else "" @endauth,
-                                    "{{ $r->review_id }}"
-                                )
-                            </script>
-                        @endforeach
+                        <script>
+                            RenderReviewSection(`{!! json_encode($reviews) !!}`, 2)
+                        </script>
                     </div>
                 </div>
             </div>

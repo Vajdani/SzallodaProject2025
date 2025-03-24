@@ -45,6 +45,7 @@
         justify-content: unset;
     }
 }
+
 .book-button {
     border-radius: 25px;
     width: 40%;
@@ -61,7 +62,7 @@ table {
     text-align: justify;
 }
 
-th + td {
+th+td {
     padding-left: 10px
 }
 
@@ -81,4 +82,8 @@ th + td {
 .roomsTable th {
     background-color: white;
     color: var(--colour_sidebar);
+}
+
+.mainContent section:nth-child(3) p {
+    text-align: unset;
 }

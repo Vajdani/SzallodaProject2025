@@ -6,7 +6,7 @@ const ratingSection = document.getElementById("ratingSection")
 let lastSzalloda = 0
 let varosChanged = false
 
-function renderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
+function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -36,7 +36,56 @@ function renderRating(username, hotelName, hotel_id, rating, created_at, review,
     ratingSection.appendChild(div)
 }
 
-function renderHotel(hotelName, hotelId) {
+function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
+    RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id)
+}
+
+function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id) {
+    RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id)
+}
+
+function RenderNone(noneText) {
+    const div = document.createElement("div")
+    div.innerHTML = `<div class="rating">`+ noneText + `</div>`
+    ratingSection.appendChild(div)
+}
+
+
+
+const reviewData = {
+    0: {
+        render: RenderRating,
+        noneText: "Egy olyan értékelés sincs, ami megfelel a szűrőnek!",
+    },
+    1: {
+        render: RenderHotelRating,
+        noneText: "Ehhez a szállodához még nem érkeztek értékelések!",
+    },
+    2: {
+        render: RenderUserRating,
+        noneText: "Ez a felhasználó még nem írt értékeléseket!",
+    }
+}
+
+function RenderReviewSection(reviews, reviewType) {
+    if (typeof(reviews) == "string") {
+        reviews = JSON.parse(reviews)
+    }
+
+    ratingSection.innerHTML = ""
+
+    let data = reviewData[reviewType]
+    if (reviews.length == 0) {
+        RenderNone(data.noneText)
+    }
+    else {
+        reviews.forEach(element => {
+            data.render(element.username, element.hotelName, element.hotel_id, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
+        });
+    }
+}
+
+function RenderHotelOption(hotelName, hotelId) {
     var option = document.createElement("option");
     option.text = hotelName;
     option.value = hotelId;
@@ -44,33 +93,7 @@ function renderHotel(hotelName, hotelId) {
     szalloda.appendChild(option);
 }
 
-function renderNone() {
-    const div = document.createElement("div")
-    div.innerHTML = `
-        <div class="rating">
-            Egy olyan értékelés sincs, ami megfelel a szűrőnek!
-        </div>
-    `
-    ratingSection.appendChild(div)
-}
-
-function RenderReviewSection(reviews) {
-    if (typeof(reviews) == "string") {
-        reviews = JSON.parse(reviews)
-    }
-
-    ratingSection.innerHTML = ""
-    if (reviews.length == 0) {
-        renderNone()
-    }
-    else {
-        reviews.forEach(element => {
-            renderRating(element.username, element.hotelName, element.hotel_id, element.rating, element.created_at, element.reviewText, element.profilePic, element.user_id, element.active == 1)
-        });
-    }
-}
-
-async function updateContents() {
+async function UpdateContents() {
     //"/ertekelesek/ertek/"+ csillagok.value +"/varos/"+ varos.value +"/szalloda/"+ szalloda.value
     lastSzalloda = szalloda.value
     await fetch("/ertekelesek/" + csillagok.value + "/" + varos.value + "/" + szalloda.value).then((response) => {
@@ -79,15 +102,15 @@ async function updateContents() {
         }
         return response.json();
     }).then((data) => {
-        RenderReviewSection(data.reviews)
+        RenderReviewSection(data.reviews, 0)
 
         szalloda.innerHTML = ""
 
-        renderHotel("Összes", 0)
+        RenderHotelOption("Összes", 0)
         let hotels = data.hotels
         if (hotels.length > 1) {
             hotels.forEach(element => {
-                renderHotel(element.hotelName, element.hotel_id)
+                RenderHotelOption(element.hotelName, element.hotel_id)
             });
         }
 
@@ -102,14 +125,15 @@ async function updateContents() {
 }
 
 if (csillagok != null) {
-    csillagok.onchange = updateContents
+    csillagok.onchange = UpdateContents
     varos.onchange = () => {
         varosChanged = true
         szalloda.value = 0
-        updateContents()
+        UpdateContents()
     }
-    szalloda.onchange = updateContents
+    szalloda.onchange = UpdateContents
 }
+
 
 
 function OpenReviewDeleteMenu(review_id) {
