@@ -6,11 +6,10 @@
 @endsection
 
 @section('content')
+    <nav>
+        <h1>Értékelés írása</h1>
+    </nav>
     <div class="mainContent">
-        <nav>
-            <h1>Értékelés írása</h1>
-
-        </nav>
         <section>
             <form action="/ertekeles" method="post" class="center">
                 @csrf

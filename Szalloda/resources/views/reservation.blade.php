@@ -7,10 +7,10 @@
 @endsection
 
 @section('content')
+    <nav>
+        <h1>Foglalás</h1>
+    </nav>
     <div class="mainContent">
-        <nav>
-            <h1>Foglalás</h1>
-        </nav>
         <section>
             <form action="/foglalas" method="post" class="center">
                 <div class="form">

@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
+    <nav>
+        <h1>Felhasználói fiók törlése</h1>
+    </nav>
     <div class="mainContent">
-        <nav>
-            <h1>Felhasználói fiók törlése</h1>
-        </nav>
         <section>
             <div class="center form">
                 <p>Biztos hogy meg szeretne válni a fiókjától?</p>

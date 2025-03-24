@@ -29,11 +29,13 @@ body {
     background-color: var(--colour_background);
     color: var(--colour_lightwhite);
 }
-.profile-picture{
+
+.profile-picture {
     height: 100px;
     width: 100px;
     border-radius: 50%;
 }
+
 main {
     display: flex;
     flex-direction: row;
@@ -41,11 +43,11 @@ main {
     /* min-height: 92vh; */
 }
 
-.white{
+.white {
     color: var(--colour_lightwhite);
 }
 
-section{
+section {
     padding: 10px;
 }
 
@@ -77,18 +79,18 @@ section{
     /* width: 400px; */
 }
 
-.sidebarHeader{
+.sidebarHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.sidebarHeader h2{
+.sidebarHeader h2 {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.toggleButtonCon{
+.toggleButtonCon {
     display: none;
     align-items: center;
     justify-content: center;
@@ -99,12 +101,12 @@ section{
     margin-bottom: 5px;
 }
 
-.toggleButtonCon p{
+.toggleButtonCon p {
     font-size: xx-large;
     font-weight: bold;
 }
 
-.toggleButtonCheckbox{
+.toggleButtonCheckbox {
     display: none;
     position: absolute;
 }
@@ -160,22 +162,22 @@ section{
 @media only screen and (max-width: 1200px) {
     main {
         flex-direction: column-reverse;
-        justify-content:unset;
+        justify-content: unset;
     }
 
     .sidebarLinks {
         padding-bottom: 0;
     }
 
-    .toggleButtonCon{
+    .toggleButtonCon {
         display: flex;
     }
 
-    .sidebarCollapsableContent{
+    .sidebarCollapsableContent {
         display: none;
     }
 
-    body:has(input[id="toggleButtonCheckbox"]:checked) .sidebarCollapsableContent{
+    body:has(input[id="toggleButtonCheckbox"]:checked) .sidebarCollapsableContent {
         display: block !important;
     }
 

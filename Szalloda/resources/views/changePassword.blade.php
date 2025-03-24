@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
+    <nav>
+        <h1>Jelszó módosítása</h1>
+    </nav>
     <div class="mainContent">
-        <nav>
-            <h1>Jelszó módosítása</h1>
-        </nav>
         <section>
             <form action="/jelszovaltoztatas" method="post" class="center">
                 @csrf
