@@ -204,7 +204,7 @@ CREATE TABLE `reviews` (
   `rating` tinyint(4) NOT NULL,
   `reviewText` text DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `active` tinyint(1) NOT NULL
+  `active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -212,14 +212,14 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`, `active`) VALUES
-(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 0),
-(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 0),
-(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 0),
-(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18', 0),
-(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 0),
-(7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 0),
-(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 0),
-(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 0);
+(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 1),
+(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 1),
+(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 1),
+(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18', 1),
+(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 1),
+(7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 1),
+(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 1),
+(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 1);
 
 -- --------------------------------------------------------
 
