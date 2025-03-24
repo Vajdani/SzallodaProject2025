@@ -60,7 +60,7 @@ class UserController extends Controller
         return view("profile", [
             "user" => User::find($id),
             "reviews" => Review::fromQuery("
-                select r.rating, r.created_at, r.reviewText, h.hotelName, h.hotel_id, u.username, u.profilePic, u.user_id, u.active
+                select r.rating, r.created_at, r.reviewText, h.hotelName, h.hotel_id, u.username, u.profilePic, u.user_id, u.active, r.review_id
                 from reviews r
                 inner join user u on u.user_id = r.user_id
                 inner join hotel h on r.hotel_id = h.hotel_id
@@ -265,5 +265,13 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect("/");
+    }
+
+    public function deleteReview($id) {
+        $review = Review::find($id);
+        $review->active = 0;
+        $review->Save();
+
+        return back();
     }
 }

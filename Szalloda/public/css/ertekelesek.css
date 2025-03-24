@@ -103,6 +103,8 @@ select {
 }
 
 .ratingData {
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -110,7 +112,7 @@ select {
     border-radius: 15px;
     height: 30px;
     min-width: 15%;
-    background-color: var(--colour_randomgreen3);
+    background-color: var(--colour_randomgreen6);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
@@ -118,7 +120,7 @@ select {
 }
 
 .review-button:hover {
-    background-color: var(--colour_randomgreen6);
+    background-color: var(--colour_randomgreen3);
 }
 
 .filterSeparater {
@@ -130,4 +132,45 @@ select {
     .filterSeparater {
         display: block;
     }
+}
+
+.deleteRating {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.deleteRating a i {
+    color: white;
+    margin: 5px 0 0 0;
+}
+
+.reviewDeleteMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button {
+    border-radius: 15px;
+    height: 30px;
+    min-width: 25%;
+    background-color: var(--colour_delete);
+    color: var(--colour_lightwhite);
+    box-shadow: none;
+    border: 2px solid black;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+}
+
+.delete-button:hover {
+    background-color: var(--colour_error_intense);
 }

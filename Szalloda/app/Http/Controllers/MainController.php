@@ -35,13 +35,14 @@ class MainController extends Controller
             "rooms" => Room::where("hotel_id", $id)->get(),
             "city" => City::find($hotel->city_id),
             "reviews" => Review::fromQuery("
-                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active
+                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active, reviews.review_id
                 from reviews, hotel, user
                 where
                     reviews.hotel_id = hotel.hotel_id and
                     reviews.user_id = user.user_id and
                     hotel.hotel_id = $id and
                     reviews.active = 1
+                order by reviews.created_at
                 "),
             "services" => Service::fromQuery("
                 select servicecategory.serviceName, service.price, service.available, service.allYear, service.startDate, service.endDate, service.openTime, service.closeTime
@@ -141,12 +142,13 @@ class MainController extends Controller
     public function reviews() {
         return view("reviews",[
             "reviews" => Review::fromQuery("
-                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active
+                select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active, reviews.review_id
                 from reviews, hotel, user
                 where
                     reviews.hotel_id = hotel.hotel_id and
                     reviews.user_id = user.user_id and
                     reviews.active = 1
+                order by reviews.created_at
             "),
             "cities" => City::all(),
             "hotels" => Hotel::all()
@@ -155,12 +157,13 @@ class MainController extends Controller
 
     public function reviewsFilter($stars, $city, $hotel) {
         $reviewQuery = "
-            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.active
+            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.active, reviews.review_id
             from reviews, hotel, user
             where
                 reviews.hotel_id = hotel.hotel_id and
                 reviews.user_id = user.user_id and
                 reviews.active = 1
+            order by reviews.created_at
             ";
 
         if ($stars <= 5 && $stars >= 1) { $reviewQuery .= " and reviews.rating = $stars"; }

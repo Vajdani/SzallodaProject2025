@@ -29,6 +29,7 @@ Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::post('/jelszovaltoztatas', [UserController::class, "changePasswordPost"]);
     Route::get('/fioktorles', [UserController::class, "deleteAccount"]);
     Route::post('/fioktorles/megerositem', [UserController::class, "deleteAccountConfirm"]);
+    Route::get('/ertekelestorles/{id}', [UserController::class, "deleteReview"]);
 });
 
 Route::group(['middleware' => [IsntLoggedIn::class]], function () {

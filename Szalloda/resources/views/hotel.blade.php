@@ -129,11 +129,18 @@
                 @foreach ($reviews as $r)
                     @if ($r->active == 1)
                         <script>
-                            renderRating("{{ $r->username }}", "", "", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}", @auth "{{ Auth::user()->user_id }}" @endauth)
+                            renderRating(
+                                "{{ $r->username }}", "", "", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}",
+                                "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}", @auth "{{ Auth::user()->user_id }}" @else "" @endauth,
+                                "{{ $r->review_id }}"
+                            )
                         </script>
                     @else
                         <script>
-                            renderRating("Törölt fiók", "", "", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}", "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}")
+                            renderRating(
+                                "Törölt fiók", "", "", "{{ $r->rating }}", "{{ $r->created_at }}", "{{ $r->reviewText }}",
+                                "{{ $r->profilePic }}", "{{ $r->user_id }}", "{{ $r->active == 1 }}", "", "{{ $r->review_id }}"
+                            )
                         </script>
                     @endif
                 @endforeach
