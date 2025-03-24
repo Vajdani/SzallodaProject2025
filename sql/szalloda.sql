@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 21. 11:16
+-- Létrehozás ideje: 2025. Már 24. 08:25
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -105,7 +105,14 @@ INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
 (4, 10, 'owner'),
 (5, 10, 'owner'),
 (6, 10, 'owner'),
-(7, 10, 'owner');
+(7, 10, 'owner'),
+(1, 11, 'employee'),
+(2, 12, 'employee'),
+(3, 13, 'employee'),
+(4, 14, 'employee'),
+(5, 15, 'employee'),
+(6, 16, 'employee'),
+(7, 17, 'employee');
 
 -- --------------------------------------------------------
 
@@ -459,7 +466,14 @@ INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`,
 (4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 0, 1),
 (5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-03-05 16:53:08', 1, 0),
 (9, 'horvathAti', 'Dr.', 'Horváth Attila', '1980-04-01', '+36307672240', 'horvath.attila@verebelyszki.hu', '$2y$12$aZDS/wu./xR5FRm9.OC52uYh8AMN4ANxPG4WK72SwSiv0E.1kzZPO', '2025-03-17 11:05:58', '2025-03-17 11:13:15', 1, 1),
-(10, 'Boss', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 0);
+(10, 'Boss', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 0),
+(11, '1_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111111', 'some@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(12, '2_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111112', 'some@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(13, '3_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111113', 'some@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(14, '4_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111114', 'some@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(15, '5_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111115', 'some@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(16, '6_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111116', 'some@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(17, '7_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111117', 'some@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -620,7 +634,7 @@ ALTER TABLE `servicecategory`
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Megkötések a kiírt táblákhoz
