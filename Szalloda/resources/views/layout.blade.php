@@ -4,10 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset("css/carousel.css") }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/26a3e6423d.js"crossorigin="anonymous"></script>
+    <script>
+        setTimeout(() => {
+            let popup = document.getElementById('popup')
+            if (popup) {
+                popup.remove()
+            }
+        }, (5000));
+    </script>
+    <link rel="stylesheet" href="{{ asset("css/carousel.css") }}">
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     @yield("css")
     <title>RushWave Retreat</title>
@@ -23,15 +31,6 @@
                         <button onclick="document.getElementById('popup').remove()">X</button>
                     </div>
                 </div>
-
-                <script>
-                    setTimeout(() => {
-                        let popup = document.getElementById('popup')
-                        if (popup) {
-                            popup.remove()
-                        }
-                    }, (5000));
-                </script>
             @endif
 
             @yield("content")
@@ -67,8 +66,8 @@
             <hr>
             <ul class="sidebarContacts">
                 <li>Elérhetőségeink</li>
-                <i class="fa-solid fa-phone"></i><li>Tel: <a href="tel:+36203568954">06 20 356 8954</a></li>
-                <i class="fa-regular fa-envelope"></i><li>E-mail: <a href="mailto:RushWaveRetreat@hotelchain.hu">valaki@pelda.hu</a></li>
+                <li><i class="fa-solid fa-phone"></i> : <a href="tel:+36203568954">06 20 356 8954</a></li>
+                <li><i class="fa-regular fa-envelope"></i>: <a href="mailto:RushWaveRetreat@hotelchain.hu">valaki@pelda.hu</a></li>
                 <li>Közösségi médiáink:</li>
                 <a target="_blank" href="https://facebook.com/RushWave_Retreat" class="white"><i class="fa-brands fa-facebook"></i></a>
                 <a target="_blank" href="https://reddit.com/RushWave_Retreat" class="white"><i class="fa-brands fa-reddit-alien"></i></a>
