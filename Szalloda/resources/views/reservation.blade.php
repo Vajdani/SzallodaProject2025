@@ -26,6 +26,9 @@
                         @endforeach
                     </select> --}}
                     <div>
+                        @error('ellatas')
+                        <p class="error">{{ $message }}</p>
+                        @enderror
                         <input type="radio" name="ellatas" id="service_0">
                         <label for="service_0">Nem kérek ellátást</label>
                         @foreach ($services as $s)
@@ -34,20 +37,18 @@
                             <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
                             @else
                             <div>
-                                <input type="checkbox" name="service_{{$s->service_id}}" id="service_{{$s->service_id}}">
+                                <input type="checkbox" name="services[]" value="{{$s->price}}|{{$s->service_id}}" id="service_{{$s->service_id}}">
                                 <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
                             </div>
                             @endif
                         @endforeach
-                        @error('ellatas')
-                        <p class="error">{{ $message }}</p>
-                        @enderror
+
                     </div>
 
                     <label for="rooms">Szoba:</label>
                     <select name="rooms" id="rooms">
                         @foreach ($room as $r)
-                            <option value="{{$r->room_id}}">{{$r->roomNumber}}</option>
+                            <option value="{{$r->room_id}}|{{$r->pricepernight}}">{{$r->roomNumber}}</option>
                         @endforeach
                     </select>
                     <p>Dátum</p>

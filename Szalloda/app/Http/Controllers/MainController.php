@@ -7,7 +7,11 @@ use App\Models\City;
 use App\Models\Hotel;
 use App\Models\Room;
 use App\Models\Service;
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -137,6 +141,36 @@ class MainController extends Controller
             'endDate.after' => 'A kezdő dátum nem lehet korábban mint a végdátum!',
             'ellatas.required' => 'válasszon ellátást!'
         ]);
+
+        $start= \Carbon\Carbon::parse($req->input('startDate'));
+        $end = \Carbon\Carbon::parse($req->input('endDate'));
+        $days = $start->diffInDays($end, false);
+
+        $tomb = explode('|', $req->rooms);
+        $room=$tomb[0];
+        $price=$tomb[1];
+        dd($req->services);
+        $service=explode('|',$req->services);
+        $price = $price * $days;
+        //dd($price);
+
+        foreach($req->services as $s){
+            $price = $price + $s;
+        }
+
+
+        $data = new booking;
+        $data->user_id = Auth::user()->user_id;
+        $data->room_id = $room;
+        $data->bookStart = $req->startDate;
+        $data->bookEnd = $req->endDate;
+        $data->status = "confirmed";
+        $data->totalPrice = $price;
+
+
+
+
+
     }
 
     public function reviews() {
