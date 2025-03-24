@@ -6,7 +6,7 @@ const ratingSection = document.getElementById("ratingSection")
 let lastSzalloda = 0
 let varosChanged = false
 
-function renderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive) {
+function renderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active) {
     const starT = "<span class='starTicked'>★</span>"
     const starU = "<span class='starUnTicked'>★</span>"
 
@@ -17,11 +17,15 @@ function renderRating(username, hotelName, hotel_id, rating, created_at, review,
                 <a href="/profil/` + user_id + `"><img src="/img/pfp/` + (userActive ? pfp : 0) + `.png" alt="profilkep" title="Profilkép" class="img-fluid profile-picture"></a>
                 <p class="text-center">` + (userActive ? username : "Törölt fiók") + `</p>
             </div>
-            <div class="ratingData">
+            <div class="ratingData" style="display:flex;flex-direction:column">
                 <h3 style="text-wrap:auto"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
                 <p>` + starT.repeat(rating) + starU.repeat(5 - rating) + `</p>
                 <p>` + created_at + `</p>
                 <p style="text-wrap:auto;text-align:justify">` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
+                ` + (user_id_active == user_id ? `
+                <div style="height:100%;display:flex;align-items:flex-end;justify-content:flex-end">
+                    <a href="/"><i class="fa-solid fa-trash" style="color: white;margin:5px 0 0 0"></i></a>
+                </div>` : ``) + `
             </div>
         </div>
     `
