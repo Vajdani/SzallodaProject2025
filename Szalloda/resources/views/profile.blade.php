@@ -3,6 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/ertekelesek.css') }}">
+    <meta name="_token" content="{{ csrf_token() }}">
 
     <script src="{{ asset('js/profile.js') }}"></script>
 @endsection
@@ -78,24 +79,5 @@
                 </div>
             </div>
         </div>
-        <form action="/profil/pfp" method="post">
-            @csrf
-            <div class="ProfilePicture-Selection" id="pics" style="display: none">
-                <div class="PPS-head">
-                    <h2>Válasza ki a profilképét!</h2>
-                </div>
-                <hr>
-                <div class="PPS-body">
-                    @for ($i = 0; $i < 4; $i++)
-                        <img src="{{ asset('img/pfp/' . $i . '.png') }}" alt="{{ $i }}" class="profile-picture" onclick="pfpchange({{ $i }})">
-                    @endfor
-                </div>
-                <div class="PPS-buttons">
-                    <button class="save-button" onclick="pfpmenu()">Mégse</button>
-                    <button class="save-button" type="submit">Profilkép beállítása</button>
-                    <input type="text" name="pfp" id="pfp" style="display: none">
-                </div>
-            </div>
-        </form>
     </div>
 @endsection
