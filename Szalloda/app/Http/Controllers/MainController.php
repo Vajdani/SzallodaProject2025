@@ -40,7 +40,8 @@ class MainController extends Controller
                 where
                     reviews.hotel_id = hotel.hotel_id and
                     reviews.user_id = user.user_id and
-                    hotel.hotel_id = $id
+                    hotel.hotel_id = $id and
+                    reviews.active = 1
                 "),
             "services" => Service::fromQuery("
                 select servicecategory.serviceName, service.price, service.available, service.allYear, service.startDate, service.endDate, service.openTime, service.closeTime
@@ -64,7 +65,9 @@ class MainController extends Controller
             "hotels" => Hotel::fromQuery("
                 select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating, count(reviews.rating) as ratingCount, hotel.description
                 from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
-                where hotel.city_id = $id
+                where
+                    hotel.city_id = $id and
+                    reviews.active = 1
                 group by hotel.hotel_id;
             "),
             "description" => $desc
@@ -115,8 +118,9 @@ class MainController extends Controller
                 from reviews, hotel, user
                 where
                     reviews.hotel_id = hotel.hotel_id and
-                    reviews.user_id = user.user_id"
-            ),
+                    reviews.user_id = user.user_id and
+                    reviews.active = 1
+            "),
             "cities" => City::all(),
             "hotels" => Hotel::all()
         ]);
@@ -128,7 +132,9 @@ class MainController extends Controller
             from reviews, hotel, user
             where
                 reviews.hotel_id = hotel.hotel_id and
-                reviews.user_id = user.user_id";
+                reviews.user_id = user.user_id and
+                reviews.active = 1
+            ";
 
         if ($stars <= 5 && $stars >= 1) { $reviewQuery .= " and reviews.rating = $stars"; }
         if ($city != 0 && City::find($city) != null) { $reviewQuery .= " and hotel.city_id = $city"; }

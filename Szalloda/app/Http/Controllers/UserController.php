@@ -64,7 +64,9 @@ class UserController extends Controller
                 from reviews r
                 inner join user u on u.user_id = r.user_id
                 inner join hotel h on r.hotel_id = h.hotel_id
-                where u.user_id like $id
+                where
+                    u.user_id like $id and
+                    r.active = 1
             ")
         ]);
     }
@@ -250,8 +252,13 @@ class UserController extends Controller
         return view("deleteAccount");
     }
 
-    public function deleteAccountConfirm() {
-        $user = User::find(Auth::user()->user_id);
+    public function deleteAccountConfirm(Request $request) {
+        $user_id = Auth::user()->user_id;
+        if ($request->deleteReviews) {
+            Review::fromQuery("update reviews set active = 0 where user_id = ".$user_id);
+        }
+
+        $user = User::find($user_id);
         $user->active = false;
         $user->Save();
 

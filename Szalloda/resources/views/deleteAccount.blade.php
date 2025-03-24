@@ -12,7 +12,15 @@
         <section>
             <div class="center form">
                 <p>Biztos hogy meg szeretne válni a fiókjától?</p>
-                <a href="/fioktorles/megerositem"><button class="save-button">Igen, törlöm a fiókom</button></a>
+
+                <form action="/fioktorles/megerositem" method="POST">
+                    @csrf
+                    <input type="checkbox" name="deleteReviews" id="deleteReviews">
+                    <label for="deleteReviews">Törlöm az értékeléseimet is</label>
+
+                    <input type="submit" class="save-button" value="Igen, törlöm a fiókom">
+                </form>
+
                 <a href="/profil"><button class="delete-button">Nem, mégsem törlöm a fiókom</button></a>
             </div>
         </section>
