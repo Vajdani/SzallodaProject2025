@@ -62,6 +62,9 @@ class MainController extends Controller
     }
 
     public function city($id) {
+        if (city::find($id) == null) {
+            return redirect("/");
+        }
         $desc = City::find($id)->description;
         $desc = explode('{break}', $desc);
 
@@ -100,7 +103,7 @@ class MainController extends Controller
     public function reservationById($id) {
         $hotel = Hotel::find($id);
         if ($hotel == null) {
-            return redirect("/foglalas");
+            return redirect("/");
         }
         $service = Service::fromQuery("
             select s.service_id, sc.serviceName, s.price,s.available,s.allYear,s.startDate,s.endDate,s.openTime,s.closeTime,s.category_id
@@ -110,7 +113,7 @@ class MainController extends Controller
             where h.hotel_id = $id;
         ");
         $start = "2025-03-15";
-        $end = "2025-03-16";
+        $end = "2025-03-16";    
         $rooms = Room::fromQuery("
                 select * from room r
                 inner join hotel h on r.hotel_id = h.hotel_id
@@ -149,15 +152,25 @@ class MainController extends Controller
         $tomb = explode('|', $req->rooms);
         $room=$tomb[0];
         $price=$tomb[1];
-        dd($req->services);
-        $service=explode('|',$req->services);
         $price = $price * $days;
-        //dd($price);
+    
+        $tomb=explode('|',$req->ellatas);
+        $service_id = $tomb[0];
+        $price = $price + ($tomb[1]*$days);
 
-        foreach($req->services as $s){
-            $price = $price + $s;
+        $service_string = $service_id."-";
+        if($req->services==null){
+
         }
-
+        else{
+            foreach($req->services as $s){
+                $price = $price + service::find($s)->price;
+                $service_string = $service_string . $s;
+                $service_string = $service_string . "-";
+            }
+        }   
+        $service_string = substr($service_string,0,-1);  
+        
 
         $data = new booking;
         $data->user_id = Auth::user()->user_id;
@@ -166,6 +179,9 @@ class MainController extends Controller
         $data->bookEnd = $req->endDate;
         $data->status = "confirmed";
         $data->totalPrice = $price;
+        $data->services = $service_string;
+        dd($data);
+        $data->save();
 
 
 

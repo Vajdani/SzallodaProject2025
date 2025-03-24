@@ -12,9 +12,6 @@ Route::get('/ertekelesek/{csillagok}/{varos}/{hotel}', [MainController::class, "
 Route::get('/szalloda/veletlenszeru', [MainController::class, "randomHotel"]);
 Route::get('/szalloda/{id}', [MainController::class, "hotel"]);
 Route::get('/telepules/{id}', [MainController::class, "city"]);
-Route::get('/foglalas', [MainController::class, "reservation"]);
-Route::get('/foglalas/{id}', [MainController::class, "reservationById"]);
-Route::post('/foglalas', [MainController::class, "reservationPost"]);
 Route::get('/profil/{id}', [UserController::class, "profileByID"]);
 
 Route::group(['middleware' => [IsLoggedIn::class]], function () {
@@ -30,6 +27,9 @@ Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::get('/fioktorles', [UserController::class, "deleteAccount"]);
     Route::post('/fioktorles/megerositem', [UserController::class, "deleteAccountConfirm"]);
     Route::get('/ertekelestorles/{id}', [UserController::class, "deleteReview"]);
+    Route::get('/foglalas', [MainController::class, "reservation"]);
+    Route::get('/foglalas/{id}', [MainController::class, "reservationById"]);
+    Route::post('/foglalas', [MainController::class, "reservationPost"]);
 });
 
 Route::group(['middleware' => [IsntLoggedIn::class]], function () {

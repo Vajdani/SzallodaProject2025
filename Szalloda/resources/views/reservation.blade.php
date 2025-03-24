@@ -29,15 +29,15 @@
                         @error('ellatas')
                         <p class="error">{{ $message }}</p>
                         @enderror
-                        <input type="radio" name="ellatas" id="service_0">
+                        <input type="radio" name="ellatas" id="service_0" value="0|0">
                         <label for="service_0">Nem kérek ellátást</label>
                         @foreach ($services as $s)
                             @if ($s->category_id<3)
-                            <input type="radio" name="ellatas" id="service_{{$s->service_id}}">
+                            <input type="radio" name="ellatas" id="service_{{$s->service_id}}" value="{{$s->service_id}}|{{$s->price}}">
                             <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
                             @else
                             <div>
-                                <input type="checkbox" name="services[]" value="{{$s->price}}|{{$s->service_id}}" id="service_{{$s->service_id}}">
+                                <input type="checkbox" name="services[]" value="{{$s->service_id}}" id="service_{{$s->service_id}}">
                                 <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
                             </div>
                             @endif
@@ -53,9 +53,9 @@
                     </select>
                     <p>Dátum</p>
                     <div style="display:flex;justify-content:space-between">
-                        <input type="date" id="startDate" style="display: inline" name="startDate">
+                        <input type="date" id="startDate" style="display: inline" name="startDate" value="{{old('startDate')}}">
                         <p class="inline">—</p>
-                        <input type="date" id="endDate" style="display: inline" name="endDate">
+                        <input type="date" id="endDate" style="display: inline" name="endDate" value="{{old('endDate')}}">
                     </div>
                     @error('startDate')
                     <p class="error">{{ $message }}</p>

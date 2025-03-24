@@ -116,9 +116,12 @@
                 <hr>
             </div>
             -->
-            <div class="text-center">
-            <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button " type="submit">Foglalok!</button></a>
-            </div>
+            @auth
+                <div class="text-center">
+                    <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button " type="submit">Foglalok!</button></a>
+                </div>
+            @endauth
+
         </section>
         <section>
             <h2>Értékelések @auth
