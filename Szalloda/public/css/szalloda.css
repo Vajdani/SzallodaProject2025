@@ -58,6 +58,10 @@
     color: white;
 }
 
+.book-button:hover {
+    background-color: var(--colour_sidebar);
+}
+
 table {
     text-align: justify;
 }

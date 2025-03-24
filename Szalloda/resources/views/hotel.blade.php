@@ -118,13 +118,12 @@
             -->
             @auth
                 <div class="text-center">
-                    <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button " type="submit">Foglalok!</button></a>
+                    <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button" type="submit">Foglalok!</button></a>
                 </div>
             @endauth
-
         </section>
         <section>
-            <h2>Értékelések 
+            <h2>Értékelések
             @auth
                 - <a href="/ertekeles/{{$hotel->hotel_id}}"><button class="review-button">Új értékelés írása</button></a>
             @endauth</h2>

@@ -148,7 +148,7 @@ select {
     margin: 5px 0 0 0;
 }
 
-.reviewDeleteMenu {
+.menuBgOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -177,6 +177,41 @@ select {
     background-color: var(--colour_error_intense);
 }
 
+.fa-trash {
+    color: var(--colour_lightwhite);
+    font-size: 163%;
+}
+
 .fa-trash:hover {
     color: var(--colour_randomgreen1);
+}
+
+.openFullReview {
+    color: var(--colour_lightwhite);
+    font-size: 120%;
+}
+
+.openFullReview i:nth-child(1) {
+    display: inline;
+}
+
+.openFullReview:hover i:nth-child(1) {
+    display: none;
+}
+
+.openFullReview i:nth-child(2) {
+    display: none;
+}
+
+.openFullReview:hover i:nth-child(2) {
+    display: inline;
+    color: var(--colour_randomgreen1);
+}
+
+.menuPanel {
+    background-color: var(--colour_randomgreen2);
+    border-radius: 25px;
+    padding: 25px;
+    max-width: 500px;
+    height: max-content;
 }

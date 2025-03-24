@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/ertekelesek.css') }}">
+    <script src="https://kit.fontawesome.com/26a3e6423d.js"crossorigin="anonymous"></script>
 @endsection
 
 @section('content')

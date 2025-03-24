@@ -6,10 +6,11 @@ const ratingSection = document.getElementById("ratingSection")
 const MAXVISIBLEREVIEWLENGTH = 250
 const MAXFULLREVIEWLENGTH = 1000
 
-let LASTHOTELID = 0
-let CITYCHANGED = false
-let RATINGS = {}
-let ACTIVEUSERID
+let lastHotelId = 0
+let cityChanged = false
+let ratings = {}
+let activeUserId
+let reviewType
 
 function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
     const reviewIsNull = (review == "" || review == "null" || review == null)
@@ -19,8 +20,12 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
     const finalReviewText = (reviewIsNull ? "" : (review.length > maxReviewLength ? review.substring(0, maxReviewLength) + "..." : review))
     const footer = `
         <div class="reviewFooter" id="reviewFooter_` + review_id + `">
-            ` + (!reviewIsNull && review.length > 250 ? `<button onclick="OpenFullReview(` + review_id + `)">Értékelés kinagyítása</button>` : "") + `
-            ` + (user_id_active == user_id ? `<button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash white"></i></button>` : ``) + `
+            ` + (!reviewIsNull && review.length > 250 ? `
+                <div class="openFullReview" title="Teljes értékelés">
+                    <i class="fa-solid fa-book"></i>
+                    <i class="fa-solid fa-book-open" onclick="OpenFullReview(` + review_id + `)"></i>
+                </div>` : "") + `
+            ` + (user_id_active == user_id ? `<button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash"></i></button>` : ``) + `
         </div>
     `
 
@@ -78,26 +83,27 @@ const reviewData = {
     }
 }
 
-function RenderReviewSection(reviews, reviewType, user_id_active) {
+function RenderReviewSection(reviews, review_type, user_id_active) {
     if (typeof(reviews) == "string") {
         reviews = JSON.parse(reviews)
     }
 
-    RATINGS = reviews;
-    ACTIVEUSERID = user_id_active
+    ratings = reviews
+    activeUserId = user_id_active
+    reviewType = review_type
 
     ratingSection.innerHTML = ""
 
     let data = reviewData[reviewType]
-    if (RATINGS.length == 0) {
+    if (ratings.length == 0) {
         RenderNone(data.noneText)
     }
     else {
-        RATINGS.forEach(element => {
+        ratings.forEach(element => {
             let rating = data.render(
                 element.username, element.hotelName, element.hotel_id, element.rating,
                 element.created_at, element.reviewText, element.profilePic, element.user_id,
-                element.active == 1, ACTIVEUSERID, element.review_id, MAXVISIBLEREVIEWLENGTH
+                element.active == 1, activeUserId, element.review_id, MAXVISIBLEREVIEWLENGTH
             )
 
             ratingSection.appendChild(rating)
@@ -115,7 +121,7 @@ function RenderHotelOption(hotelName, hotelId) {
 
 async function UpdateContents() {
     //"/ertekelesek/ertek/"+ csillagok.value +"/varos/"+ varos.value +"/szalloda/"+ szalloda.value
-    LASTHOTELID = szalloda.value
+    lastHotelId = szalloda.value
     await fetch("/ertekelesek/" + csillagok.value + "/" + varos.value + "/" + szalloda.value).then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -134,11 +140,11 @@ async function UpdateContents() {
             });
         }
 
-        if (!CITYCHANGED) {
-            szalloda.value = LASTHOTELID
+        if (!cityChanged) {
+            szalloda.value = lastHotelId
         }
 
-        CITYCHANGED = false
+        cityChanged = false
     }).catch((error) => {
         console.error('Fetch error:', error);
     })
@@ -147,7 +153,7 @@ async function UpdateContents() {
 if (csillagok != null) {
     csillagok.onchange = UpdateContents
     varos.onchange = () => {
-        CITYCHANGED = true
+        cityChanged = true
         szalloda.value = 0
         UpdateContents()
     }
@@ -161,11 +167,11 @@ function OpenReviewDeleteMenu(review_id) {
 
     let panel = document.createElement("div")
     panel.id = "reviewDeleteMenu"
-    panel.className = "reviewDeleteMenu"
+    panel.className = "menuBgOverlay"
     panel.onclick = CloseReviewDeleteMenu
 
     const form = document.createElement("div")
-    form.style = "background-color: var(--colour_randomgreen2);border-radius: 25px;padding: 25px;max-width: 500px;height: 30vh"
+    form.className = "menuPanel"
     form.innerHTML = `
         <h1>Biztos hogy törölni szeretné az értékelését?</h1>
 
@@ -181,10 +187,10 @@ function OpenReviewDeleteMenu(review_id) {
     document.getElementsByTagName("main")[0].appendChild(panel)
 
     let review = GetReviewById(review_id)
-    document.getElementById("reviewHolder").appendChild(RenderHotelRating(
+    document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
         review.username, review.hotelName, review.hotel_id, review.rating,
         review.created_at, review.reviewText, review.profilePic, review.user_id,
-        review.active == 1, ACTIVEUSERID, review.review_id, MAXVISIBLEREVIEWLENGTH, true
+        review.active == 1, activeUserId, review.review_id, MAXVISIBLEREVIEWLENGTH, true
     ))
 
 }
@@ -203,11 +209,11 @@ function OpenFullReview(review_id) {
 
     let panel = document.createElement("div")
     panel.id = "fullReviewMenu"
-    panel.className = "reviewDeleteMenu"
+    panel.className = "menuBgOverlay"
     panel.onclick = CloseFullReviewMenu
 
     const form = document.createElement("div")
-    form.style = "background-color: var(--colour_randomgreen2);border-radius: 25px;padding: 25px;max-width: 500px;height: content-max"
+    form.className = "menuPanel"
     form.innerHTML = `
         <div id="reviewHolder"></div>
 
@@ -218,10 +224,10 @@ function OpenFullReview(review_id) {
     document.getElementsByTagName("main")[0].appendChild(panel)
 
     let review = GetReviewById(review_id)
-    document.getElementById("reviewHolder").appendChild(RenderHotelRating(
+    document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
         review.username, review.hotelName, review.hotel_id, review.rating,
         review.created_at, review.reviewText, review.profilePic, review.user_id,
-        review.active == 1, ACTIVEUSERID, review.review_id, MAXFULLREVIEWLENGTH, true
+        review.active == 1, activeUserId, review.review_id, MAXFULLREVIEWLENGTH, true
     ))
 }
 
@@ -245,8 +251,8 @@ document.addEventListener("keydown", (e) => {
 
 function GetReviewById(review_id) {
     let i = 0;
-    while (i < RATINGS.length) {
-        const element = RATINGS[i];
+    while (i < ratings.length) {
+        const element = ratings[i];
         if (element.review_id == review_id) {
             return element
         }
