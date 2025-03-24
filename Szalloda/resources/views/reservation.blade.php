@@ -26,12 +26,22 @@
                         @endforeach
                     </select> --}}
                     <div>
+                        <input type="radio" name="ellatas" id="service_0">
+                        <label for="service_0">Nem kérek ellátást</label>
                         @foreach ($services as $s)
+                            @if ($s->category_id<3)
+                            <input type="radio" name="ellatas" id="service_{{$s->service_id}}">
+                            <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
+                            @else
                             <div>
                                 <input type="checkbox" name="service_{{$s->service_id}}" id="service_{{$s->service_id}}">
                                 <label for="service_{{$s->service_id}}">{{$s->serviceName}}</label>
                             </div>
+                            @endif
                         @endforeach
+                        @error('ellatas')
+                        <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <label for="rooms">Szoba:</label>
@@ -42,10 +52,17 @@
                     </select>
                     <p>Dátum</p>
                     <div style="display:flex;justify-content:space-between">
-                        <input type="date" id="startDate" style="display: inline">
+                        <input type="date" id="startDate" style="display: inline" name="startDate">
                         <p class="inline">—</p>
-                        <input type="date" id="endDate" style="display: inline">
+                        <input type="date" id="endDate" style="display: inline" name="endDate">
                     </div>
+                    @error('startDate')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
+                    @error('endDate')
+                    <p class="error">{{ $message }}</p>
+                    @enderror
+
                     <br>
                     <br>
                     <p >Létszám: <span id="letszam"></span></p>

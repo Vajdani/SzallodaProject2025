@@ -44,7 +44,8 @@ namespace SzallodaManagerForm.ItemPanels
 
         void OpenEditForm(object? sender, EventArgs e)
         {
-            //Szolgáltatás adatok form, ha lesz
+            UpdateForm serviceUpdateForm = new UpdateForm();
+            serviceUpdateForm.ShowDialog();
         }
     }
 }

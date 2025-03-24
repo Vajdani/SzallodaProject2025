@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 24. 08:25
+-- Létrehozás ideje: 2025. Már 24. 10:21
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -52,11 +52,21 @@ CREATE TABLE `booking` (
   `booking_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `bookStart` datetime NOT NULL,
-  `bookEnd` datetime NOT NULL,
+  `bookStart` date NOT NULL,
+  `bookEnd` date NOT NULL,
   `totalPrice` int(11) NOT NULL,
-  `status` enum('confirmed','cancelled','completed') NOT NULL
+  `status` enum('confirmed','cancelled','completed') NOT NULL,
+  `services` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- A tábla adatainak kiíratása `booking`
+--
+
+INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd`, `totalPrice`, `status`, `services`) VALUES
+(1, 2, 4, '2025-03-12', '2025-03-15', 260000, 'confirmed', ''),
+(2, 3, 2, '2025-03-14', '2025-03-18', 80000, 'confirmed', ''),
+(3, 5, 7, '2025-03-08', '2025-03-13', 300000, 'confirmed', '');
 
 -- --------------------------------------------------------
 
@@ -193,22 +203,23 @@ CREATE TABLE `reviews` (
   `hotel_id` int(11) NOT NULL,
   `rating` tinyint(4) NOT NULL,
   `reviewText` text DEFAULT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `reviews`
 --
 
-INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`) VALUES
-(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52'),
-(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23'),
-(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04'),
-(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18'),
-(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33'),
-(7, 4, 3, 4, NULL, '2025-03-05 17:49:56'),
-(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08'),
-(9, 9, 4, 3, NULL, '2025-03-17 12:10:18');
+INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`, `active`) VALUES
+(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 0),
+(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 0),
+(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 0),
+(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18', 0),
+(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 0),
+(7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 0),
+(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 0),
+(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 0);
 
 -- --------------------------------------------------------
 
@@ -580,7 +591,7 @@ ALTER TABLE `billing`
 -- AUTO_INCREMENT a táblához `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT a táblához `city`
