@@ -26,6 +26,8 @@
                         @endforeach
                     </select> --}}
                     <div>
+                        <input type="radio" name="ellatas" id="service_0">
+                        <label for="service_0">Nem kérek ellátást</label>
                         @foreach ($services as $s)
                             @if ($s->category_id<3)
                             <input type="radio" name="ellatas" id="service_{{$s->service_id}}">
@@ -37,6 +39,9 @@
                             </div>
                             @endif
                         @endforeach
+                        @error('ellatas')
+                        <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <label for="rooms">Szoba:</label>
