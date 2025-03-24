@@ -10,7 +10,7 @@
     gap: 10px
 }
 
-.ratingSection:nth-last-child(1) {
+.ratingSection:has(> :last-child:nth-child(1)) {
     grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
