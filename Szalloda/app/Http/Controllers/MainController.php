@@ -180,13 +180,7 @@ class MainController extends Controller
         $data->status = "confirmed";
         $data->totalPrice = $price;
         $data->services = $service_string;
-        dd($data);
         $data->save();
-
-
-
-
-
     }
 
     public function reviews() {
