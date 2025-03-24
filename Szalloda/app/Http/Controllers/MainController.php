@@ -63,11 +63,23 @@ class MainController extends Controller
         return view("city", [
             "city" => City::find($id),
             "hotels" => Hotel::fromQuery("
-                select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, round(round(avg(reviews.rating)*2,0)/2,1) as rating, count(reviews.rating) as ratingCount, hotel.description
-                from hotel left join reviews on hotel.hotel_id = reviews.hotel_id
+                select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, (
+                    select round(round(avg(reviews.rating)*2,0)/2,1)
+                    from reviews
+                    where
+                        hotel.hotel_id = reviews.hotel_id and
+                        reviews.active = 1
+                    ) as rating, (
+                    select count(reviews.rating)
+                    from reviews
+                    where
+                        hotel.hotel_id = reviews.hotel_id and
+                        reviews.active = 1
+                    ) as ratingCount,
+                    hotel.description
+                from hotel
                 where
-                    hotel.city_id = $id and
-                    reviews.active = 1
+                    hotel.city_id = $id
                 group by hotel.hotel_id;
             "),
             "description" => $desc
