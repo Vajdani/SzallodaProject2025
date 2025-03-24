@@ -7,6 +7,7 @@
 @section('content')
     <div class="mainContent">
         <div class="filterBar">
+            <hr class="filterSeparater">
             <ul>
                 <li>Szűrés:</li>
                 <li>

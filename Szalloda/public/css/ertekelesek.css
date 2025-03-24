@@ -5,18 +5,35 @@
 .ratingSection {
     padding: 0 30px 25px 30px;
     width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px
 }
 
-.filterBar{
-    width: 100%;
+@media only screen and (max-width: 1400px) {
+    .ratingSection {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
-.filterBar:first-child {
+@media only screen and (max-width: 950px) {
+    .ratingSection {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+.filterBar ul {
     background-color: var(--colour_sidebar);
     font-size: 150%;
     padding: 20px;
     margin-bottom: 10px;
     text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .filterBar ul {
+        text-align: left;
+    }
 }
 
 .filterBar:first-child ul {
@@ -34,10 +51,12 @@
 .filterBar:first-child ul li select {
     font-size: 75%;
 }
-select{
+
+select {
     background-color: var(--colour_sidebar);
     color: var(--colour_lightwhite);
 }
+
 @media only screen and (max-width: 600px) {
     .filterBar:first-child ul li {
         display: block;
@@ -53,7 +72,7 @@ select{
 }
 
 .rating {
-    background-color:var(--colour_sidebar);
+    background-color: var(--colour_sidebar);
     border: 3px solid var(--colour_randomgreen1);
     padding: 10px;
     margin-top: 15px;
@@ -96,4 +115,15 @@ select{
 
 .review-button:hover {
     background-color: var(--colour_randomgreen6);
+}
+
+.filterSeparater {
+    display: none;
+    margin: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .filterSeparater {
+        display: block;
+    }
 }
