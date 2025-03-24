@@ -170,8 +170,6 @@ class MainController extends Controller
             }
         }   
         $service_string = substr($service_string,0,-1);  
-        
-
         $data = new booking;
         $data->user_id = Auth::user()->user_id;
         $data->room_id = $room;

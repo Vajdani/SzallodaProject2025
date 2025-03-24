@@ -124,7 +124,8 @@
 
         </section>
         <section>
-            <h2>Értékelések @auth
+            <h2>Értékelések 
+            @auth
                 - <a href="/ertekeles/{{$hotel->hotel_id}}"><button class="review-button">Új értékelés írása</button></a>
             @endauth</h2>
             <div class="ratingSection center" id="ratingSection">

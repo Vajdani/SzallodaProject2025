@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 24. 10:21
+-- Létrehozás ideje: 2025. Már 24. 15:38
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -66,7 +66,8 @@ CREATE TABLE `booking` (
 INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd`, `totalPrice`, `status`, `services`) VALUES
 (1, 2, 4, '2025-03-12', '2025-03-15', 260000, 'confirmed', ''),
 (2, 3, 2, '2025-03-14', '2025-03-18', 80000, 'confirmed', ''),
-(3, 5, 7, '2025-03-08', '2025-03-13', 300000, 'confirmed', '');
+(3, 5, 7, '2025-03-08', '2025-03-13', 300000, 'confirmed', ''),
+(4, 2, 5, '2025-08-13', '2025-08-16', 298500, 'confirmed', '1-3-4');
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,7 @@ CREATE TABLE `reviews` (
   `rating` tinyint(4) NOT NULL,
   `reviewText` text DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `active` tinyint(1) DEFAULT 1
+  `active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -219,7 +220,8 @@ INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText
 (6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 1),
 (7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 1),
 (8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 1),
-(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 1);
+(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 1),
+(10, 2, 1, 5, 'Fagyos', '2025-03-24 15:29:27', 1);
 
 -- --------------------------------------------------------
 
@@ -361,45 +363,45 @@ CREATE TABLE `service` (
 --
 
 INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `available`, `allYear`, `startDate`, `endDate`, `openTime`, `closeTime`) VALUES
-(1, 1, 1, 13500, 1, 1, NULL, NULL, NULL, NULL),
-(2, 1, 2, 20000, 1, 1, NULL, NULL, NULL, NULL),
+(1, 1, 1, 13500, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(2, 1, 2, 20000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (3, 1, 9, 8000, 1, 1, NULL, NULL, '07:00:00', '20:00:00'),
-(4, 1, 13, 10000, 1, 0, '0100-04-05', '0100-11-30', NULL, NULL),
+(4, 1, 13, 10000, 1, 0, '0100-04-05', '0100-11-30', '00:00:00', '00:00:00'),
 (5, 1, 14, 7500, 1, 1, NULL, NULL, '12:00:00', '00:00:00'),
 (6, 1, 15, 12500, 1, 0, '0100-12-05', '0100-04-10', '06:00:00', '18:00:00'),
 (7, 1, 17, 8000, 1, 1, NULL, NULL, '17:00:00', '19:00:00'),
-(8, 2, 1, 16000, 1, 1, NULL, NULL, NULL, NULL),
-(9, 2, 2, 24000, 1, 1, NULL, NULL, NULL, NULL),
-(10, 2, 3, 2500, 1, 1, NULL, NULL, NULL, NULL),
+(8, 2, 1, 16000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(9, 2, 2, 24000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(10, 2, 3, 2500, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (11, 2, 4, 7000, 1, 0, '0100-05-30', '0100-09-15', '07:30:00', '21:00:00'),
 (12, 2, 7, 4000, 1, 1, NULL, NULL, '07:30:00', '23:00:00'),
 (13, 2, 16, 8750, 1, 1, NULL, NULL, '18:00:00', '21:00:00'),
 (14, 2, 17, 10000, 1, 1, NULL, NULL, '14:00:00', '15:00:00'),
-(15, 3, 1, 15000, 1, 1, NULL, NULL, NULL, NULL),
-(16, 3, 2, 24750, 1, 1, NULL, NULL, NULL, NULL),
-(17, 3, 3, 4500, 1, 1, NULL, NULL, NULL, NULL),
-(18, 3, 4, 5000, 1, 1, NULL, NULL, NULL, NULL),
+(15, 3, 1, 15000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(16, 3, 2, 24750, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(17, 3, 3, 4500, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(18, 3, 4, 5000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (19, 3, 5, 4500, 1, 1, NULL, NULL, '10:00:00', '20:00:00'),
 (20, 3, 7, 4000, 1, 1, NULL, NULL, '06:00:00', '20:00:00'),
-(21, 3, 10, 8000, 1, 1, NULL, NULL, NULL, NULL),
+(21, 3, 10, 8000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (22, 3, 18, 17500, 1, 0, '0100-10-01', '0100-04-20', '14:00:00', '18:00:00'),
-(23, 4, 1, 20000, 1, 1, NULL, NULL, NULL, NULL),
-(24, 4, 2, 27500, 1, 1, NULL, NULL, NULL, NULL),
+(23, 4, 1, 20000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(24, 4, 2, 27500, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (25, 4, 19, 22000, 1, 1, NULL, NULL, '13:00:00', '16:00:00'),
 (26, 4, 20, 17500, 1, 0, '0100-03-12', '0100-10-24', '08:00:00', '19:00:00'),
-(27, 5, 1, 12000, 1, 1, NULL, NULL, NULL, NULL),
-(28, 5, 2, 19000, 1, 1, NULL, NULL, NULL, NULL),
+(27, 5, 1, 12000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(28, 5, 2, 19000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (29, 5, 5, 4000, 1, 1, NULL, NULL, '13:30:00', '20:00:00'),
 (30, 5, 6, 2500, 1, 1, NULL, NULL, '09:00:00', '21:30:00'),
 (31, 5, 21, 8500, 1, 1, NULL, NULL, '14:00:00', '15:00:00'),
-(32, 6, 1, 15000, 1, 1, NULL, NULL, NULL, NULL),
-(33, 6, 2, 25000, 1, 1, NULL, NULL, NULL, NULL),
+(32, 6, 1, 15000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(33, 6, 2, 25000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (34, 6, 6, 5000, 1, 1, NULL, NULL, '07:00:00', '21:00:00'),
 (35, 6, 8, 7500, 1, 1, NULL, NULL, '10:00:00', '20:00:00'),
 (36, 6, 9, 8000, 1, 1, NULL, NULL, '07:30:00', '20:00:00'),
-(37, 6, 11, 10000, 1, 1, NULL, NULL, NULL, NULL),
-(38, 7, 1, 12000, 1, 1, NULL, NULL, NULL, NULL),
-(39, 7, 2, 17500, 1, 1, NULL, NULL, NULL, NULL),
+(37, 6, 11, 10000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(38, 7, 1, 12000, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
+(39, 7, 2, 17500, 1, 1, NULL, NULL, '00:00:00', '00:00:00'),
 (40, 7, 4, 5000, 1, 0, '0100-04-14', '0100-09-15', '11:00:00', '20:00:00'),
 (41, 7, 5, 6000, 1, 1, NULL, NULL, '17:00:00', '01:00:00'),
 (42, 7, 22, 17500, 1, 1, NULL, NULL, '14:00:00', '16:00:00'),
@@ -421,8 +423,8 @@ CREATE TABLE `servicecategory` (
 --
 
 INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
-(1, 'Teljes ellátás'),
-(2, 'Félpanzió'),
+(1, 'Félpanzió'),
+(2, 'Teljes ellátás'),
 (3, 'Köntös igénylés'),
 (4, 'Medence'),
 (5, 'Bár hozzáférés'),
@@ -591,7 +593,7 @@ ALTER TABLE `billing`
 -- AUTO_INCREMENT a táblához `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `city`
@@ -621,7 +623,7 @@ ALTER TABLE `loyaltyrank`
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT a táblához `room`
