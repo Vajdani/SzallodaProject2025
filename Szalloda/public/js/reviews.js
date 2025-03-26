@@ -188,7 +188,7 @@ function OpenReviewDeleteMenu(review_id) {
     `
 
     panel.appendChild(form)
-    document.getElementsByTagName("main")[0].appendChild(panel)
+    document.body.appendChild(panel)
 
     let review = GetReviewById(review_id)
     document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
@@ -225,7 +225,7 @@ function OpenFullReview(review_id) {
     `
 
     panel.appendChild(form)
-    document.getElementsByTagName("main")[0].appendChild(panel)
+    document.body.appendChild(panel)
 
     let review = GetReviewById(review_id)
     document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(

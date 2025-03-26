@@ -22,7 +22,7 @@ function pfpmenu() {
                 <hr>
                 ` + pfps + `
                 <div class="PPS-buttons">
-                    <button class="save-button" onclick="pfpmenu()">Mégse</button>
+                    <button class="save-button" onclick="CloseMenu()">Mégse</button>
                     <button class="save-button" type="submit">Profilkép beállítása</button>
                     <input type="text" name="pfp" id="pfp" style="display: none">
                 </div>
@@ -31,7 +31,7 @@ function pfpmenu() {
     `
 
     panel.appendChild(form)
-    document.getElementsByTagName("main")[0].appendChild(panel)
+    document.body.appendChild(panel)
 }
 
 function pfpchange(szam) {
