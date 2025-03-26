@@ -5,7 +5,7 @@ function pfpmenu() {
     // panel.onclick = CloseMenu
 
     let pfps = `<div class="PPS-body">`
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 8; i++) {
         pfps += `<img src="img/pfp/` + i + `.png" alt="` + i + `" class="profile-picture" onclick="pfpchange(` + i + `)" />`
     }
     pfps += `</div>`
