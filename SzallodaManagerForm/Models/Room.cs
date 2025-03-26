@@ -20,5 +20,11 @@
             PricePerNight = db.GetInt("pricepernight");
             Reserved = db.GetInt("reserved") == 1;
         }
+
+        public void UpdateRoomData(int price, int IsOutOfOrder)
+        {
+            Database ab = new($"UPDATE room SET pricepernight = {price}, reserved = {IsOutOfOrder} WHERE room_id = {room_id};");
+            ab.Close();
+        }
     }
 }

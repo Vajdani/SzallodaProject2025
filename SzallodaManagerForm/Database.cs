@@ -15,7 +15,6 @@ namespace SzallodaManagerForm
         {
             conn = new MySqlConnection(server);
             conn.Open();
-
             cmd = new MySqlCommand(query, conn);
             reader = cmd.ExecuteReader();
         }

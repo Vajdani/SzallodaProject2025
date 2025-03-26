@@ -4,6 +4,8 @@ namespace SzallodaManagerForm.ItemPanels
 {
     internal class RoomPanel : ItemPanel
     {
+
+        public Room Room { get; set; }
         public Label RoomNumber { get; private set; }
         public ComboBox Availability { get; private set; }
         public TextBox Price { get; private set; }
@@ -12,6 +14,7 @@ namespace SzallodaManagerForm.ItemPanels
 
         public RoomPanel(Panel parent, Room room) : base(parent)
         {
+            Room = room;
             RoomNumber = new()
             {
                 Text = room.RoomNumber,
@@ -53,9 +56,11 @@ namespace SzallodaManagerForm.ItemPanels
 
         void SaveData(object? sender, EventArgs e)
         {
-            // Nem falfejelős tryparse price-ra
-
-            //Adatok feltöltése
+            if(int.TryParse(Price.Text, out var price))
+            {
+                Room.UpdateRoomData(Convert.ToInt32(Price.Text), Availability.SelectedIndex);
+                MessageBox.Show("A mentés sikeres volt!","Információ",MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
