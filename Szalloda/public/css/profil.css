@@ -133,9 +133,17 @@
     padding: 10px;
 }
 
-.PPS-body{
+.PPS-body {
     padding: 10px;
     box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .PPS-body {
+        grid-template-columns: auto auto;
+    }
 }
 
 .PPS-body img{

@@ -94,12 +94,6 @@ class MainController extends Controller
         ]);
     }
 
-    public function reservation() {
-        return view("reservation", [
-            "hotels" => Hotel::all()->select("hotel_id", "hotelName")
-        ]);
-    }
-
     public function reservationById($id) {
         $hotel = Hotel::find($id);
         if ($hotel == null) {
@@ -113,7 +107,7 @@ class MainController extends Controller
             where h.hotel_id = $id;
         ");
         $start = "2025-03-15";
-        $end = "2025-03-16";    
+        $end = "2025-03-16";
         $rooms = Room::fromQuery("
                 select * from room r
                 inner join hotel h on r.hotel_id = h.hotel_id
@@ -153,7 +147,7 @@ class MainController extends Controller
         $room=$tomb[0];
         $price=$tomb[1];
         $price = $price * $days;
-    
+
         $tomb=explode('|',$req->ellatas);
         $service_id = $tomb[0];
         $price = $price + ($tomb[1]*$days);
@@ -168,8 +162,8 @@ class MainController extends Controller
                 $service_string = $service_string . $s;
                 $service_string = $service_string . "-";
             }
-        }   
-        $service_string = substr($service_string,0,-1);  
+        }
+        $service_string = substr($service_string,0,-1);
         $data = new booking;
         $data->user_id = Auth::user()->user_id;
         $data->room_id = $room;
