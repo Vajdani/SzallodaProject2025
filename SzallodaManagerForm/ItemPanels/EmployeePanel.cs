@@ -39,7 +39,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             Controls.Add(lbUsername);
             Controls.Add(lbUserType);
-            Controls.Add(btnChangeLevel);
+            Controls.Add(btnChangeLevel); //Csak owner láthatja TODO
             Controls.Add(btnFire);
 
             AlignElementsHorizontally();
@@ -63,12 +63,6 @@ namespace SzallodaManagerForm.ItemPanels
             {
                 employee.FireEmployee();
             }
-        }
-
-        void ChangeButtonText()
-        {
-            if (btnChangeLevel.Text == "Előléptetés") btnChangeLevel.Text = "Lefokozás";
-            else btnChangeLevel.Text = "Előléptetés";
         }
     }
 }

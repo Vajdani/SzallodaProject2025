@@ -23,7 +23,9 @@
 
         public void UpdateRoomData(int price, int IsOutOfOrder)
         {
-            Database ab = new($"UPDATE room SET pricepernight = {price}, reserved = {IsOutOfOrder} WHERE room_id = {room_id};");
+            this.PricePerNight = price;
+            this.Reserved = IsOutOfOrder == 1;
+            Database ab = new($"UPDATE room SET pricepernight = {price}, available = {IsOutOfOrder} WHERE room_id = {room_id};");
             ab.Close();
         }
     }

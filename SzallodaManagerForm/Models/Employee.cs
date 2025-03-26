@@ -11,7 +11,7 @@ namespace SzallodaManagerForm.Models
 
         public Employee(Database DB)
         {
-            Id = DB.GetInt("user_id"); // ERRROOOOOOOOOOOOOOOOOOOOOOOOOOR!!!!!!!!!!!!!!!!!!!!!!!, kell a lekérdezésbe az a szar annyi
+            Id = DB.GetInt("user_id"); 
             username = DB.GetString("username");
             hotel_id = DB.GetInt("hotel_id");
             AuthorityLevel = User.GetAuthorityLevel(DB.GetString("userType"));
@@ -33,6 +33,8 @@ namespace SzallodaManagerForm.Models
             Database ab = new($"DELETE FROM employee WHERE user_id = {Id};");
             ab.Close();
             MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //ki kéne törölni a hotelje listájából
         }
     }
 }

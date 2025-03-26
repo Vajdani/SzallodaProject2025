@@ -52,6 +52,7 @@
                 $"where service.category_id = servicecategory.serviceCategory_id"
             ).GroupBy(s => s.hotel_id).ToDictionary(s => s.Key, s => s.ToList());
             
+            // Manager csak employeekat lásson TODO
             var employees = Database.ReadAll<Employee>(
                 "select user.user_id, user.username, employee.hotel_id, employee.userType " +
                 "from employee, user " +
