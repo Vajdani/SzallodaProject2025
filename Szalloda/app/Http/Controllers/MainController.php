@@ -115,7 +115,7 @@ class MainController extends Controller
         return view("reservation", [
             "hotel" => $hotel,
             "services" => $service,
-            "room" => $rooms
+            "rooms" => $rooms
         ]);
     }
 
@@ -135,14 +135,12 @@ class MainController extends Controller
         $end = \Carbon\Carbon::parse($req->input('endDate'));
         $days = $start->diffInDays($end, false);
 
-        $tomb = explode('|', $req->rooms);
-        $room=$tomb[0];
-        $price=$tomb[1];
+        $room = $req->room_id;
+        $price= Room::find($room)->pricepernight;
         $price = $price * $days;
 
-        $tomb=explode('|',$req->ellatas);
-        $service_id = $tomb[0];
-        $price = $price + ($tomb[1]*$days);
+        $service_id = $req->service_id;
+        $price = $price + (Service::find($service_id)->price * $days);
 
         $service_string = $service_id."-";
         if($req->services==null){

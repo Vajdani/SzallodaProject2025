@@ -5,7 +5,7 @@
 
     <script src="{{ asset('js/reserve.js') }}"></script>
     <script>
-        InitRooms(`{!! json_encode($room) !!}`)
+        InitData(`{!! json_encode($rooms) !!}`, `{!! json_encode($services) !!}`)
     </script>
 @endsection
 
@@ -29,27 +29,27 @@
                         @endforeach
                     </select> --}}
                     <div>
-                        @error('ellatas')
+                        @error('service_id')
                             <p class="error">{{ $message }}</p>
                         @enderror
-                        <input type="radio" name="ellatas" id="service_0" value="0|0">
+                        <input type="radio" name="service_id" id="service_0" value="0|0">
                         <label for="service_0">Nem kérek ellátást</label>
                         @foreach ($services as $s)
                             @if ($s->category_id < 3)
-                                <input type="radio" name="ellatas" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}">
+                                <input type="radio" name="service_id" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
                                 <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
                             @else
                                 <div>
-                                    <input type="checkbox" name="services[]" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}">
+                                    <input type="checkbox" name="services[]" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
                                     <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
                                 </div>
                             @endif
                         @endforeach
                     </div>
 
-                    <label for="rooms">Szoba:</label>
-                    <select name="rooms" id="rooms" onchange="RoomSelected()">
-                        @foreach ($room as $r)
+                    <label for="room_id">Szoba:</label>
+                    <select name="room_id" id="room_id" onchange="RoomSelected()">
+                        @foreach ($rooms as $r)
                             <option value="{{ $r->room_id }}">{{ $r->roomNumber }}</option>
                         @endforeach
                     </select>

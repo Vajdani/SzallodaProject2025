@@ -1,17 +1,10 @@
-let selectedRoomId = 0
+let selectedRoomId = 1
 let rooms = {}
+let services = {}
 
-function InitRooms(roomsJson) {
+function InitData(roomsJson, servicesJson) {
     rooms = JSON.parse(roomsJson)
-    console.log(rooms)
-}
-
-function price(price){
-
-
-
-    console.log(price)
-    console.log("aslfkskfdk")
+    services = JSON.parse(servicesJson)
 }
 
 async function DateChanged() {
@@ -33,7 +26,7 @@ async function DateChanged() {
     }).then((data) => {
         rooms = data
 
-        let roomSelect = document.getElementById("rooms")
+        let roomSelect = document.getElementById("room_id")
         roomSelect.innerHTML = ""
         data.forEach(element => {
             let option = document.createElement("option")
@@ -51,7 +44,12 @@ async function DateChanged() {
 
 function RoomSelected() {
     selectedRoomId = document.getElementById("rooms").value
+    console.log(selectedRoomId)
 
+    CalculatePrice()
+}
+
+function ServiceSelected() {
     CalculatePrice()
 }
 
@@ -64,10 +62,14 @@ function CalculatePrice() {
         console.log(stayDuration)
     }
 
-    let room = GetRoomyId(selectedRoomId)
-    console.log(room)
-    document.getElementById("osszeg").innerText = room.pricepernight * stayDuration
-    console.log(start, end, selectedRoomId)
+    let finalPrice = GetRoomyId(selectedRoomId).pricepernight * stayDuration
+    services.forEach(element => {
+        if (document.getElementById("service_" + element.service_id).checked) {
+            finalPrice += element.price
+        }
+    })
+
+    document.getElementById("osszeg").innerText = finalPrice
 }
 
 
