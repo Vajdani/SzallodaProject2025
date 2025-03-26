@@ -18,7 +18,7 @@
             Floor = db.GetInt("floor");
             Capacity = db.GetInt("capacity");
             PricePerNight = db.GetInt("pricepernight");
-            Reserved = db.GetInt("reserved") == 1;
+            Reserved = db.GetInt("available") == 1;
         }
 
         public void UpdateRoomData(int price, int IsOutOfOrder)

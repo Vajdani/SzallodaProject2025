@@ -40,6 +40,7 @@ namespace SzallodaManagerForm.ItemPanels
             Controls.Add(lbUsername);
             Controls.Add(lbUserType);
             Controls.Add(btnChangeLevel);
+            Controls.Add(btnFire);
 
             AlignElementsHorizontally();
         }
@@ -51,9 +52,8 @@ namespace SzallodaManagerForm.ItemPanels
             if (result == DialogResult.Yes)
             {
                 employee.ChangeEmployeeAuthority();
-                btnChangeLevel.Text = employee.AuthorityLevel == User.AuthorityLevel.Employee ? "Előléptetés" : "Lefokozás";
+                
             }
-            MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         void Fire(object? sender, EventArgs e)
@@ -63,7 +63,12 @@ namespace SzallodaManagerForm.ItemPanels
             {
                 employee.FireEmployee();
             }
-            MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        void ChangeButtonText()
+        {
+            if (btnChangeLevel.Text == "Előléptetés") btnChangeLevel.Text = "Lefokozás";
+            else btnChangeLevel.Text = "Előléptetés";
         }
     }
 }

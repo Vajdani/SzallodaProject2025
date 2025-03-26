@@ -25,12 +25,14 @@ namespace SzallodaManagerForm.Models
                 
             Database ab = new($"UPDATE employee SET userType = '{level}' WHERE user_id = {Id};");
             ab.Close();
+            MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void FireEmployee()
         {
             Database ab = new($"DELETE FROM employee WHERE user_id = {Id};");
             ab.Close();
+            MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

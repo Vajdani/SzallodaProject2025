@@ -53,7 +53,7 @@
             ).GroupBy(s => s.hotel_id).ToDictionary(s => s.Key, s => s.ToList());
             
             var employees = Database.ReadAll<Employee>(
-                "select user.username, employee.hotel_id, employee.userType " +
+                "select user.user_id, user.username, employee.hotel_id, employee.userType " +
                 "from employee, user " +
                 $"where user.user_id = employee.user_id and userType <> 'owner'"
             ).GroupBy(r => r.hotel_id).ToDictionary(r => r.Key, r => r.ToList());
