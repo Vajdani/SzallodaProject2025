@@ -106,18 +106,10 @@ class MainController extends Controller
             inner join hotel h on h.hotel_id = s.hotel_id
             where h.hotel_id = $id;
         ");
-        $start = "2025-03-15";
-        $end = "2025-03-16";
         $rooms = Room::fromQuery("
-                select * from room r
-                inner join hotel h on r.hotel_id = h.hotel_id
-                where h.hotel_id = $id
-                and r.roomNumber not in (
-                select r.roomNumber
-                from room r
-                inner join booking b on b.room_id = r.room_id
-                where '$start' BETWEEN b.bookStart and b.bookEnd
-                or '$end' BETWEEN b.bookStart and b.bookEnd);
+            select r.room_id, r.roomNumber, r.pricepernight from room r
+            inner join hotel h on r.hotel_id = h.hotel_id
+            where h.hotel_id = $id
         ");
 
         return view("reservation", [
@@ -220,5 +212,20 @@ class MainController extends Controller
         $response["hotels"] = Hotel::fromQuery($hotelQuery);
 
         return $response;
+    }
+
+    public function unoccupiedRooms($hotel_id, $start, $end) {
+        return Room::fromQuery("
+            select r.room_id, r.roomNumber, r.pricepernight from room r
+            inner join hotel h on r.hotel_id = h.hotel_id
+            where
+                h.hotel_id = $hotel_id and
+                r.roomNumber not in (
+                    select r.roomNumber
+                    from room r
+                    inner join booking b on b.room_id = r.room_id
+                    where if('$start' > b.bookStart, '$start', b.bookStart) <= if('$end' < b.bookEnd, '$end', b.bookEnd)
+                );
+        ");
     }
 }

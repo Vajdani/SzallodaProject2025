@@ -13,6 +13,7 @@ Route::get('/szalloda/veletlenszeru', [MainController::class, "randomHotel"]);
 Route::get('/szalloda/{id}', [MainController::class, "hotel"]);
 Route::get('/telepules/{id}', [MainController::class, "city"]);
 Route::get('/profil/{id}', [UserController::class, "profileByID"]);
+Route::get("/foglalas/szabadszobak/{id}/{start}/{end}", [MainController::class, "unoccupiedRooms"]);
 
 Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::get('/kijelentkezes', [UserController::class, "logout"]);
