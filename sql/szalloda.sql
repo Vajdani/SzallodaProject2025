@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 24. 15:38
+-- Létrehozás ideje: 2025. Már 26. 10:39
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -67,7 +67,9 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd
 (1, 2, 4, '2025-03-12', '2025-03-15', 260000, 'confirmed', ''),
 (2, 3, 2, '2025-03-14', '2025-03-18', 80000, 'confirmed', ''),
 (3, 5, 7, '2025-03-08', '2025-03-13', 300000, 'confirmed', ''),
-(4, 2, 5, '2025-08-13', '2025-08-16', 298500, 'confirmed', '1-3-4');
+(4, 2, 5, '2025-08-13', '2025-08-16', 298500, 'confirmed', '1-3-4'),
+(5, 2, 12, '2025-04-02', '2025-04-06', 359750, 'confirmed', '8-11-13'),
+(6, 2, 68, '2025-03-06', '2025-03-09', 232500, 'confirmed', '33-34-37');
 
 -- --------------------------------------------------------
 
@@ -236,14 +238,14 @@ CREATE TABLE `room` (
   `floor` tinyint(4) DEFAULT NULL,
   `capacity` tinyint(4) NOT NULL,
   `pricepernight` int(11) NOT NULL,
-  `reserved` tinyint(1) NOT NULL DEFAULT 0
+  `available` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `room`
 --
 
-INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `pricepernight`, `reserved`) VALUES
+INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `pricepernight`, `available`) VALUES
 (1, 1, 'Alap iglu 1', NULL, 2, 40000, 0),
 (2, 1, 'Alap iglu 2', NULL, 2, 45000, 0),
 (3, 1, 'Deluxe iglu 1', NULL, 4, 60000, 0),
@@ -474,12 +476,12 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`, `phonenumber`, `email`, `password`, `created_at`, `updated_at`, `active`, `profilePic`) VALUES
 (1, 'Misike28', 'Kovács', 'Mihály Dániel', '2024-05-17', '+36709477699', 'Szekelymegafia@freemail.com', '$2y$12$U.6/gsWyUXQkxD2TSibXne5OqQ1lPVKJ2oYu5FXgX6KeA89td3ffy', '2025-02-24 09:55:37', '2025-03-05 15:52:24', 1, 1),
-(2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-02-24 11:19:42', 1, 0),
+(2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-03-26 09:30:51', 1, 6),
 (3, 'Mikudayoo', 'Hatsune', 'Miku', '2007-08-31', '+36701234567', 'hatsunemiku@vocaloid.com', '$2y$12$LQyV6fWT83nezYRP53EPDO6aiXmFzA0zHj6uYFzzs/rWWb1BwJrdW', '2025-03-05 16:37:16', '2025-03-05 16:37:52', 1, 2),
-(4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 0, 1),
+(4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 0, 4),
 (5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-03-05 16:53:08', 1, 0),
 (9, 'horvathAti', 'Dr.', 'Horváth Attila', '1980-04-01', '+36307672240', 'horvath.attila@verebelyszki.hu', '$2y$12$aZDS/wu./xR5FRm9.OC52uYh8AMN4ANxPG4WK72SwSiv0E.1kzZPO', '2025-03-17 11:05:58', '2025-03-17 11:13:15', 1, 1),
-(10, 'Boss', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 0),
+(10, 'Boss', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 5),
 (11, '1_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111111', 'some@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
 (12, '2_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111112', 'some@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
 (13, '3_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111113', 'some@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
@@ -593,7 +595,7 @@ ALTER TABLE `billing`
 -- AUTO_INCREMENT a táblához `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `city`

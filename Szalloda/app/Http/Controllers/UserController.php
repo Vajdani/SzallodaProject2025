@@ -68,7 +68,8 @@ class UserController extends Controller
                 where
                     u.user_id like $id and
                     r.active = 1
-            ")
+            "),
+            
         ]);
     }
 

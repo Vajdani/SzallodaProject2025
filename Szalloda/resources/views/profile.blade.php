@@ -77,6 +77,10 @@
                         </script>
                     </div>
                 </div>
+
+                <div class="foglalas">
+                    
+                </div>
             </div>
         </div>
     </div>

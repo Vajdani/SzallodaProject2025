@@ -173,6 +173,8 @@ class MainController extends Controller
         $data->totalPrice = $price;
         $data->services = $service_string;
         $data->save();
+
+        return redirect('/szalloda/'.$req->hotel_id);
     }
 
     public function reviews() {
