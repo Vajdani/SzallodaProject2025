@@ -77,10 +77,41 @@
                         </script>
                     </div>
                 </div>
+                @if ($hasPermission)
+                <div class="ratings"></div>
+                <h2>Foglalásaid</h2>
+                    @foreach ($booking as $b)
+                        <div class="rating center">
+                            <div class="ratingUser">
+                                <div class="profilePicture">
+                                    <a href="/szalloda/{{$b->hotel_id}}"><img src="/img/hotels/{{$b->hotel_id}}.jpg" alt="{{$b->hotelName}}.jpg" title="{{$b->hotelName}}" class="img-fluid profile-picture"></a>
+                                    <p class="text-center">{{$b->hotelName}}</p>
+                                </div>
+                                <div class="data">
+                                    <div>
+                            
 
-                <div class="foglalas">
-                    
+                                        <h3>{{$b->bookStart}} — {{$b->bookEnd}} (@if($b->status == "confirmed")
+                                            Megerősítve
+                                            @elseif($b->status == "cancelled")
+                                            Lemondva
+                                            @elseif($b->status == "completed")
+                                            befejezett
+                                        @endif)</h3>
+                                        <p>@if($b->status == "confirmed")
+                                            Fizetendő összeg: {{$b->price}} Ft
+                                            @elseif($b->status == "completed")
+                                            Fizetett összeg: {{$b->price}} Ft
+                                        @endif</p>
+                                        <p>` + created_at + `</p>
+                                        <p>` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
+                @endif
             </div>
         </div>
     </div>

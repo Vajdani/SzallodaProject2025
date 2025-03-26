@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\Hotel;
 use App\Rules\RealNameRule;
+use App\Models\Booking;
 use Carbon\Carbon;
 
 
@@ -69,7 +70,13 @@ class UserController extends Controller
                     u.user_id like $id and
                     r.active = 1
             "),
-            
+            "booking" => booking::fromQuery("
+                        select b.bookStart, b.bookEnd, b.status, b.totalPrice, r.roomNumber, h.hotelName, h.address, h.hotel_id
+                        from booking b
+                        inner join user u on u.user_id = b.user_id
+                        inner join room r on r.room_id = b.room_id
+                        inner join hotel h on h.hotel_id = r.hotel_id
+                        where b.user_id like $id;")
         ]);
     }
 
