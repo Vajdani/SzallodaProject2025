@@ -2,7 +2,7 @@ function pfpmenu() {
     let panel = document.createElement("div")
     panel.id = "pfpMenu"
     panel.className = "menuBgOverlay"
-    panel.onclick = CloseMenu
+    // panel.onclick = CloseMenu
 
     let pfps = `<div class="PPS-body">`
     for (let i = 0; i < 4; i++) {
