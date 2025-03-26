@@ -80,6 +80,10 @@ const reviewData = {
     2: {
         render: RenderUserRating,
         noneText: "Ez a felhasználó még nem írt értékeléseket!",
+    },
+    3: {
+        render: RenderUserRating,
+        noneText: "Még nem írtál értékeléseket!",
     }
 }
 
