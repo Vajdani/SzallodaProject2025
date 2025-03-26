@@ -172,7 +172,7 @@ function OpenReviewDeleteMenu(review_id) {
     let panel = document.createElement("div")
     panel.id = "reviewDeleteMenu"
     panel.className = "menuBgOverlay"
-    panel.onclick = CloseReviewDeleteMenu
+    // panel.onclick = CloseReviewDeleteMenu
 
     const form = document.createElement("div")
     form.className = "menuPanel"
