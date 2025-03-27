@@ -98,7 +98,7 @@
                                         <a href="/szalloda/{{ $b->hotel_id }}">
                                             <img src="/img/hotels/{{ $b->hotel_id }}.jpg" alt="{{ $b->hotelName }}.jpg" title="{{ $b->hotelName }}" class="img-fluid profile-picture">
                                         </a>
-                                        <p class="text-center">{{ $b->hotelName }}</p>
+                                        <p class="text-center" style="text-wrap:auto">{{ $b->hotelName }}</p>
                                     </div>
                                     <div class="ratingData">
                                         <div>
@@ -118,35 +118,15 @@
                                                     Fizetett összeg: {{ $b->totalPrice }} Ft
                                                 @endif
                                             </p>
-                                            <h4>Szolgáltatások:</h4>
-                                            <ul>
-                                                {{-- @php
-                                                    $service_ids = explode("-", $b->services);
-                                                    function contains() {
 
-                                                    }
-
-                                                    function filter($var) {
-                                                        foreach ($service_ids as $key => $value) {
-                                                            if ($value == $var) {
-                                                                return true;
-                                                            }
-                                                        }
-
-                                                        return false;
-                                                    }
-
-                                                    $bookingServices = array_filter($services, "filter")
-                                                @endphp --}}
-
-                                                @foreach (explode("-", $b->services) as $service_id)
-                                                    @foreach ($services as $service)
-                                                        @if ($service->service_id = $service_id)
-                                                            <li>{{$service->serviceName}}</li>
-                                                        @endif
+                                            @if ($b->services != "")
+                                                <h4>Szolgáltatások:</h4>
+                                                <ul>
+                                                    @foreach ($services[$b->booking_id] as $service)
+                                                        <li>{{$service->serviceName}}</li>
                                                     @endforeach
-                                                @endforeach
-                                            </ul>
+                                                </ul>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

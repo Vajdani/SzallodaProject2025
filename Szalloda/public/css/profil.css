@@ -184,3 +184,7 @@ a:hover {
     padding: 0 30px 25px 30px;
     width: 80%;
 }
+
+ul {
+    list-style-position: inside;
+}
