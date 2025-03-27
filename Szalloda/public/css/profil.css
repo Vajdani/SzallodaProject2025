@@ -7,10 +7,12 @@
     padding-top: 2%;
     padding-bottom: 2%;
 }
-.pfp{
+
+.pfp {
     height: 10vh;
     padding: 50px;
 }
+
 .profile-header h2 {
     margin-bottom: 10px;
     margin-top: 10px
@@ -96,6 +98,7 @@
 .user-data input:focus {
     outline: none;
 }
+
 .user-data input:focus {
     outline: none;
 }
@@ -117,7 +120,7 @@
     justify-content: center;
 }
 
-.ProfilePicture-Selection{
+.ProfilePicture-Selection {
     border-radius: 30px;
     border: 5px solid var(--colour_randomgreen1);
     background-color: var(--colour_sidebar);
@@ -128,7 +131,7 @@
     transform: translate(-50%, -50%)
 }
 
-.PPS-head h2{
+.PPS-head h2 {
     text-align: center;
     padding: 10px;
 }
@@ -146,11 +149,11 @@
     }
 }
 
-.PPS-body img{
+.PPS-body img {
     margin: 2px;
 }
 
-.PPS-buttons{
+.PPS-buttons {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -165,17 +168,19 @@ a:hover {
     color: var(--colour_randomhover);
 }
 
-
-
-
 @media only screen and (max-width: 600px) {
-    .profile-header{
+    .profile-header {
         width: 100%;
         border-radius: 0px;
     }
 
-    .profile-body{
+    .profile-body {
         width: 100%;
         border-radius: 0px;
     }
+}
+
+.bookingSection {
+    padding: 0 30px 25px 30px;
+    width: 80%;
 }

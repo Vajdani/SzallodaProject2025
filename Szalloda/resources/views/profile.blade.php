@@ -10,7 +10,7 @@
 
 @php
     $hasPermission = Auth::check() && Auth::user()->user_id == $user->user_id;
-    $userActive = $user->active == 1
+    $userActive = $user->active == 1;
 @endphp
 
 @section('content')
@@ -18,10 +18,11 @@
         <div class="profile-con">
             <div class="profile-header">
                 <div class="profile-picture-con">
-                    <img src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="Profilkép" class="profile-picture" id="profile">
+                    <img src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="Profilkép"
+                        class="profile-picture" id="profile">
                 </div>
                 <div class="profile-details-con">
-                    <h2>{{ $userActive ? $user->username : "Törölt fiók" }}</h2>
+                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }}</h2>
                     @if ($hasPermission)
                         <div class="profile-option-con">
                             <a onclick="pfpmenu()">Profilképcsere</a>
@@ -53,7 +54,8 @@
                             </div>
                             <div class="user-data">
                                 <label for="realname">Polgári név</label>
-                                <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname" id="realname">
+                                <input type="text" value="{{ $user->lastName }} {{ $user->firstName }}" name="realname"
+                                    id="realname">
                                 @error('realname')
                                     <p class="error">{{ $message }}</p>
                                 @enderror
@@ -73,44 +75,84 @@
                     <div class="ratingSection center" id="ratingSection">
                         <script src="{{ asset('js/reviews.js') }}"></script>
                         <script>
-                            RenderReviewSection(`{!! json_encode($reviews) !!}`, @if ($hasPermission) {{3}} @else {{2}} @endif, @auth "{{ Auth::user()->user_id }}" @else "-1" @endauth)
+                            RenderReviewSection(`{!! json_encode($reviews) !!}`,
+                            @if ($hasPermission)
+                                {{ 3 }}
+                            @else
+                                {{ 2 }}
+                            @endif , @auth "{{ Auth::user()->user_id }}"
+                            @else
+                            "-1"
+                            @endauth )
                         </script>
                     </div>
                 </div>
                 @if ($hasPermission)
-                <div class="ratings"></div>
-                <h2>Foglalásaid</h2>
-                    @foreach ($booking as $b)
-                        <div class="rating center">
-                            <div class="ratingUser">
-                                <div class="profilePicture">
-                                    <a href="/szalloda/{{$b->hotel_id}}"><img src="/img/hotels/{{$b->hotel_id}}.jpg" alt="{{$b->hotelName}}.jpg" title="{{$b->hotelName}}" class="img-fluid profile-picture"></a>
-                                    <p class="text-center">{{$b->hotelName}}</p>
-                                </div>
-                                <div class="data">
-                                    <div>
-                            
+                    <div class="ratings"></div>
+                    <h2>Foglalásaid</h2>
+                    <div class="bookingSection center">
+                        @foreach ($booking as $b)
+                            <div class="rating center">
+                                <div class="ratingUser">
+                                    <div class="profilePicture">
+                                        <a href="/szalloda/{{ $b->hotel_id }}">
+                                            <img src="/img/hotels/{{ $b->hotel_id }}.jpg" alt="{{ $b->hotelName }}.jpg" title="{{ $b->hotelName }}" class="img-fluid profile-picture">
+                                        </a>
+                                        <p class="text-center">{{ $b->hotelName }}</p>
+                                    </div>
+                                    <div class="ratingData">
+                                        <div>
+                                            <h3 style="text-wrap:auto">{{ $b->bookStart }} — {{ $b->bookEnd }}
+                                                (@if ($b->status == 'confirmed')
+                                                    Megerősítve
+                                                @elseif($b->status == 'cancelled')
+                                                    Lemondva
+                                                @elseif($b->status == 'completed')
+                                                    Befejezve
+                                                @endif)
+                                            </h3>
+                                            <p>
+                                                @if ($b->status == 'confirmed')
+                                                    Fizetendő összeg: {{ $b->totalPrice }} Ft
+                                                @elseif($b->status == 'completed')
+                                                    Fizetett összeg: {{ $b->totalPrice }} Ft
+                                                @endif
+                                            </p>
+                                            <h4>Szolgáltatások:</h4>
+                                            <ul>
+                                                {{-- @php
+                                                    $service_ids = explode("-", $b->services);
+                                                    function contains() {
 
-                                        <h3>{{$b->bookStart}} — {{$b->bookEnd}} (@if($b->status == "confirmed")
-                                            Megerősítve
-                                            @elseif($b->status == "cancelled")
-                                            Lemondva
-                                            @elseif($b->status == "completed")
-                                            befejezett
-                                        @endif)</h3>
-                                        <p>@if($b->status == "confirmed")
-                                            Fizetendő összeg: {{$b->price}} Ft
-                                            @elseif($b->status == "completed")
-                                            Fizetett összeg: {{$b->price}} Ft
-                                        @endif</p>
-                                        <p>` + created_at + `</p>
-                                        <p>` + ((review == "" || review == "null" || review == null) ? "" : review) + `</p>
+                                                    }
+
+                                                    function filter($var) {
+                                                        foreach ($service_ids as $key => $value) {
+                                                            if ($value == $var) {
+                                                                return true;
+                                                            }
+                                                        }
+
+                                                        return false;
+                                                    }
+
+                                                    $bookingServices = array_filter($services, "filter")
+                                                @endphp --}}
+
+                                                @foreach (explode("-", $b->services) as $service_id)
+                                                    @foreach ($services as $service)
+                                                        @if ($service->service_id = $service_id)
+                                                            <li>{{$service->serviceName}}</li>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
                 @endif
             </div>
         </div>
