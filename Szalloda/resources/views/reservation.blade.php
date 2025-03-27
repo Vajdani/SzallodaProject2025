@@ -18,6 +18,7 @@
             <form action="/foglalas" method="post" class="center">
                 <div class="form">
                     @csrf
+                    <h2>Foglalás adatai</h2>
                     <label for="hotel_id">Szálloda neve:</label>
                     <input type="text" name="hotel_id" id="hotel_id" style="display:none" value="{{ $hotel->hotel_id }}">
                     <p>{{ $hotel->hotelName }}</p>
@@ -57,7 +58,7 @@
                     <div style="display:flex;justify-content:space-between">
                         <input type="date" id="startDate" style="display: inline" name="startDate" onchange="DateChanged()" min="{{date("Y-m-d")}}" value="{{ old('startDate') }}">
                         <p class="inline">—</p>
-                        <input type="date" id="endDate" style="display: inline" name="endDate" onchange="DateChanged()" value="{{ old('endDate') }}">
+                        <input type="date" id="endDate" style="display: inline" name="endDate" onchange="DateChanged()" min="{{date("Y-m-d")}}" value="{{ old('endDate') }}">
                     </div>
                     @error('startDate')
                         <p class="error">{{ $message }}</p>
@@ -72,6 +73,60 @@
 
                     <p>Összeg</p>
                     <p class="flex"><span id="osszeg" class="inline">0</span> Ft</p>
+                </div>
+
+                <div class="form">
+                    <h2>Számlázási adatok</h2>
+                    
+                    <div class="inputItem">
+                        <label for="method">Fizetési módszer</label>
+                        <select name="method" id="method">
+                            <option value="cash">Készpénz</option>
+                            <option value="credit card">Bank kártya</option>
+                            <option value="debit card">Betéti kártya</option>
+                            <option value="paypal">Paypal</option>
+                        </select>
+                        @error('method')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="inputItem">
+                        <label for="country">Ország</label>
+                        <input type="text" name="country" id="country" value="{{ old('country') }}">
+                        @error('country')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="inputItem">
+                        <label for="city">Város</label>
+                        <input type="text" name="city" id="city" value="{{ old('city') }}">
+                        @error('city')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="inputItem">
+                        <label for="zip">Zipcode</label>
+                        <input type="text" name="zip" id="zip" value="{{ old('zip') }}">
+                        @error('zip')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="inputItem">
+                        <label for="line1">Utca és házszám</label>
+                        <input type="text" name="line1" id="line1" value="{{ old('line1') }}">
+                        @error('line1')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="inputItem">
+                        <label for="line2">Egyéb adatok (például emelet és ajtószám)</label>
+                        <input type="text" name="line2" id="line2" value="{{ old('line2') }}">
+                        @error('line2')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+
                 </div>
 
                 <input type="submit" value="Foglalok">

@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Room;
 use App\Models\Service;
 use App\Models\Booking;
+use App\Models\Billing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -119,15 +120,34 @@ class MainController extends Controller
     }
 
     public function reservationPost(Request $req) {
+
         $req->validate([
             'startDate' => 'required',
             'endDate' => 'required|after:startDate',
-            'service_id' => 'required'
+            'service_id' => 'required',
+
+            //----------------------
+            'method' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'line1' => 'required',
+            'line2' => 'required'
+
+
         ],[
             'startDate.required' => 'Adja meg a kezdő dátumot!',
             'endDate.required' => 'adja meg a vég dátumot!',
             'endDate.after' => 'A kezdő dátum nem lehet korábban mint a végdátum!',
-            'service_id.required' => 'válasszon ellátást!'
+            'service_id.required' => 'válasszon ellátást!',
+
+            //--------------------
+            'method.required' => 'Válasszon fizetési módot!',
+            'country.required' => 'Adja meg az országot!',
+            'city.required' => 'Adja meg a várost!',
+            'zip.required' => 'Adja meg az irányítószámot!',
+            'line1.required' => 'Adja meg az első címsort!',
+            'line2.required' => 'Adja meg a második címsort!'
         ]);
 
         $start = Carbon::parse($req->input('startDate'));
@@ -151,15 +171,34 @@ class MainController extends Controller
             }
         }
 
-        $data = new Booking;
-        $data->user_id = Auth::user()->user_id;
-        $data->room_id = $room_id;
-        $data->bookStart = $req->startDate;
-        $data->bookEnd = $req->endDate;
-        $data->status = "confirmed";
-        $data->totalPrice = $price;
-        $data->services = implode("-", $services);
-        $data->Save();
+        $booking = new Booking;
+        $booking->user_id = Auth::user()->user_id;
+        $booking->room_id = $room_id;
+        $booking->bookStart = $req->startDate;
+        $booking->bookEnd = $req->endDate;
+        $booking->status = "confirmed";
+        $booking->totalPrice = $price;
+        $booking->services = implode("-", $services);
+        $booking->save();
+
+        $billing = new Billing;
+        $billing->booking_id = $booking->booking_id;
+        $billing->amount = $price;
+        $billing->BookingDate = Carbon::now('Europe/Budapest');
+        if($req->method=="cash"){
+            $billing->paymentDate = "";
+        }
+        else{
+            $billing->paymentDate = Carbon::now('Europe/Budapest');
+        }
+        $billing->paymentMethod = $req->method;
+        $billing->country = $req->country;
+        $billing->city = $req->city;
+        $billing->zipcode = $req->zip;
+        $billing->line1 = $req->line1;
+        $billing->line2 = $req->line2;
+        $billing->save();
+
 
         return redirect("/szalloda/$req->hotel_id");
     }
