@@ -23,8 +23,32 @@ class UserController extends Controller
     static int $minPasswordLength = 8;
 
     public function review(){
+        $user_id = Auth::user()->user_id;
+        $hotels = Hotel::fromQuery("
+            select distinct hotel.hotel_id, hotel.hotelName
+            from hotel
+            inner join room on room.hotel_id = hotel.hotel_id
+            inner join booking on room.room_id = booking.room_id
+            where
+                booking.user_id = $user_id and
+                booking.status = 'completed'
+            group by hotel.hotel_id
+            having (
+                select count(*)
+                from reviews
+                where
+                    reviews.user_id = $user_id and
+                    reviews.hotel_id = hotel.hotel_id and
+                    reviews.active = 1
+                ) < count(booking.booking_id)
+        ");
+
+        if (count($hotels) == 0) {
+            return redirect('/')->with("sv", "Már nem tudsz több értéklést írni!");
+        }
+
         return view("review", [
-            "hotels" => Hotel::all()
+            "hotels" => $hotels
         ]);
     }
 
