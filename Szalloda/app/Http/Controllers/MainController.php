@@ -137,11 +137,13 @@ class MainController extends Controller
         $room_id = $req->room_id;
         $price = Room::find($room_id)->pricepernight * $days;
 
-        $service_id = $req->service_id;
-        $price += Service::find($service_id)->price * $days;
-
         $services = [];
-        array_push($services, $service_id);
+        $service_id = $req->service_id;
+        if ($service_id != 0) {
+            $price += Service::find($service_id)->price * $days;
+            array_push($services, $service_id);
+        }
+
         if ($req->services != null) {
             foreach($req->services as $s){
                 $price += Service::find($s)->price;
