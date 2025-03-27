@@ -60,22 +60,34 @@ class UserController extends Controller
     }
 
     public function profileByID($id) {
-        $serviceQuery = Service::fromQuery("
-            select distinct service.service_id, servicecategory.serviceName, booking.booking_id
-            from service
-            inner join servicecategory on servicecategory.serviceCategory_id = service.category_id
-            inner join booking on (
-                booking.services like concat(service.service_id, '-%') or
-                booking.services like concat('%-', service.service_id, '-%') or
-                booking.services like concat('%-', service.service_id) or
-                booking.services like service.service_id
-            )
-            where booking.user_id = $id
-        ");
-
         $services = array();
-        foreach ($serviceQuery as $key => $item) {
-            $services[$item["booking_id"]][$key] = $item;
+        $booking = array();
+        if (Auth::check() && Auth::user()->user_id == $id) {
+            $serviceQuery = Service::fromQuery("
+                select distinct service.service_id, servicecategory.serviceName, booking.booking_id
+                from service
+                inner join servicecategory on servicecategory.serviceCategory_id = service.category_id
+                inner join booking on (
+                    booking.services like concat(service.service_id, '-%') or
+                    booking.services like concat('%-', service.service_id, '-%') or
+                    booking.services like concat('%-', service.service_id) or
+                    booking.services like service.service_id
+                )
+                where booking.user_id = $id
+            ");
+
+            foreach ($serviceQuery as $key => $item) {
+                $services[$item["booking_id"]][$key] = $item;
+            }
+
+            $booking = Booking::fromQuery("
+                select b.bookStart, b.bookEnd, b.status, b.totalPrice, r.roomNumber, h.hotelName, h.address, h.hotel_id, b.services, b.booking_id
+                from booking b
+                inner join user u on u.user_id = b.user_id
+                inner join room r on r.room_id = b.room_id
+                inner join hotel h on h.hotel_id = r.hotel_id
+                where b.user_id like $id;
+            ");
         }
 
         return view("profile", [
@@ -89,14 +101,7 @@ class UserController extends Controller
                     u.user_id like $id and
                     r.active = 1
             "),
-            "booking" => Booking::fromQuery("
-                select b.bookStart, b.bookEnd, b.status, b.totalPrice, r.roomNumber, h.hotelName, h.address, h.hotel_id, b.services, b.booking_id
-                from booking b
-                inner join user u on u.user_id = b.user_id
-                inner join room r on r.room_id = b.room_id
-                inner join hotel h on h.hotel_id = r.hotel_id
-                where b.user_id like $id;
-            "),
+            "booking" => $booking,
             "services" => $services
         ]);
     }
