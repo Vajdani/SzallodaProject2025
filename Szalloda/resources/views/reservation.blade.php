@@ -32,7 +32,7 @@
                         @error('service_id')
                             <p class="error">{{ $message }}</p>
                         @enderror
-                        <input type="radio" name="service_id" id="service_0" value="0|0">
+                        <input type="radio" name="service_id" id="service_0" value="0" onchange="ServiceSelected()">
                         <label for="service_0">Nem kérek ellátást</label>
                         @foreach ($services as $s)
                             @if ($s->category_id < 3)

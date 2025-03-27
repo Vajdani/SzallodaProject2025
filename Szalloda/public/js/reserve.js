@@ -1,10 +1,12 @@
-let selectedRoomId = 1
+let selectedRoomId = -1
 let rooms = {}
 let services = {}
 
 function InitData(roomsJson, servicesJson) {
     rooms = JSON.parse(roomsJson)
     services = JSON.parse(servicesJson)
+
+    ResetRoomId()
 }
 
 async function DateChanged() {
@@ -36,6 +38,7 @@ async function DateChanged() {
             roomSelect.appendChild(option)
         });
 
+        ResetRoomId()
         CalculatePrice()
     }).catch((error) => {
         console.error('Fetch error:', error);
@@ -43,9 +46,7 @@ async function DateChanged() {
 }
 
 function RoomSelected() {
-    selectedRoomId = document.getElementById("rooms").value
-    console.log(selectedRoomId)
-
+    selectedRoomId = document.getElementById("room_id").value
     CalculatePrice()
 }
 
@@ -59,13 +60,17 @@ function CalculatePrice() {
     let stayDuration = 0
     if (start != "" && end != "") {
         stayDuration = (Date.parse(end) - Date.parse(start)) / 1000 / 60 / 60 / 24
-        console.log(stayDuration)
     }
 
-    let finalPrice = GetRoomyId(selectedRoomId).pricepernight * stayDuration
+    let finalPrice = 0
+    let room = GetRoomById(selectedRoomId)
+    if (room) {
+        finalPrice += room.pricepernight * stayDuration
+    }
+
     services.forEach(element => {
         if (document.getElementById("service_" + element.service_id).checked) {
-            finalPrice += element.price
+            finalPrice += element.price * ((stayDuration == 0 || element.category_id >= 3) ? 1 : stayDuration)
         }
     })
 
@@ -74,7 +79,7 @@ function CalculatePrice() {
 
 
 
-function GetRoomyId(room_id) {
+function GetRoomById(room_id) {
     let i = 0;
     while (i < rooms.length) {
         const element = rooms[i];
@@ -84,4 +89,8 @@ function GetRoomyId(room_id) {
 
         i++
     }
+}
+
+function ResetRoomId() {
+    selectedRoomId = rooms[0].room_id
 }

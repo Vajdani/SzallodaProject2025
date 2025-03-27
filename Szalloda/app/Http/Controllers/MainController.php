@@ -9,9 +9,8 @@ use App\Models\Room;
 use App\Models\Service;
 use App\Models\Booking;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class MainController extends Controller
 {
@@ -123,48 +122,44 @@ class MainController extends Controller
         $req->validate([
             'startDate' => 'required',
             'endDate' => 'required|after:startDate',
-            'ellatas' => 'required'
+            'service_id' => 'required'
         ],[
             'startDate.required' => 'Adja meg a kezdő dátumot!',
             'endDate.required' => 'adja meg a vég dátumot!',
             'endDate.after' => 'A kezdő dátum nem lehet korábban mint a végdátum!',
-            'ellatas.required' => 'válasszon ellátást!'
+            'service_id.required' => 'válasszon ellátást!'
         ]);
 
-        $start= \Carbon\Carbon::parse($req->input('startDate'));
-        $end = \Carbon\Carbon::parse($req->input('endDate'));
+        $start = Carbon::parse($req->input('startDate'));
+        $end = Carbon::parse($req->input('endDate'));
         $days = $start->diffInDays($end, false);
 
-        $room = $req->room_id;
-        $price= Room::find($room)->pricepernight;
-        $price = $price * $days;
+        $room_id = $req->room_id;
+        $price = Room::find($room_id)->pricepernight * $days;
 
         $service_id = $req->service_id;
-        $price = $price + (Service::find($service_id)->price * $days);
+        $price += Service::find($service_id)->price * $days;
 
-        $service_string = $service_id."-";
-        if($req->services==null){
-
-        }
-        else{
+        $services = [];
+        array_push($services, $service_id);
+        if ($req->services != null) {
             foreach($req->services as $s){
-                $price = $price + service::find($s)->price;
-                $service_string = $service_string . $s;
-                $service_string = $service_string . "-";
+                $price += Service::find($s)->price;
+                array_push($services, $s);
             }
         }
-        $service_string = substr($service_string,0,-1);
-        $data = new booking;
+
+        $data = new Booking;
         $data->user_id = Auth::user()->user_id;
-        $data->room_id = $room;
+        $data->room_id = $room_id;
         $data->bookStart = $req->startDate;
         $data->bookEnd = $req->endDate;
         $data->status = "confirmed";
         $data->totalPrice = $price;
-        $data->services = $service_string;
-        $data->save();
+        $data->services = implode("-", $services);
+        $data->Save();
 
-        return redirect('/szalloda/'.$req->hotel_id);
+        return redirect("/szalloda/$req->hotel_id");
     }
 
     public function reviews() {
