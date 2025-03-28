@@ -44,7 +44,7 @@ class UserController extends Controller
         ");
 
         if (count($hotels) == 0) {
-            return redirect('/')->with("sv", "Már nem tudsz több értéklést írni!");
+            return redirect('/')->with("sv", "Még nem tudsz értékléseket írni!");
         }
 
         return view("review", [

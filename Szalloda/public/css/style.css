@@ -242,9 +242,16 @@ hr {
     width: fit-content;
     position: absolute;
     top: 50px;
-    transform: translate(-100%, 0);
+    transform: translate(calc(-50% - 205px / 2), 0);
     left: 50%;
     z-index: 10;
+}
+
+@media only screen and (max-width: 1200px) {
+    .info-popup {
+        top: 100px;
+        transform: translate(-50%, 0);
+    }
 }
 
 .info-popup div {
@@ -259,6 +266,7 @@ hr {
     color: white;
     text-align: center;
     font-size: 110%;
+    width: 100%;
 }
 
 .info-popup div button {
@@ -274,7 +282,7 @@ hr {
 
 .info-popup div button:hover {
     background-color: var(--colour_error_intense);
-    border: 1px solid white;
+    outline: 2px solid white;
 }
 
 .w-100 {
