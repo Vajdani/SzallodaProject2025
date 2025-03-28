@@ -8,7 +8,7 @@
         public int? Floor { get; private set; }
         public int Capacity { get; private set; }
         public int PricePerNight { get; private set; }
-        public bool Reserved { get; private set; }
+        public bool Available { get; private set; }
 
         public Room(Database db)
         {
@@ -18,13 +18,13 @@
             Floor = db.GetInt("floor");
             Capacity = db.GetInt("capacity");
             PricePerNight = db.GetInt("pricepernight");
-            Reserved = db.GetInt("available") == 1;
+            Available = db.GetInt("available") == 1;
         }
 
         public void UpdateRoomData(int price, int IsOutOfOrder)
         {
-            this.PricePerNight = price;
-            this.Reserved = IsOutOfOrder == 1;
+            PricePerNight = price;
+            Available = IsOutOfOrder == 1;
             Database ab = new($"UPDATE room SET pricepernight = {price}, available = {IsOutOfOrder} WHERE room_id = {room_id};");
             ab.Close();
         }

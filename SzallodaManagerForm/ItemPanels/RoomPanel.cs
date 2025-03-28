@@ -23,7 +23,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             Availability = new()
             {
-                Enabled = !room.Reserved,
+                Enabled = !room.Available,
                 Items = {
                     "Elérhető",
                     "Nem elérhető"
@@ -36,7 +36,7 @@ namespace SzallodaManagerForm.ItemPanels
             {
                 MaxLength = 6,
                 Text = room.PricePerNight.ToString(),
-                Enabled = !room.Reserved
+                Enabled = !room.Available
             };
 
             btnSave = new()
