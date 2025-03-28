@@ -7,6 +7,10 @@ function InitData(roomsJson, servicesJson) {
     services = JSON.parse(servicesJson)
 
     ResetRoomId()
+
+    window.addEventListener("load", () => {
+        CalculatePrice()
+    })
 }
 
 async function DateChanged() {
@@ -65,6 +69,7 @@ function CalculatePrice() {
     let finalPrice = 0
     let room = GetRoomById(selectedRoomId)
     if (room) {
+        document.getElementById("letszam").innerText = room.capacity
         finalPrice += room.pricepernight * stayDuration
     }
 

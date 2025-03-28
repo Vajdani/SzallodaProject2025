@@ -107,7 +107,8 @@ class MainController extends Controller
             where h.hotel_id = $id;
         ");
         $rooms = Room::fromQuery("
-            select r.room_id, r.roomNumber, r.pricepernight from room r
+            select r.room_id, r.roomNumber, r.pricepernight, r.capacity
+            from room r
             inner join hotel h on r.hotel_id = h.hotel_id
             where h.hotel_id = $id
         ");
@@ -250,7 +251,8 @@ class MainController extends Controller
 
     public function unoccupiedRooms($hotel_id, $start, $end) {
         return Room::fromQuery("
-            select r.room_id, r.roomNumber, r.pricepernight from room r
+            select r.room_id, r.roomNumber, r.pricepernight, r.capacity
+            from room r
             inner join hotel h on r.hotel_id = h.hotel_id
             where
                 h.hotel_id = $hotel_id and
