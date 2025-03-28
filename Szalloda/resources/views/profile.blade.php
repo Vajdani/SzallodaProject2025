@@ -66,12 +66,15 @@
                     </div>
                 @endif
                 <div class="ratings">
-                    <h2>Értékelések</h2>
-                    @if ($hasPermission)
-                        <div class="flex">
-                            <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
-                        </div>
-                    @endif
+                    <h2>
+                        Értékelések
+                        @if ($hasPermission)
+                            <span style="font-weight:normal">
+                                — <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
+                            </span>
+                        @endif
+                    </h2>
+
                     <div class="ratingSection center" id="ratingSection">
                         <script src="{{ asset('js/reviews.js') }}"></script>
                         <script>
