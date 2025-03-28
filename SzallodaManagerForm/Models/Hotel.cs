@@ -51,12 +51,16 @@
                 "from service, servicecategory " +
                 $"where service.category_id = servicecategory.serviceCategory_id"
             ).GroupBy(s => s.hotel_id).ToDictionary(s => s.Key, s => s.ToList());
-            
-            // Manager csak employeekat lásson TODO
+
             var employees = Database.ReadAll<Employee>(
                 "select user.user_id, user.username, employee.hotel_id, employee.userType " +
                 "from employee, user " +
-                $"where user.user_id = employee.user_id and userType <> 'owner'"
+                "where user.user_id = employee.user_id and (" +
+                    $"(select e.userType from employee e where e.user_id = {user_id} and e.hotel_id = employee.hotel_id) = 'manager' and " +
+                    "employee.userType not in ('owner', 'manager') or " +
+                    $"(select e.userType from employee e where e.user_id = {user_id} and e.hotel_id = employee.hotel_id) = 'owner' and " +
+                    "employee.userType <> 'owner'" +
+                ")"
             ).GroupBy(r => r.hotel_id).ToDictionary(r => r.Key, r => r.ToList());
 
             userHotels = Database.ReadAllWithArgs<Hotel>(
