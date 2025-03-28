@@ -2,16 +2,20 @@
 
 namespace SzallodaManagerForm
 {
-    public partial class Main : Form
+    partial class Main : Form
     {
         OptionPanel current;
         OptionPanel alkalmazottak;
         OptionPanel szobak;
         OptionPanel szolgaltatasok;
 
+        public static Main Instance;
+
         public Main()
         {
             InitializeComponent();
+
+            Instance = this;
 
             szobak = new(Size, OptionPanel.ItemPanelCategory.Rooms);
             szolgaltatasok = new(Size, OptionPanel.ItemPanelCategory.Services)
@@ -90,7 +94,17 @@ namespace SzallodaManagerForm
                     break;
             }
 
-            current.UpdatePanel(Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!));
+            current.UpdatePanel(GetSelectedHotel());
+        }
+
+        public Hotel GetSelectedHotel()
+        {
+            return Hotel.GetHotelByName(cbHotelek.SelectedItem!.ToString()!)!;
+        }
+
+        public int GetSelectedHotelId()
+        {
+            return GetSelectedHotel().hotel_id;
         }
     }
 }

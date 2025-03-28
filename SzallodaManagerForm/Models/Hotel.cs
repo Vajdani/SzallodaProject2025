@@ -1,6 +1,6 @@
 ﻿namespace SzallodaManagerForm.Models
 {
-    internal class Hotel
+    class Hotel
     {
         public int hotel_id;
         public string Name { get; private set; }

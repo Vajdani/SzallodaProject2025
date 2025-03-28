@@ -47,12 +47,11 @@ namespace SzallodaManagerForm.ItemPanels
 
         void ChangeLevel(object? sender, EventArgs e)
         {
-            string aaaaaa = employee.AuthorityLevel == User.AuthorityLevel.Employee ? "elő szeretnéd léptetni" : "le szeretnéd fokozni";
-            DialogResult result = MessageBox.Show($"Biztos {aaaaaa} {employee.username}-t?","Megerősítés",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            string action = employee.AuthorityLevel == User.AuthorityLevel.Employee ? "elő szeretnéd léptetni" : "le szeretnéd fokozni";
+            DialogResult result = MessageBox.Show($"Biztos {action} {employee.username}-t?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 employee.ChangeEmployeeAuthority();
-                
             }
         }
 

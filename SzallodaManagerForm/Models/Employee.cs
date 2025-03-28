@@ -20,9 +20,17 @@ namespace SzallodaManagerForm.Models
         public void ChangeEmployeeAuthority()
         {
             string level;
-            if (AuthorityLevel == User.AuthorityLevel.Employee){ level = "manager"; AuthorityLevel = User.AuthorityLevel.Manager; }
-            else level = "employee"; AuthorityLevel = User.AuthorityLevel.Employee;
-                
+            if (AuthorityLevel == User.AuthorityLevel.Employee)
+            {
+                level = "manager";
+                AuthorityLevel = User.AuthorityLevel.Manager;
+            }
+            else
+            {
+                level = "employee";
+                AuthorityLevel = User.AuthorityLevel.Employee;
+            }
+   
             Database ab = new($"UPDATE employee SET userType = '{level}' WHERE user_id = {Id};");
             ab.Close();
             MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -30,7 +38,7 @@ namespace SzallodaManagerForm.Models
 
         public void FireEmployee()
         {
-            Database ab = new($"DELETE FROM employee WHERE user_id = {Id};");
+            Database ab = new($"DELETE FROM employee WHERE user_id = {Id} and hotel_id = {Main.Instance.GetSelectedHotelId()};");
             ab.Close();
             MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
