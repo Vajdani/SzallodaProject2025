@@ -22,6 +22,7 @@
 }
 
 .form-design input{
+    padding: 2px 0 2px 0;
     border: none;
     border-bottom: 2px solid var(--colour_randomgreen1);
     background-color: var(--colour_sidebar);

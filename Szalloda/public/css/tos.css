@@ -1,0 +1,29 @@
+.tos_div{
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: auto;
+    background-color: var(--colour_sidebar);
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tos_mainlist{
+    padding: 10px;
+}
+.tos_sublist{
+    margin-left: 20px;
+}
+.tos_item{
+    padding: 7.5px;
+}
+.tos_subitem{
+    padding: 7.5px 7.5px 0 7.5px
+}
+
+.tos_sublist > li::marker { content: counters(list-item, '.') '. '; }
+
