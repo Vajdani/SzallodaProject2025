@@ -4,7 +4,6 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/regisztracio.css') }}">
 @endsection
-
 @section('content')
     <div class="mainContent">
         <form action="/regisztracio" method="post" class="form-design">
@@ -80,7 +79,7 @@
 
             <div class="inputItem text-center">
                 <input type="checkbox" name="tos" id="tos">
-                <label for="tos" style="display: inline">Elfogadom a felhasználói feltételeket</label>
+                <label for="tos" style="display: inline">Elfogadom a <a href="/felhasznaloi_feltetetel">felhasználói feltételeket</a></label>
                 @error('tos')
                     <p class="error">{{ $message }}</p>
                 @enderror
