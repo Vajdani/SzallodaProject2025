@@ -9,6 +9,8 @@ use App\Models\Room;
 use App\Models\Service;
 use App\Models\Booking;
 use App\Models\Billing;
+use App\Models\Loyalty;
+use App\Models\LoyaltyRank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -171,6 +173,13 @@ class MainController extends Controller
                 array_push($services, $s);
             }
         }
+        $loyaltyId = Loyalty::where('user_id',Auth::user()->user_id)->get();
+        $loyalty = Loyalty::find($loyaltyId[0]->loyalty_id);
+        $loyaltyrank = LoyaltyRank::find($loyalty->rank_id);
+        $discount = 100-$loyaltyrank->discount;
+        $price *= $discount/100;
+   
+        
 
         $booking = new Booking;
         $booking->user_id = Auth::user()->user_id;
@@ -200,6 +209,14 @@ class MainController extends Controller
         $billing->line2 = $req->line2;
         $billing->save();
 
+
+        $point = round($price / 1000,0);
+     
+        $loyaltyId = Loyalty::where('user_id',Auth::user()->user_id)->get();
+        $loyalty = Loyalty::find($loyaltyId[0]->loyalty_id);
+        $loyalty->points += $point;
+        $loyalty->updated_at = Carbon::now('Europe/Budapest');
+        $loyalty->save();
 
         return redirect("/szalloda/$req->hotel_id");
     }
