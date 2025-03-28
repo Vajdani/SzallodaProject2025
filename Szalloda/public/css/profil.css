@@ -15,7 +15,9 @@
 
 .profile-header h2 {
     margin-bottom: 10px;
-    margin-top: 10px
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .profile-header {
@@ -187,4 +189,10 @@ a:hover {
 
 ul {
     list-style-position: inside;
+}
+
+.loyalty{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
 }

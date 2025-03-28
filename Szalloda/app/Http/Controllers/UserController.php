@@ -15,6 +15,8 @@ use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
 use App\Models\Booking;
+use App\Models\Loyalty;
+use App\Models\LoyaltyRank;
 use Carbon\Carbon;
 
 
@@ -126,7 +128,12 @@ class UserController extends Controller
                     r.active = 1
             "),
             "booking" => $booking,
-            "services" => $services
+            "services" => $services,
+            "loyalty" => Loyalty::fromQuery("
+                select l.points, lr.rank, lr.rank_id
+                from loyalty l
+                inner join loyaltyrank lr on l.rank_id = lr.rank_id
+                where l.user_id like $id")
         ]);
     }
 
@@ -256,9 +263,15 @@ class UserController extends Controller
         $user->phonenumber = $request->phonenumber;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->userType = "guest";
         $user->active = true;
         $user->Save();
+
+        $loyalty = new Loyalty;
+        $loyalty->user_id = $user->user_id;
+        $loyalty->rank_id = 1;
+        $loyalty->points = 0;
+        $loyalty->updated_at = Carbon::now('Europe/Budapest'); 
+        $loyalty->Save();
 
         return redirect("/bejelentkezes");
     }

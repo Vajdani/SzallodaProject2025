@@ -22,13 +22,15 @@
                         class="profile-picture" id="profile">
                 </div>
                 <div class="profile-details-con">
-                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }}</h2>
+                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{asset('img/loyalty/'.$loyalty[0]->rank_id.'.png')}}" alt="{{$loyalty[0]->rank_id}}.png" class="loyalty"></h2>
                     @if ($hasPermission)
                         <div class="profile-option-con">
                             <a onclick="pfpmenu()">Profilképcsere</a>
                             <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
                             <a href="/fioktorles">Felhasználói fiókom törlése</a>
                         </div>
+                    @else
+                    <p>Polgári név: {{$user->lastName}} {{$user->firstName}}</p>
                     @endif
                 </div>
             </div>
