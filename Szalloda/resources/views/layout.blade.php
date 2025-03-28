@@ -66,7 +66,7 @@
                 <ul class="sidebarContacts">
                     <li>Elérhetőségeink</li>
                     <li><i class="fa-solid fa-phone"></i> : <a href="tel:+36203568954">06 20 356 8954</a></li>
-                    <li><i class="fa-regular fa-envelope"></i>: <a href="mailto:RushWaveRetreat@hotelchain.hu">valaki@pelda.hu</a></li>
+                    <li><i class="fa-regular fa-envelope"></i>: <a href="mailto:RushWaveRetreat@hotelchain.hu">RushWave@hotelchain.hu</a></li>
                     <li>Közösségi médiáink:</li>
                     <a target="_blank" href="https://facebook.com/RushWave_Retreat" class="white"><i class="fa-brands fa-facebook"></i></a>
                     <a target="_blank" href="https://reddit.com/RushWave_Retreat" class="white"><i class="fa-brands fa-reddit-alien"></i></a>

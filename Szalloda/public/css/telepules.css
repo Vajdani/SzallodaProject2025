@@ -8,7 +8,7 @@
 }
 
 .city {
-    background-color: var(--colour_randomgreen5);
+    background-color: var(--colour_sidebar);
     padding: 10px;
     margin-top: 15px;
     text-align: justify;

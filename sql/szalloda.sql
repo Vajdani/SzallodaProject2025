@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 26. 10:39
+-- Létrehozás ideje: 2025. Már 28. 11:27
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -68,8 +68,8 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd
 (2, 3, 2, '2025-03-14', '2025-03-18', 80000, 'confirmed', ''),
 (3, 5, 7, '2025-03-08', '2025-03-13', 300000, 'confirmed', ''),
 (4, 2, 5, '2025-08-13', '2025-08-16', 298500, 'confirmed', '1-3-4'),
-(5, 2, 12, '2025-04-02', '2025-04-06', 359750, 'confirmed', '8-11-13'),
-(6, 2, 68, '2025-03-06', '2025-03-09', 232500, 'confirmed', '33-34-37');
+(5, 2, 12, '2025-04-02', '2025-04-06', 359750, 'completed', '8-11-13'),
+(6, 2, 68, '2025-03-06', '2025-03-09', 232500, 'cancelled', '33-34-37');
 
 -- --------------------------------------------------------
 
@@ -125,7 +125,14 @@ INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
 (4, 14, 'employee'),
 (5, 15, 'employee'),
 (6, 16, 'employee'),
-(7, 17, 'employee');
+(7, 17, 'employee'),
+(1, 18, 'manager'),
+(2, 19, 'manager'),
+(3, 20, 'manager'),
+(4, 21, 'manager'),
+(5, 22, 'manager'),
+(6, 23, 'manager'),
+(7, 24, 'manager');
 
 -- --------------------------------------------------------
 
@@ -488,7 +495,14 @@ INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`,
 (14, '4_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111114', 'some@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
 (15, '5_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111115', 'some@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
 (16, '6_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111116', 'some@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(17, '7_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111117', 'some@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0);
+(17, '7_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111117', 'some@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(18, '1_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222221', 'some_other@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(19, '2_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222222', 'some_other@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(20, '3_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222223', 'some_other@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(21, '4_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222224', 'some_other@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(22, '5_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222225', 'some_other@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(23, '6_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222226', 'some_other@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(24, '7_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222227', 'some_other@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -649,7 +663,7 @@ ALTER TABLE `servicecategory`
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Megkötések a kiírt táblákhoz

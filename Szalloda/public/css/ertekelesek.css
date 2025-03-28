@@ -112,7 +112,7 @@ select {
     border-radius: 15px;
     height: 30px;
     min-width: 15%;
-    background-color: var(--colour_randomgreen6);
+    background-color: var(--colour_randomgreen1);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
@@ -120,7 +120,7 @@ select {
 }
 
 .review-button:hover {
-    background-color: var(--colour_randomgreen3);
+    background-color: var(--colour_sidebar);
 }
 
 .filterSeparater {
