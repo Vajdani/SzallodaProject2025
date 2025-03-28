@@ -21,12 +21,11 @@
             Available = db.GetInt("available") == 1;
         }
 
-        public void UpdateRoomData(int price, int IsOutOfOrder)
+        public void UpdateRoomData(int price, int available)
         {
             PricePerNight = price;
-            Available = IsOutOfOrder == 1;
-            Database ab = new($"UPDATE room SET pricepernight = {price}, available = {IsOutOfOrder} WHERE room_id = {room_id};");
-            ab.Close();
+            Available = available == 1;
+            using Database ab = new($"UPDATE room SET pricepernight = {price}, available = {available} WHERE room_id = {room_id};");
         }
     }
 }

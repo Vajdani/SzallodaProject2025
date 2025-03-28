@@ -23,20 +23,18 @@ namespace SzallodaManagerForm.ItemPanels
 
             Availability = new()
             {
-                Enabled = !room.Available,
                 Items = {
-                    "Elérhető",
-                    "Nem elérhető"
+                    "Nem elérhető",
+                    "Elérhető"
                 },
-                SelectedIndex = 0,
-                DropDownStyle = ComboBoxStyle.DropDownList
+                SelectedIndex = room.Available ? 1 : 0,
+                DropDownStyle = ComboBoxStyle.DropDownList,
             };
 
             Price = new()
             {
                 MaxLength = 6,
                 Text = room.PricePerNight.ToString(),
-                Enabled = !room.Available
             };
 
             btnSave = new()
@@ -56,11 +54,14 @@ namespace SzallodaManagerForm.ItemPanels
 
         void SaveData(object? sender, EventArgs e)
         {
-            if(int.TryParse(Price.Text, out var price))
+            if(!int.TryParse(Price.Text, out var price))
             {
-                Room.UpdateRoomData(Convert.ToInt32(Price.Text), Availability.SelectedIndex);
-                MessageBox.Show("A mentés sikeres volt!","Információ",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Rossz ár adatot adott meg!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            Room.UpdateRoomData(price, Availability.SelectedIndex);
+            MessageBox.Show("A mentés sikeres volt!", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
