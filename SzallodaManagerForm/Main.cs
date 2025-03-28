@@ -68,7 +68,7 @@ namespace SzallodaManagerForm
             cbModositas.Items.Add("Szolgáltatások");
 
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
-            if (level >= 2) //Manager vagy Owner
+            if (level >= 1) //Manager vagy Owner
             {
                 cbModositas.Items.Add("Alkalmazottak");
             }
