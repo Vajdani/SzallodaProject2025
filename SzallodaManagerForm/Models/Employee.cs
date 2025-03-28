@@ -1,6 +1,4 @@
-﻿using static Mysqlx.Notice.Warning.Types;
-
-namespace SzallodaManagerForm.Models
+﻿namespace SzallodaManagerForm.Models
 {
     internal class Employee
     {
@@ -41,8 +39,6 @@ namespace SzallodaManagerForm.Models
             Database ab = new($"DELETE FROM employee WHERE user_id = {Id} and hotel_id = {Main.Instance.GetSelectedHotelId()};");
             ab.Close();
             MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            //ki kéne törölni a hotelje listájából
         }
     }
 }
