@@ -270,7 +270,7 @@ class UserController extends Controller
         $loyalty->user_id = $user->user_id;
         $loyalty->rank_id = 1;
         $loyalty->points = 0;
-        $loyalty->updated_at = Carbon::now('Europe/Budapest'); 
+        $loyalty->updated_at = Carbon::now('Europe/Budapest');
         $loyalty->Save();
 
         return redirect("/bejelentkezes");

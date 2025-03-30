@@ -178,8 +178,8 @@ class MainController extends Controller
         $loyaltyrank = LoyaltyRank::find($loyalty->rank_id);
         $discount = 100-$loyaltyrank->discount;
         $price *= $discount/100;
-   
-        
+
+
 
         $booking = new Booking;
         $booking->user_id = Auth::user()->user_id;
@@ -211,13 +211,19 @@ class MainController extends Controller
 
 
         $point = round($price / 1000,0);
-     
+
         $loyaltyId = Loyalty::where('user_id',Auth::user()->user_id)->get();
         $loyalty = Loyalty::find($loyaltyId[0]->loyalty_id);
         $loyalty->points += $point;
         $loyalty->updated_at = Carbon::now('Europe/Budapest');
-        $loyalty->save();
 
+        $ranks = loyaltyrank::fromquery("select lr.rank_id, lr.minPoint from loyaltyrank lr");
+        foreach($ranks as $r){
+            if($loyalty->points > $r->minPoint){
+                $loyalty->rank_id = $r->rank_id;
+            }
+        }
+        $loyalty->save();
         return redirect("/szalloda/$req->hotel_id");
     }
 

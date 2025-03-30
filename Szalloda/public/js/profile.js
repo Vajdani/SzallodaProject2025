@@ -1,8 +1,16 @@
+function loyaltymenu(loyalty,points){
+    let panel = document.createElement("div")
+    panel.id="loyaltymenu"
+    panel.className = "menuBgOverlay"
+    window.alert(loyalty+" "+points)
+
+}
+
 function pfpmenu() {
     let panel = document.createElement("div")
     panel.id = "pfpMenu"
     panel.className = "menuBgOverlay"
-    // panel.onclick = CloseMenu
+    //panel.onclick = CloseMenu
 
     let pfps = `<div class="PPS-body">`
     for (let i = 0; i < 8; i++) {
