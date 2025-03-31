@@ -37,7 +37,7 @@
                         </div>
                     @else
                     @if ($userActive == 1)
-                    <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>    
+                    <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>
                     @endif
                     @endif
                 </div>

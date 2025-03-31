@@ -10,7 +10,7 @@ function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
     //panel.onclick = CloseMenu
     let perklist=""
     if(perks!=""){
-        let perklist = `<ul>`
+        perklist = `<ul style="text-align:left">`
         perks.forEach(element => {
             perklist+= `<li>`+element+`</li>`
         });
@@ -52,7 +52,7 @@ function loyaltymax(loyalty,...perks){
     panel.className = "menuBgOverlay"
     panel.onclick = CloseMenu
 
-    let perklist = `<ul>`
+    let perklist = `<ul style="text-align:left">`
 
     perks.forEach(element => {
        perklist+= `<li>`+element+`</li>`
