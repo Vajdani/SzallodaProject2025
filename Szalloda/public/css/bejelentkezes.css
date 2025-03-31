@@ -6,11 +6,17 @@ form {
 }
 
 .form {
-    background-color: var(--colour_randomgreen2);
+    background-color: var(--colour_sidebar);
     border-radius: 25px;
     padding: 25px;
-    max-width: 250px;
+    max-width: 500px;
     height: 30vh;
+}
+
+.delete-form{
+    padding: 10px;
+    margin-top: 50px;
+    background-color: var(--colour_randomgreen1);
 }
 
 form.regisztracio {
@@ -53,7 +59,7 @@ input:not(input[type=checkbox]) {
 .delete-button {
     border-radius: 15px;
     height: 30px;
-    min-width: 25%;
+    min-width: 30%;
     background-color: var(--colour_delete);
     color: var(--colour_lightwhite);
     box-shadow: none;
