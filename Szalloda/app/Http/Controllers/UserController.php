@@ -156,6 +156,14 @@ class UserController extends Controller
     }
 
 
+    public function cancel(Request $req){
+        $booking = Booking::find($req->cancel);
+        $booking->status = "refund requested";
+        $booking->save();
+        return UserController::profileByID(Auth::user()->user_id);
+
+        }
+
     public function profilePost(Request $req) {
         $req->validate([
             'username' => 'required',
@@ -198,6 +206,7 @@ class UserController extends Controller
         Auth::logout();
         return redirect("/")->with('sv', 'Sikeres kijelentkezés!');
     }
+
 
     public function login() {
         return view("login");

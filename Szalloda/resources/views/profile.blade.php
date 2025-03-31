@@ -29,7 +29,7 @@
                             onclick="loyaltymenu('{{$loyalty[0]->rank}}','{{$loyalty[0]->points}}','{{$loyalty[0]->minPoint}}','{{$nextRank[0]->minPoint}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @else
                             onclick="loyaltymax('{{$loyalty[0]->rank}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
-                            @endif 
+                            @endif
                             >Hűségprogram megtekintése</a>
                             <a onclick="pfpmenu()">Profilképcsere</a>
                             <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
@@ -109,15 +109,23 @@
                                     </div>
                                     <div class="ratingData">
                                         <div>
+                                            <form action="/profil/lemond" method="post">
+                                                @csrf
                                             <h3 style="text-wrap:auto">{{ $b->bookStart }} — {{ $b->bookEnd }}
                                                 (@if ($b->status == 'confirmed')
                                                     Megerősítve
                                                 @elseif($b->status == 'cancelled')
-                                                    Lemondva
+                                                    Visszatérítve
+                                                @elseif($b->status == 'refund requested')
+                                                    visszatérítés kérvényezve
                                                 @elseif($b->status == 'completed')
                                                     Befejezve
                                                 @endif)
+                                                @if($b->status=='confirmed'||$b->status=='completed')
+                                                    <button class="cancel-button" type="submit" value="{{$b->booking_id}}" id="cancel" name="cancel">Lemondás</button>
+                                                @endif
                                             </h3>
+                                            </form>
                                             <p>
                                                 @if ($b->status == 'confirmed')
                                                     Fizetendő összeg: {{ $b->totalPrice }} Ft

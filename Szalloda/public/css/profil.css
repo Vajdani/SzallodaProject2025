@@ -81,6 +81,19 @@
     background-color: var(--colour_sidebar);
 }
 
+.cancel-button{
+    border-radius: 15px;
+    height: 30px;
+    min-width: 10%;
+    background-color: var(--colour_delete);
+    color: var(--colour_lightwhite);
+    box-shadow: none;
+    border: 2px solid black;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+    float: right;
+}
+
 .user-information form {
     width: 100%;
     display: flex;

@@ -21,6 +21,7 @@ Route::group(['middleware' => [IsLoggedIn::class]], function () {
     Route::get('/profil', [UserController::class, "profile"]);
     Route::post('/profil/adat', [UserController::class, "profilePost"]);
     Route::post('/profil/pfp', [UserController::class, "profilePfp"]);
+    Route::post('/profil/lemond',[UserController::class,"Cancel"]);
     Route::get('/ertekeles', [UserController::class, "review"]);
     Route::get('/ertekeles/{id}', [UserController::class, "reviewById"]);
     Route::post('/ertekeles', [UserController::class, "reviewPost"]);
