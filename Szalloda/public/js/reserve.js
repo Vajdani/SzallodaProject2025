@@ -85,7 +85,7 @@ function CalculatePrice() {
     let output = document.getElementById("osszeg")
     if (userLoyalty.rank_id > 1 && finalPrice > 0) {
         output.innerHTML = `
-            <s>` + finalPrice + ` Ft</s> — <span style="color:red">` + Math.ceil(finalPrice * (100 - userLoyalty.discount) * 0.01) + ` Ft</span><img src="/img/loyalty/` + userLoyalty.rank_id + `.png" alt="` + userLoyalty.rank_id + `.png" class="loyalty">
+            <s title="Teljes ár">` + finalPrice + ` Ft</s> — <span style="color:red" title="` + userLoyalty.discount + `% leárazás">` + Math.ceil(finalPrice * (100 - userLoyalty.discount) * 0.01) + ` Ft</span><img src="/img/loyalty/` + userLoyalty.rank_id + `.png" title="` + userLoyalty.rank + ` rank" alt="` + userLoyalty.rank_id + `.png">
         `
     }
     else {

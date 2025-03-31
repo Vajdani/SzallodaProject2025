@@ -1,11 +1,11 @@
-function point(point){
+function point(point) {
     slider = document.getElementById("point")
-    slider.value=point
+    slider.value = point
 }
 
 function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
     let panel = document.createElement("div")
-    panel.id="loyaltymenu"
+    panel.id = "loyaltymenu"
     panel.className = "menuBgOverlay"
     //panel.onclick = CloseMenu
     if(perks!=""){
@@ -21,7 +21,7 @@ else{
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">
-            <h2>Az ön jelenlegi rangja: `+loyalty+`</h2>
+            <h2>Az ön jelenlegi rangja: `+ loyalty + `</h2>
         </div>
         <div class="loyal-body">
            <p>`+currentmin+`</p><progress id="point" class="pointslider" value="`+points+`" min="`+currentmin+`" max="`+nextmin+`"></progress>  <p style="float: right">`+nextmin+`</p>
@@ -35,18 +35,18 @@ else{
            `+perklist+`
         </div>
         <div class="PPS-buttons">
-            <button class="save-button" onclick="CloseMenu('loyaltymenu')">Mégse</button>
+            <button class="save-button" onclick="CloseMenu('loyaltymenu')">Bezárás</button>
         </div>
     </div>
     `
     document.body.appendChild(panel)
-   
+
 }
 
 function loyaltymax(loyalty,...perks){
 
     let panel = document.createElement("div")
-    panel.id="loyaltymenu"
+    panel.id = "loyaltymenu"
     panel.className = "menuBgOverlay"
     panel.onclick = CloseMenu
 
@@ -62,7 +62,7 @@ function loyaltymax(loyalty,...perks){
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">
-            <h2>Az ön jelenlegi rangja: `+loyalty+`</h2>
+            <h2>Az ön jelenlegi rangja: `+ loyalty + `</h2>
         </div>
         <hr> 
         <div class="loyal-body">
@@ -77,7 +77,7 @@ function loyaltymax(loyalty,...perks){
            `+perklist+`
         </div>
         <div class="PPS-buttons">
-            <button class="save-button" onclick="CloseMenu('loyaltymenu')">Mégse</button>
+            <button class="save-button" onclick="CloseMenu('loyaltymenu')">Bezárás</button>
         </div>
     </div>
     `
@@ -88,7 +88,7 @@ function pfpmenu() {
     let panel = document.createElement("div")
     panel.id = "pfpMenu"
     panel.className = "menuBgOverlay"
-    //panel.onclick = CloseMenu
+    //panel.onclick = () => CloseMenu('pfpMenu')
 
     let pfps = `<div class="PPS-body">`
     for (let i = 0; i < 8; i++) {
@@ -135,6 +135,7 @@ function CloseMenu(menuid) {
 
 document.addEventListener("keydown", (e) => {
     if (e.key == "Escape") {
-        CloseMenu()
+        CloseMenu("pfpMenu")
+        CloseMenu("loyaltymenu")
     }
 })

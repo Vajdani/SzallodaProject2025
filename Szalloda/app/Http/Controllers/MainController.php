@@ -119,7 +119,7 @@ class MainController extends Controller
             "hotel" => $hotel,
             "services" => $service,
             "rooms" => $rooms,
-            "userLoyalty" => Loyalty::select("loyalty.rank_id", "discount")
+            "userLoyalty" => Loyalty::select("loyalty.rank_id", "loyaltyrank.discount", "loyaltyrank.rank")
                              ->join("loyaltyrank", "loyalty.rank_id", "loyaltyrank.rank_id")
                              ->where("user_id", Auth::user()->user_id)
                              ->first()
