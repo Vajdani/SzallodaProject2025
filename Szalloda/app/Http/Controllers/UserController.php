@@ -119,7 +119,7 @@ class UserController extends Controller
 
 
         $currentRank =  Loyalty::fromQuery("
-        select l.points, lr.rank, lr.rank_id, lr.minPoint
+        select l.points, lr.rank, lr.rank_id, lr.minPoint,lr.perks
         from loyalty l
         inner join loyaltyrank lr on l.rank_id = lr.rank_id
         where l.user_id like $id");
@@ -131,6 +131,9 @@ class UserController extends Controller
                     where rank_id like $rankid+1;
             ");
         }
+        $perks = explode(',',$currentRank[0]->perks);
+
+
 
         return view("profile", [
             "user" => User::find($id),
@@ -146,7 +149,8 @@ class UserController extends Controller
             "booking" => $booking,
             "services" => $services,
             "loyalty" =>$currentRank,
-            "nextRank" => $next
+            "nextRank" => $next,
+            "perks" => $perks
             ]);
 
     }

@@ -24,11 +24,13 @@
                     <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{ asset('img/loyalty/' . $loyalty[0]->rank_id . '.png') }}" alt="{{ $loyalty[0]->rank }}.png" class="loyalty"></h2>
                     @if ($hasPermission)
                         <div class="profile-option-con">
-                            <a @if ($loyalty[0]->rank_id != 4)
-                                onclick="loyaltymenu('{{ $loyalty[0]->rank }}','{{ $loyalty[0]->points }}','{{ $loyalty[0]->minPoint }}','{{ $nextRank[0]->minPoint }}')"
+                            <a
+                            @if ($loyalty[0]->rank_id!=4)
+                            onclick="loyaltymenu('{{$loyalty[0]->rank}}','{{$loyalty[0]->points}}','{{$loyalty[0]->minPoint}}','{{$nextRank[0]->minPoint}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @else
-                                onclick="loyaltymax('{{ $loyalty[0]->rank }}')"
-                            @endif>Hűségprogram megtekintése</a>
+                            onclick="loyaltymax('{{$loyalty[0]->rank}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
+                            @endif 
+                            >Hűségprogram megtekintése</a>
                             <a onclick="pfpmenu()">Profilképcsere</a>
                             <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
                             <a href="/fioktorles">Felhasználói fiókom törlése</a>
