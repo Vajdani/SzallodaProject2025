@@ -8,7 +8,7 @@ function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
     panel.id = "loyaltymenu"
     panel.className = "menuBgOverlay"
     //panel.onclick = CloseMenu
-    perklist=""
+    let perklist=""
     if(perks!=""){
         let perklist = `<ul>`
         perks.forEach(element => {
