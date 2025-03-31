@@ -186,6 +186,15 @@ select {
     color: var(--colour_randomgreen1);
 }
 
+.fa-pen-to-square {
+    color: var(--colour_lightwhite);
+    font-size: 163%;
+}
+
+.fa-pen-to-square:hover {
+    color: var(--colour_randomgreen1);
+}
+
 .openFullReview {
     color: var(--colour_lightwhite);
     font-size: 120%;

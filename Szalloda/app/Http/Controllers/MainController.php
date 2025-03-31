@@ -249,18 +249,19 @@ class MainController extends Controller
 
     public function reviewsFilter($stars, $city, $hotel) {
         $reviewQuery = "
-            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.active, reviews.review_id
+            select reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName, hotel.hotel_id, user.username, user.profilePic, user.user_id, user.active, reviews.review_id
             from reviews, hotel, user
             where
                 reviews.hotel_id = hotel.hotel_id and
                 reviews.user_id = user.user_id and
                 reviews.active = 1
-            order by reviews.created_at
-            ";
+        ";
 
         if ($stars <= 5 && $stars >= 1) { $reviewQuery .= " and reviews.rating = $stars"; }
         if ($city != 0 && City::find($city) != null) { $reviewQuery .= " and hotel.city_id = $city"; }
         if ($hotel != 0 && Hotel::find($hotel) != null) { $reviewQuery .= " and reviews.hotel_id = $hotel"; }
+
+        $reviewQuery .= " order by reviews.created_at";
 
         $response = [
             "reviews" => Review::fromQuery($reviewQuery),
