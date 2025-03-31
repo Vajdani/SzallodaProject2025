@@ -25,7 +25,7 @@ class UserController extends Controller
 {
     private static int $minPasswordLength = 8;
 
-    public function review(){
+    public function PostReview_Frontend() {
         $user_id = Auth::user()->user_id;
         $hotels = Hotel::fromQuery("
             select distinct hotel.hotel_id, hotel.hotelName
@@ -55,13 +55,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function reviewById($id){
+    public function PostReviewByID_Frontend($id) {
         return view("review", [
             "hotel" => Hotel::find($id)
         ]);
     }
 
-    public function reviewPost(Request $req){
+    public function PostReview_Backend(Request $req) {
         $req->validate([
             'hotel' => 'required',
             'star' => 'required',
@@ -82,11 +82,11 @@ class UserController extends Controller
         return redirect("/szalloda/$req->hotel");
     }
 
-    public function profile() {
-        return UserController::profileByID(Auth::user()->user_id);
+    public function Profile_Frontend() {
+        return UserController::ProfileByID_Frontend(Auth::user()->user_id);
     }
 
-    public function profileByID($id) {
+    public function ProfileByID_Frontend($id) {
         $services = array();
         $booking = array();
         if (Auth::check() && Auth::user()->user_id == $id) {
@@ -156,15 +156,15 @@ class UserController extends Controller
         ]);
     }
 
-    public function cancel(Request $req){
+    public function CancelBooking_Backend(Request $req){
         $booking = Booking::find($req->cancel);
         $booking->status = "refund requested";
         $booking->save();
 
-        return UserController::profileByID(Auth::user()->user_id);
+        return UserController::ProfileByID_Frontend(Auth::user()->user_id);
     }
 
-    public function profilePost(Request $req) {
+    public function UpdateProfileDetails_Backend(Request $req) {
         $req->validate([
             'username' => 'required',
             'realname' => [
@@ -194,7 +194,7 @@ class UserController extends Controller
         return redirect("/profil");
     }
 
-    public function profilePfp(Request $req){
+    public function SetNewPFP_Backend(Request $req){
         $data = User::find(Auth::user()->user_id);
         $data->profilePic = $req->pfp;
         $data->save();
@@ -202,17 +202,17 @@ class UserController extends Controller
         return redirect("/profil");
     }
 
-    public function logout() {
+    public function Logout_Backend() {
         Auth::logout();
         return redirect("/")->with('sv', 'Sikeres kijelentkezés!');
     }
 
 
-    public function login() {
+    public function Login_Frontend() {
         return view("login");
     }
 
-    public function loginPost(Request $req) {
+    public function Login_Backend(Request $req) {
         $req->validate([
             'username' => 'required',
             'password' => 'required'
@@ -226,11 +226,11 @@ class UserController extends Controller
         }
     }
 
-    public function registration() {
+    public function Registration_Frontend() {
         return view("registration");
     }
 
-    public function registrationPost(Request $request) {
+    public function Registration_Backend(Request $request) {
         $request->validate([
             "name" => "required|unique:user,username",
             "lastName" => "required",
@@ -303,11 +303,11 @@ class UserController extends Controller
         return redirect("/bejelentkezes");
     }
 
-    public function changePassword() {
+    public function ChangePassword_Frontend() {
         return view("changePassword");
     }
 
-    public function changePasswordPost(Request $req) {
+    public function ChangePassword_Backend(Request $req) {
         $req->validate([
             'password'      => 'required',
             'newpassword'  => [
@@ -347,11 +347,11 @@ class UserController extends Controller
         }
     }
 
-    public function deleteAccount() {
+    public function DeleteAccount_Frontend() {
         return view("deleteAccount");
     }
 
-    public function deleteAccountConfirm(Request $request) {
+    public function DeleteAccount_Backend(Request $request) {
         $user_id = Auth::user()->user_id;
         if ($request->deleteReviews) {
             Review::fromQuery("update reviews set active = 0 where user_id = ".$user_id);
@@ -366,7 +366,7 @@ class UserController extends Controller
         return redirect("/");
     }
 
-    public function deleteReview($id) {
+    public function DeleteReview_Backend($id) {
         $review = Review::find($id);
         $review->active = 0;
         $review->Save();
@@ -374,7 +374,7 @@ class UserController extends Controller
         return back();
     }
 
-    public function modifyReview($id) {
+    public function ModifyReview_Frontend($id) {
         $review = Review::find($id);
         return view("review", [
             "hotel" => Hotel::find($review->hotel_id),
@@ -382,7 +382,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function modifyReviewPost(Request $req, $id) {
+    public function ModifyReview_Backend(Request $req, $id) {
         $req->validate([
             'hotel' => 'required',
             'star' => 'required',

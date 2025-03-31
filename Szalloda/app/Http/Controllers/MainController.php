@@ -17,17 +17,17 @@ use Illuminate\Support\Carbon;
 
 class MainController extends Controller
 {
-    public function index() {
+    public function MainPage_Frontend() {
         return view("index",[
             "cities" => City::all()
         ]);
     }
 
-    public function randomHotel() {
-        return MainController::hotel(rand(1, Hotel::max("hotel_id")));
+    public function RandomHotel_Frontend() {
+        return MainController::Hotel_Frontend(Hotel::inRandomOrder()->first()->hotel_id);
     }
 
-    public function hotel($id) {
+    public function Hotel_Frontend($id) {
         $hotel = Hotel::find($id);
         if ($hotel == null) {
             return redirect("/");
@@ -66,7 +66,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function city($id) {
+    public function City_Frontend($id) {
         if (city::find($id) == null) {
             return redirect("/");
         }
@@ -99,7 +99,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function reservationById($id) {
+    public function ReservationByID_Frontend($id) {
         $hotel = Hotel::find($id);
         if ($hotel == null) {
             return redirect("/");
@@ -129,8 +129,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function reservationPost(Request $req) {
-
+    public function Reservation_Backend(Request $req) {
         $req->validate([
             'startDate' => 'required|after:now',
             'endDate' => 'required|after:startDate',
@@ -181,13 +180,12 @@ class MainController extends Controller
                 array_push($services, $s);
             }
         }
+
         $loyaltyId = Loyalty::where('user_id',Auth::user()->user_id)->get();
         $loyalty = Loyalty::find($loyaltyId[0]->loyalty_id);
         $loyaltyrank = LoyaltyRank::find($loyalty->rank_id);
         $discount = 100-$loyaltyrank->discount;
         $price *= $discount/100;
-
-
 
         $booking = new Booking;
         $booking->user_id = Auth::user()->user_id;
@@ -217,7 +215,6 @@ class MainController extends Controller
         $billing->line2 = $req->line2;
         $billing->save();
 
-
         $point = round($price / 1000,0);
 
         $loyaltyId = Loyalty::where('user_id',Auth::user()->user_id)->get();
@@ -235,7 +232,7 @@ class MainController extends Controller
         return redirect("/szalloda/$req->hotel_id");
     }
 
-    public function reviews() {
+    public function AllReviews_Frontend() {
         return view("reviews",[
             "reviews" => Review::fromQuery("
                 select
@@ -254,7 +251,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function reviewsFilter($stars, $city, $hotel) {
+    public function GetFilteredReviews_API($stars, $city, $hotel) {
         $reviewQuery = "
             select
                 reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName,
@@ -287,7 +284,7 @@ class MainController extends Controller
         return $response;
     }
 
-    public function unoccupiedRooms($hotel_id, $start, $end) {
+    public function GetUnoccupiedRooms_API($hotel_id, $start, $end) {
         return Room::fromQuery("
             select r.room_id, r.roomNumber, r.pricepernight, r.capacity
             from room r
