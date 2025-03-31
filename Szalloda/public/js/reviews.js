@@ -12,7 +12,7 @@ let ratings = {}
 let activeUserId
 let reviewType
 
-function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
+function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter) {
     const reviewIsNull = (review == "" || review == "null" || review == null)
     const profilePictureId = userActive ? pfp : 0
     const finalUserName = userActive ? username : "Törölt fiók"
@@ -25,7 +25,7 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
                     <i class="fa-solid fa-book"></i>
                     <i class="fa-solid fa-book-open" onclick="OpenFullReview(` + review_id + `)"></i>
                 </div>` : "") + `
-            ` + (user_id_active == user_id ? `<button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash"></i></button>` : ``) + `
+            ` + (activeUserId == user_id ? `<button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-pen-to-square"></i></button><button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash"></i></button>` : ``) + `
         </div>
     `
 
@@ -52,12 +52,12 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
     return div
 }
 
-function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
-    return RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter)
+function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter) {
+    return RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter)
 }
 
-function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter) {
-    return RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, user_id_active, review_id, maxReviewLength, disableFooter)
+function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter) {
+    return RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter)
 }
 
 function RenderNone(noneText) {
@@ -88,13 +88,15 @@ const reviewData = {
 }
 
 function RenderReviewSection(reviews, review_type, user_id_active) {
+    let hasReplaced = false
     if (typeof(reviews) == "string") {
-        reviews = JSON.parse(reviews)
+        reviews = JSON.parse(reviews.replace(/\r\n/g, "<br>"))
+        hasReplaced = true
     }
 
     ratings = reviews
-    activeUserId = user_id_active
     reviewType = review_type
+    activeUserId = user_id_active
 
     ratingSection.innerHTML = ""
 
@@ -104,10 +106,15 @@ function RenderReviewSection(reviews, review_type, user_id_active) {
     }
     else {
         ratings.forEach(element => {
+            let text = element.reviewText
+            if (text && !hasReplaced) {
+                text = text.replace(/\r\n/g, "<br>")
+            }
+
             let rating = data.render(
                 element.username, element.hotelName, element.hotel_id, element.rating,
-                element.created_at, element.reviewText, element.profilePic, element.user_id,
-                element.active == 1, activeUserId, element.review_id, MAXVISIBLEREVIEWLENGTH
+                element.created_at, text, element.profilePic, element.user_id,
+                element.active == 1, element.review_id, MAXVISIBLEREVIEWLENGTH
             )
 
             ratingSection.appendChild(rating)
@@ -124,7 +131,6 @@ function RenderHotelOption(hotelName, hotelId) {
 }
 
 async function UpdateContents() {
-    //"/ertekelesek/ertek/"+ csillagok.value +"/varos/"+ varos.value +"/szalloda/"+ szalloda.value
     lastHotelId = szalloda.value
     await fetch("/ertekelesek/" + csillagok.value + "/" + varos.value + "/" + szalloda.value).then((response) => {
         if (!response.ok) {
@@ -132,7 +138,7 @@ async function UpdateContents() {
         }
         return response.json();
     }).then((data) => {
-        RenderReviewSection(data.reviews, 0)
+        RenderReviewSection(data.reviews, 0, activeUserId)
 
         szalloda.innerHTML = ""
 
@@ -194,7 +200,7 @@ function OpenReviewDeleteMenu(review_id) {
     document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
         review.username, review.hotelName, review.hotel_id, review.rating,
         review.created_at, review.reviewText, review.profilePic, review.user_id,
-        review.active == 1, activeUserId, review.review_id, MAXVISIBLEREVIEWLENGTH, true
+        review.active == 1, review.review_id, MAXVISIBLEREVIEWLENGTH, true
     ))
 
 }
@@ -231,7 +237,7 @@ function OpenFullReview(review_id) {
     document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
         review.username, review.hotelName, review.hotel_id, review.rating,
         review.created_at, review.reviewText, review.profilePic, review.user_id,
-        review.active == 1, activeUserId, review.review_id, MAXFULLREVIEWLENGTH, true
+        review.active == 1, review.review_id, MAXFULLREVIEWLENGTH, true
     ))
 }
 
