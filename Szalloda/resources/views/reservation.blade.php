@@ -23,12 +23,7 @@
                     <input type="text" name="hotel_id" id="hotel_id" style="display:none" value="{{ $hotel->hotel_id }}">
                     <p>{{ $hotel->hotelName }}</p>
 
-                    <label {{-- for="service" --}}>Szolgálatások:</label>
-                    {{-- <select name="service" id="service">
-                        @foreach ($services as $s)
-                            <option value="{{$s->service_id}}">{{$s->serviceName}}</option>
-                        @endforeach
-                    </select> --}}
+                    <label for="service_0">Szolgálatások:</label>
                     <div>
                         @error('service_id')
                             <p class="error">{{ $message }}</p>
@@ -92,7 +87,7 @@
                     </div>
                     <div class="inputItem">
                         <label for="country">Ország</label>
-                        <input type="text" name="country" id="country" value="{{ old('country') }}">
+                        <input type="text" name="country" id="country" value="{{ old('country') }}" autocomplete="false">
                         @error('country')
                             <p class="error">{{ $message }}</p>
                         @enderror
