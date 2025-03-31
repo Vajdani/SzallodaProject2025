@@ -36,7 +36,9 @@
                             <a href="/fioktorles">Felhasználói fiókom törlése</a>
                         </div>
                     @else
-                        <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>
+                    @if ($userActive == 1)
+                    <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>    
+                    @endif
                     @endif
                 </div>
             </div>
