@@ -5,13 +5,17 @@
     <script src="{{asset('js/reviewstar.js')}}"></script>
 @endsection
 
+@php
+    $isModifying = isset($review);
+@endphp
+
 @section('content')
     <nav>
         <h1>Értékelés írása</h1>
     </nav>
     <div class="mainContent">
         <section>
-            <form action="/ertekeles" method="post" class="center">
+            <form action="@if($isModifying){{"/ertekelesmodositas/$review->review_id"}}@else{{"/ertekeles"}}@endif" method="post" class="center">
                 @csrf
                 <label for="hotel">Melyik hotelünkhöz szeretne értékelést írni?</label>
                 <br>
@@ -32,9 +36,15 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
                 <input type="number" name="star" id="star" style="display: none">
-                <textarea name="comment" id="comment" cols="30" rows="10" maxlength="1000">{{old("comment")}}</textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10" maxlength="1000">@if($isModifying){{$review->reviewText}}@else{{old("comment")}}@endif</textarea>
                 <input type="submit" value="Közzététel">
             </form>
         </section>
     </div>
+
+    @if($isModifying)
+        <script>
+            reviewstar(Number("{{ $review->rating }}"))
+        </script>
+    @endif
 @endsection

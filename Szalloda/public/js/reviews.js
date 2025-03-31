@@ -25,7 +25,7 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
                     <i class="fa-solid fa-book"></i>
                     <i class="fa-solid fa-book-open" onclick="OpenFullReview(` + review_id + `)"></i>
                 </div>` : "") + `
-            ` + (activeUserId == user_id ? `<button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-pen-to-square"></i></button><button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash"></i></button>` : ``) + `
+            ` + (activeUserId == user_id ? `<a href="/ertekelesmodositas/` + review_id + `"><button style="border: 0; background:0"><i class="fa-solid fa-pen-to-square"></i></button></a><button style="border: 0; background:0" onclick="OpenReviewDeleteMenu(` + review_id + `)"><i class="fa-solid fa-trash"></i></button>` : ``) + `
         </div>
     `
 
@@ -202,7 +202,6 @@ function OpenReviewDeleteMenu(review_id) {
         review.created_at, review.reviewText, review.profilePic, review.user_id,
         review.active == 1, review.review_id, MAXVISIBLEREVIEWLENGTH, true
     ))
-
 }
 
 function CloseReviewDeleteMenu() {
@@ -243,6 +242,82 @@ function OpenFullReview(review_id) {
 
 function CloseFullReviewMenu() {
     let menu = document.getElementById("fullReviewMenu")
+    if (menu) {
+        menu.remove()
+    }
+}
+
+
+
+function OpenReviewEditMenu(review_id) {
+    if (document.getElementById("reviewEditMenu")) { return }
+
+    let panel = document.createElement("div")
+    panel.id = "reviewEditMenu"
+    panel.className = "menuBgOverlay"
+    // panel.onclick = CloseReviewEditMenu
+
+    const form = document.createElement("div")
+    form.className = "menuPanel"
+    form.innerHTML = `
+        <h1>Módosítsa az értékelését, ahogyan szeretné!</h1>
+
+        <div id="reviewHolder"></div>
+
+        <div style="display:flex;justify-content:space-between">
+            <form action="/ertekelesmodositas/` + review_id + `" method="post">
+                <input type="hidden" name="_token" value="` + document.querySelector('meta[name="_token"]').content + `">
+                <input>
+
+                <input class="review-button" type="submit" value="Mentés" />
+            </form>
+
+            <button onclick="CloseReviewEditMenu()" class="delete-button">Mégsem</button>
+        </div>
+    `
+
+    panel.appendChild(form)
+    document.body.appendChild(panel)
+
+    let data = GetReviewById(review_id)
+    let review = data.reviewText
+    let userActive = data.active == 1
+    let username = data.username
+    let hotel_id = data.hotel_id
+    let user_id = data.user_id
+    let pfp = data.profilePic
+    let created_at = data.created_at
+    let hotelName = data.hotelName
+    let rating = data.rating
+
+    const profilePictureId = userActive ? pfp : 0
+    const finalUserName = userActive ? username : "Törölt fiók"
+    const ratingStars = ("<span class='starTicked'>★</span>").repeat(rating) + ("<span class='starUnTicked'>★</span>").repeat(5 - rating)
+
+    const div = document.createElement("div")
+    div.id = "review_" + review_id
+    div.innerHTML = `
+        <div class="ratingUser">
+            <div class="profilePicture">
+                <a href="/profil/` + user_id + `"><img src="/img/pfp/` + profilePictureId + `.png" alt="profilkep" title="` + finalUserName + ` profilképe" class="img-fluid profile-picture"></a>
+                <p class="text-center">` + finalUserName + `</p>
+            </div>
+            <div class="ratingData">
+                <h3 style="text-wrap:auto"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
+                <p>` + ratingStars + `</p>
+                <p style="text-wrap:auto">` + created_at + `</p>
+                <textarea style="height:100%;width:100%" id="newReviewText" name="newReviewText">` + review.replace(/<br>/g, "\r\n") + `</textarea>
+            </div>
+        </div>
+    `
+
+    div.classList.add("rating", "center")
+
+    document.getElementById("reviewHolder").appendChild(div)
+}
+
+function CloseReviewEditMenu() {
+    let menu = document.getElementById("reviewEditMenu")
     if (menu) {
         menu.remove()
     }

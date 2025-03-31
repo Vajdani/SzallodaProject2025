@@ -10,15 +10,16 @@ function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
     //panel.onclick = CloseMenu
     perklist=""
     if(perks!=""){
-    let perklist = `<ul>`
-    perks.forEach(element => {
-       perklist+= `<li>`+element+`</li>`
-    });
-    perklist += `</ul>`
-}
-else{
-    perklist="Önnek jelenleg nincsenek jutalmai!"
-}
+        let perklist = `<ul>`
+        perks.forEach(element => {
+            perklist+= `<li>`+element+`</li>`
+        });
+        perklist += `</ul>`
+    }
+    else {
+        perklist="Önnek jelenleg nincsenek jutalmai!"
+    }
+
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">

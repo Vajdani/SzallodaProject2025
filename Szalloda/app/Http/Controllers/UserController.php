@@ -22,7 +22,7 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    static int $minPasswordLength = 8;
+    private static int $minPasswordLength = 8;
 
     public function review(){
         $user_id = Auth::user()->user_id;
@@ -119,21 +119,21 @@ class UserController extends Controller
 
 
         $currentRank =  Loyalty::fromQuery("
-        select l.points, lr.rank, lr.rank_id, lr.minPoint,lr.perks
-        from loyalty l
-        inner join loyaltyrank lr on l.rank_id = lr.rank_id
-        where l.user_id like $id");
+            select l.points, lr.rank, lr.rank_id, lr.minPoint,lr.perks
+            from loyalty l
+            inner join loyaltyrank lr on l.rank_id = lr.rank_id
+            where l.user_id like $id
+        ");
         $next ="";
         $rankid = $currentRank[0]->rank_id;
         if($rankid!=4){
-            $next = loyaltyrank::fromQuery("select rank_id,rank,minPoint
-                    from loyaltyrank
-                    where rank_id like $rankid+1;
+            $next = loyaltyrank::fromQuery("
+                select rank_id,rank,minPoint
+                from loyaltyrank
+                where rank_id like $rankid+1;
             ");
         }
         $perks = explode(',',$currentRank[0]->perks);
-
-
 
         return view("profile", [
             "user" => User::find($id),
@@ -151,18 +151,16 @@ class UserController extends Controller
             "loyalty" =>$currentRank,
             "nextRank" => $next,
             "perks" => $perks
-            ]);
-
+        ]);
     }
-
 
     public function cancel(Request $req){
         $booking = Booking::find($req->cancel);
         $booking->status = "refund requested";
         $booking->save();
-        return UserController::profileByID(Auth::user()->user_id);
 
-        }
+        return UserController::profileByID(Auth::user()->user_id);
+    }
 
     public function profilePost(Request $req) {
         $req->validate([
@@ -372,5 +370,33 @@ class UserController extends Controller
         $review->Save();
 
         return back();
+    }
+
+    public function modifyReview($id) {
+        $review = Review::find($id);
+        return view("review", [
+            "hotel" => Hotel::find($review->hotel_id),
+            "review" => $review
+        ]);
+    }
+
+    public function modifyReviewPost(Request $req, $id) {
+        $req->validate([
+            'hotel' => 'required',
+            'star' => 'required',
+            "comment" => "max:1000"
+        ], [
+            'hotel.required' => 'Muszáj választania egy szállodát!',
+            'star.required' => 'Muszáj értékelnie a szállodát!',
+        ]);
+
+        $review = Review::find($id);
+        $review->rating = $req->star;
+        $review->reviewText = $req->comment;
+        $review->created_at = Carbon::now('Europe/Budapest');
+        $review->edited = 1;
+        $review->Save();
+
+        return redirect("/szalloda/$req->hotel");
     }
 }
