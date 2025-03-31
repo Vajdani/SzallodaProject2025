@@ -131,6 +131,9 @@ class UserController extends Controller
                     where rank_id like $rankid+1;
             ");
         }
+        else{
+            
+        }
         return view("profile", [
             "user" => User::find($id),
             "reviews" => Review::fromQuery("

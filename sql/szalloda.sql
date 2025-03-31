@@ -212,7 +212,7 @@ INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at
 
 CREATE TABLE `loyaltyrank` (
   `rank_id` int(11) NOT NULL,
-  `rank` enum('bronze','silver','gold','platinum') NOT NULL,
+  `rank` enum('bronze','silver','gold','diamond') NOT NULL,
   `discount` double(3,1) NOT NULL,
   `minPoint` int(11) NOT NULL,
   `perks` text DEFAULT NULL
@@ -226,7 +226,7 @@ INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) V
 (1, 'bronze', 0.0, 0, ''),
 (2, 'silver', 5.0, 1000, 'ingyenes törölköző'),
 (3, 'gold', 10.0, 5000, 'ingyenes törölköző, későbbi távozás'),
-(4, 'platinum', 25.0, 15000, 'ingyenes törölköző, későbbi távozás, hozzáférés a platinum részlegünkhöz');
+(4, 'diamond', 25.0, 15000, 'ingyenes törölköző, későbbi távozás, hozzáférés a diamond részlegünkhöz');
 
 -- --------------------------------------------------------
 

@@ -27,6 +27,29 @@ function loyaltymenu(loyalty,points,currentmin,nextmin){
    
 }
 
+function loyaltymax(loyalty){
+    let panel = document.createElement("div")
+    panel.id="loyaltymenu"
+    panel.className = "menuBgOverlay"
+    panel.onclick = CloseMenu
+    
+    panel.innerHTML = `
+    <div class="ProfilePicture-Selection" id="loyal">
+        <div class="PPS-head">
+            <h2>Az ön jelenlegi rangja: `+loyalty+`</h2>
+        </div>
+        <hr> 
+        <div class="loyal-body">
+            <p>Gratulálok, elérted a legmagasabb rangot!</p>
+        </div>  
+        <div class="PPS-buttons">
+            <button class="save-button" onclick="CloseMenu('loyaltymenu')">Mégse</button>
+        </div>
+    </div>
+    `
+    document.body.appendChild(panel)
+}
+
 function pfpmenu() {
     let panel = document.createElement("div")
     panel.id = "pfpMenu"
