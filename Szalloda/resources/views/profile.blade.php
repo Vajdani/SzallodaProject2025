@@ -26,9 +26,9 @@
                         <div class="profile-option-con">
                             <a
                             @if ($loyalty[0]->rank_id!=4)
-                            onclick="loyaltymenu('{{$loyalty[0]->rank}}','{{$loyalty[0]->points}}','{{$loyalty[0]->minPoint}}','{{$nextRank[0]->minPoint}}')"
+                            onclick="loyaltymenu('{{$loyalty[0]->rank}}','{{$loyalty[0]->points}}','{{$loyalty[0]->minPoint}}','{{$nextRank[0]->minPoint}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @else
-                            onclick="loyaltymax('{{$loyalty[0]->rank}}')"
+                            onclick="loyaltymax('{{$loyalty[0]->rank}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @endif 
                             >Hűségprogram megtekintése</a>
                             <a onclick="pfpmenu()">Profilképcsere</a>

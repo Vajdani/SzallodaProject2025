@@ -3,21 +3,37 @@ function point(point){
     slider.value=point
 }
 
-function loyaltymenu(loyalty,points,currentmin,nextmin){
+function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
     let panel = document.createElement("div")
     panel.id="loyaltymenu"
     panel.className = "menuBgOverlay"
-    panel.onclick = CloseMenu
-    
+    //panel.onclick = CloseMenu
+    if(perks!=""){
+    let perklist = `<ul>`
+    perks.forEach(element => {
+       perklist+= `<li>`+element+`</li>`
+    });
+    perklist += `</ul>`
+}
+else{
+    perklist="Önnek jelenleg nincsenek jutalmai!"
+}
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">
             <h2>Az ön jelenlegi rangja: `+loyalty+`</h2>
         </div>
-        <hr> 
         <div class="loyal-body">
            <p>`+currentmin+`</p><progress id="point" class="pointslider" value="`+points+`" min="`+currentmin+`" max="`+nextmin+`"></progress>  <p style="float: right">`+nextmin+`</p>
         </div>  
+          <hr>
+        <div class="PPS-head">
+            <h2>Az ön jelenlegi jutalmai:</h2>
+        </div>
+        <hr>
+        <div class="loyal-body">
+           `+perklist+`
+        </div>
         <div class="PPS-buttons">
             <button class="save-button" onclick="CloseMenu('loyaltymenu')">Mégse</button>
         </div>
@@ -27,12 +43,22 @@ function loyaltymenu(loyalty,points,currentmin,nextmin){
    
 }
 
-function loyaltymax(loyalty){
+function loyaltymax(loyalty,...perks){
+
     let panel = document.createElement("div")
     panel.id="loyaltymenu"
     panel.className = "menuBgOverlay"
     panel.onclick = CloseMenu
-    
+
+    let perklist = `<ul>`
+
+    perks.forEach(element => {
+       perklist+= `<li>`+element+`</li>`
+    });
+
+    perklist += `</ul>`
+    console.log(perklist)
+
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">
@@ -42,6 +68,14 @@ function loyaltymax(loyalty){
         <div class="loyal-body">
             <p>Gratulálok, elérted a legmagasabb rangot!</p>
         </div>  
+        <hr>
+        <div class="PPS-head">
+            <h2>Az ön jelenlegi jutalmai:</h2>
+        </div>
+        <hr>
+        <div class="loyal-body">
+           `+perklist+`
+        </div>
         <div class="PPS-buttons">
             <button class="save-button" onclick="CloseMenu('loyaltymenu')">Mégse</button>
         </div>
