@@ -1,4 +1,4 @@
-.form{
+.form {
     border: 1px solid black;
     background-color: white;
     width: 100%;
@@ -11,35 +11,40 @@
     background-color: var(--colour_randomgreen2);
 }
 
-.ellatas-opcio{
+.ellatas-opcio {
     display: flex;
     flex-direction: row;
     max-width: 200px;
 }
 
-.telefonszam{
+.telefonszam {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
 }
 
-label{
+label {
     display: inline;
 }
-.inline{
+
+.inline {
     display: inline;
 }
+
 .block {
     display: block;
 }
+
 .mainContent {
     font-size: medium;
 }
-.mainContent section{
-    padding:15px;
+
+.mainContent section {
+    padding: 15px;
 
 }
+
 form {
     width: 80%;
     display: flex;
@@ -53,17 +58,17 @@ form a {
     text-align: center;
 }
 
-input[type=text]{
+input[type=text] {
     border: none;
     border-radius: 15px;
     background-color: var(--colour_randomgreen5);
     color: var(--colour_lightwhite);
 }
 
-input[type=date]
-{
+input[type=date] {
     width: 40%;
 }
+
 input[type=submit] {
     padding: 5px;
     font-size: 90%;
@@ -71,35 +76,58 @@ input[type=submit] {
     margin-bottom: 10px;
     width: 100%;
 }
-.kod{
+
+.kod {
     width: 9%;
 }
-.szam{
+
+.szam {
     width: 33%;
 }
-textarea{
+
+textarea {
     width: 90%;
     height: 100px;
 
 }
+
 @media only screen and (max-width: 600px) {
-    label{
+    label {
         display: block;
     }
-    .kod{
+
+    .kod {
         width: 15%;
     }
-    .szam{
+
+    .szam {
         width: 60%;
     }
-    input[type=date]
-    {
+
+    input[type=date] {
         width: 80%;
     }
-    span{
+
+    span {
         display: block;
     }
-    input[type=radio]{
+
+    input[type=radio] {
         display: inline;
     }
+}
+
+.finalPrice {
+    --gap: 5px;
+    --iconSize: 0px;
+
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap);
+    margin-left: calc(var(--iconSize) + var(--gap));
+}
+
+.finalPrice:has(img) {
+    --iconSize: 30px;
 }

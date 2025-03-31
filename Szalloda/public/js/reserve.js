@@ -1,10 +1,13 @@
 let selectedRoomId = -1
 let rooms = {}
 let services = {}
+let userLoyalty = {}
 
-function InitData(roomsJson, servicesJson) {
+function InitData(roomsJson, servicesJson, loyalty) {
     rooms = JSON.parse(roomsJson)
     services = JSON.parse(servicesJson)
+    userLoyalty = JSON.parse(loyalty)
+    console.log(userLoyalty)
 
     ResetRoomId()
 
@@ -79,7 +82,15 @@ function CalculatePrice() {
         }
     })
 
-    document.getElementById("osszeg").innerText = finalPrice
+    let output = document.getElementById("osszeg")
+    if (userLoyalty.rank_id > 1 && finalPrice > 0) {
+        output.innerHTML = `
+            <s>` + finalPrice + ` Ft</s> — <span style="color:red">` + Math.ceil(finalPrice * (100 - userLoyalty.discount) * 0.01) + ` Ft</span><img src="/img/loyalty/` + userLoyalty.rank_id + `.png" alt="` + userLoyalty.rank_id + `.png" class="loyalty">
+        `
+    }
+    else {
+        output.innerText = finalPrice + " Ft"
+    }
 }
 
 

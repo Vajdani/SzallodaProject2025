@@ -5,7 +5,7 @@
 
     <script src="{{ asset('js/reserve.js') }}"></script>
     <script>
-        InitData(`{!! json_encode($rooms) !!}`, `{!! json_encode($services) !!}`)
+        InitData(`{!! json_encode($rooms) !!}`, `{!! json_encode($services) !!}`, `{!! json_encode($userLoyalty)!!}` )
     </script>
 @endsection
 
@@ -72,7 +72,7 @@
                     <p>Létszám: <span id="letszam"></span></p>
 
                     <p>Összeg</p>
-                    <p class="flex"><span id="osszeg" class="inline">0</span> Ft</p>
+                    <p id="osszeg" class="finalPrice">0</p>
                 </div>
 
                 <div class="form">
