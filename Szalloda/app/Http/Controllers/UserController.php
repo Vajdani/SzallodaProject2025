@@ -15,7 +15,6 @@ use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
 use App\Rules\StringMaxRule;
-use App\Rules\UniqueUserRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
 use App\Models\LoyaltyRank;
@@ -235,7 +234,7 @@ class UserController extends Controller
         $request->validate([
             "name" => [
                 'required',
-                new UniqueUserRule()
+                "unique:user,username"
             ],
             "lastName" => "required",
             "firstName" => "required",
