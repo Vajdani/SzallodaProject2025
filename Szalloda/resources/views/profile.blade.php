@@ -21,22 +21,20 @@
                         class="profile-picture" id="profile">
                 </div>
                 <div class="profile-details-con">
-                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{asset('img/loyalty/'.$loyalty[0]->rank_id.'.png')}}" alt="{{$loyalty[0]->rank}}.png" class="loyalty"></h2>
+                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{ asset('img/loyalty/' . $loyalty[0]->rank_id . '.png') }}" alt="{{ $loyalty[0]->rank }}.png" class="loyalty"></h2>
                     @if ($hasPermission)
                         <div class="profile-option-con">
-                            <a
-                            @if ($loyalty[0]->rank_id!=4)
-                            onclick="loyaltymenu('{{$loyalty[0]->rank}}','{{$loyalty[0]->points}}','{{$loyalty[0]->minPoint}}','{{$nextRank[0]->minPoint}}')"
+                            <a @if ($loyalty[0]->rank_id != 4)
+                                onclick="loyaltymenu('{{ $loyalty[0]->rank }}','{{ $loyalty[0]->points }}','{{ $loyalty[0]->minPoint }}','{{ $nextRank[0]->minPoint }}')"
                             @else
-                            onclick="loyaltymax('{{$loyalty[0]->rank}}')"
-                            @endif 
-                            >Hűségprogram megtekintése</a>
+                                onclick="loyaltymax('{{ $loyalty[0]->rank }}')"
+                            @endif>Hűségprogram megtekintése</a>
                             <a onclick="pfpmenu()">Profilképcsere</a>
                             <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
                             <a href="/fioktorles">Felhasználói fiókom törlése</a>
                         </div>
                     @else
-                    <p>Polgári név: {{$user->lastName}} {{$user->firstName}}</p>
+                        <p>Polgári név: {{ $user->lastName }} {{ $user->firstName }}</p>
                     @endif
                 </div>
             </div>
@@ -86,15 +84,11 @@
                     <div class="ratingSection center" id="ratingSection">
                         <script src="{{ asset('js/reviews.js') }}"></script>
                         <script>
-                            RenderReviewSection(`{!! json_encode($reviews) !!}`,
-                            @if ($hasPermission)
-                                {{ 3 }}
-                            @else
-                                {{ 2 }}
-                            @endif , @auth "{{ Auth::user()->user_id }}"
-                            @else
-                            "-1"
-                            @endauth )
+                            RenderReviewSection(
+                                `{!! json_encode($reviews) !!}`,
+                                @if ($hasPermission) {{ 3 }} @else {{ 2 }} @endif,
+                                @auth "{{ Auth::user()->user_id }}" @else "-1" @endauth
+                            )
                         </script>
                     </div>
                 </div>
@@ -130,11 +124,11 @@
                                                 @endif
                                             </p>
 
-                                            @if ($b->services != "")
+                                            @if ($b->services != '')
                                                 <h4>Szolgáltatások:</h4>
                                                 <ul>
                                                     @foreach ($services[$b->booking_id] as $service)
-                                                        <li>{{$service->serviceName}}</li>
+                                                        <li>{{ $service->serviceName }}</li>
                                                     @endforeach
                                                 </ul>
                                             @endif
@@ -149,5 +143,3 @@
         </div>
     </div>
 @endsection
-
-
