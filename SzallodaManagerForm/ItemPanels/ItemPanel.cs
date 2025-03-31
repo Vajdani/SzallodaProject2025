@@ -5,15 +5,16 @@
         public int ItemID { get; private set; }
         public ItemPanel(Panel parent, int verticalPadding = 10)
         {
-            ResizePanel(parent.Size);
-            Location = new Point(10, (50 + verticalPadding) * parent.Controls.Count);
+            ResizePanel(parent.ClientSize); //iitt
+            Location = new Point(10, (60 + verticalPadding) * parent.Controls.Count + verticalPadding);
             BackColor = Color.Aqua;
             Visible = true;
         }
 
         public void ResizePanel(Size parentSize)
         {
-            Size = new Size(Convert.ToInt32(Math.Floor(parentSize.Width * 0.95)), 50);
+            Size = new Size(Convert.ToInt32(Math.Floor(parentSize.Width * 0.95)), 60);
+            AlignElementsHorizontally();
         }
 
         public void PositionElemenet(Control control, int position)

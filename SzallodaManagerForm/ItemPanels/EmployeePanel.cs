@@ -39,7 +39,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             Controls.Add(lbUsername);
             Controls.Add(lbUserType);
-            Controls.Add(btnChangeLevel); //Csak owner láthatja TODO
+            if(User.GetHotelAuthorityLevel(Main.Instance.GetSelectedHotelId()) == User.AuthorityLevel.Owner) Controls.Add(btnChangeLevel); 
             Controls.Add(btnFire);
 
             AlignElementsHorizontally();

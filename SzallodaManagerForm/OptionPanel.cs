@@ -15,19 +15,19 @@ namespace SzallodaManagerForm
         Panel itemPanelCon;
         public ItemPanelCategory Category { get; private set; }
         
-        public OptionPanel(Size parent, ItemPanelCategory category) 
+        public OptionPanel(ItemPanelCategory category) 
         {
             Category = category;
 
-            Size = new Size(parent.Width, parent.Height-70);
-            Location = new Point(0, 70);
+            Size = new Size(Main.Instance.ClientSize.Width, Main.Instance.ClientSize.Height-100);
+            Location = new Point(0,100);
             Visible = false;
 
             itemPanelCon = new Panel
             {
                 BackColor = Color.Red,
-                Size = new Size(Size.Width - 20, (parent.Height - 170)),
-                Location = new Point(0, 50),
+                Size = new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200)),
+                Location = new Point(10, 50),
                 AutoScroll = true
             };
             Controls.Add(itemPanelCon);
@@ -36,6 +36,7 @@ namespace SzallodaManagerForm
         public void UpdatePanel(Hotel? hotel)
         {
             itemPanelCon.Controls.Clear();
+            ResizePanel();
 
             if (hotel == null) { return; }
 
@@ -63,19 +64,18 @@ namespace SzallodaManagerForm
 
                     break;
             }
+            this.Visible = true;
 
-            Visible = true;
         }
 
-        public void ResizePanel(Size parent)
+        public void ResizePanel()
         {
-            Size = new Size(parent.Width, parent.Height - 70);
-            itemPanelCon.Size = new Size(Size.Width - 20, (parent.Height - 170));
+            Size = new Size(Main.Instance.ClientSize.Width, Main.Instance.ClientSize.Height - 100);
+            itemPanelCon.Size = new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200));
 
-            foreach(var ItP in itemPanelCon.Controls)
+            foreach (ItemPanel ItP in itemPanelCon.Controls)
             {
-                // Ha az aktuális item ItemPanel, resize function meghívása rajta
-                if(ItP is ItemPanel) {}
+                ItP.ResizePanel(itemPanelCon.Size);
             }
         }
     }

@@ -4,6 +4,9 @@ namespace SzallodaManagerForm
 {
     partial class Main : Form
     {
+
+        Panel Header;
+
         OptionPanel current;
         OptionPanel alkalmazottak;
         OptionPanel szobak;
@@ -16,13 +19,14 @@ namespace SzallodaManagerForm
             InitializeComponent();
 
             Instance = this;
+            this.Resize += OnSizeChange;
 
-            szobak = new(Size, OptionPanel.ItemPanelCategory.Rooms);
-            szolgaltatasok = new(Size, OptionPanel.ItemPanelCategory.Services)
+            szobak = new(OptionPanel.ItemPanelCategory.Rooms);
+            szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services)
             {
                 BackColor = Color.RebeccaPurple
             };
-            alkalmazottak = new(Size, OptionPanel.ItemPanelCategory.Employees)
+            alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees)
             { 
                 BackColor = Color.RebeccaPurple
             };
@@ -51,6 +55,8 @@ namespace SzallodaManagerForm
             }
 
             cbHotelek.SelectedIndex = 0;
+
+            Header = panel1;
         }
 
         private void Main_Closed(object sender, FormClosedEventArgs e)
@@ -105,6 +111,21 @@ namespace SzallodaManagerForm
         public int GetSelectedHotelId()
         {
             return GetSelectedHotel().hotel_id;
+        }
+
+        public void OnSizeChange(object sender, EventArgs e)
+        {
+            if(this.Size.Width > 700)
+            {
+                current.ResizePanel();
+                ResizeHeader();
+            }
+            lbFelhasznalo.Text = this.Size.Width.ToString();
+        }
+
+        public void ResizeHeader()
+        {
+            Header.Size = new Size(this.ClientSize.Width, Header.Size.Height);
         }
     }
 }
