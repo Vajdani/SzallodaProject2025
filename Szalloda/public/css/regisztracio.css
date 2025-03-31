@@ -27,6 +27,7 @@
     border-bottom: 2px solid var(--colour_randomgreen1);
     background-color: var(--colour_sidebar);
     transition: all 99999999999999s linear;
+    color: var(--colour_lightwhite)
 }
 
 .form-design input:not(input[type=checkbox]) {

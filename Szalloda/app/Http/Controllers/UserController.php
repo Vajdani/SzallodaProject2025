@@ -15,6 +15,7 @@ use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
 use App\Rules\StringMaxRule;
+use App\Rules\UniqueUserRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
 use App\Models\LoyaltyRank;
@@ -232,7 +233,10 @@ class UserController extends Controller
 
     public function Registration_Backend(Request $request) {
         $request->validate([
-            "name" => "required|unique:user,username",
+            "name" => [
+                'required',
+                new UniqueUserRule()
+            ],
             "lastName" => "required",
             "firstName" => "required",
             "email" => [
@@ -274,6 +278,7 @@ class UserController extends Controller
             "password.symbols" => "A jelszónak speciális karaktereket is tartalmaznia kell!",
 
             "password_confirmation.required" => "Muszáj megerősítenie a jelszavát!",
+            "password.confirmed" => "A jelszavaknak egyezniük kell",
 
             "date.required" => "Muszáj megadnia a születési dátumát!",
             "date.date" => "Valós dátumot adjon meg!",

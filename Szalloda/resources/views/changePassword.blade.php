@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}">
+    <link rel="stylesheet" href="{{asset('css/regisztracio.css')}}">
 @endsection
 
 @section('content')
@@ -9,21 +9,23 @@
         <h1>Jelszó módosítása</h1>
     </nav>
     <div class="mainContent">
-        <section>
-            <form action="/jelszovaltoztatas" method="post" class="center">
+            <form action="/jelszovaltoztatas" method="post" class="form-design">
                 @csrf
+                <div class="inputItem">
+                    <label for="password">Régi jelszó</label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <div class="inputItem">
+                    <label for="newpassword">Új jelszó</label>
+                    <input type="password" name="newpassword" id="newpassword">
+                </div>
+                <div class="inputItem">
+                    <label for="newpassword_confirmation">Új jelszó megerősítése</label>
+                    <input type="password" name="newpassword_confirmation" id="newpassword_confirmation">
+                </div>
 
-                <label for="password">Régi jelszó</label>
-                <input type="password" name="password" id="password">
 
-                <label for="newpassword">Új jelszó</label>
-                <input type="password" name="newpassword" id="newpassword">
-
-                <label for="newpassword_confirmation">Új jelszó megerősítése</label>
-                <input type="password" name="newpassword_confirmation" id="newpassword_confirmation">
-
-                <input type="submit" value="Módosítás">
+                <button type="submit">Módosítás</button>
             </form>
-        </section>
     </div>
 @endsection
