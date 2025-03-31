@@ -131,3 +131,8 @@ textarea {
 .finalPrice:has(img) {
     --iconSize: 30px;
 }
+
+.finalPrice img {
+    width: var(--iconSize);
+    height: var(--iconSize);
+}
