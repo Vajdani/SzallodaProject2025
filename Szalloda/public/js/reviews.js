@@ -17,10 +17,10 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
     const profilePictureId = userActive ? pfp : 0
     const finalUserName = userActive ? username : "Törölt fiók"
     const ratingStars = ("<span class='starTicked'>★</span>").repeat(rating) + ("<span class='starUnTicked'>★</span>").repeat(5 - rating)
-    const finalReviewText = (reviewIsNull ? "" : (review.length > maxReviewLength ? review.substring(0, maxReviewLength) + "..." : review))
+    const finalReviewText = (reviewIsNull ? "" : (review.replace(/<br>/g, "").length > maxReviewLength ? review.substring(0, maxReviewLength) + "..." : review))
     const footer = `
         <div class="reviewFooter" id="reviewFooter_` + review_id + `">
-            ` + (!reviewIsNull && review.length > 250 ? `
+            ` + (!reviewIsNull && review.length > MAXVISIBLEREVIEWLENGTH ? `
                 <div class="openFullReview" title="Teljes értékelés">
                     <i class="fa-solid fa-book"></i>
                     <i class="fa-solid fa-book-open" onclick="OpenFullReview(` + review_id + `)"></i>
