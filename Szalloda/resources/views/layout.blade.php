@@ -78,6 +78,8 @@
     <footer>
         <p>Footer text</p>
     </footer>
+
+    @yield("loyal")
 </body>
 
 </html>

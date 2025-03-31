@@ -1,9 +1,30 @@
-function loyaltymenu(loyalty,points){
+function point(point){
+    slider = document.getElementById("point")
+    slider.value=point
+}
+
+function loyaltymenu(loyalty,points,currentmin,nextmin){
     let panel = document.createElement("div")
     panel.id="loyaltymenu"
     panel.className = "menuBgOverlay"
-    window.alert(loyalty+" "+points)
-
+    panel.onclick = CloseMenu
+    
+    panel.innerHTML = `
+    <div class="ProfilePicture-Selection" id="loyal">
+        <div class="PPS-head">
+            <h2>Az ön jelenlegi rangja: `+loyalty+`</h2>
+        </div>
+        <hr> 
+        <div class="loyal-body">
+           <p>`+currentmin+`</p><progress id="point" class="pointslider" value="`+points+`" min="`+currentmin+`" max="`+nextmin+`"></progress>  <p style="float: right">`+nextmin+`</p>
+        </div>  
+        <div class="PPS-buttons">
+            <button class="save-button" onclick="CloseMenu('loyaltymenu')">Mégse</button>
+        </div>
+    </div>
+    `
+    document.body.appendChild(panel)
+   
 }
 
 function pfpmenu() {
@@ -30,7 +51,7 @@ function pfpmenu() {
                 <hr>
                 ` + pfps + `
                 <div class="PPS-buttons">
-                    <button class="save-button" onclick="CloseMenu()">Mégse</button>
+                    <button class="save-button" onclick="CloseMenu('pfpMenu')">Mégse</button>
                     <button class="save-button" type="submit">Profilkép beállítása</button>
                     <input type="text" name="pfp" id="pfp" style="display: none">
                 </div>
@@ -48,8 +69,8 @@ function pfpchange(szam) {
     document.getElementById("pfp").value = szam
 }
 
-function CloseMenu() {
-    let menu = document.getElementById("pfpMenu")
+function CloseMenu(menuid) {
+    let menu = document.getElementById(menuid)
     if (menu) {
         menu.remove()
     }

@@ -116,6 +116,21 @@ class UserController extends Controller
             ");
         }
 
+
+
+        $currentRank =  Loyalty::fromQuery("
+        select l.points, lr.rank, lr.rank_id, lr.minPoint
+        from loyalty l
+        inner join loyaltyrank lr on l.rank_id = lr.rank_id
+        where l.user_id like $id");
+        $next ="";
+        $rankid = $currentRank[0]->rank_id;
+        if($rankid!=4){
+            $next = loyaltyrank::fromQuery("select rank_id,rank,minPoint
+                    from loyaltyrank
+                    where rank_id like $rankid+1;
+            ");
+        }
         return view("profile", [
             "user" => User::find($id),
             "reviews" => Review::fromQuery("
@@ -129,12 +144,10 @@ class UserController extends Controller
             "),
             "booking" => $booking,
             "services" => $services,
-            "loyalty" => Loyalty::fromQuery("
-                select l.points, lr.rank, lr.rank_id
-                from loyalty l
-                inner join loyaltyrank lr on l.rank_id = lr.rank_id
-                where l.user_id like $id")
-        ]);
+            "loyalty" =>$currentRank,
+            "nextRank" => $next
+            ]);
+
     }
 
 

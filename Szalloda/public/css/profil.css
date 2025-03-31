@@ -196,3 +196,29 @@ ul {
     height: 30px;
     margin-left: 10px;
 }
+
+.pointslider {
+    border-radius: 7px; 
+    width: 80%;
+    height: 10px;
+}
+.pointslider::-webkit-progress-bar {
+    background-color: rgb(82, 82, 82);
+    border-radius: 7px;
+}
+.pointslider::-webkit-progress-value {
+    background-color: #3ff03f;
+    border-radius: 7px;
+}
+
+
+.loyal-body{
+        padding: 10px;
+        box-sizing: border-box;
+        display: flex;
+        text-align: center;
+        align-items: center;
+}
+.loyal-body p{
+    padding: 5px;
+}
