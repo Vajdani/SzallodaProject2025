@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 28. 11:27
+-- Létrehozás ideje: 2025. Már 31. 12:27
 -- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- PHP verzió: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,6 +42,16 @@ CREATE TABLE `billing` (
   `line2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- A tábla adatainak kiíratása `billing`
+--
+
+INSERT INTO `billing` (`billing_id`, `booking_id`, `amount`, `bookingDate`, `paymentDate`, `paymentStatus`, `paymentMethod`, `country`, `city`, `zipcode`, `line1`, `line2`) VALUES
+(1, 7, 143500, '2025-03-31 11:23:20', '2025-03-31 11:23:20', 'pending', 'debit card', 'Magyarország', 'Budapest', '1056', 'váci utca 6', '6/8/3'),
+(2, 8, 310500, '2025-03-31 11:51:37', '0000-00-00 00:00:00', 'pending', 'cash', 'Magyarország', 'Budapest', '1056', 'váci utca 6', '6/8/3'),
+(3, 9, 723000, '2025-03-31 11:53:03', '2025-03-31 11:53:03', 'pending', 'credit card', 'Magyarország', 'Budapest', '1056', 'váci utca 6', '6/8/3'),
+(4, 10, 195000, '2025-03-31 12:02:39', '0000-00-00 00:00:00', 'pending', 'cash', 'Magyarország', 'Budapest', '1056', 'váci utca 6', '6/8/3');
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +65,7 @@ CREATE TABLE `booking` (
   `bookStart` date NOT NULL,
   `bookEnd` date NOT NULL,
   `totalPrice` int(11) NOT NULL,
-  `status` enum('confirmed','cancelled','completed') NOT NULL,
+  `status` enum('confirmed','cancelled','completed','refund requested') NOT NULL,
   `services` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -69,7 +79,11 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd
 (3, 5, 7, '2025-03-08', '2025-03-13', 300000, 'confirmed', ''),
 (4, 2, 5, '2025-08-13', '2025-08-16', 298500, 'confirmed', '1-3-4'),
 (5, 2, 12, '2025-04-02', '2025-04-06', 359750, 'completed', '8-11-13'),
-(6, 2, 68, '2025-03-06', '2025-03-09', 232500, 'cancelled', '33-34-37');
+(6, 2, 68, '2025-03-06', '2025-03-09', 232500, 'cancelled', '33-34-37'),
+(7, 2, 80, '2025-03-31', '2025-04-02', 143500, 'confirmed', '39-40-41-42'),
+(8, 2, 7, '2025-08-02', '2025-08-05', 310500, 'confirmed', '2-3-4-5'),
+(9, 2, 1, '2025-03-31', '2025-04-13', 723000, 'confirmed', '2-3'),
+(10, 25, 64, '2025-04-01', '2025-04-04', 195000, 'completed', '');
 
 -- --------------------------------------------------------
 
@@ -120,7 +134,7 @@ INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
 (6, 10, 'owner'),
 (7, 10, 'owner'),
 (1, 11, 'employee'),
-(2, 12, 'employee'),
+(2, 12, 'manager'),
 (3, 13, 'employee'),
 (4, 14, 'employee'),
 (5, 15, 'employee'),
@@ -178,12 +192,12 @@ CREATE TABLE `loyalty` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Tábla adatainak kiíratása `loyalty`
+-- A tábla adatainak kiíratása `loyalty`
 --
 
 INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at`) VALUES
 (1, 1, 1, 0, '2025-03-31 00:00:00'),
-(2, 2, 1, 0, '2025-03-31 00:00:00'),
+(2, 2, 2, 1178, '2025-03-31 11:53:03'),
 (3, 3, 1, 0, '2025-03-31 00:00:00'),
 (4, 4, 1, 0, '2025-03-31 00:00:00'),
 (5, 5, 1, 0, '2025-03-31 00:00:00'),
@@ -202,7 +216,8 @@ INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at
 (18, 21, 1, 0, '2025-03-31 00:00:00'),
 (19, 22, 1, 0, '2025-03-31 00:00:00'),
 (20, 23, 1, 0, '2025-03-31 00:00:00'),
-(21, 24, 1, 0, '2025-03-31 00:00:00');
+(21, 24, 1, 0, '2025-03-31 00:00:00'),
+(22, 25, 1, 195, '2025-03-31 12:02:39');
 
 -- --------------------------------------------------------
 
@@ -241,23 +256,25 @@ CREATE TABLE `reviews` (
   `rating` tinyint(4) NOT NULL,
   `reviewText` text DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT 1
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `edited` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `reviews`
 --
 
-INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`, `active`) VALUES
-(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 1),
-(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 1),
-(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 1),
-(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18', 1),
-(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 1),
-(7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 1),
-(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 1),
-(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 1),
-(10, 2, 1, 5, 'Fagyos', '2025-03-24 15:29:27', 1);
+INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`, `active`, `edited`) VALUES
+(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 1, 0),
+(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 1, 0),
+(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 0, 0),
+(5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18', 1, 0),
+(6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 1, 0),
+(7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 1, 0),
+(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 1, 0),
+(9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 1, 0),
+(10, 2, 1, 5, 'Fagyos', '2025-03-24 15:29:27', 1, 0),
+(11, 25, 6, 5, 'jó volt', '2025-03-31 12:03:03', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -280,100 +297,100 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `pricepernight`, `available`) VALUES
-(1, 1, 'Alap iglu 1', NULL, 2, 40000, 0),
-(2, 1, 'Alap iglu 2', NULL, 2, 45000, 0),
-(3, 1, 'Deluxe iglu 1', NULL, 4, 60000, 0),
-(4, 1, 'Deluxe iglu 2', NULL, 4, 65000, 0),
-(5, 1, 'Deluxe iglu 3', NULL, 5, 80000, 0),
-(6, 1, 'Premium iglu', NULL, 2, 60000, 0),
-(7, 1, 'Családi iglu', NULL, 6, 75000, 0),
-(8, 2, 'Royal Suite 1', 0, 4, 80000, 0),
-(9, 2, 'Royal Suite 2', 0, 4, 80000, 0),
-(10, 2, 'Royal Suite 3', 0, 4, 80000, 0),
-(11, 2, 'Királyi kamra 1', 0, 2, 70000, 0),
-(12, 2, 'Királyi kamra 2', 1, 2, 70000, 0),
-(13, 2, 'Királyi kamra 3', 1, 2, 70000, 0),
-(14, 2, 'Kiránynő szobája 1', 1, 2, 65000, 0),
-(15, 2, 'Kiránynő szobája 2', 1, 2, 65000, 0),
-(16, 2, 'Kiránynő szobája 3', 2, 2, 65000, 0),
-(17, 2, 'Deluxe szoba 1', 2, 3, 75000, 0),
-(18, 2, 'Deluxe szoba 2', 2, 3, 75000, 0),
-(19, 2, 'Deluxe szoba 3', 2, 3, 75000, 0),
-(20, 2, 'Lovagi szállás 1', 3, 4, 85000, 0),
-(21, 2, 'Lovagi szállás 2', 3, 4, 85000, 0),
-(22, 2, 'Lovagi szállás 3', 3, 4, 85000, 0),
-(23, 3, '101', -1, 2, 120000, 0),
-(24, 3, '102A', -1, 2, 125000, 0),
-(25, 3, '102B', -1, 2, 130000, 0),
-(26, 3, '201A', -2, 2, 130000, 0),
-(27, 3, '201B', -2, 2, 135000, 0),
-(28, 3, '201C', -2, 2, 140000, 0),
-(29, 3, '202', -2, 2, 140000, 0),
-(30, 3, '301', -3, 2, 145000, 0),
-(31, 3, '302', -3, 2, 150000, 0),
-(32, 3, '303A', -3, 4, 150000, 0),
-(33, 3, '304B', -3, 4, 155000, 0),
-(34, 3, '401', -4, 4, 160000, 0),
-(35, 3, '402', -4, 4, 160000, 0),
-(36, 3, '403A', -4, 4, 165000, 0),
-(37, 3, '404B', -4, 4, 170000, 0),
-(38, 4, '1. számú kabin', NULL, 2, 75000, 0),
-(39, 4, '2. számú kabin', NULL, 2, 80000, 0),
-(40, 4, '3. számú kabin', NULL, 3, 90000, 0),
-(41, 4, '4. számú kabin', NULL, 3, 95000, 0),
-(42, 4, '5. számú kabin', NULL, 4, 105000, 0),
-(43, 4, '6. számú kabin', NULL, 4, 110000, 0),
-(44, 4, '7. számú kabin', NULL, 2, 75000, 0),
-(45, 4, '8. számú kabin', NULL, 2, 80000, 0),
-(46, 4, '9. számú kabin', NULL, 3, 85000, 0),
-(47, 4, '10. számú kabin', NULL, 4, 100000, 0),
-(48, 5, '1. számú kabin', 1, 2, 60000, 0),
-(49, 5, '2. számú kabin', 1, 2, 65000, 0),
-(50, 5, '3. számú kabin', 1, 3, 70000, 0),
-(51, 5, '4. számú kabin', 1, 2, 67000, 0),
-(52, 5, '5. számú kabin', 2, 3, 75000, 0),
-(53, 5, '6. számú kabin', 2, 4, 80000, 0),
-(54, 5, '7. számú kabin', 2, 2, 69000, 0),
-(55, 5, '8. számú kabin', 2, 2, 73000, 0),
-(56, 5, '9. számú kabin', 3, 3, 80000, 0),
-(57, 5, '10. számú kabin', 3, 4, 85000, 0),
-(58, 5, '11. számú kabin', 3, 2, 72000, 0),
-(59, 5, '12. számú kabin', 3, 3, 77000, 0),
-(60, 5, '13. számú kabin', 4, 2, 70000, 0),
-(61, 5, '14. számú kabin', 4, 3, 75000, 0),
-(62, 5, '15. számú kabin', 4, 4, 85000, 0),
-(63, 5, '16. számú kabin', 4, 2, 70000, 0),
-(64, 6, '101. szoba', 1, 4, 65000, 0),
-(65, 6, '102. szoba', 1, 2, 40000, 0),
-(66, 6, '103. szoba', 1, 1, 25000, 0),
-(67, 6, '104A. szoba', 1, 3, 45000, 0),
-(68, 6, '104B. szoba', 1, 3, 47500, 0),
-(69, 6, '201. szoba', 2, 1, 28000, 0),
-(70, 6, '202. szoba', 2, 4, 60000, 0),
-(71, 6, '203. szoba', 2, 3, 48650, 0),
-(72, 6, '204. szoba', 2, 4, 63000, 0),
-(73, 6, '205. szoba', 2, 2, 38000, 0),
-(74, 6, '301. szoba', 3, 1, 25730, 0),
-(75, 6, '302. szoba', 3, 2, 40000, 0),
-(76, 6, '303. szoba', 3, 4, 70000, 0),
-(77, 6, '304A. szoba', 3, 2, 33000, 0),
-(78, 6, '304B. szoba', 3, 4, 62000, 0),
-(79, 6, '305. szoba', 3, 6, 115000, 0),
-(80, 7, 'Kőszivárvány Szoba 1', 1, 2, 40000, 0),
-(81, 7, 'Kőszivárvány Szoba 2', 1, 2, 42000, 0),
-(82, 7, 'Barlangi Kényelem 1', 1, 2, 45000, 0),
-(83, 7, 'Barlangi Kényelem 2', 1, 2, 45000, 0),
-(84, 7, 'Mélységi Nyugalom 1', 1, 2, 48000, 0),
-(85, 7, 'Mélységi Nyugalom 2', 1, 2, 48000, 0),
-(86, 7, 'Földi Harmónia 1', 2, 2, 40000, 0),
-(87, 7, 'Földi Harmónia 2', 2, 2, 42000, 0),
-(88, 7, 'Bányász Panoráma 1', 2, 2, 47000, 0),
-(89, 7, 'Bányász Panoráma 2', 2, 2, 47000, 0),
-(90, 7, 'Ősi Barlang 1', 3, 2, 50000, 0),
-(91, 7, 'Ősi Barlang 2', 3, 2, 50000, 0),
-(92, 7, 'Kőszikla Lak 1', 3, 3, 55000, 0),
-(93, 7, 'Kőszikla Lak 2', 3, 3, 55000, 0),
-(94, 7, 'Csendes Mély', 3, 2, 43000, 0);
+(1, 1, 'Alap iglu 1', NULL, 2, 35000, 0),
+(2, 1, 'Alap iglu 2', NULL, 2, 45000, 1),
+(3, 1, 'Deluxe iglu 1', NULL, 4, 60000, 1),
+(4, 1, 'Deluxe iglu 2', NULL, 4, 65000, 1),
+(5, 1, 'Deluxe iglu 3', NULL, 5, 80000, 1),
+(6, 1, 'Premium iglu', NULL, 2, 60000, 1),
+(7, 1, 'Családi iglu', NULL, 6, 75000, 1),
+(8, 2, 'Royal Suite 1', 0, 4, 80000, 1),
+(9, 2, 'Royal Suite 2', 0, 4, 80000, 1),
+(10, 2, 'Royal Suite 3', 0, 4, 80000, 1),
+(11, 2, 'Királyi kamra 1', 0, 2, 70000, 1),
+(12, 2, 'Királyi kamra 2', 1, 2, 70000, 1),
+(13, 2, 'Királyi kamra 3', 1, 2, 70000, 1),
+(14, 2, 'Kiránynő szobája 1', 1, 2, 65000, 1),
+(15, 2, 'Kiránynő szobája 2', 1, 2, 65000, 1),
+(16, 2, 'Kiránynő szobája 3', 2, 2, 65000, 1),
+(17, 2, 'Deluxe szoba 1', 2, 3, 75000, 1),
+(18, 2, 'Deluxe szoba 2', 2, 3, 75000, 1),
+(19, 2, 'Deluxe szoba 3', 2, 3, 75000, 1),
+(20, 2, 'Lovagi szállás 1', 3, 4, 85000, 1),
+(21, 2, 'Lovagi szállás 2', 3, 4, 85000, 1),
+(22, 2, 'Lovagi szállás 3', 3, 4, 85000, 1),
+(23, 3, '101', -1, 2, 120000, 1),
+(24, 3, '102A', -1, 2, 125000, 1),
+(25, 3, '102B', -1, 2, 130000, 1),
+(26, 3, '201A', -2, 2, 130000, 1),
+(27, 3, '201B', -2, 2, 135000, 1),
+(28, 3, '201C', -2, 2, 140000, 1),
+(29, 3, '202', -2, 2, 140000, 1),
+(30, 3, '301', -3, 2, 145000, 1),
+(31, 3, '302', -3, 2, 150000, 1),
+(32, 3, '303A', -3, 4, 150000, 1),
+(33, 3, '304B', -3, 4, 155000, 1),
+(34, 3, '401', -4, 4, 160000, 1),
+(35, 3, '402', -4, 4, 160000, 1),
+(36, 3, '403A', -4, 4, 165000, 1),
+(37, 3, '404B', -4, 4, 170000, 1),
+(38, 4, '1. számú kabin', NULL, 2, 75000, 1),
+(39, 4, '2. számú kabin', NULL, 2, 80000, 1),
+(40, 4, '3. számú kabin', NULL, 3, 90000, 1),
+(41, 4, '4. számú kabin', NULL, 3, 95000, 1),
+(42, 4, '5. számú kabin', NULL, 4, 105000, 1),
+(43, 4, '6. számú kabin', NULL, 4, 110000, 1),
+(44, 4, '7. számú kabin', NULL, 2, 75000, 1),
+(45, 4, '8. számú kabin', NULL, 2, 80000, 1),
+(46, 4, '9. számú kabin', NULL, 3, 85000, 1),
+(47, 4, '10. számú kabin', NULL, 4, 100000, 1),
+(48, 5, '1. számú kabin', 1, 2, 60000, 1),
+(49, 5, '2. számú kabin', 1, 2, 65000, 1),
+(50, 5, '3. számú kabin', 1, 3, 70000, 1),
+(51, 5, '4. számú kabin', 1, 2, 67000, 1),
+(52, 5, '5. számú kabin', 2, 3, 75000, 1),
+(53, 5, '6. számú kabin', 2, 4, 80000, 1),
+(54, 5, '7. számú kabin', 2, 2, 69000, 1),
+(55, 5, '8. számú kabin', 2, 2, 73000, 1),
+(56, 5, '9. számú kabin', 3, 3, 80000, 1),
+(57, 5, '10. számú kabin', 3, 4, 85000, 1),
+(58, 5, '11. számú kabin', 3, 2, 72000, 1),
+(59, 5, '12. számú kabin', 3, 3, 77000, 1),
+(60, 5, '13. számú kabin', 4, 2, 70000, 1),
+(61, 5, '14. számú kabin', 4, 3, 75000, 1),
+(62, 5, '15. számú kabin', 4, 4, 85000, 1),
+(63, 5, '16. számú kabin', 4, 2, 70000, 1),
+(64, 6, '101. szoba', 1, 4, 65000, 1),
+(65, 6, '102. szoba', 1, 2, 40000, 1),
+(66, 6, '103. szoba', 1, 1, 25000, 1),
+(67, 6, '104A. szoba', 1, 3, 45000, 1),
+(68, 6, '104B. szoba', 1, 3, 47500, 1),
+(69, 6, '201. szoba', 2, 1, 28000, 1),
+(70, 6, '202. szoba', 2, 4, 60000, 1),
+(71, 6, '203. szoba', 2, 3, 48650, 1),
+(72, 6, '204. szoba', 2, 4, 63000, 1),
+(73, 6, '205. szoba', 2, 2, 38000, 1),
+(74, 6, '301. szoba', 3, 1, 25730, 1),
+(75, 6, '302. szoba', 3, 2, 40000, 1),
+(76, 6, '303. szoba', 3, 4, 70000, 1),
+(77, 6, '304A. szoba', 3, 2, 33000, 1),
+(78, 6, '304B. szoba', 3, 4, 62000, 1),
+(79, 6, '305. szoba', 3, 6, 115000, 1),
+(80, 7, 'Kőszivárvány Szoba 1', 1, 2, 40000, 1),
+(81, 7, 'Kőszivárvány Szoba 2', 1, 2, 42000, 1),
+(82, 7, 'Barlangi Kényelem 1', 1, 2, 45000, 1),
+(83, 7, 'Barlangi Kényelem 2', 1, 2, 45000, 1),
+(84, 7, 'Mélységi Nyugalom 1', 1, 2, 48000, 1),
+(85, 7, 'Mélységi Nyugalom 2', 1, 2, 48000, 1),
+(86, 7, 'Földi Harmónia 1', 2, 2, 40000, 1),
+(87, 7, 'Földi Harmónia 2', 2, 2, 42000, 1),
+(88, 7, 'Bányász Panoráma 1', 2, 2, 47000, 1),
+(89, 7, 'Bányász Panoráma 2', 2, 2, 47000, 1),
+(90, 7, 'Ősi Barlang 1', 3, 2, 50000, 1),
+(91, 7, 'Ősi Barlang 2', 3, 2, 50000, 1),
+(92, 7, 'Kőszikla Lak 1', 3, 3, 55000, 1),
+(93, 7, 'Kőszikla Lak 2', 3, 3, 55000, 1),
+(94, 7, 'Csendes Mély', 3, 2, 43000, 1);
 
 -- --------------------------------------------------------
 
@@ -510,7 +527,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`, `phonenumber`, `email`, `password`, `created_at`, `updated_at`, `active`, `profilePic`) VALUES
 (1, 'Misike28', 'Kovács', 'Mihály Dániel', '2024-05-17', '+36709477699', 'Szekelymegafia@freemail.com', '$2y$12$U.6/gsWyUXQkxD2TSibXne5OqQ1lPVKJ2oYu5FXgX6KeA89td3ffy', '2025-02-24 09:55:37', '2025-03-05 15:52:24', 1, 1),
-(2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-03-26 09:30:51', 1, 6),
+(2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-03-31 09:55:11', 1, 5),
 (3, 'Mikudayoo', 'Hatsune', 'Miku', '2007-08-31', '+36701234567', 'hatsunemiku@vocaloid.com', '$2y$12$LQyV6fWT83nezYRP53EPDO6aiXmFzA0zHj6uYFzzs/rWWb1BwJrdW', '2025-03-05 16:37:16', '2025-03-05 16:37:52', 1, 2),
 (4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 0, 4),
 (5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-03-05 16:53:08', 1, 0),
@@ -529,7 +546,8 @@ INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`,
 (21, '4_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222224', 'some_other@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
 (22, '5_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222225', 'some_other@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
 (23, '6_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222226', 'some_other@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(24, '7_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222227', 'some_other@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0);
+(24, '7_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222227', 'some_other@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(25, 'Gyuszika', 'Horváth', 'Mihály', '2004-01-23', '+36307675340', 'asd@sjlkdjad.ca', '$2y$12$n.RKQI5FFzN.HUwwsVyDKe7W.Ue0x8H69c.O9/JEXbnkoceiJ8kj.', '2025-03-31 10:00:03', '2025-03-31 10:03:26', 0, 0);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -630,13 +648,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT a táblához `city`
@@ -654,7 +672,7 @@ ALTER TABLE `hotel`
 -- AUTO_INCREMENT a táblához `loyalty`
 --
 ALTER TABLE `loyalty`
-  MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT a táblához `loyaltyrank`
@@ -666,7 +684,7 @@ ALTER TABLE `loyaltyrank`
 -- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT a táblához `room`
@@ -690,7 +708,7 @@ ALTER TABLE `servicecategory`
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Megkötések a kiírt táblákhoz

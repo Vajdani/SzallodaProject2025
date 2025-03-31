@@ -35,7 +35,7 @@
                                 <input type="radio" name="service_id" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
                                 <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
                             @else
-                                <div>
+                                <div id="services">
                                     <input type="checkbox" name="services[]" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
                                     <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
                                 </div>
@@ -72,7 +72,7 @@
 
                 <div class="form">
                     <h2>Számlázási adatok</h2>
-                    
+
                     <div class="inputItem">
                         <label for="method">Fizetési módszer</label>
                         <select name="method" id="method">
@@ -120,7 +120,7 @@
                             <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
 
                 </div>
 

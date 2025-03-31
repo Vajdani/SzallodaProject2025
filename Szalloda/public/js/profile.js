@@ -8,6 +8,7 @@ function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
     panel.id = "loyaltymenu"
     panel.className = "menuBgOverlay"
     //panel.onclick = CloseMenu
+    perklist=""
     if(perks!=""){
     let perklist = `<ul>`
     perks.forEach(element => {
@@ -25,7 +26,7 @@ else{
         </div>
         <div class="loyal-body">
            <p>`+currentmin+`</p><progress id="point" class="pointslider" value="`+points+`" min="`+currentmin+`" max="`+nextmin+`"></progress>  <p style="float: right">`+nextmin+`</p>
-        </div>  
+        </div>
           <hr>
         <div class="PPS-head">
             <h2>Az ön jelenlegi jutalmai:</h2>
@@ -64,10 +65,10 @@ function loyaltymax(loyalty,...perks){
         <div class="PPS-head">
             <h2>Az ön jelenlegi rangja: `+ loyalty + `</h2>
         </div>
-        <hr> 
+        <hr>
         <div class="loyal-body">
             <p>Gratulálok, elérted a legmagasabb rangot!</p>
-        </div>  
+        </div>
         <hr>
         <div class="PPS-head">
             <h2>Az ön jelenlegi jutalmai:</h2>

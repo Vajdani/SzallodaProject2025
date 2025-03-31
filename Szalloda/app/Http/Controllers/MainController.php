@@ -129,7 +129,7 @@ class MainController extends Controller
     public function reservationPost(Request $req) {
 
         $req->validate([
-            'startDate' => 'required',
+            'startDate' => 'required|after:now',
             'endDate' => 'required|after:startDate',
             'service_id' => 'required',
 
@@ -143,6 +143,7 @@ class MainController extends Controller
 
 
         ],[
+            'stardate.after' => "A mainál korábbi dátumot nem adhat meg!",
             'startDate.required' => 'Adja meg a kezdő dátumot!',
             'endDate.required' => 'adja meg a vég dátumot!',
             'endDate.after' => 'A kezdő dátum nem lehet korábban mint a végdátum!',
