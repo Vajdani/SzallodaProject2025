@@ -14,6 +14,7 @@ use App\Models\Review;
 use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
+use App\Rules\StringMaxRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
 use App\Models\LoyaltyRank;
@@ -116,8 +117,6 @@ class UserController extends Controller
             ");
         }
 
-
-
         $currentRank =  Loyalty::fromQuery("
             select l.points, lr.rank, lr.rank_id, lr.minPoint,lr.perks
             from loyalty l
@@ -138,7 +137,10 @@ class UserController extends Controller
         return view("profile", [
             "user" => User::find($id),
             "reviews" => Review::fromQuery("
-                select r.rating, r.created_at, r.reviewText, h.hotelName, h.hotel_id, u.username, u.profilePic, u.user_id, u.active, r.review_id
+                select
+                    r.rating, r.created_at, r.reviewText, h.hotelName,
+                    h.hotel_id, u.username, u.profilePic, u.user_id, u.active,
+                    r.review_id, r.edited
                 from reviews r
                 inner join user u on u.user_id = r.user_id
                 inner join hotel h on r.hotel_id = h.hotel_id
@@ -384,7 +386,9 @@ class UserController extends Controller
         $req->validate([
             'hotel' => 'required',
             'star' => 'required',
-            "comment" => "max:1000"
+            "comment" => [
+                new StringMaxRule()
+            ]
         ], [
             'hotel.required' => 'Muszáj választania egy szállodát!',
             'star.required' => 'Muszáj értékelnie a szállodát!',

@@ -36,7 +36,10 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
                 <input type="number" name="star" id="star" style="display: none">
-                <textarea name="comment" id="comment" cols="30" rows="10" maxlength="1000">@if($isModifying){{$review->reviewText}}@else{{old("comment")}}@endif</textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10" maxlength="1000">@if(old("comment")){{old("comment")}}@elseif(isset($review)){{$review->reviewText}}@endif</textarea>
+                @error('comment')
+                    <p class="error">{{ $message }}</p>
+                @enderror
                 <input type="submit" value="Közzététel">
             </form>
         </section>

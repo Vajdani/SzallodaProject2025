@@ -12,7 +12,7 @@ let ratings = {}
 let activeUserId
 let reviewType
 
-function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter) {
+function RenderRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, isEdited, maxReviewLength, disableFooter) {
     const reviewIsNull = (review == "" || review == "null" || review == null)
     const profilePictureId = userActive ? pfp : 0
     const finalUserName = userActive ? username : "Törölt fiók"
@@ -38,10 +38,10 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
                 <p class="text-center">` + finalUserName + `</p>
             </div>
             <div class="ratingData">
-                <h3 style="text-wrap:auto"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
+                <h3 style="text-wrap:auto;"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
                 <p>` + ratingStars + `</p>
-                <p style="text-wrap:auto">` + created_at + `</p>
-                <p style="text-wrap:auto">` + finalReviewText + `</p>
+                <p style="text-wrap:auto">` + created_at + (isEdited ? " <span style='color: gold'>(szerkesztve)</span>" : "") + `</p>
+                <p style="text-wrap:auto;-ms-word-break:break-all;word-break:break-all;white-space:pre-wrap">` + finalReviewText + `</p>
                 ` + (disableFooter == true ? "" : footer) + `
             </div>
         </div>
@@ -52,12 +52,12 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
     return div
 }
 
-function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter) {
-    return RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter)
+function RenderHotelRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, isEdited, maxReviewLength, disableFooter) {
+    return RenderRating(username, "", "", rating, created_at, review, pfp, user_id, userActive, review_id, isEdited, maxReviewLength, disableFooter)
 }
 
-function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter) {
-    return RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, maxReviewLength, disableFooter)
+function RenderUserRating(username, hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, isEdited, maxReviewLength, disableFooter) {
+    return RenderRating("", hotelName, hotel_id, rating, created_at, review, pfp, user_id, userActive, review_id, isEdited, maxReviewLength, disableFooter)
 }
 
 function RenderNone(noneText) {
@@ -114,7 +114,8 @@ function RenderReviewSection(reviews, review_type, user_id_active) {
             let rating = data.render(
                 element.username, element.hotelName, element.hotel_id, element.rating,
                 element.created_at, text, element.profilePic, element.user_id,
-                element.active == 1, element.review_id, MAXVISIBLEREVIEWLENGTH
+                element.active == 1, element.review_id, element.edited == 1,
+                MAXVISIBLEREVIEWLENGTH
             )
 
             ratingSection.appendChild(rating)
@@ -200,7 +201,8 @@ function OpenReviewDeleteMenu(review_id) {
     document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
         review.username, review.hotelName, review.hotel_id, review.rating,
         review.created_at, review.reviewText, review.profilePic, review.user_id,
-        review.active == 1, review.review_id, MAXVISIBLEREVIEWLENGTH, true
+        review.active == 1, review.review_id, review.edited == 1, MAXVISIBLEREVIEWLENGTH,
+        true
     ))
 }
 
@@ -236,88 +238,13 @@ function OpenFullReview(review_id) {
     document.getElementById("reviewHolder").appendChild(reviewData[reviewType].render(
         review.username, review.hotelName, review.hotel_id, review.rating,
         review.created_at, review.reviewText, review.profilePic, review.user_id,
-        review.active == 1, review.review_id, MAXFULLREVIEWLENGTH, true
+        review.active == 1, review.review_id, review.edited == 1, MAXFULLREVIEWLENGTH,
+        true
     ))
 }
 
 function CloseFullReviewMenu() {
     let menu = document.getElementById("fullReviewMenu")
-    if (menu) {
-        menu.remove()
-    }
-}
-
-
-
-function OpenReviewEditMenu(review_id) {
-    if (document.getElementById("reviewEditMenu")) { return }
-
-    let panel = document.createElement("div")
-    panel.id = "reviewEditMenu"
-    panel.className = "menuBgOverlay"
-    // panel.onclick = CloseReviewEditMenu
-
-    const form = document.createElement("div")
-    form.className = "menuPanel"
-    form.innerHTML = `
-        <h1>Módosítsa az értékelését, ahogyan szeretné!</h1>
-
-        <div id="reviewHolder"></div>
-
-        <div style="display:flex;justify-content:space-between">
-            <form action="/ertekelesmodositas/` + review_id + `" method="post">
-                <input type="hidden" name="_token" value="` + document.querySelector('meta[name="_token"]').content + `">
-                <input>
-
-                <input class="review-button" type="submit" value="Mentés" />
-            </form>
-
-            <button onclick="CloseReviewEditMenu()" class="delete-button">Mégsem</button>
-        </div>
-    `
-
-    panel.appendChild(form)
-    document.body.appendChild(panel)
-
-    let data = GetReviewById(review_id)
-    let review = data.reviewText
-    let userActive = data.active == 1
-    let username = data.username
-    let hotel_id = data.hotel_id
-    let user_id = data.user_id
-    let pfp = data.profilePic
-    let created_at = data.created_at
-    let hotelName = data.hotelName
-    let rating = data.rating
-
-    const profilePictureId = userActive ? pfp : 0
-    const finalUserName = userActive ? username : "Törölt fiók"
-    const ratingStars = ("<span class='starTicked'>★</span>").repeat(rating) + ("<span class='starUnTicked'>★</span>").repeat(5 - rating)
-
-    const div = document.createElement("div")
-    div.id = "review_" + review_id
-    div.innerHTML = `
-        <div class="ratingUser">
-            <div class="profilePicture">
-                <a href="/profil/` + user_id + `"><img src="/img/pfp/` + profilePictureId + `.png" alt="profilkep" title="` + finalUserName + ` profilképe" class="img-fluid profile-picture"></a>
-                <p class="text-center">` + finalUserName + `</p>
-            </div>
-            <div class="ratingData">
-                <h3 style="text-wrap:auto"><a style="color:white" href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
-                <p>` + ratingStars + `</p>
-                <p style="text-wrap:auto">` + created_at + `</p>
-                <textarea style="height:100%;width:100%" id="newReviewText" name="newReviewText">` + review.replace(/<br>/g, "\r\n") + `</textarea>
-            </div>
-        </div>
-    `
-
-    div.classList.add("rating", "center")
-
-    document.getElementById("reviewHolder").appendChild(div)
-}
-
-function CloseReviewEditMenu() {
-    let menu = document.getElementById("reviewEditMenu")
     if (menu) {
         menu.remove()
     }
