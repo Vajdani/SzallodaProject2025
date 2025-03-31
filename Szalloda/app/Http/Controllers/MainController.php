@@ -74,7 +74,7 @@ class MainController extends Controller
             "city" => City::find($id),
             "hotels" => Hotel::fromQuery("
                 select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, (
-                    select round(round(avg(reviews.rating)*2,0)/2,1)
+                    select round(avg(reviews.rating), 1)
                     from reviews
                     where
                         hotel.hotel_id = reviews.hotel_id and

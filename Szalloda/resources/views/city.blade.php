@@ -10,7 +10,7 @@
     </nav>
     <div class="mainContent">
         <section>
-            <img src="{{ asset('img/cities/' . $city->city_id . '.jpg') }}" alt="{{$city->cityName}}.jpg" title="{{$city->cityName}}" class="szallodaMainImg img-fluid" width="600px" height="400px">
+            <img src="{{ asset('img/cities/'.$city->city_id.'.jpg') }}" alt="{{ $city->cityName }}.jpg" title="{{ $city->cityName }}" class="szallodaMainImg img-fluid" width="600px" height="400px">
             <div style="background-color:teal">
                 @for ($i = 0; $i < count($description); $i++)
                     <p>{{ $description[$i] }}</p>
@@ -26,13 +26,13 @@
                     </a>
                     <div class="cityImgContainer">
                         <a href="/szalloda/{{ $hotel->hotel_id }}">
-                            <img src="{{asset('img/hotels/'.$hotel->hotel_id.'.jpg')}}" alt="{{$hotel->hotelName}}" title="{{ $hotel->hotelName }}" class="img-fluid">
+                            <img src="{{ asset('img/hotels/'.$hotel->hotel_id.'.jpg') }}" alt="{{ $hotel->hotelName }}" title="{{ $hotel->hotelName }}" class="img-fluid">
                         </a>
                         <p>
                             @if ($hotel->rating == '')
                                 <p>Nincsenek értékelések.</p>
                             @else
-                                <span class="starTicked">{{ str_repeat('★', $hotel->rating) }}</span><span class="starTicked">{{ str_repeat('⯪', ceil($hotel->rating - floor($hotel->rating))) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - ceil($hotel->rating)) }} - {{ $hotel->rating }}</span>
+                                <span class="starTicked">{{ str_repeat('★', $hotel->rating) }}</span><span class="halfStarTicked" {{--style="--ratio:{{ceil(($hotel->rating - floor($hotel->rating)) * 100)}}%"--}}>{{ str_repeat('★', ceil($hotel->rating - floor($hotel->rating))) }}</span><span class="starUnTicked">{{ str_repeat('★', 5 - ceil($hotel->rating)) }} - {{ $hotel->rating }}</span>
                                 <p>{{ $hotel->ratingCount }} értékelés</p>
                             @endif
                         </p>
@@ -53,10 +53,10 @@
                     </table>
                     <hr>
                     @foreach (explode('{break}', $hotel->description) as $desc)
-                    <p style="float: none;">
-                        {{$desc}}
-                    </p>
-                    <br>
+                        <p style="float: none;">
+                            {{$desc}}
+                        </p>
+                        <br>
                     @endforeach
                 </div>
             @endforeach

@@ -238,6 +238,25 @@ hr {
     color: var(--colour_lightwhite)
 }
 
+/* https://codepen.io/caderek/pen/OJebepo */
+.halfStarTicked {
+    --color-full: gold;
+    --color-empty: var(--colour_lightwhite);
+    --ratio: 50%;
+
+    color: var(--color-empty);
+    background: linear-gradient(
+        to right,
+        var(--color-full),
+        var(--color-full) var(--ratio),
+        var(--color-empty) var(--ratio),
+        var(--color-empty)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .info-popup {
     background-color: var(--colour_footer);
     border-radius: 25px;
