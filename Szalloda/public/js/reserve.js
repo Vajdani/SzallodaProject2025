@@ -7,7 +7,6 @@ function InitData(roomsJson, servicesJson, loyalty) {
     rooms = JSON.parse(roomsJson)
     services = JSON.parse(servicesJson)
     userLoyalty = JSON.parse(loyalty)
-    console.log(userLoyalty)
 
     ResetRoomId()
 
@@ -27,23 +26,46 @@ async function DateChanged() {
 
     if (start == "" || end.value == "") { return }
 
-    await fetch("/foglalas/szabadszobak/" + document.getElementById("hotel_id").value + "/" + start + "/" + end.value).then((response) => {
+    await fetch("/foglalas/info/" + document.getElementById("hotel_id").value + "/" + start + "/" + end.value).then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
     }).then((data) => {
-        rooms = data
+        rooms = data.rooms
+        services = data.services
 
         let roomSelect = document.getElementById("room_id")
         roomSelect.innerHTML = ""
-        data.forEach(element => {
+        rooms.forEach(element => {
             let option = document.createElement("option")
             option.value = element.room_id
             option.innerText = element.roomNumber
 
             roomSelect.appendChild(option)
         });
+
+        let servicesDiv = document.getElementById("services")
+        servicesDiv.innerHTML = ""
+        services.forEach(element => {
+            let div = document.createElement("div")
+
+            let id = "service_" + element.service_id
+            let input = document.createElement("input")
+            input.name = "services[]"
+            input.id = id
+            input.value = element.service_id
+            input.onchange = ServiceSelected
+            input.type = "checkbox"
+
+            let label = document.createElement("label")
+            label.htmlFor = id
+            label.innerText = element.serviceName
+
+            div.appendChild(input)
+            div.appendChild(label)
+            servicesDiv.appendChild(div)
+        })
 
         ResetRoomId()
         CalculatePrice()

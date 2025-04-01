@@ -23,24 +23,32 @@
                     <input type="text" name="hotel_id" id="hotel_id" style="display:none" value="{{ $hotel->hotel_id }}">
                     <p>{{ $hotel->hotelName }}</p>
 
-                    <label for="service_0">Szolgálatások:</label>
                     <div>
                         @error('service_id')
-                            <p class="error">{{ $message }}</p>
+                        <p class="error">{{ $message }}</p>
                         @enderror
-                        <input type="radio" name="service_id" id="service_0" value="0" onchange="ServiceSelected()">
-                        <label for="service_0">Nem kérek ellátást</label>
-                        @foreach ($services as $s)
-                            @if ($s->category_id < 3)
-                                <input type="radio" name="service_id" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
-                                <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
-                            @else
-                                <div id="services">
-                                    <input type="checkbox" name="services[]" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
+
+                        <label for="service_0">Szolgálatások:</label>
+                        <div>
+                            <input type="radio" name="service_id" id="service_0" value="0" onchange="ServiceSelected()">
+                            <label for="service_0">Nem kérek ellátást</label>
+                            @foreach ($services as $s)
+                                @if ($s->category_id < 3)
+                                    <input type="radio" name="service_id" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
                                     <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
-                                </div>
-                            @endif
-                        @endforeach
+                                @endif
+                            @endforeach
+                        </div>
+                        <div id="services">
+                            @foreach ($services as $s)
+                                @if ($s->category_id >= 3)
+                                    <div>
+                                        <input type="checkbox" name="services[]" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
+                                        <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
 
                     <label for="room_id">Szoba:</label>

@@ -13,7 +13,7 @@ Route::get ('/szalloda/veletlenszeru',                      [MainController::cla
 Route::get ('/szalloda/{id}',                               [MainController::class, "Hotel_Frontend"]);
 Route::get ('/telepules/{id}',                              [MainController::class, "City_Frontend"]);
 Route::get ('/profil/{id}',                                 [UserController::class, "ProfileByID_Frontend"]);
-Route::get ("/foglalas/szabadszobak/{id}/{start}/{end}",    [MainController::class, "GetUnoccupiedRooms_API"]);
+Route::get ("/foglalas/info/{id}/{start}/{end}",            [MainController::class, "GetBookingInfo_API"]);
 Route::view('/felhasznaloi_feltetetel',                     'tos');
 
 Route::group(['middleware' => [IsLoggedIn::class]], function () {

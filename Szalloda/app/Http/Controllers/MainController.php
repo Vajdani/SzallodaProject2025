@@ -284,19 +284,35 @@ class MainController extends Controller
         return $response;
     }
 
-    public function GetUnoccupiedRooms_API($hotel_id, $start, $end) {
-        return Room::fromQuery("
-            select r.room_id, r.roomNumber, r.pricepernight, r.capacity
-            from room r
-            inner join hotel h on r.hotel_id = h.hotel_id
-            where
-                h.hotel_id = $hotel_id and
-                r.roomNumber not in (
-                    select r.roomNumber
-                    from room r
-                    inner join booking b on b.room_id = r.room_id
-                    where if('$start' > b.bookStart, '$start', b.bookStart) <= if('$end' < b.bookEnd, '$end', b.bookEnd)
-                );
-        ");
+    public function GetBookingInfo_API($hotel_id, $start, $end) {
+        return [
+            "rooms" => Room::fromQuery("
+                select r.room_id, r.roomNumber, r.pricepernight, r.capacity
+                from room r
+                inner join hotel h on r.hotel_id = h.hotel_id
+                where
+                    h.hotel_id = $hotel_id and
+                    r.roomNumber not in (
+                        select r.roomNumber
+                        from room r
+                        inner join booking b on b.room_id = r.room_id
+                        where if('$start' > b.bookStart, '$start', b.bookStart) <= if('$end' < b.bookEnd, '$end', b.bookEnd)
+                    );
+            "),
+            "services" => Service::fromQuery("
+                select s.service_id, sc.serviceName, s.price, s.available, s.allYear, s.startDate, s.endDate, s.openTime, s.closeTime, s.category_id
+                from service s
+                inner join servicecategory sc on sc.serviceCategory_id = s.category_id
+                inner join hotel h on h.hotel_id = s.hotel_id
+                where
+                    s.category_id >= 3 and
+                    h.hotel_id = $hotel_id and (
+                        s.allYear
+                        or
+                        if(month('$start') > month(s.startDate), month('$start'), month(s.startDate)) <= if(month('$end') < month(s.endDate), month('$end'), month(s.endDate)) and
+                        if(day('$start') > day(s.startDate), day('$start'), day(s.startDate)) <= if(day('$end') < day(s.endDate), day('$end'), day(s.endDate))
+                    );
+            ")
+        ];
     }
 }
