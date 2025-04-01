@@ -9,10 +9,11 @@ namespace SzallodaManagerForm
         {
             Rooms,
             Employees,
-            Services
+            Services,
         }
 
         Panel itemPanelCon;
+        Button? extraFunctButton;
         public ItemPanelCategory Category { get; private set; }
         
         public OptionPanel(ItemPanelCategory category) 
@@ -31,6 +32,17 @@ namespace SzallodaManagerForm
                 AutoScroll = true
             };
             Controls.Add(itemPanelCon);
+
+            if(category == ItemPanelCategory.Employees)
+            {
+                extraFunctButton = new()
+                {
+                    Text = "Alkalmazott hozzáadása",
+                    Size = new(300, 40),
+                    Location = new Point(itemPanelCon.Location.X + itemPanelCon.Width - 300, itemPanelCon.Location.Y + itemPanelCon.Size.Height + 5),
+                };
+                this.Controls.Add(extraFunctButton);
+            }
         }
 
         public void UpdatePanel(Hotel? hotel)
@@ -72,11 +84,17 @@ namespace SzallodaManagerForm
         {
             Size = new Size(Main.Instance.ClientSize.Width, Main.Instance.ClientSize.Height - 100);
             itemPanelCon.Size = new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200));
+            if(extraFunctButton is not null) extraFunctButton.Location = new Point(itemPanelCon.Location.X + itemPanelCon.Width - 300, itemPanelCon.Location.Y + itemPanelCon.Size.Height + 5);
 
             foreach (ItemPanel ItP in itemPanelCon.Controls)
             {
                 ItP.ResizePanel(itemPanelCon.Size);
             }
+        }
+
+        void OpenHiringForm()
+        {
+            new AddEmployeeForm().ShowDialog();
         }
     }
 }

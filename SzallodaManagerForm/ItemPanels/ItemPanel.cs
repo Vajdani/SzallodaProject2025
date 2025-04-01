@@ -5,7 +5,7 @@
         public int ItemID { get; private set; }
         public ItemPanel(Panel parent, int verticalPadding = 10)
         {
-            ResizePanel(parent.ClientSize); //iitt
+            ResizePanel(parent.ClientSize); 
             Location = new Point(10, (60 + verticalPadding) * parent.Controls.Count + verticalPadding);
             BackColor = Color.Aqua;
             Visible = true;
