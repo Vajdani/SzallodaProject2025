@@ -61,7 +61,7 @@ class MainController extends Controller
             "),
             "city_description" => City::find($hotel->city_id)->description_short,
             "hotel_description" => $desc,
-            "writeReviews" => UserController::CanWriteReviewForHotel($hotel_id, Auth::user()->user_id)[0]
+            "writeReviews" => UserController::CanWriteReviewForHotel($hotel_id, Auth::check() ? Auth::user()->user_id : -1)[0]
         ]);
     }
 
