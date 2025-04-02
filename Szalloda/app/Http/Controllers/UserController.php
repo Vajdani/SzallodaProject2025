@@ -201,7 +201,10 @@ class UserController extends Controller
 
     public function UpdateProfileDetails_Backend(Request $req) {
         $req->validate([
-            'username' => 'required',
+            'username' => [
+                'required',
+                "unique:user,username"
+            ],
             'realname' => [
                 'required',
                 new RealNameRule()
@@ -212,6 +215,7 @@ class UserController extends Controller
             ]
         ], [
             "username.required" => "Muszáj megadnia a felhasználónevét!",
+            "username.unique" => "Ez a felhasználónév már foglalt!"
 
             "realname.required" => "Muszáj megadnia a polgári nevét!",
 
