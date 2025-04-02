@@ -60,7 +60,7 @@ async function DateChanged() {
 
             let label = document.createElement("label")
             label.htmlFor = id
-            label.innerText = element.serviceName
+            label.innerText = " " + element.serviceName
 
             div.appendChild(input)
             div.appendChild(label)

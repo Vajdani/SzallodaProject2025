@@ -285,6 +285,9 @@ class MainController extends Controller
     }
 
     public function GetBookingInfo_API($hotel_id, $start, $end) {
+        $year = date("Y");
+        $year_next = date("Y") + 1;
+
         return [
             "rooms" => Room::fromQuery("
                 select r.room_id, r.roomNumber, r.pricepernight, r.capacity
@@ -300,18 +303,21 @@ class MainController extends Controller
                     );
             "),
             "services" => Service::fromQuery("
-                select s.service_id, sc.serviceName, s.price, s.available, s.allYear, s.startDate, s.endDate, s.openTime, s.closeTime, s.category_id
+                select s.service_id, sc.serviceName, s.price, s.available, s.allYear,
+                    if (s.startDate is not null, concat('$year', right(s.startDate, 6)), s.startDate) formattedStartDate,
+                    if (s.endDate is not null, if (month(s.endDate) < month(s.startDate), concat('$year_next', right(s.endDate, 6)), concat('$year', right(s.endDate, 6))), s.endDate) formattedEndDate,
+                    s.openTime, s.closeTime, s.category_id
                 from service s
                 inner join servicecategory sc on sc.serviceCategory_id = s.category_id
                 inner join hotel h on h.hotel_id = s.hotel_id
                 where
                     s.category_id >= 3 and
-                    h.hotel_id = $hotel_id and (
-                        s.allYear
-                        or
-                        if(month('$start') > month(s.startDate), month('$start'), month(s.startDate)) <= if(month('$end') < month(s.endDate), month('$end'), month(s.endDate)) and
-                        if(day('$start') > day(s.startDate), day('$start'), day(s.startDate)) <= if(day('$end') < day(s.endDate), day('$end'), day(s.endDate))
-                    );
+                    h.hotel_id = $hotel_id
+                having
+                    s.allYear
+                    or
+                    if('$start' > formattedStartDate, '$start', formattedStartDate) <= if('$end' < formattedEndDate, '$end', formattedEndDate)
+                ;
             ")
         ];
     }
