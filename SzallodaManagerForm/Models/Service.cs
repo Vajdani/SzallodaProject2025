@@ -27,5 +27,17 @@
             OpenTime = db.GetTimeSpan("openTime");
             CloseTime = db.GetTimeSpan("closeTime");
         }
+
+        public void UpdateService(int price, bool available, DateTime[]? dates, TimeSpan[]? times)
+        {
+            Price = price;
+            Available = available;
+            int numAva = Available ? 1 : 0;
+            if (dates != null) { StartDate = dates[0]; EndDate = dates[1]; }
+            if (times != null) { OpenTime = times[0]; CloseTime = times[1]; }
+
+
+            Database ab = new($"UPDATE service SET price = {Price}, available = {numAva},");
+        }
     }
 }

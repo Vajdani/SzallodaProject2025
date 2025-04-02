@@ -41,6 +41,7 @@ namespace SzallodaManagerForm
                     Size = new(300, 40),
                     Location = new Point(itemPanelCon.Location.X + itemPanelCon.Width - 300, itemPanelCon.Location.Y + itemPanelCon.Size.Height + 5),
                 };
+                extraFunctButton.Click += (s, e) => { OpenHiringForm(); };
                 this.Controls.Add(extraFunctButton);
             }
         }

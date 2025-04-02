@@ -53,6 +53,7 @@ namespace SzallodaManagerForm.ItemPanels
             {
                 employee.ChangeEmployeeAuthority();
             }
+            Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
         }
 
         void Fire(object? sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace SzallodaManagerForm.ItemPanels
             {
                 employee.FireEmployee();
             }
+            Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
         }
     }
 }

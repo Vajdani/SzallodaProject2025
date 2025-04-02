@@ -7,7 +7,7 @@ namespace SzallodaManagerForm
 
         Panel Header;
 
-        OptionPanel current;
+        public static OptionPanel current;
         OptionPanel alkalmazottak;
         OptionPanel szobak;
         OptionPanel szolgaltatasok;
@@ -57,6 +57,10 @@ namespace SzallodaManagerForm
             cbHotelek.SelectedIndex = 0;
 
             Header = panel1;
+            foreach(Control c in Header.Controls)
+            {
+                if(c != lbFelhasznalo) c.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            }
         }
 
         private void Main_Closed(object sender, FormClosedEventArgs e)
@@ -115,12 +119,11 @@ namespace SzallodaManagerForm
 
         public void OnSizeChange(object sender, EventArgs e)
         {
-            if(this.Size.Width > 700)
+            if(this.Size.Width > 1000)
             {
                 current.ResizePanel();
                 ResizeHeader();
             }
-            lbFelhasznalo.Text = this.Size.Width.ToString();
         }
 
         public void ResizeHeader()

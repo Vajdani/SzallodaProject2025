@@ -4,12 +4,17 @@ namespace SzallodaManagerForm.ItemPanels
 {
     internal class ServicePanel : ItemPanel
     {
+
+        Service service;
         public Label serviceName { get; private set; }
         public Label Availability { get; private set; }
         Button btnEdit;
 
         public ServicePanel(Panel parent, Service service) : base(parent)
         {
+
+            this.service = service; 
+
             serviceName = new Label
             {
                 Text = service.Name,
@@ -46,13 +51,13 @@ namespace SzallodaManagerForm.ItemPanels
         {
             List<InputRow> test = new List<InputRow>()
             {
-                new ComboBoxRow("AAAAA", ["Alma", "Körte", "Teto"]),
-                new TextBoxRow("BBBB"),
-                new TextBoxRow("CCCCC", true),
-                new TimePickerRow("Elérhetőség", TimePickerRow.PickMethod.Day),
-                new TimePickerRow("Nyitás", TimePickerRow.PickMethod.Time)
-        };
-            UpdateForm serviceUpdateForm = new UpdateForm("Szolgáltatás Módosítása", test);
+                new TextBoxRow("Price", true),
+                new ComboBoxRow("Availability", ["Avaible", "Out of order"], service.Available ? 0 : 1),
+                new TimePickerRow("Elérhetőség", TimePickerRow.PickMethod.Day, !service.AllYear),
+                new TimePickerRow("Nyitás", TimePickerRow.PickMethod.Time,  (service.OpenTime != null && service.CloseTime != null))
+            };
+
+            ServiceUpdateForm serviceUpdateForm = new ServiceUpdateForm("Szolgáltatás Módosítása", test);
             serviceUpdateForm.ShowDialog();
         }
     }

@@ -95,5 +95,15 @@
 
             return userHotels.First(h => h.hotel_id == hotel_id);
         }
+        
+        public void AddEmployee(Employee employee)
+        {
+            Employees.Add(employee);
+        }
+
+        public void RemoveEmployee(int user_id, int hotel_id)
+        {
+            Employees.Remove(Employees.First(e => e.Id == user_id && e.hotel_id == hotel_id));
+        }
     }
 }

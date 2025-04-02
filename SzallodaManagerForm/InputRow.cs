@@ -6,20 +6,29 @@ using System.Threading.Tasks;
 
 namespace SzallodaManagerForm
 {
-    public class InputRow
+    public abstract class InputRow
     {
         public Label Text { get; private set; }
         public Label ErrorLabel { get; private set; }
+        public int BonusBottomSpacing { get; protected set; } = 20;
 
         public InputRow(string text)
         {
-            Text = new();
-            Text.Text = text;
+            Text = new()
+            {
+                Text = text,
+                AutoSize = true,
+            };
 
-            ErrorLabel = new Label();
+            ErrorLabel = new()
+            {
+                Text = "ERRORLABELVAGYOK",
+                ForeColor = Color.DarkRed,
+                AutoSize = true,
+                Visible = false
+            };
             //ErrorLabel.Visible = false;
-            ErrorLabel.Text = "ERRORLABELVAGYOK";
-            ErrorLabel.ForeColor = Color.DarkRed;
+
         }
 
         public virtual void UpdatePosition(Size parentSize, int y)
@@ -81,6 +90,7 @@ namespace SzallodaManagerForm
         public TextBoxRow(string text, bool NumOnly = false, bool canBnull = false) : base(text)
         {
             ValueTextBox = new TextBox();
+            ValueTextBox.Size = new Size(200, 50);
             numOnly = NumOnly;
             IsNullable = canBnull; 
 
@@ -128,58 +138,71 @@ namespace SzallodaManagerForm
             Time
         }
 
-        DateTimePicker Timepicker;
+        DateTimePicker Start;
+        DateTimePicker Finish;
+        ComboBox cbSetValue;
 
-
-        public TimePickerRow(string text, PickMethod pick) : base(text)
+        public TimePickerRow(string text, PickMethod pick, bool IsLimited) : base(text)
         {
+            BonusBottomSpacing = 60;
 
-            Timepicker = new DateTimePicker();
-            Timepicker.Width = Timepicker.Width / 2;
-            Timepicker.Format = DateTimePickerFormat.Custom;
-            switch (pick)
+            Start = new()
             {
-                case PickMethod.Day: Timepicker.CustomFormat = "MM-dd"; break;
-                case PickMethod.Time: Timepicker.CustomFormat = "hh:mm"; break;
-            }
+                Visible = IsLimited,
+                Format = DateTimePickerFormat.Custom,
+                CustomFormat = pick switch
+                {
+                    PickMethod.Day => "MM-dd",
+                    PickMethod.Time => "hh:mm"
+                }
+            };
+
+            Finish = new()
+            {
+                Visible = IsLimited,
+                Format = DateTimePickerFormat.Custom,
+                CustomFormat = pick switch
+                {
+                    PickMethod.Day => "MM-dd",
+                    PickMethod.Time => "hh:mm"
+                }
+            };
+
+            cbSetValue = new()
+            {
+                Items = {
+                    pick == PickMethod.Day ? "All Year" : "All Day",
+                    "Limited"
+                },
+                SelectedIndex = IsLimited ? 1 : 0,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+            };
+
+            cbSetValue.SelectedIndexChanged += (s, e) =>
+            {
+                Start.Visible = cbSetValue.SelectedIndex == 1;
+                Finish.Visible = cbSetValue.SelectedIndex == 1;
+
+            };
         }
 
         public override void UpdatePosition(Size parentSize, int y)
         {
-            int gap = (parentSize.Width - Text.Width - Timepicker.Width) / 3;
+            int gap = (parentSize.Width - Text.Width - cbSetValue.Width) / 3;
             Text.Location = new Point(gap, y);
-            Timepicker.Location = new Point(gap * 2 + Text.Width, y);
+            cbSetValue.Location = new Point(gap * 2 + Text.Width, y);
 
-            ErrorLabel.Location = new Point(Text.Location.X, Text.Location.Y + 20);
+            gap = (parentSize.Width - Start.Width - Finish.Width) / 3;
+            Start.Location = new Point(gap, y+Start.ClientSize.Height+25);
+            Finish.Location = new Point(gap * 2 + Start.Width, y+Finish.ClientSize.Height + 25);
         }
 
         public override void ApplyElements(Control.ControlCollection control)
         {
             base.ApplyElements(control);
-            control.Add(Timepicker);
-        }
-    }
-
-    class MultipleRows : InputRow
-    {
-        ComboBox Selector;
-        Panel ItemPanel;
-
-        public MultipleRows(string basetext, string closedText, string openText, InputRow[] inputs, int baseState = 0) : base(basetext) {
-
-            //Comboboxtól függ hogy látszik-e a többi elem
-            Selector = new()
-            {
-                SelectedIndex = baseState,
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Items =
-                {
-                    closedText,
-                    openText
-                }
-            };
+            control.Add(Start);
+            control.Add(Finish);
+            control.Add(cbSetValue);
         }
     }
 }
-
-// Text, CB, Datetimepicker, timepicker,

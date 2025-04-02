@@ -30,6 +30,7 @@ namespace SzallodaManagerForm.ItemPanels
                 SelectedIndex = room.Available ? 1 : 0,
                 DropDownStyle = ComboBoxStyle.DropDownList,
             };
+            Availability.MouseWheel += (s, e) => { ((HandledMouseEventArgs)e).Handled = true; };
 
             Price = new()
             {

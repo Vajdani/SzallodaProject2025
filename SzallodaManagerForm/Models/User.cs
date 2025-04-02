@@ -1,6 +1,37 @@
 ﻿namespace SzallodaManagerForm.Models
 {
-    internal class User
+
+    internal class BaseUser
+    {
+        public int user_id { get; protected set; }
+        public string username { get; protected set; }
+        public string firstname { get; protected set; }
+        public string lastname { get; protected set; }
+
+        public BaseUser(Database db)
+        {
+            user_id = db.GetInt("user_id");
+            username = db.GetString("username");
+            firstname = db.GetString("firstName");
+            lastname = db.GetString("lastName");
+        }
+
+        public void HireUser(int authBoxIndex)
+        {
+            Database ab = authBoxIndex switch
+            {
+                0 => new($"INSERT INTO employee(hotel_id, user_id, userType) VALUES ({Main.Instance.GetSelectedHotelId()}, {user_id}, 'employee');"),
+                1 => new($"INSERT INTO employee(hotel_id, user_id, userType) VALUES ({Main.Instance.GetSelectedHotelId()}, {user_id}, 'manager');"),
+                _ => throw new Exception("Invalid value")
+            };
+            ab.Close();
+
+            Main.Instance.GetSelectedHotel().AddEmployee(new Employee(this, authBoxIndex == 0 ? User.AuthorityLevel.Employee : User.AuthorityLevel.Manager));
+        }
+
+    }
+
+    internal class User 
     {
         public enum AuthorityLevel
         {

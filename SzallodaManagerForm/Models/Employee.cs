@@ -15,6 +15,13 @@
             AuthorityLevel = User.GetAuthorityLevel(DB.GetString("userType"));
         }
 
+        public Employee(BaseUser user, User.AuthorityLevel auth) {
+            Id = user.user_id;
+            username = user.username;
+            hotel_id = Main.Instance.GetSelectedHotelId();
+            AuthorityLevel = auth;
+        }
+
         public void ChangeEmployeeAuthority()
         {
             string level;
@@ -38,6 +45,7 @@
         {
             Database ab = new($"DELETE FROM employee WHERE user_id = {Id} and hotel_id = {Main.Instance.GetSelectedHotelId()};");
             ab.Close();
+            Main.Instance.GetSelectedHotel().RemoveEmployee(Id, Main.Instance.GetSelectedHotelId());
             MessageBox.Show("Sikeres módosítás", "Információ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
