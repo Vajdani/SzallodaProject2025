@@ -48,7 +48,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             btnAddButton.Click += (s, e) =>
             {
-                DialogResult result = MessageBox.Show($"Biztod fel szeretnéd venni {lbFullname.Text}-t a {Main.Instance.GetSelectedHotel()} hotelhez {cbAuthorityLevel.Text}ként?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show($"Biztod fel szeretnéd venni {lbFullname.Text}-t a {Main.Instance.GetSelectedHotel().Name} hotelhez {cbAuthorityLevel.Text}ként?", "Megerősítés", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes) 
                 {
                     user.HireUser(cbAuthorityLevel.SelectedIndex);
