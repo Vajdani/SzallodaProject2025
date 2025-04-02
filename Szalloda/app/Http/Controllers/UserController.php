@@ -121,10 +121,10 @@ class UserController extends Controller
         return UserController::ProfileByID_Frontend(Auth::user()->user_id);
     }
 
-    public function ProfileByID_Frontend($id) {
+    public function ProfileByID_Frontend($user_id) {
         $services = [];
         $booking = [];
-        if (Auth::check() && Auth::user()->user_id == $id) {
+        if (Auth::check() && Auth::user()->user_id == $user_id) {
             $serviceQuery = Service::fromQuery("
                 select distinct service.service_id, servicecategory.serviceName, booking.booking_id
                 from service
@@ -135,7 +135,7 @@ class UserController extends Controller
                     booking.services like concat('%-', service.service_id) or
                     booking.services like service.service_id
                 )
-                where booking.user_id = $id
+                where booking.user_id = $user_id
             ");
 
             foreach ($serviceQuery as $key => $item) {
@@ -148,7 +148,7 @@ class UserController extends Controller
                 inner join user u on u.user_id = b.user_id
                 inner join room r on r.room_id = b.room_id
                 inner join hotel h on h.hotel_id = r.hotel_id
-                where b.user_id like $id;
+                where b.user_id like $user_id;
             ");
         }
 
@@ -156,7 +156,7 @@ class UserController extends Controller
             select l.points, lr.rank, lr.rank_id, lr.minPoint,lr.perks
             from loyalty l
             inner join loyaltyrank lr on l.rank_id = lr.rank_id
-            where l.user_id like $id
+            where l.user_id like $user_id
         ");
         $next ="";
         $rankid = $currentRank[0]->rank_id;
@@ -170,7 +170,7 @@ class UserController extends Controller
         $perks = explode(',',$currentRank[0]->perks);
 
         return view("profile", [
-            "user" => User::find($id),
+            "user" => User::find($user_id),
             "reviews" => Review::fromQuery("
                 select
                     r.rating, r.created_at, r.reviewText, h.hotelName,
@@ -180,7 +180,7 @@ class UserController extends Controller
                 inner join user u on u.user_id = r.user_id
                 inner join hotel h on r.hotel_id = h.hotel_id
                 where
-                    u.user_id like $id and
+                    u.user_id like $user_id and
                     r.active = 1
             "),
             "booking" => $booking,
@@ -407,23 +407,23 @@ class UserController extends Controller
         return redirect("/");
     }
 
-    public function DeleteReview_Backend($id) {
-        $review = Review::find($id);
+    public function DeleteReview_Backend($review_id) {
+        $review = Review::find($review_id);
         $review->active = 0;
         $review->Save();
 
         return back();
     }
 
-    public function ModifyReview_Frontend($id) {
-        $review = Review::find($id);
+    public function ModifyReview_Frontend($review_id) {
+        $review = Review::find($review_id);
         return view("review", [
             "hotel" => Hotel::find($review->hotel_id),
             "review" => $review
         ]);
     }
 
-    public function ModifyReview_Backend(Request $req, $id) {
+    public function ModifyReview_Backend(Request $req, $review_id) {
         $req->validate([
             'hotel' => 'required',
             'star' => 'required',
@@ -435,7 +435,7 @@ class UserController extends Controller
             'star.required' => 'Muszáj értékelnie a szállodát!',
         ]);
 
-        $review = Review::find($id);
+        $review = Review::find($review_id);
         $review->rating = $req->star;
         $review->reviewText = $req->comment;
         $review->created_at = Carbon::now('Europe/Budapest');

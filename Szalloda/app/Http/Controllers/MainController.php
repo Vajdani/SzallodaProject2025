@@ -65,15 +65,15 @@ class MainController extends Controller
         ]);
     }
 
-    public function City_Frontend($id) {
-        if (city::find($id) == null) {
+    public function City_Frontend($city_id) {
+        if (city::find($city_id) == null) {
             return redirect("/");
         }
-        $desc = City::find($id)->description;
+        $desc = City::find($city_id)->description;
         $desc = explode('{break}', $desc);
 
         return view("city", [
-            "city" => City::find($id),
+            "city" => City::find($city_id),
             "hotels" => Hotel::fromQuery("
                 select hotel.hotelName, hotel.hotel_id, hotel.address, hotel.phoneNumber, hotel.email, (
                     select round(avg(reviews.rating), 1)
@@ -91,15 +91,15 @@ class MainController extends Controller
                     hotel.description
                 from hotel
                 where
-                    hotel.city_id = $id
+                    hotel.city_id = $city_id
                 group by hotel.hotel_id;
             "),
             "description" => $desc
         ]);
     }
 
-    public function ReservationByID_Frontend($id) {
-        $hotel = Hotel::find($id);
+    public function ReservationByID_Frontend($hotel_id) {
+        $hotel = Hotel::find($hotel_id);
         if ($hotel == null) {
             return redirect("/");
         }
@@ -108,13 +108,13 @@ class MainController extends Controller
             from service s
             inner join servicecategory sc on sc.serviceCategory_id = s.category_id
             inner join hotel h on h.hotel_id = s.hotel_id
-            where h.hotel_id = $id;
+            where h.hotel_id = $hotel_id;
         ");
         $rooms = Room::fromQuery("
             select r.room_id, r.roomNumber, r.pricepernight, r.capacity
             from room r
             inner join hotel h on r.hotel_id = h.hotel_id
-            where h.hotel_id = $id
+            where h.hotel_id = $hotel_id
         ");
 
         return view("reservation", [
