@@ -53,8 +53,7 @@ class UserController extends Controller
         return [$authorized, $authorized ? $hotel[0] : null];
     }
 
-    public function PostReview_Frontend() {
-        $user_id = Auth::user()->user_id;
+    public static function CanWriteReview($user_id) {
         $hotels = Hotel::fromQuery("
             select distinct hotel.hotel_id, hotel.hotelName
             from hotel
@@ -74,13 +73,21 @@ class UserController extends Controller
                 ) < count(booking.booking_id)
         ");
 
-        if (count($hotels) == 0) {
+        $authorized = count($hotels) > 0;
+        return [$authorized, $authorized ? $hotels : null];
+    }
+
+    public function PostReview_Frontend() {
+        $data = UserController::CanWriteReview(Auth::user()->user_id);
+
+        if ($data[0]) {
+            return view("review", [
+                "hotels" => $data[1]
+            ]);
+        }
+        else {
             return back()->with("sv", "Még nem tudsz értékléseket írni!");
         }
-
-        return view("review", [
-            "hotels" => $hotels
-        ]);
     }
 
     public function PostReviewByID_Frontend($hotel_id) {
@@ -124,6 +131,7 @@ class UserController extends Controller
     public function ProfileByID_Frontend($user_id) {
         $services = [];
         $booking = [];
+        $writeReviews = false;
         if (Auth::check() && Auth::user()->user_id == $user_id) {
             $serviceQuery = Service::fromQuery("
                 select distinct service.service_id, servicecategory.serviceName, booking.booking_id
@@ -150,6 +158,8 @@ class UserController extends Controller
                 inner join hotel h on h.hotel_id = r.hotel_id
                 where b.user_id like $user_id;
             ");
+
+            $writeReviews = UserController::CanWriteReview($user_id)[0];
         }
 
         $currentRank =  Loyalty::fromQuery("
@@ -187,7 +197,8 @@ class UserController extends Controller
             "services" => $services,
             "loyalty" =>$currentRank,
             "nextRank" => $next,
-            "perks" => $perks
+            "perks" => $perks,
+            "writeReviews" => $writeReviews
         ]);
     }
 
@@ -421,6 +432,10 @@ class UserController extends Controller
 
     public function ModifyReview_Frontend($review_id) {
         $review = Review::find($review_id);
+        if ($review == null) {
+            return redirect("/");
+        }
+
         return view("review", [
             "hotel" => Hotel::find($review->hotel_id),
             "review" => $review

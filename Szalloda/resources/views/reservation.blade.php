@@ -9,6 +9,10 @@
     </script>
 @endsection
 
+@php
+    $minDate = date("Y-m-d", strtotime("+1 day"));
+@endphp
+
 @section('content')
     <nav>
         <h1>Foglalás</h1>
@@ -18,12 +22,18 @@
             <form action="/foglalas" method="post" class="center">
                 <div class="form">
                     @csrf
-                    <h2>Foglalás adatai</h2>
-                    <label for="hotel_id">Szálloda neve:</label>
-                    <input type="text" name="hotel_id" id="hotel_id" style="display:none" value="{{ $hotel->hotel_id }}">
-                    <p>{{ $hotel->hotelName }}</p>
+                    <div class="formHeader">
+                        <h2>Foglalás adatai</h2>
+                        <hr>
+                    </div>
 
-                    <div>
+                    <div style="margin-bottom:5px">
+                        <label for="hotel_id">Szálloda neve:</label>
+                        <input type="text" name="hotel_id" id="hotel_id" style="display:none" value="{{ $hotel->hotel_id }}">
+                        <p style="font-size:100%" class="inline">{{ $hotel->hotelName }}</p>
+                    </div>
+
+                    <div style="margin-bottom: 10px">
                         @error('service_id')
                         <p class="error">{{ $message }}</p>
                         @enderror
@@ -51,35 +61,39 @@
                         </div>
                     </div>
 
-                    <label for="room_id">Szoba:</label>
-                    <select name="room_id" id="room_id" onchange="RoomSelected()">
-                        @foreach ($rooms as $r)
-                            <option value="{{ $r->room_id }}">{{ $r->roomNumber }}</option>
-                        @endforeach
-                    </select>
-                    <p>Dátum</p>
-                    <div style="display:flex;justify-content:space-between">
-                        <input type="date" id="startDate" style="display: inline" name="startDate" onchange="DateChanged()" min="{{date("Y-m-d")}}" value="{{ old('startDate') }}">
-                        <p class="inline">—</p>
-                        <input type="date" id="endDate" style="display: inline" name="endDate" onchange="DateChanged()" min="{{date("Y-m-d")}}" value="{{ old('endDate') }}">
+                    <div>
+                        <label for="room_id" style="align-self:flex-start">Szoba:</label>
+                        <select name="room_id" id="room_id" onchange="RoomSelected()" style="align-self:flex-end">
+                            @foreach ($rooms as $r)
+                                <option value="{{ $r->room_id }}">{{ $r->roomNumber }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    @error('startDate')
-                        <p class="error">{{ $message }}</p>
-                    @enderror
-                    @error('endDate')
-                        <p class="error">{{ $message }}</p>
-                    @enderror
+                    <div>
+                        <p class="text-center">Dátum</p>
+                        <div style="display:flex;justify-content:space-between">
+                            <input type="date" id="startDate" class="inline" name="startDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('startDate') }}">
+                            <p class="inline">—</p>
+                            <input type="date" id="endDate" class="inline" name="endDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('endDate') }}">
+                        </div>
+                        @error('startDate')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                        @error('endDate')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <br>
-                    <br>
-                    <p>Létszám: <span id="letszam"></span></p>
-
+                    <p style="margin-top:10px">Létszám: <span id="letszam"></span></p>
                     <p>Összeg</p>
                     <p id="osszeg" class="finalPrice">0</p>
                 </div>
 
-                <div class="form">
-                    <h2>Számlázási adatok</h2>
+                <div class="form" style="align-items: flex-start">
+                    <div class="formHeader">
+                        <h2>Számlázási adatok</h2>
+                        <hr>
+                    </div>
 
                     <div class="inputItem">
                         <label for="method">Fizetési módszer</label>
@@ -92,6 +106,7 @@
                         @error('method')
                             <p class="error">{{ $message }}</p>
                         @enderror
+                        <hr>
                     </div>
                     <div class="inputItem">
                         <label for="country">Ország</label>
@@ -129,10 +144,8 @@
                         @enderror
                     </div>
 
-
+                    <input type="submit" value="Foglalok" class="center">
                 </div>
-
-                <input type="submit" value="Foglalok">
             </form>
         </section>
     </div>

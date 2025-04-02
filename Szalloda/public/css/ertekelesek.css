@@ -91,6 +91,7 @@ select {
     width: min-content;
     text-wrap: nowrap;
     width: 100%;
+    height: 100%;
 }
 
 .ratingUser>div.profilePicture {

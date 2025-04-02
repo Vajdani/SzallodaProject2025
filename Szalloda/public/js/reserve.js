@@ -2,6 +2,7 @@ let selectedRoomId = -1
 let rooms = {}
 let services = {}
 let userLoyalty = {}
+let selectedServices = {}
 
 function InitData(roomsJson, servicesJson, loyalty) {
     rooms = JSON.parse(roomsJson)
@@ -55,6 +56,7 @@ async function DateChanged() {
             input.name = "services[]"
             input.id = id
             input.value = element.service_id
+            input.checked = selectedServices[id]
             input.onchange = ServiceSelected
             input.type = "checkbox"
 
@@ -80,6 +82,12 @@ function RoomSelected() {
 }
 
 function ServiceSelected() {
+    selectedServices = {}
+    services.forEach(element => {
+        let id = "service_" + element.service_id
+        selectedServices[id] = document.getElementById(id).checked
+    });
+
     CalculatePrice()
 }
 

@@ -3,38 +3,42 @@ function point(point) {
     slider.value = point
 }
 
-function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
+function loyaltymenu(loyalty, points, currentmin, nextmin, rank_id, ...perks) {
     let panel = document.createElement("div")
     panel.id = "loyaltymenu"
     panel.className = "menuBgOverlay"
     //panel.onclick = CloseMenu
-    let perklist=""
-    if(perks!=""){
+    let perklist = ""
+    if (perks != "") {
         perklist = `<ul style="text-align:left">`
         perks.forEach(element => {
-            perklist+= `<li>`+element+`</li>`
+            perklist += `<li>` + element + `</li>`
         });
         perklist += `</ul>`
     }
     else {
-        perklist="Önnek jelenleg nincsenek jutalmai!"
+        perklist = "Jelenleg nincsenek jutalmai!"
     }
 
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">
-            <h2>Az ön jelenlegi rangja: `+ loyalty + `</h2>
+            <div class="loyaltyMenuHeader">
+                <h2>Jelenlegi rangja: <span>`+ loyalty + `</span></h2>
+                <img src="img/loyalty/` + rank_id + `.png" alt="` + rank_id + `.png" title="` + loyalty + `" class="img-fluid" style="max-height:inherit">
+            </div>
+            <hr>
         </div>
         <div class="loyal-body">
-           <p>`+currentmin+`</p><progress id="point" class="pointslider" value="`+points+`" min="`+currentmin+`" max="`+nextmin+`"></progress>  <p style="float: right">`+nextmin+`</p>
+           <p style="width:auto">`+ currentmin + `</p><progress id="point" class="pointslider" value="` + points + `" min="` + currentmin + `" max="` + nextmin + `"></progress>  <p style="float: right;width:auto">` + nextmin + `</p>
         </div>
           <hr>
         <div class="PPS-head">
-            <h2>Az ön jelenlegi jutalmai:</h2>
+            <h2>Jutalmai:</h2>
         </div>
         <hr>
         <div class="loyal-body">
-           `+perklist+`
+           `+ perklist + `
         </div>
         <div class="PPS-buttons">
             <button class="save-button" onclick="CloseMenu('loyaltymenu')">Bezárás</button>
@@ -45,8 +49,7 @@ function loyaltymenu(loyalty,points,currentmin,nextmin,...perks){
 
 }
 
-function loyaltymax(loyalty,...perks){
-
+function loyaltymax(loyalty, rank_id, ...perks) {
     let panel = document.createElement("div")
     panel.id = "loyaltymenu"
     panel.className = "menuBgOverlay"
@@ -55,7 +58,7 @@ function loyaltymax(loyalty,...perks){
     let perklist = `<ul style="text-align:left">`
 
     perks.forEach(element => {
-       perklist+= `<li>`+element+`</li>`
+        perklist += `<li>` + element + `</li>`
     });
 
     perklist += `</ul>`
@@ -64,19 +67,22 @@ function loyaltymax(loyalty,...perks){
     panel.innerHTML = `
     <div class="ProfilePicture-Selection" id="loyal">
         <div class="PPS-head">
-            <h2>Az ön jelenlegi rangja: `+ loyalty + `</h2>
+            <div class="loyaltyMenuHeader">
+                <h2>Jelenlegi rangja: <span>`+ loyalty + `</span></h2>
+                <img src="img/loyalty/` + rank_id + `.png" alt="` + rank_id + `.png" title="` + loyalty + `" class="img-fluid" style="max-height:inherit">
+            </div>
+            <hr>
         </div>
-        <hr>
         <div class="loyal-body">
             <p>Gratulálok, elérted a legmagasabb rangot!</p>
         </div>
         <hr>
         <div class="PPS-head">
-            <h2>Az ön jelenlegi jutalmai:</h2>
+            <h2>Jutalmai:</h2>
         </div>
         <hr>
         <div class="loyal-body">
-           `+perklist+`
+           `+ perklist + `
         </div>
         <div class="PPS-buttons">
             <button class="save-button" onclick="CloseMenu('loyaltymenu')">Bezárás</button>

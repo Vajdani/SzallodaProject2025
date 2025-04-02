@@ -21,14 +21,14 @@
                         class="profile-picture" id="profile">
                 </div>
                 <div class="profile-details-con">
-                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{ asset('img/loyalty/' . $loyalty[0]->rank_id . '.png') }}" alt="{{ $loyalty[0]->rank }}.png" class="loyalty"></h2>
+                    <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{ asset('img/loyalty/' . $loyalty[0]->rank_id . '.png') }}" alt="{{ $loyalty[0]->rank }}.png" title="{{$loyalty[0]->rank}}" class="loyalty"></h2>
                     @if ($hasPermission)
                         <div class="profile-option-con">
                             <a
                             @if ($loyalty[0]->rank_id!=4)
-                            onclick="loyaltymenu('{{$loyalty[0]->rank}}','{{$loyalty[0]->points}}','{{$loyalty[0]->minPoint}}','{{$nextRank[0]->minPoint}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
+                            onclick="loyaltymenu('{{$loyalty[0]->rank}}', '{{$loyalty[0]->points}}', '{{$loyalty[0]->minPoint}}', '{{$nextRank[0]->minPoint}}', '{{$loyalty[0]->rank_id}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @else
-                            onclick="loyaltymax('{{$loyalty[0]->rank}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
+                            onclick="loyaltymax('{{$loyalty[0]->rank}}', '{{$loyalty[0]->rank_id}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @endif
                             >Hűségprogram megtekintése</a>
                             <a onclick="pfpmenu()">Profilképcsere</a>
@@ -78,7 +78,7 @@
                 <div class="ratings">
                     <h2>
                         Értékelések
-                        @if ($hasPermission)
+                        @if ($hasPermission && $writeReviews)
                             <span style="font-weight:normal">
                                 — <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
                             </span>

@@ -1,7 +1,6 @@
 .form {
-    border: 1px solid black;
     background-color: white;
-    width: 100%;
+    width: 35%;
     border-radius: 25px;
     padding: 2%;
     margin-bottom: 10px;
@@ -65,9 +64,22 @@ input[type=text] {
     border-bottom: var(--colour_randomgreen1) 2px solid;
 }
 
-.inputItem{
-    padding: 5px;
-    
+.inputItem {
+    /* padding: 5px; */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.inputItem label,
+.inputItem input {
+    width: 100%;
+}
+
+.inputItem hr {
+    margin-top: 5px;
+    background-color: var(--colour_randomgreen1);
 }
 
 input[type=date] {
@@ -78,8 +90,7 @@ input[type=submit] {
     padding: 5px;
     font-size: 90%;
     display: block;
-    margin-bottom: 10px;
-    width: 100%;
+    margin-top: 10px;
 }
 
 .kod {
@@ -140,4 +151,15 @@ textarea {
 .finalPrice img {
     width: var(--iconSize);
     height: var(--iconSize);
+}
+
+.formHeader {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.formHeader h2 {
+    margin-bottom: 2px;
+    width: 100%;
+    text-align: center;
 }

@@ -230,5 +230,25 @@ ul {
 }
 
 .loyal-body p {
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+}
+
+.loyaltyMenuHeader {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    max-height: 50px;
+    margin: 5px;
+}
+
+.loyaltyMenuHeader h2 {
+    padding-right: 0;
+}
+
+.loyaltyMenuHeader h2 span {
+    text-transform: capitalize;
     padding: 5px;
 }
