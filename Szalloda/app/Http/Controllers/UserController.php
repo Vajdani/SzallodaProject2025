@@ -46,7 +46,7 @@ class UserController extends Controller
         ");
 
         $authorized = count($hotel) > 0;
-        return [$authorized, $authorized && $hotel[0]];
+        return [$authorized, $authorized ? $hotel[0] : null];
     }
 
     public function PostReview_Frontend() {
