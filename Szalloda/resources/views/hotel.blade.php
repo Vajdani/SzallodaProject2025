@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ asset('css/ertekelesek.css') }}">
 @endsection
 
+@php
+    $oceanfloor = [ "Teknős","Bohóchal","Cápa","Horgászhal" ];
+@endphp
+
 @section('content')
     <nav>
         <h1>{{ $hotel->hotelName }} szálloda</h1>
@@ -95,27 +99,6 @@
                 </table>
                 <hr>
             </div>
-            <!--<div>
-                <p>Szolgáltatások</p>
-                <table class="roomsTable">
-                    <tr>
-                        <th>Név</th>
-                        <th>Ár</th>
-                        <th>Jelenleg elérhető-e</th>
-                        <th>Egész évben elérhető-e</th>
-                    </tr>
-                    @foreach ($services as $service)
-                        <tr>
-                            <td>{{$service->serviceName}}</td>
-                            <td>{{$service->price}} Ft</td>
-                            <td>{{$service->available == 1 ? "Igen" : "Nem"}}</td>
-                            <td>{{$service->allYear == 1 ? "Igen" : "Nem"}}</td>
-                        </tr>
-                    @endforeach
-                </table>
-                <hr>
-            </div>
-            -->
             @auth
                 <div class="text-center">
                     <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button" type="submit">Foglalok!</button></a>
@@ -125,7 +108,9 @@
         <section>
             <h2>Értékelések
             @auth
-                - <a href="/ertekeles/{{$hotel->hotel_id}}"><button class="review-button">Új értékelés írása</button></a>
+                @if ($writeReviews)
+                    - <a href="/ertekeles/{{$hotel->hotel_id}}"><button class="review-button">Új értékelés írása</button></a>
+                @endif
             @endauth</h2>
             <div class="ratingSection center" id="ratingSection">
                 <script src="{{ asset('js/reviews.js') }}"></script>

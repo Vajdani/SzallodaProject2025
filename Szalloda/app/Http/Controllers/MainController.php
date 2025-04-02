@@ -27,18 +27,17 @@ class MainController extends Controller
         return MainController::Hotel_Frontend(Hotel::inRandomOrder()->first()->hotel_id);
     }
 
-    public function Hotel_Frontend($id) {
-        $hotel = Hotel::find($id);
+    public function Hotel_Frontend($hotel_id) {
+        $hotel = Hotel::find($hotel_id);
         if ($hotel == null) {
             return redirect("/");
         }
-        $desc = hotel::find($id)->description;
+        $desc = hotel::find($hotel_id)->description;
         $desc = explode('{break}', $desc);
-        $oceanfloor = array("Teknős","Bohóchal","Cápa","Horgászhal");
 
         return view("hotel", [
             "hotel" => $hotel,
-            "rooms" => Room::where("hotel_id", $id)->get(),
+            "rooms" => Room::where("hotel_id", $hotel_id)->get(),
             "city" => City::find($hotel->city_id),
             "reviews" => Review::fromQuery("
                 select
@@ -49,7 +48,7 @@ class MainController extends Controller
                 where
                     reviews.hotel_id = hotel.hotel_id and
                     reviews.user_id = user.user_id and
-                    hotel.hotel_id = $id and
+                    hotel.hotel_id = $hotel_id and
                     reviews.active = 1
                 order by reviews.created_at
             "),
@@ -57,12 +56,12 @@ class MainController extends Controller
                 select servicecategory.serviceName, service.price, service.available, service.allYear, service.startDate, service.endDate, service.openTime, service.closeTime
                 from service, servicecategory
                 where
-                    service.hotel_id = $id and
+                    service.hotel_id = $hotel_id and
                     service.category_id = servicecategory.serviceCategory_id
             "),
             "city_description" => City::find($hotel->city_id)->description_short,
             "hotel_description" => $desc,
-            "oceanfloor" => $oceanfloor
+            "writeReviews" => UserController::CanWriteReviewForHotel($hotel_id, Auth::user()->user_id)[0]
         ]);
     }
 
@@ -141,9 +140,6 @@ class MainController extends Controller
             'city' => 'required',
             'zip' => 'required',
             'line1' => 'required',
-            'line2' => 'required'
-
-
         ],[
             'stardate.after' => "A mainál korábbi dátumot nem adhat meg!",
             'startDate.required' => 'Adja meg a kezdő dátumot!',
@@ -157,7 +153,6 @@ class MainController extends Controller
             'city.required' => 'Adja meg a várost!',
             'zip.required' => 'Adja meg az irányítószámot!',
             'line1.required' => 'Adja meg az első címsort!',
-            'line2.required' => 'Adja meg a második címsort!'
         ]);
 
         $start = Carbon::parse($req->input('startDate'));
@@ -212,7 +207,7 @@ class MainController extends Controller
         $billing->city = $req->city;
         $billing->zipcode = $req->zip;
         $billing->line1 = $req->line1;
-        $billing->line2 = $req->line2;
+        $billing->line2 = $req->line2 || "";
         $billing->save();
 
         $point = round($price / 1000,0);

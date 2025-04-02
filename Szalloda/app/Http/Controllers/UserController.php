@@ -25,6 +25,30 @@ class UserController extends Controller
 {
     private static int $minPasswordLength = 8;
 
+    public static function CanWriteReviewForHotel($hotel_id, $user_id) {
+        $hotel = Hotel::fromQuery("
+            select hotel.hotel_id, hotel.hotelName
+            from hotel
+            inner join room on room.hotel_id = hotel.hotel_id
+            inner join booking on room.room_id = booking.room_id
+            where
+                hotel.hotel_id = $hotel_id and
+                booking.user_id = $user_id and
+                booking.status = 'completed'
+            having (
+                select count(*)
+                from reviews
+                where
+                    reviews.user_id = $user_id and
+                    reviews.hotel_id = hotel.hotel_id and
+                    reviews.active = 1
+                ) < count(booking.booking_id)
+        ");
+
+        $authorized = count($hotel) > 0;
+        return [$authorized, $authorized && $hotel[0]];
+    }
+
     public function PostReview_Frontend() {
         $user_id = Auth::user()->user_id;
         $hotels = Hotel::fromQuery("
@@ -55,9 +79,16 @@ class UserController extends Controller
         ]);
     }
 
-    public function PostReviewByID_Frontend($id) {
+    public function PostReviewByID_Frontend($hotel_id) {
+        $user_id = Auth::user()->user_id;
+        $data = UserController::CanWriteReviewForHotel($hotel_id, $user_id);
+
+        if (!$data[0]) {
+            return back()->with("sv", "Még nem tudsz értékléseket írni!");
+        }
+
         return view("review", [
-            "hotel" => Hotel::find($id)
+            "hotel" => $data[1]
         ]);
     }
 
@@ -87,8 +118,8 @@ class UserController extends Controller
     }
 
     public function ProfileByID_Frontend($id) {
-        $services = array();
-        $booking = array();
+        $services = [];
+        $booking = [];
         if (Auth::check() && Auth::user()->user_id == $id) {
             $serviceQuery = Service::fromQuery("
                 select distinct service.service_id, servicecategory.serviceName, booking.booking_id
