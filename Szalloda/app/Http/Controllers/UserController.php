@@ -14,7 +14,7 @@ use App\Models\Review;
 use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
-use App\Rules\StringMaxRule;
+use App\Rules\MaxCommentLengthRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
 use App\Models\LoyaltyRank;
@@ -24,6 +24,10 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
     private static int $minPasswordLength = 8;
+    private static int $minUserAge = 18;
+    private static int $minPhoneNumberLength = 10;
+    private static int $maxPhoneNumberLength = 15;
+    private static int $maxCommentLength = 1000;
 
     public static function CanWriteReviewForHotel($hotel_id, $user_id) {
         $hotel = Hotel::fromQuery("
@@ -96,7 +100,7 @@ class UserController extends Controller
         $req->validate([
             'hotel' => 'required',
             'star' => 'required',
-            "comment" => "max:1000"
+            "comment" => "max:".self::$maxCommentLength
         ], [
             'hotel.required' => 'Muszáj választania egy szállodát!',
             'star.required' => 'Muszáj értékelnie a szállodát!',
@@ -238,7 +242,6 @@ class UserController extends Controller
         return redirect("/")->with('sv', 'Sikeres kijelentkezés!');
     }
 
-
     public function Login_Frontend() {
         return view("login");
     }
@@ -274,14 +277,18 @@ class UserController extends Controller
                 "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
                 "unique:user,email"
             ],
-            "phonenumber" => "required|min:10|max:15|unique:user,phonenumber",
+            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber",
             "password" => [
                 "required",
-                Password::min(self::$minPasswordLength)->letters()->mixedCase()->numbers()->symbols(),
+                Password::min(self::$minPasswordLength)
+                        ->letters()
+                        ->mixedCase()
+                        ->numbers()
+                        ->symbols(),
                 "confirmed"
             ],
             "password_confirmation" => "required",
-            "date" => "required|date|before:".Carbon::now()->subYears(18),
+            "date" => "required|date|before:".Carbon::now()->subYears(self::$minUserAge),
             "tos" => "required",
         ], [
             "name.required" => "Muszáj megadnia a felhasználónevét!",
@@ -294,10 +301,9 @@ class UserController extends Controller
             "email.regex" => "Nem e-mail címet adott meg!",
             "email.unique" => "Ezzel az e-mail címmel már regisztrált fiókot!",
 
-
             "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
-            "phonenumber.min" => "A telefonszámnak legalább 10 számjegy hosszúnak kell lennie!",
-            "phonenumber.max" => "A telefonszám legfeljebb 15 számjegy hosszú lehet!",
+            "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
+            "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
             "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
 
             "password.required" => "Muszáj megadnia a jelszavát!",
@@ -312,7 +318,7 @@ class UserController extends Controller
 
             "date.required" => "Muszáj megadnia a születési dátumát!",
             "date.date" => "Valós dátumot adjon meg!",
-            "date.before" => "Csak 18 évnél idősebb személy regisztrálhat!",
+            "date.before" => "Csak ".self::$minUserAge." évnél idősebb személy regisztrálhat!",
 
             "tos.required" => "Muszáj elfogadnia a felhasználói feltételeket!",
         ]);
@@ -347,7 +353,7 @@ class UserController extends Controller
             'password'      => 'required',
             'newpassword'  => [
                 'required',
-                Password::min(8)
+                Password::min(self::$minPasswordLength)
                         ->numbers()
                         ->letters()
                         ->mixedCase()
@@ -358,7 +364,7 @@ class UserController extends Controller
         ], [
             'password.required'     => 'A jelszó megadása kötelező',
             'newpassword.required'  => 'Az új Jelszó megadása kötelező',
-            'newpassword.min'       => 'Legalább 8 karakter legyen az új jelszó!',
+            'newpassword.min'       => 'Legalább '.self::$minPasswordLength.' karakter legyen az új jelszó!',
             'newpassword.numbers'   => 'Az új jelszónak tartalmaznia kell számot',
             'newpassword.letters'   => 'Az új jelszónak tartalmaznia kell betűt',
             'newpassword.mixed'     => 'Az új jelszónak kell tartalmazni kis és nagybetűt is!',
@@ -368,7 +374,7 @@ class UserController extends Controller
 
         if(Hash::check($req->password,Auth::user()->password)){
             $data = User::find(Auth::user()->user_id);
-            $data->password    = Hash::make($req->newpassword);
+            $data->password = Hash::make($req->newpassword);
             $data->Save();
             Auth::logout();
             return redirect('/bejelentkezes')->with([
@@ -422,7 +428,7 @@ class UserController extends Controller
             'hotel' => 'required',
             'star' => 'required',
             "comment" => [
-                new StringMaxRule()
+                new MaxCommentLengthRule()
             ]
         ], [
             'hotel.required' => 'Muszáj választania egy szállodát!',

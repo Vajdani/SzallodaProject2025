@@ -246,7 +246,7 @@ class MainController extends Controller
         ]);
     }
 
-    public function GetFilteredReviews_API($stars, $city, $hotel) {
+    public function GetFilteredReviews_API($stars, $city_id, $hotel_id) {
         $reviewQuery = "
             select
                 reviews.rating, reviews.created_at, reviews.reviewText, hotel.hotelName,
@@ -260,8 +260,8 @@ class MainController extends Controller
         ";
 
         if ($stars <= 5 && $stars >= 1) { $reviewQuery .= " and reviews.rating = $stars"; }
-        if ($city != 0 && City::find($city) != null) { $reviewQuery .= " and hotel.city_id = $city"; }
-        if ($hotel != 0 && Hotel::find($hotel) != null) { $reviewQuery .= " and reviews.hotel_id = $hotel"; }
+        if ($city_id != 0 && City::find($city_id) != null) { $reviewQuery .= " and hotel.city_id = $city_id"; }
+        if ($hotel_id != 0 && Hotel::find($hotel_id) != null) { $reviewQuery .= " and reviews.hotel_id = $hotel_id"; }
 
         $reviewQuery .= " order by reviews.created_at";
 
@@ -270,8 +270,8 @@ class MainController extends Controller
         ];
 
         $hotelQuery = "select hotelName, hotel_id from hotel";
-        if ($city != 0) {
-            $hotelQuery .= " where city_id = $city";
+        if ($city_id != 0) {
+            $hotelQuery .= " where city_id = $city_id";
         }
 
         $response["hotels"] = Hotel::fromQuery($hotelQuery);

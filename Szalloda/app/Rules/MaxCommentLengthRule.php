@@ -4,8 +4,9 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use App\Http\Controllers\UserController;
 
-class StringMaxRule implements ValidationRule
+class MaxCommentLengthRule implements ValidationRule
 {
     /**
      * Run the validation rule.
@@ -14,8 +15,9 @@ class StringMaxRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (mb_strlen(str_replace(PHP_EOL, '', $value)) > 1000) {
-            $fail("Legfeljebb 1000 karakter hosszú értékelést írhat!");
+        $max = UserController::$maxCommentLength;
+        if (mb_strlen(str_replace(PHP_EOL, '', $value)) > $max) {
+            $fail("Legfeljebb ".$max." karakter hosszú értékelést írhat!");
         }
     }
 }
