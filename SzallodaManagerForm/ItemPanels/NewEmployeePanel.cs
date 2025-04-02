@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SzallodaManagerForm.Models;
+﻿using SzallodaManagerForm.Models;
 
 namespace SzallodaManagerForm.ItemPanels
 {
@@ -26,7 +20,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             lbFullname = new()
             {
-                Text = $"{user.firstname}\n {user.lastname}"
+                Text = $"{user.firstname} {user.lastname}",
             };
 
             cbAuthorityLevel = new()

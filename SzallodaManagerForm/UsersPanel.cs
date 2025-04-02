@@ -59,7 +59,6 @@ namespace SzallodaManagerForm
 
         }
 
-
         public void ResizePanel(Size size)
         {
             Size = new Size(size.Width, size.Height - 100);
