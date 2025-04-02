@@ -27,7 +27,7 @@ class UserController extends Controller
     private static int $minUserAge = 18;
     private static int $minPhoneNumberLength = 10;
     private static int $maxPhoneNumberLength = 15;
-    private static int $maxCommentLength = 1000;
+    public static int $maxCommentLength = 1000;
 
     public static function CanWriteReviewForHotel($hotel_id, $user_id) {
         $hotel = Hotel::fromQuery("
