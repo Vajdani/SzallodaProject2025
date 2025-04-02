@@ -215,7 +215,7 @@ class UserController extends Controller
             ]
         ], [
             "username.required" => "Muszáj megadnia a felhasználónevét!",
-            "username.unique" => "Ez a felhasználónév már foglalt!"
+            "username.unique" => "Ez a felhasználónév már foglalt!",
 
             "realname.required" => "Muszáj megadnia a polgári nevét!",
 
