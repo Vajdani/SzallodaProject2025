@@ -32,7 +32,7 @@
                     @endisset
                 </div>
 
-                <p class="text-center" style="margin-bottom: 5px">Értékelés - <span id="rating"><span onclick="reviewstar(1)">★</span><span onclick="reviewstar(2)">★</span><span onclick="reviewstar(3)">★</span><span onclick="reviewstar(4)">★</span><span onclick="reviewstar(5)">★</span></span></p>
+                <p class="text-center" style="margin-bottom: 5px">Értékelés - <span id="rating">@for ($i = 1; $i <= 5; $i++)<span id="rating_{{$i}}" onclick="reviewstar({{$i}})">★</span>@endfor</span></p>
 
                 @error('star')
                     <p class="error">{{ $message }}</p>
