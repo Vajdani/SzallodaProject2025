@@ -56,6 +56,13 @@
                                 @enderror
                             </div>
                             <div class="user-data">
+                                <label for="phonenumber">Telefonszám</label>
+                                <input type="text" name="phonenumber" id="phonenumber" value="{{ $user->phonenumber }}" placeholder="pl: +36201111111">
+                                @error('phonenumber')
+                                    <p class="error">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div class="user-data">
                                 <label for="username">Felhasználónév</label>
                                 <input type="text" value="{{ $user->username }}" name="username" id="username">
                                 @error('username')

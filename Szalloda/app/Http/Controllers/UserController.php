@@ -14,6 +14,7 @@ use App\Models\Review;
 use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
+use App\Rules\UsernameUniqueRule;
 use App\Rules\MaxCommentLengthRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
@@ -214,7 +215,7 @@ class UserController extends Controller
         $req->validate([
             'username' => [
                 'required',
-                "unique:user,username"
+                new UsernameUniqueRule()
             ],
             'realname' => [
                 'required',
@@ -223,7 +224,8 @@ class UserController extends Controller
             "email" => [
                 "required",
                 "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
-            ]
+            ],
+            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber",
         ], [
             "username.required" => "Muszáj megadnia a felhasználónevét!",
             "username.unique" => "Ez a felhasználónév már foglalt!",
@@ -231,7 +233,12 @@ class UserController extends Controller
             "realname.required" => "Muszáj megadnia a polgári nevét!",
 
             "email.required" => "Muszáj megadnia az e-mail címét!",
-            "email.regex" => "Nem egy e-mail címet adott meg!"
+            "email.regex" => "Nem egy e-mail címet adott meg!",
+
+            "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
+            "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
+            "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
+            "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
         ]);
         $data = User::find(Auth::user()->user_id);
         $data->username = $req->username;
@@ -239,6 +246,7 @@ class UserController extends Controller
         $data->lastName = $nev[0];
         $data->firstName = $nev[1];
         $data->email = $req->email;
+        $data->phonenumber = $req->phonenumber;
         $data->Save();
 
         return redirect("/profil");
