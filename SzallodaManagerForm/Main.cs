@@ -76,6 +76,7 @@ namespace SzallodaManagerForm
             cbModositas.Items.Clear();
             cbModositas.Items.Add("Szobák");
             cbModositas.Items.Add("Szolgáltatások");
+            cbModositas.Items.Add("Statisztika");
 
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 1) //Manager vagy Owner
@@ -101,6 +102,10 @@ namespace SzallodaManagerForm
                     break;
                 case "Szolgáltatások":
                     current = szolgaltatasok;
+                    break;
+                case "Statisztika":
+                    hotelstat hs = new hotelstat(cbHotelek.SelectedItem.ToString());
+                    hs.ShowDialog();
                     break;
             }
 

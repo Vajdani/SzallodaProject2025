@@ -8,7 +8,7 @@ namespace SzallodaManagerForm
 {
     internal class AddEmployeeForm : Form
     {
-        Label lbTitle; 
+        Label lbTitle;
         UsersPanel Display;
 
         public AddEmployeeForm()
@@ -41,10 +41,20 @@ namespace SzallodaManagerForm
 
         void OnSizechange()
         {
-            lbTitle.Location = new((this.ClientSize.Width - lbTitle.ClientSize.Width)/2, 30);
+            lbTitle.Location = new((this.ClientSize.Width - lbTitle.ClientSize.Width) / 2, 30);
             Display.ResizePanel(this.ClientSize);
         }
 
-
-    }   
+        private void InitializeComponent()
+        {
+            SuspendLayout();
+            // 
+            // AddEmployeeForm
+            // 
+            ClientSize = new Size(326, 253);
+            Name = "AddEmployeeForm";
+            Text = " ";
+            ResumeLayout(false);
+        }
+    }
 }

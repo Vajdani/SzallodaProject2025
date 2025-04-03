@@ -72,7 +72,7 @@ namespace SzallodaManagerForm
 
             for (int i = 0; i < InputFields.Count; i++)
             {
-                InputFields[i].UpdatePosition(this.ClientSize, i >= 1 ? (i + 1) * 50 + InputFields[i-1].BonusBottomSpacing : (i + 1) * 50);
+                InputFields[i].UpdatePosition(this.ClientSize, i >= 1 ? (i + 1) * 50 + InputFields[i - 1].BonusBottomSpacing : (i + 1) * 50);
                 InputFields[i].ApplyElements(this.Controls);
             }
         }
@@ -81,6 +81,11 @@ namespace SzallodaManagerForm
         {
             DialogResult dialog = MessageBox.Show("Biztos el akarod vetni?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialog == DialogResult.Yes) Close();
+        }
+
+        private void InitializeComponent()
+        {
+
         }
 
         protected virtual void SaveButtonClick(object sender, EventArgs e)

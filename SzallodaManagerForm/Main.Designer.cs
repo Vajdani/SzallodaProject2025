@@ -46,19 +46,18 @@
             panel1.Controls.Add(cbHotelek);
             panel1.Controls.Add(lbFelhasznalo);
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4, 5, 4, 5);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1126, 100);
+            panel1.Size = new Size(901, 80);
             panel1.TabIndex = 0;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14F);
-            label2.Location = new Point(751, 27);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(601, 22);
             label2.Name = "label2";
-            label2.Size = new Size(150, 38);
+            label2.Size = new Size(129, 32);
             label2.TabIndex = 4;
             label2.Text = "Módosítás:";
             // 
@@ -67,11 +66,12 @@
             cbModositas.AutoCompleteCustomSource.AddRange(new string[] { "Alkalmazottak", "Szolgáltatások", "Szobák" });
             cbModositas.DropDownStyle = ComboBoxStyle.DropDownList;
             cbModositas.FormattingEnabled = true;
-            cbModositas.Items.AddRange(new object[] { "Alkalmazottak", "Szolgáltatások", "Szobák" });
-            cbModositas.Location = new Point(920, 35);
-            cbModositas.Margin = new Padding(4, 5, 4, 5);
+            cbModositas.ImeMode = ImeMode.On;
+            cbModositas.Items.AddRange(new object[] { "Alkalmazottak", "Szolgáltatások", "Szobák", "Statisztika megtekintése" });
+            cbModositas.Location = new Point(736, 28);
+            cbModositas.Margin = new Padding(3, 4, 3, 4);
             cbModositas.Name = "cbModositas";
-            cbModositas.Size = new Size(171, 33);
+            cbModositas.Size = new Size(138, 28);
             cbModositas.TabIndex = 2;
             cbModositas.SelectedIndexChanged += cbModositas_SelectedIndexChanged;
             // 
@@ -79,10 +79,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F);
-            label1.Location = new Point(433, 27);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(346, 22);
             label1.Name = "label1";
-            label1.Size = new Size(90, 38);
+            label1.Size = new Size(77, 32);
             label1.TabIndex = 3;
             label1.Text = "Hotel:";
             // 
@@ -90,10 +89,10 @@
             // 
             cbHotelek.DropDownStyle = ComboBoxStyle.DropDownList;
             cbHotelek.FormattingEnabled = true;
-            cbHotelek.Location = new Point(536, 35);
-            cbHotelek.Margin = new Padding(4, 3, 4, 3);
+            cbHotelek.Location = new Point(429, 28);
+            cbHotelek.Margin = new Padding(3, 2, 3, 2);
             cbHotelek.Name = "cbHotelek";
-            cbHotelek.Size = new Size(188, 33);
+            cbHotelek.Size = new Size(151, 28);
             cbHotelek.TabIndex = 1;
             cbHotelek.SelectedValueChanged += OnHotelSelected;
             // 
@@ -101,23 +100,22 @@
             // 
             lbFelhasznalo.AutoSize = true;
             lbFelhasznalo.Font = new Font("Segoe UI", 20F);
-            lbFelhasznalo.Location = new Point(16, 10);
-            lbFelhasznalo.Margin = new Padding(4, 0, 4, 0);
+            lbFelhasznalo.Location = new Point(13, 8);
             lbFelhasznalo.Name = "lbFelhasznalo";
-            lbFelhasznalo.Size = new Size(291, 54);
+            lbFelhasznalo.Size = new Size(245, 46);
             lbFelhasznalo.TabIndex = 0;
             lbFelhasznalo.Text = "Felhasználónév";
             // 
             // Main
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1120, 768);
+            ClientSize = new Size(896, 614);
             Controls.Add(panel1);
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Main";
+            Text = "Módosítási felület";
             FormClosed += Main_Closed;
             Load += Main_Load;
             panel1.ResumeLayout(false);
