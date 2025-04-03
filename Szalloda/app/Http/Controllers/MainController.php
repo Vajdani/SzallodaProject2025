@@ -139,7 +139,7 @@ class MainController extends Controller
             'country' => 'required',
             'city' => 'required',
             'zip' => 'required',
-            'line1' => 'required',
+            'line1' => 'required:',
         ],[
             'stardate.after' => "A mainál korábbi dátumot nem adhat meg!",
             'startDate.required' => 'Adja meg a kezdő dátumot!',
