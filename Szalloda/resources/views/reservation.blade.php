@@ -20,7 +20,7 @@
     <div class="mainContent">
         <section>
             <form action="/foglalas" method="post" class="center">
-                <div class="form">
+                <div class="formWindow">
                     @csrf
                     <div class="formHeader">
                         <h2>Foglalás adatai</h2>
@@ -89,7 +89,7 @@
                     <p id="osszeg" class="finalPrice">0</p>
                 </div>
 
-                <div class="form" style="align-items: flex-start">
+                <div class="formWindow" style="align-items: flex-start">
                     <div class="formHeader">
                         <h2>Számlázási adatok</h2>
                         <hr>
@@ -115,19 +115,22 @@
                             <p class="error">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="inputItem">
-                        <label for="city">Város</label>
-                        <input type="text" name="city" id="city" value="{{ old('city') }}">
-                        @error('city')
-                            <p class="error">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="inputItem">
-                        <label for="zip">Zipcode</label>
-                        <input type="text" name="zip" id="zip" value="{{ old('zip') }}">
-                        @error('zip')
-                            <p class="error">{{ $message }}</p>
-                        @enderror
+                    <div class="inputItem" style="display:flex;flex-direction:row;gap:10px">
+                        <div class="w-100">
+                            <label for="city">Város</label>
+                            <input type="text" name="city" id="city" value="{{ old('city') }}">
+                            @error('city')
+                                <p class="error">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="w-100">
+                            <label for="zip">Zipcode</label>
+                            <input type="text" name="zip" id="zip" value="{{ old('zip') }}">
+                            @error('zip')
+                                <p class="error">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                     <div class="inputItem">
                         <label for="line1">Utca és házszám</label>
