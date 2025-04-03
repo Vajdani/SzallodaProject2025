@@ -79,7 +79,7 @@ select {
     background-color: var(--colour_sidebar);
     border: 3px solid var(--colour_randomgreen1);
     padding: 10px;
-    margin-top: 15px;
+    /* margin-top: 15px; */
     border-radius: 15px;
 }
 
@@ -145,7 +145,6 @@ select {
 }
 
 .reviewFooter a i {
-    color: white;
     margin: 5px 0 0 0;
 }
 

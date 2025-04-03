@@ -45,7 +45,11 @@
             <div class="profile-body">
                 @if ($userActive && $hasPermission)
                     <div class="user-information">
-                        <h2>Felhasználói Adatok</h2>
+                        <div class="sectionHeader">
+                            <hr>
+                            <h2>Felhasználói Adatok</h2>
+                            <hr>
+                        </div>
                         <form action="/profil/adat" method="post">
                             @csrf
                             <div class="user-data">
@@ -83,15 +87,18 @@
                     </div>
                 @endif
                 <div class="ratings">
-                    <h2>
-                        Értékelések
-                        @if ($hasPermission && $writeReviews)
+                    <div class="sectionHeader">
+                        <hr>
+                        <h2>
+                            Értékelések
+                            @if ($hasPermission && $writeReviews)
                             <span style="font-weight:normal">
                                 — <a href="/ertekeles"><button class="review-button">Új értékelés írása</button></a>
                             </span>
-                        @endif
-                    </h2>
-
+                            @endif
+                        </h2>
+                        <hr>
+                    </div>
                     <div class="ratingSection center" id="ratingSection">
                         <script src="{{ asset('js/reviews.js') }}"></script>
                         <script>
@@ -104,58 +111,63 @@
                     </div>
                 </div>
                 @if ($hasPermission)
-                    <div class="ratings"></div>
-                    <h2>Foglalásaid</h2>
-                    <div class="bookingSection center">
-                        @foreach ($booking as $b)
-                            <div class="rating center">
-                                <div class="ratingUser">
-                                    <div class="profilePicture">
-                                        <a href="/szalloda/{{ $b->hotel_id }}">
-                                            <img src="/img/hotels/{{ $b->hotel_id }}.jpg" alt="{{ $b->hotelName }}.jpg" title="{{ $b->hotelName }}" class="img-fluid profile-picture">
-                                        </a>
-                                        <p class="text-center" style="text-wrap:auto">{{ $b->hotelName }}</p>
-                                    </div>
-                                    <div class="ratingData">
-                                        <div>
-                                            <form action="/profil/lemond" method="post">
-                                                @csrf
-                                            <h3 style="text-wrap:auto">{{ $b->bookStart }} — {{ $b->bookEnd }}
-                                                (@if ($b->status == 'confirmed')
-                                                    Megerősítve
-                                                @elseif($b->status == 'cancelled')
-                                                    Visszatérítve
-                                                @elseif($b->status == 'refund requested')
-                                                    visszatérítés kérvényezve
-                                                @elseif($b->status == 'completed')
-                                                    Befejezve
-                                                @endif)
-                                                @if($b->status=='confirmed')
-                                                    <button class="cancel-button" type="submit" value="{{$b->booking_id}}" id="cancel" name="cancel">Lemondás</button>
-                                                @endif
-                                            </h3>
-                                            </form>
-                                            <p>
-                                                @if ($b->status == 'confirmed')
-                                                    Fizetendő összeg: {{ $b->totalPrice }} Ft
-                                                @elseif($b->status == 'completed')
-                                                    Fizetett összeg: {{ $b->totalPrice }} Ft
-                                                @endif
-                                            </p>
+                    <div class="ratings">
+                        <div class="sectionHeader">
+                            <hr>
+                            <h2>Foglalásaid</h2>
+                            <hr>
+                        </div>
+                        <div class="bookingSection center">
+                            @foreach ($booking as $b)
+                                <div class="rating center">
+                                    <div class="ratingUser">
+                                        <div class="profilePicture">
+                                            <a href="/szalloda/{{ $b->hotel_id }}">
+                                                <img src="/img/hotels/{{ $b->hotel_id }}.jpg" alt="{{ $b->hotelName }}.jpg" title="{{ $b->hotelName }}" class="img-fluid profile-picture">
+                                            </a>
+                                            <p class="text-center" style="text-wrap:auto">{{ $b->hotelName }}</p>
+                                        </div>
+                                        <div class="ratingData">
+                                            <div>
+                                                <form action="/profil/lemond" method="post">
+                                                    @csrf
+                                                <h3 style="text-wrap:auto">{{ $b->bookStart }} — {{ $b->bookEnd }}
+                                                    (@if ($b->status == 'confirmed')
+                                                        Megerősítve
+                                                    @elseif($b->status == 'cancelled')
+                                                        Visszatérítve
+                                                    @elseif($b->status == 'refund requested')
+                                                        visszatérítés kérvényezve
+                                                    @elseif($b->status == 'completed')
+                                                        Befejezve
+                                                    @endif)
+                                                    @if($b->status=='confirmed')
+                                                        <button class="cancel-button" type="submit" value="{{$b->booking_id}}" id="cancel" name="cancel">Lemondás</button>
+                                                    @endif
+                                                </h3>
+                                                </form>
+                                                <p>
+                                                    @if ($b->status == 'confirmed')
+                                                        Fizetendő összeg: {{ $b->totalPrice }} Ft
+                                                    @elseif($b->status == 'completed')
+                                                        Fizetett összeg: {{ $b->totalPrice }} Ft
+                                                    @endif
+                                                </p>
 
-                                            @if ($b->services != '')
-                                                <h4>Szolgáltatások:</h4>
-                                                <ul>
-                                                    @foreach ($services[$b->booking_id] as $service)
-                                                        <li>{{ $service->serviceName }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
+                                                @if ($b->services != '')
+                                                    <h4>Szolgáltatások:</h4>
+                                                    <ul>
+                                                        @foreach ($services[$b->booking_id] as $service)
+                                                            <li>{{ $service->serviceName }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 @endif
             </div>

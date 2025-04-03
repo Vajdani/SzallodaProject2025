@@ -61,9 +61,26 @@
     background-color: var(--colour_sidebar);
 }
 
-.profile-body h2 {
-    margin-left: 2%;
-    margin-top: 1%;
+.sectionHeader h2 {
+    margin: 0 10px 0 10px;
+    padding: 5px 0 5px 5px;
+    max-width: 100%;
+    background-color: lightgray;
+    color: var(--colour_sidebar);
+}
+
+.sectionHeader hr {
+    margin: 0 10px 0 10px;
+    background-color: var(--colour_randomgreen1);
+    height: 3px
+}
+
+.sectionHeader hr:first-child {
+    margin-top: 10px;
+}
+
+.sectionHeader hr:last-child {
+    margin-bottom: 10px;
 }
 
 .save-button {
@@ -198,6 +215,9 @@ a:hover {
 .bookingSection {
     padding: 0 30px 25px 30px;
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
 }
 
 ul {
