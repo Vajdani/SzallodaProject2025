@@ -125,14 +125,14 @@
         </section>
         <section>
             <h2>A városról</h2>
-            <div class="varosGrid">
+            <div class="cityGrid">
                 <div>
                     <h3>{{ $city->cityName }}</h3>
                     <p>
                        {{ $city_description }}
                     </p>
                 </div>
-                <a href="/telepules/{{ $city->city_id }}">
+                <a href="/telepules/{{ $city->city_id }}" style="flex-shrink:0.25;display:flex;justify-content:center">
                     <img src="{{ asset("img/cities/$city->city_id.jpg") }}" alt="{{ $city->cityName }}" title="{{ $city->cityName }}" class="img-fluid">
                 </a>
             </div>
