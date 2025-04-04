@@ -24,107 +24,15 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
+    //region Class properties
     private static int $minPasswordLength = 8;
     private static int $minUserAge = 18;
     private static int $minPhoneNumberLength = 10;
     private static int $maxPhoneNumberLength = 15;
     public static int $maxCommentLength = 1000;
+    //endregion
 
-    public static function CanWriteReviewForHotel($hotel_id, $user_id) {
-        $hotel = Hotel::fromQuery("
-            select hotel.hotel_id, hotel.hotelName
-            from hotel
-            inner join room on room.hotel_id = hotel.hotel_id
-            inner join booking on room.room_id = booking.room_id
-            where
-                hotel.hotel_id = $hotel_id and
-                booking.user_id = $user_id and
-                booking.status = 'completed'
-            having (
-                select count(*)
-                from reviews
-                where
-                    reviews.user_id = $user_id and
-                    reviews.hotel_id = hotel.hotel_id and
-                    reviews.active = 1
-                ) < count(booking.booking_id)
-        ");
-
-        $authorized = count($hotel) > 0;
-        return [$authorized, $authorized ? $hotel[0] : null];
-    }
-
-    public static function CanWriteReview($user_id) {
-        $hotels = Hotel::fromQuery("
-            select distinct hotel.hotel_id, hotel.hotelName
-            from hotel
-            inner join room on room.hotel_id = hotel.hotel_id
-            inner join booking on room.room_id = booking.room_id
-            where
-                booking.user_id = $user_id and
-                booking.status = 'completed'
-            group by hotel.hotel_id
-            having (
-                select count(*)
-                from reviews
-                where
-                    reviews.user_id = $user_id and
-                    reviews.hotel_id = hotel.hotel_id and
-                    reviews.active = 1
-                ) < count(booking.booking_id)
-        ");
-
-        $authorized = count($hotels) > 0;
-        return [$authorized, $authorized ? $hotels : null];
-    }
-
-    public function PostReview_Frontend() {
-        $data = UserController::CanWriteReview(Auth::user()->user_id);
-
-        if ($data[0]) {
-            return view("review", [
-                "hotels" => $data[1]
-            ]);
-        }
-        else {
-            return back()->with("sv", "Még nem tudsz értékléseket írni!");
-        }
-    }
-
-    public function PostReviewByID_Frontend($hotel_id) {
-        $user_id = Auth::user()->user_id;
-        $data = UserController::CanWriteReviewForHotel($hotel_id, $user_id);
-
-        if (!$data[0]) {
-            return back()->with("sv", "Még nem tudsz értékléseket írni!");
-        }
-
-        return view("review", [
-            "hotel" => $data[1]
-        ]);
-    }
-
-    public function PostReview_Backend(Request $req) {
-        $req->validate([
-            'hotel' => 'required',
-            'star' => 'required',
-            "comment" => "max:".self::$maxCommentLength
-        ], [
-            'hotel.required' => 'Muszáj választania egy szállodát!',
-            'star.required' => 'Muszáj értékelnie a szállodát!',
-        ]);
-
-        $review = new Review;
-        $review->user_id = Auth::user()->user_id;
-        $review->hotel_id = $req->hotel;
-        $review->rating = $req->star;
-        $review->reviewText = $req->comment;
-        $review->created_at = Carbon::now('Europe/Budapest');
-        $review->Save();
-
-        return redirect("/szalloda/$req->hotel");
-    }
-
+    //region Frontend
     public function Profile_Frontend() {
         return UserController::ProfileByID_Frontend(Auth::user()->user_id);
     }
@@ -160,7 +68,7 @@ class UserController extends Controller
                 where b.user_id like $user_id;
             ");
 
-            $writeReviews = UserController::CanWriteReview($user_id)[0];
+            $writeReviews = ReviewController::CanWriteReview($user_id)[0];
         }
 
         $currentRank =  Loyalty::fromQuery("
@@ -203,90 +111,24 @@ class UserController extends Controller
         ]);
     }
 
-    public function CancelBooking_Backend(Request $req){
-        $booking = Booking::find($req->cancel);
-        $booking->status = "refund requested";
-        $booking->save();
-
-        return UserController::ProfileByID_Frontend(Auth::user()->user_id);
-    }
-
-    public function UpdateProfileDetails_Backend(Request $req) {
-        $req->validate([
-            'username' => [
-                'required',
-                new UsernameUniqueRule()
-            ],
-            'realname' => [
-                'required',
-                new RealNameRule()
-            ],
-            "email" => [
-                "required",
-                "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
-            ],
-            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber",
-        ], [
-            "username.required" => "Muszáj megadnia a felhasználónevét!",
-            "username.unique" => "Ez a felhasználónév már foglalt!",
-
-            "realname.required" => "Muszáj megadnia a polgári nevét!",
-
-            "email.required" => "Muszáj megadnia az e-mail címét!",
-            "email.regex" => "Nem egy e-mail címet adott meg!",
-
-            "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
-            "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
-            "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
-            "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
-        ]);
-        $data = User::find(Auth::user()->user_id);
-        $data->username = $req->username;
-        $nev = explode(' ', $req->realname, 2);
-        $data->lastName = $nev[0];
-        $data->firstName = $nev[1];
-        $data->email = $req->email;
-        $data->phonenumber = $req->phonenumber;
-        $data->Save();
-
-        return redirect("/profil");
-    }
-
-    public function SetNewPFP_Backend(Request $req){
-        $data = User::find(Auth::user()->user_id);
-        $data->profilePic = $req->pfp;
-        $data->save();
-
-        return redirect("/profil");
-    }
-
-    public function Logout_Backend() {
-        Auth::logout();
-        return redirect("/")->with('sv', 'Sikeres kijelentkezés!');
+    public function Registration_Frontend() {
+        return view("registration");
     }
 
     public function Login_Frontend() {
         return view("login");
     }
 
-    public function Login_Backend(Request $req) {
-        $req->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-        if(Auth::attempt(['username' => $req->username, 'password' => $req->password, "active" => true]) ||
-           Auth::attempt(['email' => $req->username, 'password' => $req->password, "active" => true])) {
-            return redirect('/')->with("sv", "Sikeres bejelentkezés!");
-        }
-        else{
-            return redirect('/bejelentkezes');
-        }
+    public function ChangePassword_Frontend() {
+        return view("changePassword");
     }
 
-    public function Registration_Frontend() {
-        return view("registration");
+    public function DeleteAccount_Frontend() {
+        return view("deleteAccount");
     }
+    //endregion
 
+    //region Backend
     public function Registration_Backend(Request $request) {
         $request->validate([
             "name" => [
@@ -367,8 +209,18 @@ class UserController extends Controller
         return redirect("/bejelentkezes");
     }
 
-    public function ChangePassword_Frontend() {
-        return view("changePassword");
+    public function Login_Backend(Request $req) {
+        $req->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+        if(Auth::attempt(['username' => $req->username, 'password' => $req->password, "active" => true]) ||
+           Auth::attempt(['email' => $req->username, 'password' => $req->password, "active" => true])) {
+            return redirect('/')->with("sv", "Sikeres bejelentkezés!");
+        }
+        else{
+            return redirect('/bejelentkezes');
+        }
     }
 
     public function ChangePassword_Backend(Request $req) {
@@ -411,8 +263,58 @@ class UserController extends Controller
         }
     }
 
-    public function DeleteAccount_Frontend() {
-        return view("deleteAccount");
+    public function UpdateProfileDetails_Backend(Request $req) {
+        $req->validate([
+            'username' => [
+                'required',
+                new UsernameUniqueRule()
+            ],
+            'realname' => [
+                'required',
+                new RealNameRule()
+            ],
+            "email" => [
+                "required",
+                "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
+            ],
+            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber",
+        ], [
+            "username.required" => "Muszáj megadnia a felhasználónevét!",
+            "username.unique" => "Ez a felhasználónév már foglalt!",
+
+            "realname.required" => "Muszáj megadnia a polgári nevét!",
+
+            "email.required" => "Muszáj megadnia az e-mail címét!",
+            "email.regex" => "Nem egy e-mail címet adott meg!",
+
+            "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
+            "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
+            "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
+            "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
+        ]);
+        $data = User::find(Auth::user()->user_id);
+        $data->username = $req->username;
+        $nev = explode(' ', $req->realname, 2);
+        $data->lastName = $nev[0];
+        $data->firstName = $nev[1];
+        $data->email = $req->email;
+        $data->phonenumber = $req->phonenumber;
+        $data->Save();
+
+        return redirect("/profil");
+    }
+
+    public function SetNewPFP_Backend(Request $req){
+        $data = User::find(Auth::user()->user_id);
+        $data->profilePic = $req->pfp;
+        $data->save();
+
+        return redirect("/profil");
+    }
+
+    public function Logout_Backend() {
+        Auth::logout();
+        return redirect("/")->with('sv', 'Sikeres kijelentkezés!');
     }
 
     public function DeleteAccount_Backend(Request $request) {
@@ -429,46 +331,5 @@ class UserController extends Controller
 
         return redirect("/");
     }
-
-    public function DeleteReview_Backend($review_id) {
-        $review = Review::find($review_id);
-        $review->active = 0;
-        $review->Save();
-
-        return back();
-    }
-
-    public function ModifyReview_Frontend($review_id) {
-        $review = Review::find($review_id);
-        if ($review == null) {
-            return redirect("/");
-        }
-
-        return view("review", [
-            "hotel" => Hotel::find($review->hotel_id),
-            "review" => $review
-        ]);
-    }
-
-    public function ModifyReview_Backend(Request $req, $review_id) {
-        $req->validate([
-            'hotel' => 'required',
-            'star' => 'required',
-            "comment" => [
-                new MaxCommentLengthRule()
-            ]
-        ], [
-            'hotel.required' => 'Muszáj választania egy szállodát!',
-            'star.required' => 'Muszáj értékelnie a szállodát!',
-        ]);
-
-        $review = Review::find($review_id);
-        $review->rating = $req->star;
-        $review->reviewText = $req->comment;
-        $review->created_at = Carbon::now('Europe/Budapest');
-        $review->edited = 1;
-        $review->Save();
-
-        return redirect("/szalloda/$req->hotel");
-    }
+    //endregion
 }
