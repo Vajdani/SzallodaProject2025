@@ -94,7 +94,7 @@ class ReviewController extends Controller
         $review->created_at = Carbon::now('Europe/Budapest');
         $review->Save();
 
-        return redirect("/szalloda/$req->hotel");
+        return redirect("/profil");
     }
 
     public function ModifyReview_Backend(Request $req, $review_id) {
