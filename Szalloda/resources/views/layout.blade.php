@@ -76,7 +76,7 @@
         </div>
     </main>
     <footer>
-        <p>RushWave Retreat - Minden jog fenntartva. ©2025</p>
+        <p>2025 © Copyright RushWave Retreat - Minden jog fenntartva. </p>
     </footer>
 
     @yield("loyal")

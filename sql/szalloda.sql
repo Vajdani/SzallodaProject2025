@@ -126,7 +126,7 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
-(1, 7 'owner'),
+(1, 7, 'owner'),
 (2, 7, 'owner'),
 (3, 7, 'owner'),
 (4, 7, 'owner'),

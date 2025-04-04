@@ -221,7 +221,7 @@ class UserController extends Controller
         $loyalty->updated_at = Carbon::now('Europe/Budapest');
         $loyalty->Save();
 
-        return redirect("/bejelentkezes");
+        return redirect("/bejelentkezes")->with("sv", "Sikeres regisztráció!");
     }
 
     public function Login_Backend(Request $req) {

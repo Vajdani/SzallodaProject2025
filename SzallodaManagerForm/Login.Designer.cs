@@ -134,7 +134,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(350, 399);
+            ClientSize = new Size(340, 399);
             Controls.Add(panel1);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
