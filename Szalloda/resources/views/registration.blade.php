@@ -4,6 +4,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/regisztracio.css') }}">
 @endsection
+
 @section('content')
     <div class="mainContent">
         <form action="/regisztracio" method="post" class="form-design">
@@ -71,7 +72,7 @@
 
             <div class="inputItem">
                 <label for="date">Születési dátum</label>
-                <input type="date" name="date" id="date" value="{{ old('date') }}">
+                <input type="date" name="date" id="date" value="{{ old('date') }}" max="{{ date("Y-m-d", strtotime("-18 year")) }}">
                 @error('date')
                     <p class="error">{{ $message }}</p>
                 @enderror
