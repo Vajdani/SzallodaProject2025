@@ -572,7 +572,7 @@ INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`,
 (29, 'Vestriv', 'Tóth', 'Ottó', '2001-01-05', '+36208468365', 'vestriv@gmail.com', '$2y$12$K4NFp4om7A4ys89on3s6XeZihf7N5zxpsAwsBLYkTPRumvfFfqioi', '2025-04-04 12:43:10', '2025-04-04 12:43:10', 1, 3),
 (30, 'ThedevilSkate', 'Szabó', 'Ervin', '2005-08-25', '+36708452938', 'skatedevil666@citromail.hu', '$2y$12$vC8O31RNaQp/zZ0Xhdp./uaYgnmo1ad49uv6W1/M/JBC7fQvAMAZW', '2025-04-04 12:45:13', '2025-04-04 12:45:13', 1, 1),
 (31, 'Interon', 'Mészáros', 'Márta Ibolya', '1970-07-07', '+36208469294', 'interon34283@gmail.com', '$2y$12$dx7SuxpseSnaaAdBR.uajuIYp/M48fkMLQfAtB3E7AN2pqmgHla/S', '2025-04-04 12:47:18', '2025-04-04 12:47:18', 1, 0),
-(32, 'Kixan', 'Bodnár', 'Dominik Győző', '2003-02-28', '+36708347733', 'kix__@protonmail.com', '$2y$12$0jh2/eQvDarYSGeLBddY9.HaT4IPn98HbydwGDpa2hHEpDF86Meu2', '2025-04-04 12:48:30', '2025-04-04 12:48:30', 1, 6);
+(32, 'Kixan', 'Bodnár', 'Dominik Győző', '2003-02-28', '+36708347733', 'kix__@protonmail.com', '$2y$12$0jh2/eQvDarYSGeLBddY9.HaT4IPn98HbydwGDpa2hHEpDF86Meu2', '2025-04-04 12:48:30', '2025-04-04 12:48:30', 1, 6),
 (33, 'Dragon286', 'Kiss', 'Barnabás', '2003-07-21', '+368579283', 'barnobruno@hotmail.com', '$2y$12$6f1m8o0P5h/7594H.BaD7uRn0oSx35dgsQ22Iw9gBAU.HZ2b37cby', '2025-04-04 12:57:43', '2025-04-04 12:57:43', 1, 2),
 (34, 'Gubacs_mester', 'Kresz', 'Vince', '2005-04-12', '+368579253', 'Gubi@gmail.com', '$2y$12$MhlDFc7DhSKReV9RqFYVmeWqPzKKQBm.P.d8GZ/95/Niyel.of/pu', '2025-04-04 12:58:24', '2025-04-04 12:58:24', 1, 6),
 (35, 'Kecifei', 'Bánki', 'Gábor', '2005-08-13', '+368578582', 'Bgabor@freemail.hu', '$2y$12$k1hIkFXZ23ezqy.t.UNXZeRvaZLJ8IHNpprj9IP.sNz1J.yqjrQwW', '2025-04-04 12:59:05', '2025-04-04 12:59:05', 1, 4);
