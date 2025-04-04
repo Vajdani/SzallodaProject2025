@@ -12,13 +12,13 @@
     $hasPermission = Auth::check() && Auth::user()->user_id == $user->user_id;
     $userActive = $user->active == 1;
 @endphp
+
 @section('content')
     <div class="mainContent">
         <div class="profile-con">
             <div class="profile-header">
                 <div class="profile-picture-con">
-                    <img src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="Profilkép"
-                        class="profile-picture" id="profile">
+                    <img src="{{ asset('img/pfp/' . ($userActive ? $user->profilePic : 0) . '.png') }}" alt="Profilkép" class="profile-picture" id="profile">
                 </div>
                 <div class="profile-details-con">
                     <h2>{{ $userActive ? $user->username : 'Törölt fiók' }} — <img src="{{ asset('img/loyalty/' . $loyalty[0]->rank_id . '.png') }}" alt="{{ $loyalty[0]->rank }}.png" title="{{$loyalty[0]->rank}}" class="loyalty"></h2>

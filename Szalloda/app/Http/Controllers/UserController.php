@@ -38,6 +38,20 @@ class UserController extends Controller
     }
 
     public function ProfileByID_Frontend($user_id) {
+        if (!is_numeric($user_id)) {
+            $found_id = User::select("user_id")->where("username", $user_id)->first();
+            if ($found_id == null) {
+                return redirect("/")->with("sv", "Nincs ilyen felhasználó!");
+            }
+
+            $user_id = $found_id->user_id;
+        }
+
+        $user = User::find($user_id);
+        if ($user == null) {
+            return redirect("/")->with("sv", "Nincs ilyen felhasználó!");
+        }
+
         $services = [];
         $booking = [];
         $writeReviews = false;
@@ -89,7 +103,8 @@ class UserController extends Controller
         $perks = explode(',',$currentRank[0]->perks);
 
         return view("profile", [
-            "user" => User::find($user_id),
+            "user" => $user,
+            // "userType" => User::fromQuery("select userType from employee where user_id = $user_id"),
             "reviews" => Review::fromQuery("
                 select
                     r.rating, r.created_at, r.reviewText, h.hotelName,
