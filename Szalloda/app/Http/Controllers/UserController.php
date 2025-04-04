@@ -78,7 +78,8 @@ class UserController extends Controller
                 inner join user u on u.user_id = b.user_id
                 inner join room r on r.room_id = b.room_id
                 inner join hotel h on h.hotel_id = r.hotel_id
-                where b.user_id like $user_id;
+                where b.user_id like $user_id
+                order by b.booking_id desc;
             ");
 
             $writeReviews = ReviewController::CanWriteReview($user_id)[0];

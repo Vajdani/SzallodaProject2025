@@ -16,7 +16,7 @@ class phonenumberUniqueRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ($value != Auth::user()->phonenumber && User::where("phonenumber", $value)->count() > 0) {
+        if ($value != Auth::user()->phonenumber && User::where("phonenumber", $value)->where("active",1)->count() > 0) {
             $fail("Ez a telefonszám már foglalt!");
         }
     }
