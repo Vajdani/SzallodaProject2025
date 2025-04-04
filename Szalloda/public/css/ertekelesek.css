@@ -124,17 +124,6 @@ select {
     background-color: var(--colour_sidebar);
 }
 
-.filterSeparater {
-    display: none;
-    margin: 0;
-}
-
-@media only screen and (max-width: 1200px) {
-    .filterSeparater {
-        display: block;
-    }
-}
-
 .reviewFooter {
     height: 100%;
     display: flex;

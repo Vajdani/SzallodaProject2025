@@ -30,7 +30,7 @@
     }
 }
 
-.varosGrid {
+.cityGrid {
     /* display: grid;
     grid-template-columns: auto auto; */
     display: flex;
@@ -40,7 +40,7 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    .varosGrid {
+    .cityGrid {
         flex-direction: column;
         justify-content: unset;
     }
