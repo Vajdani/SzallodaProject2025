@@ -44,3 +44,7 @@ Route::group(['middleware' => [IsntLoggedIn::class]], function () {
     Route::get ('/regisztracio',    [UserController::class, "Registration_Frontend"]);
     Route::post('/regisztracio',    [UserController::class, "Registration_Backend"]);
 });
+
+Route::fallback(function () {
+    return redirect('/');
+});
