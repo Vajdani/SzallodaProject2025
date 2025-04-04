@@ -53,7 +53,7 @@
                     @endauth
 
                     <li><a href="/ertekelesek">Értékelések</a></li>
-                    <li><a href="/szalloda/veletlenszeru">Nyaraló ajánlás</a></li>
+                    <li><a href="/szalloda/veletlenszeru">Véletlenszerű szálloda</a></li>
                     <li><hr></li>
                     @auth
                         <li><a href="/kijelentkezes">Kijelentkezés</a></li>

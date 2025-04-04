@@ -33,6 +33,21 @@
                         <p style="font-size:100%" class="inline">{{ $hotel->hotelName }}</p>
                     </div>
 
+                    <div>
+                        <p class="text-center">Dátum</p>
+                        <div style="display:flex;justify-content:space-between">
+                            <input type="date" id="startDate" class="inline" name="startDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('startDate') }}">
+                            <p class="inline">—</p>
+                            <input type="date" id="endDate" class="inline" name="endDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('endDate') }}">
+                        </div>
+                        @error('startDate')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                        @error('endDate')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div style="margin-bottom: 10px">
                         @error('service_id')
                         <p class="error">{{ $message }}</p>
@@ -69,20 +84,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div>
-                        <p class="text-center">Dátum</p>
-                        <div style="display:flex;justify-content:space-between">
-                            <input type="date" id="startDate" class="inline" name="startDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('startDate') }}">
-                            <p class="inline">—</p>
-                            <input type="date" id="endDate" class="inline" name="endDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('endDate') }}">
-                        </div>
-                        @error('startDate')
-                            <p class="error">{{ $message }}</p>
-                        @enderror
-                        @error('endDate')
-                            <p class="error">{{ $message }}</p>
-                        @enderror
-                    </div>
+
 
                     <p style="margin-top:10px">Létszám: <span id="letszam"></span></p>
                     <p>Összeg</p>

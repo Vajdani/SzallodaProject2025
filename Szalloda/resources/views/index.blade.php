@@ -57,7 +57,6 @@
             <h2>Oldalról</h2>
             <hr>
             <p>
-
                 Üdvözöljük a RushWave Retreat hivatalos weboldalán! Weboldalunk célja, hogy lehetővé tegye a vendégeink számára, hogy könnyen, gyorsan és egyszerűen foglaljanak szállást bármelyik hotelünkben, mindössze néhány kattintással. Fedezze fel a RushWave Retreat által kínált prémium szolgáltatásokat és szokatlan szálláshelyeit.
 
                 Weboldalunkon könnyedén megtekintheti szállodáink széles választékát, valamint azok részletes leírásait és az aktuális elérhetőségeket. Az egyes hotelekhez tartozó értékelések segítenek hogy kitudja választani az önnek megfelelő szállást, ezzel garantálva ön kényelmét. Emellett átfogó információkat talál a szobatípusokról, szolgáltatásainkról, illetve az étkezési lehetőségekről.
