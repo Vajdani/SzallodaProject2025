@@ -20,7 +20,7 @@
                 @endfor
             </div>
         </section>
-        <section class="citySection">
+        <div class="citySection">
             @foreach ($hotels as $hotel)
                 <div class="city">
                     @if (!isset($addedCityHeader))
@@ -69,6 +69,6 @@
                     @endforeach
                 </div>
             @endforeach
-        </section>
+        </div>
     </div>
 @endsection
