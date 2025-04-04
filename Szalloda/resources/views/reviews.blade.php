@@ -7,7 +7,6 @@
 
 @section('content')
     <nav class="filterBar" style="padding: 0;">
-        <hr class="filterSeparater">
         <ul>
             <li>Szűrés:</li>
             <li>
