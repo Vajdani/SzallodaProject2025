@@ -8,9 +8,14 @@ use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use App\Rules\MaxCommentLengthRule;
 
 class ReviewController extends Controller
 {
+    //region Class properties
+    public static int $maxCommentLength = 1000;
+    //endregion
+
     //region Frontend
     public function AllReviews_Frontend() {
         return view("reviews",[

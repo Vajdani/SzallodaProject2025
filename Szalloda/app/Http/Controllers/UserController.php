@@ -15,7 +15,6 @@ use App\Models\Hotel;
 use App\Models\Service;
 use App\Rules\RealNameRule;
 use App\Rules\UsernameUniqueRule;
-use App\Rules\MaxCommentLengthRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
 use App\Models\LoyaltyRank;
@@ -29,7 +28,6 @@ class UserController extends Controller
     private static int $minUserAge = 18;
     private static int $minPhoneNumberLength = 10;
     private static int $maxPhoneNumberLength = 15;
-    public static int $maxCommentLength = 1000;
     //endregion
 
     //region Frontend

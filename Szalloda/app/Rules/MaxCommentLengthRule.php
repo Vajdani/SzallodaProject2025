@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 
 class MaxCommentLengthRule implements ValidationRule
 {
@@ -15,7 +15,7 @@ class MaxCommentLengthRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $max = UserController::$maxCommentLength;
+        $max = ReviewController::$maxCommentLength;
         if (mb_strlen(str_replace(PHP_EOL, '', $value)) > $max) {
             $fail("Legfeljebb ".$max." karakter hosszú értékelést írhat!");
         }
