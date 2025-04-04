@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 31, 2025 at 10:11 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2025. Ápr 04. 14:49
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `szalloda`
+-- Adatbázis: `szalloda`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `billing`
+-- Tábla szerkezet ehhez a táblához `billing`
 --
 
 CREATE TABLE `billing` (
@@ -43,7 +43,7 @@ CREATE TABLE `billing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `billing`
+-- A tábla adatainak kiíratása `billing`
 --
 
 INSERT INTO `billing` (`billing_id`, `booking_id`, `amount`, `bookingDate`, `paymentDate`, `paymentStatus`, `paymentMethod`, `country`, `city`, `zipcode`, `line1`, `line2`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `billing` (`billing_id`, `booking_id`, `amount`, `bookingDate`, `pay
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booking`
+-- Tábla szerkezet ehhez a táblához `booking`
 --
 
 CREATE TABLE `booking` (
@@ -70,7 +70,7 @@ CREATE TABLE `booking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `booking`
+-- A tábla adatainak kiíratása `booking`
 --
 
 INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd`, `totalPrice`, `status`, `services`) VALUES
@@ -88,7 +88,7 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd
 -- --------------------------------------------------------
 
 --
--- Table structure for table `city`
+-- Tábla szerkezet ehhez a táblához `city`
 --
 
 CREATE TABLE `city` (
@@ -100,7 +100,7 @@ CREATE TABLE `city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `city`
+-- A tábla adatainak kiíratása `city`
 --
 
 INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `description_short`) VALUES
@@ -112,7 +112,7 @@ INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `descriptio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Tábla szerkezet ehhez a táblához `employee`
 --
 
 CREATE TABLE `employee` (
@@ -122,7 +122,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `employee`
+-- A tábla adatainak kiíratása `employee`
 --
 
 INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
@@ -151,7 +151,7 @@ INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hotel`
+-- Tábla szerkezet ehhez a táblához `hotel`
 --
 
 CREATE TABLE `hotel` (
@@ -165,7 +165,7 @@ CREATE TABLE `hotel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `hotel`
+-- A tábla adatainak kiíratása `hotel`
 --
 
 INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber`, `email`, `description`) VALUES
@@ -180,7 +180,7 @@ INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loyalty`
+-- Tábla szerkezet ehhez a táblához `loyalty`
 --
 
 CREATE TABLE `loyalty` (
@@ -192,7 +192,7 @@ CREATE TABLE `loyalty` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `loyalty`
+-- A tábla adatainak kiíratása `loyalty`
 --
 
 INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at`) VALUES
@@ -217,12 +217,22 @@ INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at
 (19, 22, 1, 0, '2025-03-31 00:00:00'),
 (20, 23, 1, 0, '2025-03-31 00:00:00'),
 (21, 24, 1, 0, '2025-03-31 00:00:00'),
-(22, 25, 1, 195, '2025-03-31 12:02:39');
+(22, 25, 1, 195, '2025-03-31 12:02:39'),
+(23, 26, 1, 0, '2025-04-04 14:29:43'),
+(24, 27, 1, 0, '2025-04-04 14:33:28'),
+(25, 28, 1, 0, '2025-04-04 14:34:32'),
+(26, 29, 1, 0, '2025-04-04 14:36:50'),
+(27, 30, 1, 0, '2025-04-04 14:38:39'),
+(28, 31, 1, 0, '2025-04-04 14:40:21'),
+(29, 32, 1, 0, '2025-04-04 14:43:10'),
+(30, 33, 1, 0, '2025-04-04 14:45:13'),
+(31, 34, 1, 0, '2025-04-04 14:47:18'),
+(32, 35, 1, 0, '2025-04-04 14:48:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loyaltyrank`
+-- Tábla szerkezet ehhez a táblához `loyaltyrank`
 --
 
 CREATE TABLE `loyaltyrank` (
@@ -234,7 +244,7 @@ CREATE TABLE `loyaltyrank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `loyaltyrank`
+-- A tábla adatainak kiíratása `loyaltyrank`
 --
 
 INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) VALUES
@@ -246,7 +256,7 @@ INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reviews`
+-- Tábla szerkezet ehhez a táblához `reviews`
 --
 
 CREATE TABLE `reviews` (
@@ -261,7 +271,7 @@ CREATE TABLE `reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `reviews`
+-- A tábla adatainak kiíratása `reviews`
 --
 
 INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`, `active`, `edited`) VALUES
@@ -280,7 +290,7 @@ INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room`
+-- Tábla szerkezet ehhez a táblához `room`
 --
 
 CREATE TABLE `room` (
@@ -294,7 +304,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `room`
+-- A tábla adatainak kiíratása `room`
 --
 
 INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `pricepernight`, `available`) VALUES
@@ -396,7 +406,7 @@ INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `p
 -- --------------------------------------------------------
 
 --
--- Table structure for table `service`
+-- Tábla szerkezet ehhez a táblához `service`
 --
 
 CREATE TABLE `service` (
@@ -413,7 +423,7 @@ CREATE TABLE `service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `service`
+-- A tábla adatainak kiíratása `service`
 --
 
 INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `available`, `allYear`, `startDate`, `endDate`, `openTime`, `closeTime`) VALUES
@@ -464,7 +474,7 @@ INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `availa
 -- --------------------------------------------------------
 
 --
--- Table structure for table `servicecategory`
+-- Tábla szerkezet ehhez a táblához `servicecategory`
 --
 
 CREATE TABLE `servicecategory` (
@@ -473,7 +483,7 @@ CREATE TABLE `servicecategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `servicecategory`
+-- A tábla adatainak kiíratása `servicecategory`
 --
 
 INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
@@ -504,7 +514,7 @@ INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tábla szerkezet ehhez a táblához `user`
 --
 
 CREATE TABLE `user` (
@@ -523,7 +533,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `user`
+-- A tábla adatainak kiíratása `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`, `phonenumber`, `email`, `password`, `created_at`, `updated_at`, `active`, `profilePic`) VALUES
@@ -531,38 +541,48 @@ INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`,
 (2, 'Gyuszi', 'Molnár', 'Gyula Dániel', '1982-06-17', '+36307675240', 'gyula_molnar@hotmail.com', '$2y$12$ldDrheSUdRZMXSEi.hJ.3.qb/76.OZ70ON8zHgBSoRmEglh9RHLHK', '2025-02-24 11:10:34', '2025-03-31 09:55:11', 1, 5),
 (3, 'Mikudayoo', 'Hatsune', 'Miku', '2007-08-31', '+36701234567', 'hatsunemiku@vocaloid.com', '$2y$12$LQyV6fWT83nezYRP53EPDO6aiXmFzA0zHj6uYFzzs/rWWb1BwJrdW', '2025-03-05 16:37:16', '2025-03-05 16:37:52', 1, 2),
 (4, 'Ila68', 'Kiss', 'Ilona', '2015-10-30', '+36205126141', 'jarfasila68@hotmail.com', '$2y$12$.qAyWsqzqtHgSY47KmxP8umE9/8dQm/jrlXpDxG1FfJdXdPlCU5dm', '2025-03-05 16:48:31', '2025-03-05 16:52:06', 0, 4),
-(5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-03-05 16:53:08', 1, 0),
+(5, 'Vajdani', 'Vajda', 'Dániel', '2006-05-19', '+36201111111', 'vajda.daniel@valami.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-05 16:53:08', '2025-04-04 12:13:30', 1, 2),
 (9, 'horvathAti', 'Dr.', 'Horváth Attila', '1980-04-01', '+36307672240', 'horvath.attila@verebelyszki.hu', '$2y$12$aZDS/wu./xR5FRm9.OC52uYh8AMN4ANxPG4WK72SwSiv0E.1kzZPO', '2025-03-17 11:05:58', '2025-03-17 11:13:15', 1, 1),
-(10, 'Boss', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 5),
-(11, '1_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111111', 'some@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(12, '2_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111112', 'some@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(13, '3_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111113', 'some@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(14, '4_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111114', 'some@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(15, '5_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111115', 'some@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(16, '6_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111116', 'some@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(17, '7_employee_1', 'abcd', 'abcd', '2025-03-24', '+36701111117', 'some@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
-(18, '1_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222221', 'some_other@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(19, '2_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222222', 'some_other@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(20, '3_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222223', 'some_other@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(21, '4_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222224', 'some_other@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(22, '5_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222225', 'some_other@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(23, '6_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222226', 'some_other@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(24, '7_manager_1', 'abcd', 'abcd', '2025-03-28', '+36702222227', 'some_other@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
-(25, 'Gyuszika', 'Horváth', 'Mihály', '2004-01-23', '+36307675340', 'asd@sjlkdjad.ca', '$2y$12$n.RKQI5FFzN.HUwwsVyDKe7W.Ue0x8H69c.O9/JEXbnkoceiJ8kj.', '2025-03-31 10:00:03', '2025-03-31 10:03:26', 0, 0);
+(10, 'Tulaj', 'Lakatos', 'István', '1969-08-06', '+36201111112', 'boss@gmail.com', '$2y$12$ChUtVpaPJbIrYSD9qIDw8eXDyqvkB60I7CQxSdqqrSVsfGfaaE1v.', '2025-03-20 09:02:09', '2025-03-20 09:02:09', 1, 0),
+(11, 'CzarTwinkle', 'Szőke', 'Vivien', '2025-03-24', '+36701111111', 'some@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 7),
+(12, 'Ryrgeldosand', 'Pál', 'Zsombor Imre', '2025-03-24', '+36701111112', 'some@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 6),
+(13, 'Canosher', 'Mészáros', 'Izabella Dorottya', '2025-03-24', '+36701111113', 'some@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(14, 'Xpes', 'Kocsis', 'Nikoletta Borbála', '2025-03-24', '+36701111114', 'some@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 6),
+(15, 'Fairyonal', 'Nemes', 'Kálmán', '2025-03-24', '+36701111115', 'some@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 0),
+(16, 'Mythio', 'Fekete', 'György', '2025-03-24', '+36701111116', 'some@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 5),
+(17, 'Wittyna', 'Váradi', 'Nóra Dorina', '2025-03-24', '+36701111117', 'some@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-24 00:00:00', '2025-03-24 00:00:00', 1, 1),
+(18, 'Komunisti', 'Borbély', 'Katalin Laura', '2025-03-28', '+36702222221', 'some_other@email1.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 0),
+(19, 'Sardiden', 'Váradi', 'Milán', '2025-03-28', '+36702222222', 'some_other@email2.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 7),
+(20, 'Gurlinue', 'Illés', 'Zalán', '2025-03-28', '+36702222223', 'some_other@email3.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 1),
+(21, 'Hartia', 'Virág', 'Roland', '2025-03-28', '+36702222224', 'some_other@email4.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 3),
+(22, 'Bancaja', 'Székely', 'Beatrix', '2025-03-28', '+36702222225', 'some_other@email5.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 3),
+(23, 'Nostrik', 'Barta', 'Bence', '2025-03-28', '+36702222226', 'some_other@email6.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 6),
+(24, 'Polymax', 'Szücs', 'Ottó', '2025-03-28', '+36702222227', 'some_other@email7.com', '$2y$12$Rm8jQoZqrkUJBcx40wD80.y5FNaOYD0eO/GfBWKBZiIOWNq77uhpG', '2025-03-28 00:00:00', '2025-03-28 00:00:00', 1, 5),
+(25, 'Gyuszika', 'Horváth', 'Mihály', '2004-01-23', '+36307675340', 'asd@sjlkdjad.ca', '$2y$12$n.RKQI5FFzN.HUwwsVyDKe7W.Ue0x8H69c.O9/JEXbnkoceiJ8kj.', '2025-03-31 10:00:03', '2025-03-31 10:03:26', 0, 0),
+(26, 'Skeyestu', 'Hegedűs', 'Barnabás', '1998-03-07', '+36703849364', 'bHegedu@gmail.com', '$2y$12$9kmjFJeNcLrKf6gbDx6jour7eil7.CMIRt67Ic6WD6OI8HtjJMG2W', '2025-04-04 12:29:43', '2025-04-04 12:29:43', 1, 6),
+(27, 'Vensumer', 'Bálint', 'Iván Zsombor', '1980-06-26', '+36408473847', 'bivanz@citromail.hu', '$2y$12$df4KDzw.qQdcEJ9WzvjgqONPy5Ai.IRJ.8YICYgot8.nXUy/jaD9O', '2025-04-04 12:33:28', '2025-04-04 12:33:28', 1, 2),
+(28, 'Ditechan', 'Balázs', 'Adrián Milán', '2005-07-19', '+36208469385', 'milchan@gmail.com', '$2y$12$lUL0GWklSKr49VauZBAxGu5tYN9vKnj2Znw9igIDB7FPEHgQrOoVu', '2025-04-04 12:34:31', '2025-04-04 12:34:31', 1, 5),
+(29, 'Gingeric', 'Bogdán', 'Renáta Regina', '2006-09-24', '+36709368285', 'gingerina@protonmail.com', '$2y$12$yJzk.KicDGWBNyI0kPMTNeYrW9qC7xY1xUJ8g6OlOaW7SygrU95Xu', '2025-04-04 12:36:50', '2025-04-04 12:36:50', 1, 0),
+(30, 'Xoserna', 'Váradi', 'Aranka', '2003-12-09', '+36706496492', 'xoserna@gmail.com', '$2y$12$ZcnobFNDlkqaLC68zOC5DulyhJp0vstKbtHsLK.UepEBs7Oj8qiLS', '2025-04-04 12:38:39', '2025-04-04 12:38:39', 1, 4),
+(31, '2cool2Spyder', 'Pál', 'Sándor', '1994-04-29', '+36708358263', 'spyderpal@protonmail.com', '$2y$12$rw4pgCaaQpWqn04IN5NVXuC.6f4Bn7nrlVIfSDTaKOutwaGr0tyF6', '2025-04-04 12:40:21', '2025-04-04 12:40:21', 1, 7),
+(32, 'Vestriv', 'Tóth', 'Ottó', '2001-01-05', '+36208468365', 'vestriv@gmail.com', '$2y$12$K4NFp4om7A4ys89on3s6XeZihf7N5zxpsAwsBLYkTPRumvfFfqioi', '2025-04-04 12:43:10', '2025-04-04 12:43:10', 1, 3),
+(33, 'ThedevilSkate', 'Szabó', 'Ervin', '2005-08-25', '+36708452938', 'skatedevil666@citromail.hu', '$2y$12$vC8O31RNaQp/zZ0Xhdp./uaYgnmo1ad49uv6W1/M/JBC7fQvAMAZW', '2025-04-04 12:45:13', '2025-04-04 12:45:13', 1, 1),
+(34, 'Interon', 'Mészáros', 'Márta Ibolya', '1970-07-07', '+36208469294', 'interon34283@gmail.com', '$2y$12$dx7SuxpseSnaaAdBR.uajuIYp/M48fkMLQfAtB3E7AN2pqmgHla/S', '2025-04-04 12:47:18', '2025-04-04 12:47:18', 1, 0),
+(35, 'Kixan', 'Bodnár', 'Dominik Győző', '2003-02-28', '+36708347733', 'kix__@protonmail.com', '$2y$12$0jh2/eQvDarYSGeLBddY9.HaT4IPn98HbydwGDpa2hHEpDF86Meu2', '2025-04-04 12:48:30', '2025-04-04 12:48:30', 1, 6);
 
 --
--- Indexes for dumped tables
+-- Indexek a kiírt táblákhoz
 --
 
 --
--- Indexes for table `billing`
+-- A tábla indexei `billing`
 --
 ALTER TABLE `billing`
   ADD PRIMARY KEY (`billing_id`),
   ADD KEY `booking_id` (`booking_id`);
 
 --
--- Indexes for table `booking`
+-- A tábla indexei `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
@@ -570,27 +590,27 @@ ALTER TABLE `booking`
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indexes for table `city`
+-- A tábla indexei `city`
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`city_id`);
 
 --
--- Indexes for table `employee`
+-- A tábla indexei `employee`
 --
 ALTER TABLE `employee`
   ADD KEY `hotel_id` (`hotel_id`,`user_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `hotel`
+-- A tábla indexei `hotel`
 --
 ALTER TABLE `hotel`
   ADD PRIMARY KEY (`hotel_id`),
   ADD KEY `city_id` (`city_id`) USING BTREE;
 
 --
--- Indexes for table `loyalty`
+-- A tábla indexei `loyalty`
 --
 ALTER TABLE `loyalty`
   ADD PRIMARY KEY (`loyalty_id`),
@@ -598,13 +618,13 @@ ALTER TABLE `loyalty`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `loyaltyrank`
+-- A tábla indexei `loyaltyrank`
 --
 ALTER TABLE `loyaltyrank`
   ADD PRIMARY KEY (`rank_id`);
 
 --
--- Indexes for table `reviews`
+-- A tábla indexei `reviews`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`review_id`),
@@ -612,14 +632,14 @@ ALTER TABLE `reviews`
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- Indexes for table `room`
+-- A tábla indexei `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`room_id`),
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- Indexes for table `service`
+-- A tábla indexei `service`
 --
 ALTER TABLE `service`
   ADD PRIMARY KEY (`service_id`),
@@ -627,13 +647,13 @@ ALTER TABLE `service`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `servicecategory`
+-- A tábla indexei `servicecategory`
 --
 ALTER TABLE `servicecategory`
   ADD PRIMARY KEY (`serviceCategory_id`);
 
 --
--- Indexes for table `user`
+-- A tábla indexei `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
@@ -642,127 +662,127 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- A kiírt táblák AUTO_INCREMENT értéke
 --
 
 --
--- AUTO_INCREMENT for table `billing`
+-- AUTO_INCREMENT a táblához `billing`
 --
 ALTER TABLE `billing`
   MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `booking`
+-- AUTO_INCREMENT a táblához `booking`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `city`
+-- AUTO_INCREMENT a táblához `city`
 --
 ALTER TABLE `city`
   MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `hotel`
+-- AUTO_INCREMENT a táblához `hotel`
 --
 ALTER TABLE `hotel`
   MODIFY `hotel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `loyalty`
+-- AUTO_INCREMENT a táblához `loyalty`
 --
 ALTER TABLE `loyalty`
-  MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `loyaltyrank`
+-- AUTO_INCREMENT a táblához `loyaltyrank`
 --
 ALTER TABLE `loyaltyrank`
   MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `reviews`
+-- AUTO_INCREMENT a táblához `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `room`
+-- AUTO_INCREMENT a táblához `room`
 --
 ALTER TABLE `room`
   MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT for table `service`
+-- AUTO_INCREMENT a táblához `service`
 --
 ALTER TABLE `service`
   MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT for table `servicecategory`
+-- AUTO_INCREMENT a táblához `servicecategory`
 --
 ALTER TABLE `servicecategory`
   MODIFY `serviceCategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- Constraints for dumped tables
+-- Megkötések a kiírt táblákhoz
 --
 
 --
--- Constraints for table `billing`
+-- Megkötések a táblához `billing`
 --
 ALTER TABLE `billing`
   ADD CONSTRAINT `billing_ibfk_1` FOREIGN KEY (`billing_id`) REFERENCES `booking` (`booking_id`);
 
 --
--- Constraints for table `booking`
+-- Megkötések a táblához `booking`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
 
 --
--- Constraints for table `employee`
+-- Megkötések a táblához `employee`
 --
 ALTER TABLE `employee`
   ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Constraints for table `hotel`
+-- Megkötések a táblához `hotel`
 --
 ALTER TABLE `hotel`
   ADD CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`);
 
 --
--- Constraints for table `loyalty`
+-- Megkötések a táblához `loyalty`
 --
 ALTER TABLE `loyalty`
   ADD CONSTRAINT `loyalty_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `loyalty_ibfk_2` FOREIGN KEY (`rank_id`) REFERENCES `loyaltyrank` (`rank_id`);
 
 --
--- Constraints for table `reviews`
+-- Megkötések a táblához `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Constraints for table `room`
+-- Megkötések a táblához `room`
 --
 ALTER TABLE `room`
   ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Constraints for table `service`
+-- Megkötések a táblához `service`
 --
 ALTER TABLE `service`
   ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `servicecategory` (`serviceCategory_id`),
