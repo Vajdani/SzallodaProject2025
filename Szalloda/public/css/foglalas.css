@@ -58,6 +58,7 @@ form a {
 }
 
 input[type=text] {
+    padding: 2.5px;
     border: none;
     background-color: var(--colour_sidebar);
     color: var(--colour_lightwhite);

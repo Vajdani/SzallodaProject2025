@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
+
 class BookingController extends Controller
 {
     //region Frontend
@@ -144,7 +145,7 @@ class BookingController extends Controller
             }
         }
         $loyalty->save();
-        return redirect("/szalloda/$req->hotel_id");
+        return redirect("/szalloda/$req->hotel_id")->with('sv', 'Sikeres foglalás!');
     }
 
     public function CancelBooking_Backend(Request $req){
@@ -152,6 +153,20 @@ class BookingController extends Controller
         $booking->status = "refund requested";
         $booking->save();
 
+        $point = round($booking->totalPrice / 1000,0);
+
+        $loyaltyId = Loyalty::where('user_id',Auth::user()->user_id)->get();
+        $loyalty = Loyalty::find($loyaltyId[0]->loyalty_id);
+        $loyalty->points -= $point;
+        $loyalty->updated_at = Carbon::now('Europe/Budapest');
+
+        $ranks = loyaltyrank::fromquery("select lr.rank_id, lr.minPoint from loyaltyrank lr");
+        foreach($ranks as $r){
+            if($loyalty->points > $r->minPoint){
+                $loyalty->rank_id = $r->rank_id;
+            }
+        }
+        $loyalty->save();
         return back();
     }
     //endregion
