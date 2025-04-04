@@ -69,7 +69,7 @@ namespace SzallodaManagerForm
                 {
                     sum = ab.Reader["sum"].ToString();
                 }
-
+                
                 if (Convert.ToInt32(ab.Reader["db"]) == maxdb)
                 {
                     maxhonap.Add(honapok[i-1]);
@@ -81,9 +81,10 @@ namespace SzallodaManagerForm
                     maxhonap.Add(honapok[i - 1]);
                     maxdb = Convert.ToInt32(ab.Reader["db"]);
                 }
-                if (ab.Reader["sum"].ToString() != null)
+                if (!Convert.IsDBNull(ab.Reader["sum"]))
                 {
-                    if (Convert.ToInt32(ab.Reader["sum"]) > maxft)
+                    int current = Convert.ToInt32(ab.Reader["sum"]);
+                    if (current > maxft)
                     {
                         maxft = Convert.ToInt32(ab.Reader["sum"]);
                         maxfthonap = honapok[i - 1];
