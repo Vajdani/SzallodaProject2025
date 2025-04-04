@@ -11,7 +11,7 @@
     <div class="mainContent">
         <section>
             <img src="{{ asset('img/cities/'.$city->city_id.'.jpg') }}" alt="{{ $city->cityName }}.jpg" title="{{ $city->cityName }}" class="szallodaMainImg img-fluid" width="600px" height="400px">
-            <div style="background-color:teal">
+            <div class="cityDescription">
                 @for ($i = 0; $i < count($description); $i++)
                     <p>{{ $description[$i] }}</p>
                     <br>

@@ -7,6 +7,15 @@
     padding: 0 30px 25px 30px;
 }
 
+.cityDescription {
+    background-color: var(--colour_sidebar);
+    padding: 10px;
+    margin: 15px 20px 0 20px;
+    text-align: justify;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
 .city {
     background-color: var(--colour_sidebar);
     padding: 10px;
