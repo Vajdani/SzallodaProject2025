@@ -11,6 +11,7 @@ namespace SzallodaManagerForm
         OptionPanel alkalmazottak;
         OptionPanel szobak;
         OptionPanel szolgaltatasok;
+        OptionPanel foglalalsok;
 
         public static Main Instance;
 
@@ -30,7 +31,9 @@ namespace SzallodaManagerForm
             { 
                 BackColor = Color.RebeccaPurple
             };
-            
+            foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings);
+
+            Controls.Add(foglalalsok);
             Controls.Add(szobak);
             Controls.Add(szolgaltatasok);
             Controls.Add(alkalmazottak);
@@ -77,6 +80,7 @@ namespace SzallodaManagerForm
             cbModositas.Items.Add("Szobák");
             cbModositas.Items.Add("Szolgáltatások");
             cbModositas.Items.Add("Statisztika");
+            cbModositas.Items.Add("Foglalások");
 
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 1) //Manager vagy Owner
@@ -103,6 +107,9 @@ namespace SzallodaManagerForm
                 case "Szolgáltatások":
                     current = szolgaltatasok;
                     break;
+                case "Foglalások":
+                    current = foglalalsok;
+                    break;
                 case "Statisztika":
                     hotelstat hs = new hotelstat(cbHotelek.SelectedItem.ToString());
                     hs.ShowDialog();
@@ -124,7 +131,7 @@ namespace SzallodaManagerForm
 
         public void OnSizeChange(object sender, EventArgs e)
         {
-            if(this.Size.Width > 1000)
+            if(this.Size.Width > 700)
             {
                 current.ResizePanel();
                 ResizeHeader();

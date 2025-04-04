@@ -10,6 +10,7 @@ namespace SzallodaManagerForm
             Rooms,
             Employees,
             Services,
+            Bookings
         }
 
         Panel itemPanelCon;
@@ -74,7 +75,12 @@ namespace SzallodaManagerForm
                     {
                         itemPanelCon.Controls.Add(new RoomPanel(itemPanelCon, room));
                     }
-
+                    break;
+                case ItemPanelCategory.Bookings:
+                    foreach (Booking booking in hotel.Bookings)
+                    {
+                        itemPanelCon.Controls.Add(new BookingPanel(itemPanelCon, booking));
+                    }
                     break;
             }
             this.Visible = true;

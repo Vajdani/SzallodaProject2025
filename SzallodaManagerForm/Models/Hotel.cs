@@ -12,6 +12,7 @@
         public List<Room> Rooms { get; private set; } = [];
         public List<Service> Services { get; private set; } = [];
         public List<Employee> Employees { get; private set; } = [];
+        public List<Booking> Bookings { get; private set; } = [];
 
 
         public static List<Hotel> userHotels = [];
@@ -39,10 +40,17 @@
             {
                 Employees = employees;
             }
+
+            if ((args![3] as Dictionary<int, List<Booking>>)!.TryGetValue(hotel_id, out List<Booking>? bookings))
+            {
+                Bookings = bookings;
+            }
         }
 
         public static void OnUserLogin(int user_id)
         {
+            var bookings = Database.ReadAll<Booking>($"SELECT hotel_id, booking_id, booking.bookStart, booking.bookEnd, booking.status, booking.totalPrice FROM room, booking WHERE room.room_id = booking.room_id").GroupBy(b => b.hotel_id).ToDictionary(b => b.Key, b => b.ToList());
+
             var rooms = Database.ReadAll<Room>($"select * from room").GroupBy(r => r.hotel_id).ToDictionary(r => r.Key, r => r.ToList());
             
             var services = Database.ReadAll<Service>(
@@ -67,7 +75,7 @@
                 "select hotel.hotel_id, hotel.city_id, hotel.hotelName, hotel.address, hotel.phoneNumber, hotel.email, hotel.description " +
                 "from hotel, employee " +
                 $"where hotel.hotel_id = employee.hotel_id and employee.user_id = {user_id};",
-                rooms, services, employees
+                rooms, services, employees, bookings
             );
         }
 
