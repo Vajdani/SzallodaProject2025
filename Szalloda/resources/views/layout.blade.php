@@ -37,7 +37,7 @@
         </div>
         <div class="sidebar">
             <div class="sidebarHeader">
-                <h2><a href="/" class="brandlink">RushWave Retreat</a></h2>
+                <h2>RushWave Retreat</h2>
                 <label for="toggleButtonCheckbox" class="toggleButtonCon">
                     <input name="toggleButtonCheckbox" type="checkbox" id="toggleButtonCheckbox" class="toggleButtonCheckbox">
                     <p>≡</p>
