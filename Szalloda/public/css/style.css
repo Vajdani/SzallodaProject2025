@@ -1,7 +1,9 @@
 * {
     padding: 0;
     margin: 0;
+}
 
+:root {
     --colour_background: #A3D1C6;
     --colour_sidebar: #15B392;
     --colour_footer: #0d854d;
