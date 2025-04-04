@@ -184,10 +184,9 @@ class BookingController extends Controller
                 inner join servicecategory sc on sc.serviceCategory_id = s.category_id
                 inner join hotel h on h.hotel_id = s.hotel_id
                 where
-                    s.category_id >= 3 and
                     h.hotel_id = $hotel_id
                 having
-                    s.allYear
+                    s.allYear = 1
                     or
                     if('$start' > formattedStartDate, '$start', formattedStartDate) <= if('$end' < formattedEndDate, '$end', formattedEndDate)
                 ;

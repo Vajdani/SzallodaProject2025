@@ -49,24 +49,26 @@ async function DateChanged() {
         let servicesDiv = document.getElementById("services")
         servicesDiv.innerHTML = ""
         services.forEach(element => {
-            let div = document.createElement("div")
+            if (element.category_id >= 3) {
+                let div = document.createElement("div")
 
-            let id = "service_" + element.service_id
-            let input = document.createElement("input")
-            input.name = "services[]"
-            input.id = id
-            input.value = element.service_id
-            input.checked = selectedServices[id]
-            input.onchange = ServiceSelected
-            input.type = "checkbox"
+                let id = "service_" + element.service_id
+                let input = document.createElement("input")
+                input.name = "services[]"
+                input.id = id
+                input.value = element.service_id
+                input.checked = selectedServices[id]
+                input.onchange = ServiceSelected
+                input.type = "checkbox"
 
-            let label = document.createElement("label")
-            label.htmlFor = id
-            label.innerText = " " + element.serviceName
+                let label = document.createElement("label")
+                label.htmlFor = id
+                label.innerText = " " + element.serviceName
 
-            div.appendChild(input)
-            div.appendChild(label)
-            servicesDiv.appendChild(div)
+                div.appendChild(input)
+                div.appendChild(label)
+                servicesDiv.appendChild(div)
+            }
         })
 
         ResetRoomId()
@@ -107,7 +109,8 @@ function CalculatePrice() {
     }
 
     services.forEach(element => {
-        if (document.getElementById("service_" + element.service_id).checked) {
+        let checkbox = document.getElementById("service_" + element.service_id)
+        if (checkbox && checkbox.checked) {
             finalPrice += element.price * ((stayDuration == 0 || element.category_id >= 3) ? 1 : stayDuration)
         }
     })
