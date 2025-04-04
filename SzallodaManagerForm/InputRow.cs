@@ -47,8 +47,10 @@ namespace SzallodaManagerForm
         {
             ErrorLabel.Text = message;
             ErrorLabel.Visible = true;
-
         }
+
+        public virtual bool Validate() { return true; }
+        public virtual object? GetValue() { return null; }
     }
 
     class ComboBoxRow : InputRow
@@ -79,6 +81,11 @@ namespace SzallodaManagerForm
             base.ApplyElements(control);
             control.Add(ItemBox);
         }
+
+        public override object GetValue()
+        {
+            return ItemBox.SelectedIndex;
+        }
     }
 
     class TextBoxRow : InputRow 
@@ -92,9 +99,9 @@ namespace SzallodaManagerForm
             ValueTextBox = new TextBox();
             ValueTextBox.Size = new Size(200, 50);
             numOnly = NumOnly;
-            IsNullable = canBnull; 
+            IsNullable = canBnull;
 
-            ValueTextBox.TextChanged += NumberValidation;
+            ValueTextBox.TextChanged += (s, e) => { ErrorLabel.Visible = false; };
         }
 
         public override void UpdatePosition(Size parentSize, int y)
@@ -112,21 +119,25 @@ namespace SzallodaManagerForm
             control.Add(ValueTextBox);
         }
 
-        void NumberValidation(object sender, EventArgs e)
+        public override bool Validate()
         {
-            ErrorLabel.Visible = false;
-            if (numOnly && ValueTextBox.Text.Length > 0)
+            if(!IsNullable && ValueTextBox.Text.Length == 0)
             {
-                try
-                {
-                    int a = Convert.ToInt32(ValueTextBox.Text);
-                }
-                catch 
-                {
-                    this.ShowError("Csak számot szabad megadni!");
-                    ValueTextBox.Clear();
-                }
+                ShowError("Nem lehet üres!");
+                return false;
             }
+            if (numOnly && !int.TryParse(ValueTextBox.Text, out int var))
+            {
+                ValueTextBox.Clear();
+                ShowError("Csak számot lehet megadni!");
+                return false;
+            }
+            return true;
+        }
+
+        public override object GetValue()
+        {
+            return ValueTextBox.Text;
         }
     }
 
@@ -141,14 +152,16 @@ namespace SzallodaManagerForm
         DateTimePicker Start;
         DateTimePicker Finish;
         ComboBox cbSetValue;
+        PickMethod Pick;
 
         public TimePickerRow(string text, PickMethod pick, bool IsLimited) : base(text)
         {
             BonusBottomSpacing = 60;
+            Pick = pick;
 
             Start = new()
             {
-                Visible = IsLimited,
+                Enabled = IsLimited,
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = pick switch
                 {
@@ -156,10 +169,11 @@ namespace SzallodaManagerForm
                     PickMethod.Time => "hh:mm"
                 }
             };
+            Start.ValueChanged += (s, e) => { ErrorLabel.Visible = false; };
 
             Finish = new()
             {
-                Visible = IsLimited,
+                Enabled = IsLimited,
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = pick switch
                 {
@@ -167,12 +181,13 @@ namespace SzallodaManagerForm
                     PickMethod.Time => "hh:mm"
                 }
             };
+            Finish.ValueChanged += (s, e) => { ErrorLabel.Visible = false; };
 
             cbSetValue = new()
             {
                 Items = {
-                    pick == PickMethod.Day ? "All Year" : "All Day",
-                    "Limited"
+                    pick == PickMethod.Day ? "Egész éves" : "Egész napos",
+                    "Ideiglenes"
                 },
                 SelectedIndex = IsLimited ? 1 : 0,
                 DropDownStyle = ComboBoxStyle.DropDownList,
@@ -180,8 +195,8 @@ namespace SzallodaManagerForm
 
             cbSetValue.SelectedIndexChanged += (s, e) =>
             {
-                Start.Visible = cbSetValue.SelectedIndex == 1;
-                Finish.Visible = cbSetValue.SelectedIndex == 1;
+                Start.Enabled = cbSetValue.SelectedIndex == 1;
+                Finish.Enabled = cbSetValue.SelectedIndex == 1;
 
             };
         }
@@ -203,6 +218,27 @@ namespace SzallodaManagerForm
             control.Add(Start);
             control.Add(Finish);
             control.Add(cbSetValue);
+        }
+
+        public override bool Validate()
+        {
+            if(cbSetValue.SelectedIndex == 1 && !(Start.Value < Finish.Value)) // Need to fix
+            {
+                ShowError($"A zárás későbbi idő kell legyen, mint a kezdés!");
+                return false;
+            }
+            return true;
+        }
+
+        public override object? GetValue()
+        {
+            if (cbSetValue.SelectedIndex == 0) { Text.ForeColor = Color.Pink; return null; }
+            else return Pick switch
+            {
+                PickMethod.Day => new DateTime[] { new(0100, Start.Value.Month, Start.Value.Day), new(0100, Finish.Value.Month, Finish.Value.Day) },
+                PickMethod.Time => new TimeSpan[] { new(Start.Value.Hour, Start.Value.Minute, 0), new(Finish.Value.Hour, Finish.Value.Minute, 0) },
+                _ => null
+            };
         }
     }
 }

@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SzallodaManagerForm.Models;
 
 namespace SzallodaManagerForm
 {
     public partial class ServiceUpdateForm : Form
     {
-        public int ServiceID { get; private set; }
+        internal Service Service { get; private set; }
         List<InputRow>? InputFields;
         Label Title;
         Button CancelButton;
         Button SaveButton;
 
-        public ServiceUpdateForm(string title, List<InputRow>? items = null)
+        internal ServiceUpdateForm(string title, Service service, List<InputRow>? items = null)
         {
             InputFields = items;
+            Service = service;
+
             if (items != null) this.Size = new Size(600, 200 + items.Count * 75);
             else this.Size = new Size(400, 200);
 
@@ -90,7 +93,19 @@ namespace SzallodaManagerForm
 
         protected virtual void SaveButtonClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Megnyomtaad");
+            if (!ValidateInputs()) { return; }
+            object?[] result = new object[InputFields.Count];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = InputFields[i].GetValue();
+            }
+
+            Service.UpdateService(Convert.ToInt32(result[0]), (int)result[1] == 0, (DateTime[]?)result[2], (TimeSpan[]?)result[3]);
+        }
+
+        public bool ValidateInputs()
+        {
+            return InputFields.All(i => i.Validate());
         }
     }
 }

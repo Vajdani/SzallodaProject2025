@@ -32,12 +32,40 @@
         {
             Price = price;
             Available = available;
-            int numAva = Available ? 1 : 0;
-            if (dates != null) { StartDate = dates[0]; EndDate = dates[1]; }
-            if (times != null) { OpenTime = times[0]; CloseTime = times[1]; }
+            if (dates != null) {
+                StartDate = dates[0]; 
+                EndDate = dates[1];
+                AllYear = false;
+            }
+            else { 
+                StartDate = null;
+                EndDate = null;
+                AllYear= true;
+            }
+            if (times != null) { 
+                OpenTime = times[0];
+                CloseTime = times[1];
+            }
+            else { 
+                OpenTime= null;
+                CloseTime= null;
+            }
 
+            string q = $"UPDATE service SET " +
+                $"price = {Price}, " +
+                $"available = {(Available ? 1 : 0)}, " +
+                $"allYear = {(AllYear? 1 : 0)} " + // Ide majd kell egy vessző
+                //Fix later
+                //$"startDate = {(StartDate == null ? "NULL" : $"'{StartDate.Value:yyyy-MM-dd}'")}, " +
+                //$"endDate = {(EndDate == null ? "NULL" : $"'{EndDate.Value:yyyy-MM-dd}'")}', " +
+                //$"openTime = '{(OpenTime == null ? "00:00:00" : OpenTime.Value.ToString("hh:mm:ss"))}', " +
+                //$"closeTime = '{(CloseTime == null ? "00:00:00" : CloseTime.Value.ToString("hh:mm:ss"))}' " +
+                $"WHERE service_id = {this.service_id};";
 
-            Database ab = new($"UPDATE service SET price = {Price}, available = {numAva},");
+            Database ab = new(q);
+            ab.Close();
+
+            MessageBox.Show("Sikeres módosítás!","Információ",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
     }
 }

@@ -51,13 +51,13 @@ namespace SzallodaManagerForm.ItemPanels
         {
             List<InputRow> test = new List<InputRow>()
             {
-                new TextBoxRow("Price", true),
-                new ComboBoxRow("Availability", ["Avaible", "Out of order"], service.Available ? 0 : 1),
-                new TimePickerRow("Elérhetőség", TimePickerRow.PickMethod.Day, !service.AllYear),
-                new TimePickerRow("Nyitás", TimePickerRow.PickMethod.Time,  (service.OpenTime != null && service.CloseTime != null))
+                new TextBoxRow("Ár", true),
+                new ComboBoxRow("Elérhetőség", ["Elérhető", "Üzemen kívül"], service.Available ? 0 : 1),
+                new TimePickerRow("Időszak", TimePickerRow.PickMethod.Day, !service.AllYear),
+                new TimePickerRow("Nyitvatartás", TimePickerRow.PickMethod.Time,  (service.OpenTime != null && service.CloseTime != null))
             };
 
-            ServiceUpdateForm serviceUpdateForm = new ServiceUpdateForm("Szolgáltatás Módosítása", test);
+            ServiceUpdateForm serviceUpdateForm = new ServiceUpdateForm("Szolgáltatás Módosítása", service, test);
             serviceUpdateForm.ShowDialog();
         }
     }
