@@ -152,7 +152,7 @@ class BookingController extends Controller
         $booking->status = "refund requested";
         $booking->save();
 
-        return UserController::ProfileByID_Frontend(Auth::user()->user_id);
+        return back();
     }
     //endregion
 

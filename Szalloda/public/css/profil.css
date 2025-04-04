@@ -98,7 +98,7 @@
     background-color: var(--colour_sidebar);
 }
 
-.cancel-button{
+.cancel-button {
     border-radius: 15px;
     height: 30px;
     min-width: 10%;
@@ -109,6 +109,10 @@
     margin: 10px 0 10px 0;
     padding: 5px;
     float: right;
+}
+
+.cancel-button:hover {
+    background-color: var(--colour_error);
 }
 
 .user-information form {
