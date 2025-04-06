@@ -187,7 +187,7 @@ class BookingController extends Controller
                         select r.roomNumber
                         from room r
                         inner join booking b on b.room_id = r.room_id
-                        where if('$start' > b.bookStart, '$start', b.bookStart) <= if('$end' < b.bookEnd, '$end', b.bookEnd)
+                        where if('$start' > b.bookStart, '$start', b.bookStart) <= if('$end' < b.bookEnd, '$end', b.bookEnd) or r.available = 0
                     );
             "),
             "services" => Service::fromQuery("
