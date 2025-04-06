@@ -171,6 +171,11 @@ namespace SzallodaManagerForm
             Start = new()
             {
                 Enabled = IsLimited,
+                ShowUpDown = pick switch
+                {
+                    PickMethod.Day => false,
+                    PickMethod.Time => true,
+                },
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = pick switch
                 {
@@ -183,6 +188,11 @@ namespace SzallodaManagerForm
             Finish = new()
             {
                 Enabled = IsLimited,
+                ShowUpDown = pick switch
+                {
+                    PickMethod.Day => false,
+                    PickMethod.Time => true,
+                },
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = pick switch
                 {
