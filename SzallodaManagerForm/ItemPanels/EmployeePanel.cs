@@ -20,7 +20,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             lbUserType = new()
             {
-                Text = User.GetAuthorityLevelName(employee.AuthorityLevel)
+                Text = User.GetAuthorityLevelName(employee.AuthorityLevel) == "Employee" ? "Alkalmazott" : "Manager"
             };
 
             btnChangeLevel = new()

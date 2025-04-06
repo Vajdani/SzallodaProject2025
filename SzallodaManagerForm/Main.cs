@@ -23,14 +23,8 @@ namespace SzallodaManagerForm
             this.Resize += OnSizeChange;
 
             szobak = new(OptionPanel.ItemPanelCategory.Rooms, ["Szoba", "Állapot", "Ár"]);
-            szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services, ["Név", "Állapot"])
-            {
-                BackColor = Color.RebeccaPurple
-            };
-            alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees, ["Felhasználó név", "Rank"])
-            { 
-                BackColor = Color.RebeccaPurple
-            };
+            szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services, ["Név", "Állapot"]);
+            alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees, ["Felhasználó név", "Rank"]);
             foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings, ["Kezdés dátuma", "Zárás dátuma", "Ár", "Állapot"]);
 
             Controls.Add(foglalalsok);

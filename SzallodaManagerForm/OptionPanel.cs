@@ -29,7 +29,7 @@ namespace SzallodaManagerForm
 
             itemPanelCon = new Panel
             {
-                BackColor = Color.Red,
+                BackColor = Color.Gray,
                 Size = new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200)),
                 Location = new Point(10, 50),
                 AutoScroll = true
@@ -89,7 +89,7 @@ namespace SzallodaManagerForm
                 case ItemPanelCategory.Bookings:
                     foreach (Booking booking in hotel.Bookings)
                     {
-                        if(booking.status == Booking.BookingStatus.RefundRequested || booking.status == Booking.BookingStatus.Confirmed) itemPanelCon.Controls.Add(new BookingPanel(itemPanelCon, booking));
+                        if(booking.status == Booking.BookingStatus.RefundRequested || (booking.status == Booking.BookingStatus.Confirmed && booking.bookEnd.Date < DateTime.Today )) itemPanelCon.Controls.Add(new BookingPanel(itemPanelCon, booking));
                     }
                     break;
             }

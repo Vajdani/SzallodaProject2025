@@ -24,10 +24,7 @@ namespace SzallodaManagerForm
                 Font = new Font("Arial", 20, FontStyle.Bold),
             };
 
-            Display = new()
-            {
-                BackColor = Color.Purple,
-            };
+            Display = new();
 
             Controls.Add(lbTitle);
             Controls.Add(Display);

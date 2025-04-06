@@ -7,7 +7,7 @@
         {
             ResizePanel(parent.ClientSize); 
             Location = new Point(10, (60 + verticalPadding) * parent.Controls.Count + verticalPadding);
-            BackColor = Color.Aqua;
+            BackColor = Color.DarkGray;
             Visible = true;
         }
 
