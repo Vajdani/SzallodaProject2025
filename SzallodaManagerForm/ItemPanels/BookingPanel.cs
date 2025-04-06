@@ -61,8 +61,8 @@ namespace SzallodaManagerForm.ItemPanels
             btnComplete.Click += (s, e) => {
                 switch (Booking.status)
                 {
-                    case Booking.BookingStatus.RefundRequested: Booking.ChangeBookingStatus(Booking.BookingStatus.Cancelled); break;
-                    case Booking.BookingStatus.Confirmed: Booking.ChangeBookingStatus(Booking.BookingStatus.Completed); break;
+                    case Booking.BookingStatus.RefundRequested: Booking.ChangeBookingStatus(Booking.BookingStatus.Cancelled, "refunded"); break;
+                    case Booking.BookingStatus.Confirmed: Booking.ChangeBookingStatus(Booking.BookingStatus.Completed, "completed"); break;
                 }
                 Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
             };

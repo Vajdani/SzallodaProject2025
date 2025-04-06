@@ -57,11 +57,19 @@ namespace SzallodaManagerForm.Models
             };
         }
 
-        public void ChangeBookingStatus(BookingStatus status)
+        public void ChangeBookingStatus(BookingStatus status, string paymentstatus)
         {
             this.status = status;
             Database ab = new($"UPDATE booking SET status = '{GetBookingStatusName(status)}' WHERE booking_id = {booking_id}");
             ab.Close();
+            ab = new($"UPDATE billing SET paymentStatus = '{paymentstatus}' WHERE booking_id = {booking_id}");
+            ab.Close();
+            if (GetBookingStatusName(status) == "completed")
+            {
+                ab = new($"UPDATE billing SET paymentDate = '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}' WHERE booking_id = {booking_id} AND paymentMethod = 'cash'");
+                ab.Close();
+            }
+          
         }
     }
 }
