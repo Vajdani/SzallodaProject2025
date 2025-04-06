@@ -10,7 +10,8 @@ namespace SzallodaManagerForm
             Rooms,
             Employees,
             Services,
-            Bookings
+            Bookings,
+            Statistic
         }
 
         Panel itemPanelCon;
@@ -90,6 +91,13 @@ namespace SzallodaManagerForm
                     foreach (Booking booking in hotel.Bookings)
                     {
                         if(booking.status == Booking.BookingStatus.RefundRequested || (booking.status == Booking.BookingStatus.Confirmed && booking.bookEnd.Date < DateTime.Today )) itemPanelCon.Controls.Add(new BookingPanel(itemPanelCon, booking));
+                    }
+                    break;
+                case ItemPanelCategory.Statistic:
+                    foreach(var valuePair in Main.Instance.GetSelectedHotel().GetBookingStatistics())
+                    {
+                        (int count, int profit) = valuePair.Value;
+                        if(count > 0) itemPanelCon.Controls.Add(new MonthStatisticPanel(itemPanelCon, valuePair.Key, count, profit));
                     }
                     break;
             }

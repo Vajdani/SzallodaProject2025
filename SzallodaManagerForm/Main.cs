@@ -12,6 +12,7 @@ namespace SzallodaManagerForm
         OptionPanel szobak;
         OptionPanel szolgaltatasok;
         OptionPanel foglalalsok;
+        OptionPanel statisztika;
 
         public static Main Instance;
 
@@ -26,11 +27,13 @@ namespace SzallodaManagerForm
             szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services, ["Név", "Állapot"]);
             alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees, ["Felhasználó név", "Rank"]);
             foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings, ["Kezdés dátuma", "Zárás dátuma", "Ár", "Állapot"]);
+            statisztika = new(OptionPanel.ItemPanelCategory.Statistic, ["Hónap", "Foglalások", "Bevétel"]);
 
             Controls.Add(foglalalsok);
             Controls.Add(szobak);
             Controls.Add(szolgaltatasok);
             Controls.Add(alkalmazottak);
+            Controls.Add(statisztika);
 
             current = szobak;
         }
@@ -104,8 +107,9 @@ namespace SzallodaManagerForm
                     current = foglalalsok;
                     break;
                 case "Statisztika":
-                    hotelstat hs = new hotelstat(cbHotelek.SelectedItem.ToString());
-                    hs.ShowDialog();
+                    current = statisztika;
+                    //hotelstat hs = new hotelstat(cbHotelek.SelectedItem.ToString());
+                    //hs.ShowDialog();
                     break;
 
             }

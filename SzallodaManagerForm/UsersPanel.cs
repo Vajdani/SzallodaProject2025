@@ -12,7 +12,7 @@ namespace SzallodaManagerForm
     {
         Panel itemPanelCon;
         Label lbSearch;
-        TextBox tbSearchbox;
+        public TextBox tbSearchbox { get; private set; }
         public static UsersPanel? Instance { get; private set; }
 
         public UsersPanel() 
@@ -50,7 +50,6 @@ namespace SzallodaManagerForm
         public void UpdatePanel(string name = "")
         {
             itemPanelCon.Controls.Clear();
-            tbSearchbox.Clear();
 
             var Users = Database.ReadAll<Models.BaseUser>($"SELECT user_id, username, firstName, lastName FROM user WHERE user_id NOT IN (SELECT user_id FROM employee WHERE hotel_id = {Main.Instance.GetSelectedHotelId()}) and username like '{name}%';");
             foreach (BaseUser user in Users)

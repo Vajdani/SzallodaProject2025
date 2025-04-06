@@ -47,6 +47,7 @@ namespace SzallodaManagerForm.ItemPanels
                 {
                     user.HireUser(cbAuthorityLevel.SelectedIndex);
                     UsersPanel.Instance.UpdatePanel();
+                    UsersPanel.Instance.tbSearchbox.Clear();
                 }
             };
 
