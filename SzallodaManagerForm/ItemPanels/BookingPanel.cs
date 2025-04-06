@@ -14,9 +14,10 @@ namespace SzallodaManagerForm.ItemPanels
 
         Label lbStartDate;
         Label lbEndDate;
-        ComboBox cbStatus;
-        TextBox tbPrice;
-
+        Label lbPrice;
+        Label lbStatus;
+        Button btnComplete;
+        
         public BookingPanel(Panel parent, Booking booking) : base(parent) {
 
             Booking = booking;
@@ -31,30 +32,48 @@ namespace SzallodaManagerForm.ItemPanels
                 Text = Booking.bookEnd.ToString(),
             };
 
-            cbStatus = new()
+            lbStatus = new()
             {
-                Items =
+                Text = Booking.status switch
                 {
-                    "Megerősítve",
-                    "Megszakítva",
-                    "Kész",
-                    "Visszafizetés igényelve"
-                },
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                SelectedIndex = (int)booking.status
+                    Booking.BookingStatus.RefundRequested => "Visszatérítés igényelve",
+                    Booking.BookingStatus.Confirmed => "Megerősítve",
+                    _ => throw new Exception("Invalid status")
+                }
             };
-            cbStatus.MouseWheel += (s, e) => { ((HandledMouseEventArgs)e).Handled = true; };
 
-            tbPrice = new()
+
+            lbPrice = new()
             {
-                Text = booking.totalPrice.ToString(),
+                Text = booking.totalPrice.ToString() + " Ft"
+            };
+
+            btnComplete = new()
+            {
+                Text = Booking.status switch
+                {
+                    Booking.BookingStatus.RefundRequested => "Visszafizetés",
+                    Booking.BookingStatus.Confirmed => "Lezárás",
+                    _ => throw new Exception("Invalid status")
+                }
+            };
+
+            btnComplete.Click += (s, e) => {
+                switch (Booking.status)
+                {
+                    case Booking.BookingStatus.RefundRequested: Booking.ChangeBookingStatus(Booking.BookingStatus.Cancelled); break;
+                    case Booking.BookingStatus.Confirmed: Booking.ChangeBookingStatus(Booking.BookingStatus.Completed); break;
+                }
+                Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
             };
 
 
             this.Controls.Add(lbStartDate);
             this.Controls.Add(lbEndDate);
-            this.Controls.Add(cbStatus);
-            this.Controls.Add(tbPrice);
+            this.Controls.Add(lbPrice);
+            this.Controls.Add(lbStatus);
+            this.Controls.Add(btnComplete);
+            
 
             AlignElementsHorizontally();
 

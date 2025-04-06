@@ -14,15 +14,17 @@ namespace SzallodaManagerForm
         }
 
         Panel itemPanelCon;
+        List<Label> Headers = new List<Label>();
+
         Button? extraFunctButton;
         public ItemPanelCategory Category { get; private set; }
         
-        public OptionPanel(ItemPanelCategory category) 
+        public OptionPanel(ItemPanelCategory category, string[]? headertexts = null) 
         {
             Category = category;
 
-            Size = new Size(Main.Instance.ClientSize.Width, Main.Instance.ClientSize.Height-100);
-            Location = new Point(0,100);
+            Size = new Size(Main.Instance.ClientSize.Width, Main.Instance.ClientSize.Height);
+            Location = new Point(0,50);
             Visible = false;
 
             itemPanelCon = new Panel
@@ -33,6 +35,14 @@ namespace SzallodaManagerForm
                 AutoScroll = true
             };
             Controls.Add(itemPanelCon);
+
+            if (headertexts != null)
+            {
+                foreach (string text in headertexts)
+                {
+                    Headers.Add(new Label { Text = text, Visible = false, Font = new("arial", 12, FontStyle.Bold), AutoSize = true }); 
+                }
+            }
 
             if(category == ItemPanelCategory.Employees)
             {
@@ -79,12 +89,42 @@ namespace SzallodaManagerForm
                 case ItemPanelCategory.Bookings:
                     foreach (Booking booking in hotel.Bookings)
                     {
-                        itemPanelCon.Controls.Add(new BookingPanel(itemPanelCon, booking));
+                        if(booking.status == Booking.BookingStatus.RefundRequested || booking.status == Booking.BookingStatus.Confirmed) itemPanelCon.Controls.Add(new BookingPanel(itemPanelCon, booking));
                     }
                     break;
             }
+
             this.Visible = true;
 
+            if(itemPanelCon.Controls.Count == 0)
+            {
+                Label noElementsLabel = new()
+                {
+                    Text = "Nincsenek elemek",
+                    Font = new Font("arial", 20, FontStyle.Bold),
+                    AutoSize = true,
+                };
+                itemPanelCon.Controls.Add(noElementsLabel);
+                noElementsLabel.Location = new Point(
+                    (itemPanelCon.ClientSize.Width - noElementsLabel.Width) / 2, 
+                    (itemPanelCon.ClientSize.Height - noElementsLabel.ClientSize.Height) / 2);
+               
+            }
+            else
+            {
+                DisplayHeaderTexts(((ItemPanel)itemPanelCon.Controls[0]).GetControlPositions());
+            }
+
+        }
+
+        public void DisplayHeaderTexts(List<int> points)
+        {
+            for (int i = 0; i < Headers.Count && i < points.Count; i++)
+            {
+                Headers[i].Visible = true;
+                Headers[i].Location = new Point(points[i], 30);
+                this.Controls.Add(Headers[i]);
+            }
         }
 
         public void ResizePanel()
@@ -93,10 +133,28 @@ namespace SzallodaManagerForm
             itemPanelCon.Size = new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200));
             if(extraFunctButton is not null) extraFunctButton.Location = new Point(itemPanelCon.Location.X + itemPanelCon.Width - 300, itemPanelCon.Location.Y + itemPanelCon.Size.Height + 5);
 
-            foreach (ItemPanel ItP in itemPanelCon.Controls)
+            if (itemPanelCon.Controls.Count > 1)
             {
-                ItP.ResizePanel(itemPanelCon.Size);
+                foreach (ItemPanel ItP in itemPanelCon.Controls)
+                {
+                    ItP.ResizePanel(itemPanelCon.Size);
+                }
+                DisplayHeaderTexts(((ItemPanel)itemPanelCon.Controls[0]).GetControlPositions());
             }
+
+            if (itemPanelCon.Controls.Count == 1)
+            {
+                Label noitems = (Label)itemPanelCon.Controls[0];
+                noitems.Location = new Point(
+                    (itemPanelCon.ClientSize.Width - noitems.Width) / 2,
+                    (itemPanelCon.ClientSize.Height - noitems.Height) / 2
+                );
+                foreach(Label ht in Headers)
+                {
+                    ht.Visible = false;
+                }
+            }
+
         }
 
         void OpenHiringForm()

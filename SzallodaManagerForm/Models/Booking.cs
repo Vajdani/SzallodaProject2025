@@ -11,9 +11,10 @@ namespace SzallodaManagerForm.Models
         public enum BookingStatus
         {
             Confirmed,
-            Cancelled,
+            RefundRequested,
             Completed,
-            RefundRequested
+            Cancelled
+                
         }
         public int hotel_id { get; private set; }
         public int booking_id { get; private set; }
@@ -56,7 +57,11 @@ namespace SzallodaManagerForm.Models
             };
         }
 
-
-
+        public void ChangeBookingStatus(BookingStatus status)
+        {
+            this.status = status;
+            Database ab = new($"UPDATE booking SET status = '{GetBookingStatusName(status)}' WHERE booking_id = {booking_id}");
+            ab.Close();
+        }
     }
 }

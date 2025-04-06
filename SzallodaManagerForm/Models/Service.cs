@@ -8,10 +8,10 @@
         public int Price { get; private set; }
         public bool Available { get; private set; }
         public bool AllYear { get; private set; }
-        public DateTime? StartDate;
-        public DateTime? EndDate;
-        public TimeSpan? OpenTime;
-        public TimeSpan? CloseTime;
+        public DateTime StartDate;
+        public DateTime EndDate;
+        public TimeSpan OpenTime;
+        public TimeSpan CloseTime;
 
         public Service(Database db)
         {
@@ -38,8 +38,8 @@
                 AllYear = false;
             }
             else { 
-                StartDate = null;
-                EndDate = null;
+                StartDate = DateTime.MinValue;
+                EndDate = DateTime.MinValue;
                 AllYear= true;
             }
             if (times != null) { 
@@ -47,19 +47,18 @@
                 CloseTime = times[1];
             }
             else { 
-                OpenTime= null;
-                CloseTime= null;
+                OpenTime= TimeSpan.MinValue;
+                CloseTime= TimeSpan.MinValue;
             }
 
             string q = $"UPDATE service SET " +
                 $"price = {Price}, " +
                 $"available = {(Available ? 1 : 0)}, " +
-                $"allYear = {(AllYear? 1 : 0)} " + // Ide majd kell egy vessző
-                //Fix later
-                //$"startDate = {(StartDate == null ? "NULL" : $"'{StartDate.Value:yyyy-MM-dd}'")}, " +
-                //$"endDate = {(EndDate == null ? "NULL" : $"'{EndDate.Value:yyyy-MM-dd}'")}', " +
-                //$"openTime = '{(OpenTime == null ? "00:00:00" : OpenTime.Value.ToString("hh:mm:ss"))}', " +
-                //$"closeTime = '{(CloseTime == null ? "00:00:00" : CloseTime.Value.ToString("hh:mm:ss"))}' " +
+                $"allYear = {(AllYear ? 1 : 0)}, " +
+                $"startDate = {(AllYear ? "NULL" : $"'{StartDate:yyyy-MM-dd}'")}, " +
+                $"endDate = {(AllYear ? "NULL" : $"'{EndDate:yyyy-MM-dd}'")}, " +
+                $"openTime = {(OpenTime == TimeSpan.Zero ? "'00:00:00'" : $"'{OpenTime:hh\\:mm\\:ss}'")}, " +
+                $"closeTime = {(CloseTime == TimeSpan.Zero ? "'00:00:00'" : $"'{CloseTime:hh\\:mm\\:ss}'")} " +
                 $"WHERE service_id = {this.service_id};";
 
             Database ab = new(q);

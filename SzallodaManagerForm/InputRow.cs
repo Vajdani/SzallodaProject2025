@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,11 +94,19 @@ namespace SzallodaManagerForm
         public TextBox ValueTextBox { get; private set; }
         bool numOnly;
         bool IsNullable;
+        string? BaseValue;
 
-        public TextBoxRow(string text, bool NumOnly = false, bool canBnull = false) : base(text)
+        public TextBoxRow(string text, string? baseValue = null, bool NumOnly = false, bool canBnull = false) : base(text)
         {
+            BonusBottomSpacing = 10;
             ValueTextBox = new TextBox();
-            ValueTextBox.Size = new Size(200, 50);
+            if(baseValue != null)
+            {
+                ValueTextBox.Text = baseValue;
+                BaseValue = baseValue;
+            }
+            else BaseValue = null;
+                ValueTextBox.Size = new Size(200, 50);
             numOnly = NumOnly;
             IsNullable = canBnull;
 
@@ -110,7 +119,7 @@ namespace SzallodaManagerForm
             Text.Location = new Point(gap, y);
             ValueTextBox.Location = new Point(gap*2 + Text.Width, y);
 
-            ErrorLabel.Location = new Point(Text.Location.X, Text.Location.Y + 20);
+            ErrorLabel.Location = new Point(Text.Location.X, Text.Location.Y + ErrorLabel.ClientSize.Height + 20);
         }
 
         public override void ApplyElements(Control.ControlCollection control)
@@ -154,7 +163,7 @@ namespace SzallodaManagerForm
         ComboBox cbSetValue;
         PickMethod Pick;
 
-        public TimePickerRow(string text, PickMethod pick, bool IsLimited) : base(text)
+        public TimePickerRow(string text, PickMethod pick, bool IsLimited, object[]? timeValues = null) : base(text)
         {
             BonusBottomSpacing = 60;
             Pick = pick;
@@ -166,7 +175,7 @@ namespace SzallodaManagerForm
                 CustomFormat = pick switch
                 {
                     PickMethod.Day => "MM-dd",
-                    PickMethod.Time => "hh:mm"
+                    PickMethod.Time => "HH:mm"
                 }
             };
             Start.ValueChanged += (s, e) => { ErrorLabel.Visible = false; };
@@ -178,7 +187,7 @@ namespace SzallodaManagerForm
                 CustomFormat = pick switch
                 {
                     PickMethod.Day => "MM-dd",
-                    PickMethod.Time => "hh:mm"
+                    PickMethod.Time => "HH:mm"
                 }
             };
             Finish.ValueChanged += (s, e) => { ErrorLabel.Visible = false; };
@@ -197,9 +206,50 @@ namespace SzallodaManagerForm
             {
                 Start.Enabled = cbSetValue.SelectedIndex == 1;
                 Finish.Enabled = cbSetValue.SelectedIndex == 1;
-
+                ErrorLabel.Visible = false;
             };
+
+            Debug.WriteLine($"timeValues[0] = {timeValues[0]?.ToString() ?? "null"}");
+            Debug.WriteLine($"timeValues[1] = {timeValues[1]?.ToString() ?? "null"}");
+
+            if (timeValues != null)
+            {
+                switch (Pick)
+                {
+                    case PickMethod.Day:
+                        var startDate = (DateTime)timeValues[0];
+                        var endDate = (DateTime)timeValues[1];
+
+                        if (startDate == DateTime.MinValue)
+                            startDate = new DateTime(2000, 1, 1);
+                        if (endDate == DateTime.MinValue)
+                            endDate = new DateTime(2000, 1, 1);
+
+                        Start.Value = new DateTime(2000, startDate.Month, startDate.Day);
+                        Finish.Value = new DateTime(2000, endDate.Month, endDate.Day);
+                        break;
+
+                    case PickMethod.Time:
+                        var startTime = (TimeSpan)timeValues[0];
+                        var endTime = (TimeSpan)timeValues[1];
+
+                        if (startTime == TimeSpan.MinValue)
+                            startTime = TimeSpan.Zero;
+                        if (endTime == TimeSpan.MinValue)
+                            endTime = TimeSpan.Zero;
+
+                        Start.Value = new DateTime(2000, 1, 1, startTime.Hours, startTime.Minutes, 0);
+                        Finish.Value = new DateTime(2000, 1, 1, endTime.Hours, endTime.Minutes, 0);
+                        break;
+                }
+            }
+            else
+            {
+                Start.Value = new DateTime(2000, 1, 1, 0, 0, 0);
+                Finish.Value = new DateTime(2000, 1, 1, 0, 0, 0);
+            }
         }
+        
 
         public override void UpdatePosition(Size parentSize, int y)
         {
@@ -208,8 +258,10 @@ namespace SzallodaManagerForm
             cbSetValue.Location = new Point(gap * 2 + Text.Width, y);
 
             gap = (parentSize.Width - Start.Width - Finish.Width) / 3;
-            Start.Location = new Point(gap, y+Start.ClientSize.Height+25);
-            Finish.Location = new Point(gap * 2 + Start.Width, y+Finish.ClientSize.Height + 25);
+            Start.Location = new Point(gap, y+Start.ClientSize.Height+10);
+            Finish.Location = new Point(gap * 2 + Start.Width, y+Finish.ClientSize.Height + 10);
+
+            ErrorLabel.Location = new(Start.Location.X, y + Start.ClientSize.Height + ErrorLabel.ClientSize.Height + 20);
         }
 
         public override void ApplyElements(Control.ControlCollection control)
@@ -222,17 +274,30 @@ namespace SzallodaManagerForm
 
         public override bool Validate()
         {
-            if(cbSetValue.SelectedIndex == 1 && !(Start.Value < Finish.Value)) // Need to fix
+
+            if (Pick == PickMethod.Time && cbSetValue.SelectedIndex == 1)
             {
-                ShowError($"A zárás későbbi idő kell legyen, mint a kezdés!");
-                return false;
+                if (Start.Value.Minute >= Finish.Value.Minute && Start.Value.Hour >= Finish.Value.Hour)
+                {
+                    ShowError("A zárás későbbi idő kell legyen, mint a kezdés!");
+                    return false;
+                }
+            }
+
+            if (Pick == PickMethod.Day && cbSetValue.SelectedIndex == 1) { 
+
+                if (Start.Value.Day >= Finish.Value.Day && Start.Value.Month >= Finish.Value.Month)
+                {
+                    ShowError("A zárás későbbi dátum kell legyen, mint a kezdés!");
+                    return false;
+                }
             }
             return true;
         }
 
         public override object? GetValue()
         {
-            if (cbSetValue.SelectedIndex == 0) { Text.ForeColor = Color.Pink; return null; }
+            if (cbSetValue.SelectedIndex == 0) { return null; }
             else return Pick switch
             {
                 PickMethod.Day => new DateTime[] { new(0100, Start.Value.Month, Start.Value.Day), new(0100, Finish.Value.Month, Finish.Value.Day) },

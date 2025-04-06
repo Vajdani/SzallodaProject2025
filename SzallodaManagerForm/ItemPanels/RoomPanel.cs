@@ -10,6 +10,7 @@ namespace SzallodaManagerForm.ItemPanels
         public ComboBox Availability { get; private set; }
         public TextBox Price { get; private set; }
 
+        Label AfterPriceLabel;
         Button btnSave;
 
         public RoomPanel(Panel parent, Room room) : base(parent)
@@ -34,8 +35,16 @@ namespace SzallodaManagerForm.ItemPanels
 
             Price = new()
             {
+                Name = "Price",
                 MaxLength = 6,
+                Size = new Size(150, 40),
                 Text = room.PricePerNight.ToString(),
+            };
+
+            AfterPriceLabel = new()
+            {
+                Text = "Ft",
+                AutoSize = true,
             };
 
             btnSave = new()
@@ -48,9 +57,33 @@ namespace SzallodaManagerForm.ItemPanels
             Controls.Add(RoomNumber);
             Controls.Add(Availability);
             Controls.Add(Price);
+            Controls.Add(AfterPriceLabel);
             Controls.Add(btnSave);
 
             AlignElementsHorizontally();
+        }
+
+        public override void AlignElementsHorizontally(int sidePadding = 20)
+        {
+            var controls = Controls.Cast<Control>().Where(c => c != AfterPriceLabel).ToList();
+
+            int width = Size.Width - sidePadding * 2;
+            int totalWidth = controls.Sum(c => c.Size.Width);
+            int gapSize = (int)Math.Round((double)(Size.Width - sidePadding * 2 - totalWidth) / controls.Count);
+            int currentX = sidePadding;
+
+            foreach (Control c in controls)
+            {
+                PositionElemenet(c, currentX);
+                currentX = currentX + gapSize + c.Size.Width;
+            }
+
+            var priceBox = Controls.Cast<Control>().FirstOrDefault(c => c.Name == "Price" || c == Price);
+            if (priceBox != null)
+            {
+                int x = priceBox.Location.X + priceBox.Width + 5;
+                PositionElemenet(AfterPriceLabel, x);
+            }
         }
 
         void SaveData(object? sender, EventArgs e)

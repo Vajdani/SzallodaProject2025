@@ -49,15 +49,15 @@ namespace SzallodaManagerForm.ItemPanels
 
         void OpenEditForm(object? sender, EventArgs e)
         {
-            List<InputRow> test = new List<InputRow>()
+            List<InputRow> Inputs = new List<InputRow>()
             {
-                new TextBoxRow("Ár", true),
+                new TextBoxRow("Ár", service.Price.ToString(), true),
                 new ComboBoxRow("Elérhetőség", ["Elérhető", "Üzemen kívül"], service.Available ? 0 : 1),
-                new TimePickerRow("Időszak", TimePickerRow.PickMethod.Day, !service.AllYear),
-                new TimePickerRow("Nyitvatartás", TimePickerRow.PickMethod.Time,  (service.OpenTime != null && service.CloseTime != null))
+                new TimePickerRow("Időszak", TimePickerRow.PickMethod.Day, !service.AllYear, [service.StartDate, service.EndDate]),
+                new TimePickerRow("Nyitvatartás", TimePickerRow.PickMethod.Time, !(service.OpenTime == service.CloseTime) ,[service.OpenTime, service.CloseTime])
             };
 
-            ServiceUpdateForm serviceUpdateForm = new ServiceUpdateForm("Szolgáltatás Módosítása", service, test);
+            ServiceUpdateForm serviceUpdateForm = new ServiceUpdateForm("Szolgáltatás Módosítása", service, Inputs);
             serviceUpdateForm.ShowDialog();
         }
     }

@@ -101,6 +101,9 @@ namespace SzallodaManagerForm
             }
 
             Service.UpdateService(Convert.ToInt32(result[0]), (int)result[1] == 0, (DateTime[]?)result[2], (TimeSpan[]?)result[3]);
+
+            Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
+            Close();
         }
 
         public bool ValidateInputs()

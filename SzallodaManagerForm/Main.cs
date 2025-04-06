@@ -22,16 +22,16 @@ namespace SzallodaManagerForm
             Instance = this;
             this.Resize += OnSizeChange;
 
-            szobak = new(OptionPanel.ItemPanelCategory.Rooms);
-            szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services)
+            szobak = new(OptionPanel.ItemPanelCategory.Rooms, ["Szoba", "Állapot", "Ár"]);
+            szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services, ["Név", "Állapot"])
             {
                 BackColor = Color.RebeccaPurple
             };
-            alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees)
+            alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees, ["Felhasználó név", "Rank"])
             { 
                 BackColor = Color.RebeccaPurple
             };
-            foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings);
+            foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings, ["Kezdés dátuma", "Zárás dátuma", "Ár", "Állapot"]);
 
             Controls.Add(foglalalsok);
             Controls.Add(szobak);
@@ -88,7 +88,6 @@ namespace SzallodaManagerForm
                 cbModositas.Items.Add("Alkalmazottak");
             }
 
-            current = szobak;
             cbModositas.SelectedIndex = 0;
         }
 
@@ -114,6 +113,7 @@ namespace SzallodaManagerForm
                     hotelstat hs = new hotelstat(cbHotelek.SelectedItem.ToString());
                     hs.ShowDialog();
                     break;
+
             }
 
             current.UpdatePanel(GetSelectedHotel());

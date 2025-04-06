@@ -22,7 +22,7 @@
             control.Location = new Point(position, (Size.Height - control.Size.Height) / 2);
         }
 
-        public void AlignElementsHorizontally(int sidePadding = 20)
+        public virtual void AlignElementsHorizontally(int sidePadding = 20)
         {
             var controls = Controls.Cast<Control>().ToList();
 
@@ -36,6 +36,11 @@
                 PositionElemenet(c, currentX);
                 currentX = currentX + gapSize + c.Size.Width;
             }
+        }
+
+        public List<int> GetControlPositions()
+        {
+            return this.Controls.Cast<Control>().Select(c => c.Location.X + c.ClientSize.Width/2).ToList();
         }
     }
 }

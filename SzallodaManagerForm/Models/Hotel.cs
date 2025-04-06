@@ -49,7 +49,9 @@
 
         public static void OnUserLogin(int user_id)
         {
-            var bookings = Database.ReadAll<Booking>($"SELECT hotel_id, booking_id, booking.bookStart, booking.bookEnd, booking.status, booking.totalPrice FROM room, booking WHERE room.room_id = booking.room_id").GroupBy(b => b.hotel_id).ToDictionary(b => b.Key, b => b.ToList());
+            var bookings = Database.ReadAll<Booking>("SELECT hotel_id, booking_id, booking.bookStart, booking.bookEnd, booking.status, booking.totalPrice FROM room, booking " +
+                "WHERE room.room_id = booking.room_id").GroupBy(b => b.hotel_id).ToDictionary(b => b.Key, b => b.ToList());
+
 
             var rooms = Database.ReadAll<Room>($"select * from room").GroupBy(r => r.hotel_id).ToDictionary(r => r.Key, r => r.ToList());
             
