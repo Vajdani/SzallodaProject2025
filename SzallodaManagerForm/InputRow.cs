@@ -285,23 +285,23 @@ namespace SzallodaManagerForm
         public override bool Validate()
         {
 
-            /*if (Pick == PickMethod.Time && cbSetValue.SelectedIndex == 1)
+            if (Pick == PickMethod.Time && cbSetValue.SelectedIndex == 1)
             {
-                if (Start.Value.Minute >= Finish.Value.Minute && Start.Value.Hour >= Finish.Value.Hour)
+                if (Start.Value.Minute == Finish.Value.Minute && Start.Value.Hour == Finish.Value.Hour)
                 {
-                    ShowError("A zárás későbbi idő kell legyen, mint a kezdés!");
+                    ShowError("Az időpontok nem egyezhetnek!");
                     return false;
                 }
             }
 
             if (Pick == PickMethod.Day && cbSetValue.SelectedIndex == 1) { 
 
-                if (Start.Value.Day >= Finish.Value.Day && Start.Value.Month >= Finish.Value.Month)
+                if (Start.Value.Day == Finish.Value.Day && Start.Value.Month == Finish.Value.Month)
                 {
-                    ShowError("A zárás későbbi dátum kell legyen, mint a kezdés!");
+                    ShowError("A dátumok nem egyezhetnek!");
                     return false;
                 }
-            }*/
+            }
             return true;
         }
 
