@@ -27,13 +27,11 @@ namespace SzallodaManagerForm
             szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services, ["Név", "Állapot"]);
             alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees, ["Felhasználó név", "Rank"]);
             foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings, ["Kezdés dátuma", "Zárás dátuma", "Ár", "Állapot"]);
-            statisztika = new(OptionPanel.ItemPanelCategory.Statistic, ["Hónap", "Foglalások", "Bevétel"]);
 
             Controls.Add(foglalalsok);
             Controls.Add(szobak);
             Controls.Add(szolgaltatasok);
             Controls.Add(alkalmazottak);
-            Controls.Add(statisztika);
 
             current = szobak;
         }
@@ -61,6 +59,9 @@ namespace SzallodaManagerForm
             {
                 if(c != lbFelhasznalo) c.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             }
+
+            statisztika = new(OptionPanel.ItemPanelCategory.Statistic, ["Hónap", "Foglalások", "Bevétel"]);
+            Controls.Add(statisztika);
         }
 
         private void Main_Closed(object sender, FormClosedEventArgs e)
