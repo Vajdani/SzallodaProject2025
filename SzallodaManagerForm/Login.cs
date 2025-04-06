@@ -46,7 +46,7 @@ namespace SzallodaManagerForm
                                 $"employee.user_id = user.user_id;");
                 if (!userQuery.Read())
                 {
-                    MessageBox.Show("Sikertelen bejelentkezés! Rossz felhasználónevet vagy jelszavat adott meg!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Ilyen nevû felhasználó nem dolgozik egyik hotelünkben sem!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }

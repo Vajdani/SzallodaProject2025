@@ -285,7 +285,7 @@ namespace SzallodaManagerForm
         public override bool Validate()
         {
 
-            if (Pick == PickMethod.Time && cbSetValue.SelectedIndex == 1)
+            /*if (Pick == PickMethod.Time && cbSetValue.SelectedIndex == 1)
             {
                 if (Start.Value.Minute >= Finish.Value.Minute && Start.Value.Hour >= Finish.Value.Hour)
                 {
@@ -301,7 +301,7 @@ namespace SzallodaManagerForm
                     ShowError("A zárás későbbi dátum kell legyen, mint a kezdés!");
                     return false;
                 }
-            }
+            }*/
             return true;
         }
 

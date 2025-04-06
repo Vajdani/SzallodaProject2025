@@ -79,12 +79,12 @@ namespace SzallodaManagerForm
             cbModositas.Items.Clear();
             cbModositas.Items.Add("Szobák");
             cbModositas.Items.Add("Szolgáltatások");
-            cbModositas.Items.Add("Statisztika");
             cbModositas.Items.Add("Foglalások");
 
             int level = (int)User.GetHotelAuthorityLevel(hotel.hotel_id);
             if (level >= 1) //Manager vagy Owner
             {
+                cbModositas.Items.Add("Statisztika");
                 cbModositas.Items.Add("Alkalmazottak");
             }
 
