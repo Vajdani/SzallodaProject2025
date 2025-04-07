@@ -170,7 +170,6 @@ namespace SzallodaManagerForm
                         MostPopularMonth.Visible = true;
                         TotalProfitYear.Visible = true;
                         MostProfitMonth.Visible = true;
-
                     }
                     else
                     {
@@ -216,7 +215,12 @@ namespace SzallodaManagerForm
         public void ResizePanel()
         {
             Size = new Size(Main.Instance.ClientSize.Width, Main.Instance.ClientSize.Height - 50);
-            itemPanelCon.Size = new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200));
+            itemPanelCon.Size = Category switch
+            {
+                ItemPanelCategory.Employees => new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 150)),
+                ItemPanelCategory.Statistic => new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 200)),
+                _ => new Size(Size.Width - 20, (Main.Instance.ClientSize.Height - 100))
+            };
             if(extraFunctButton is not null) extraFunctButton.Location = new Point(itemPanelCon.Location.X + itemPanelCon.Width - 300, itemPanelCon.Location.Y + itemPanelCon.Size.Height + 5);
             if(Category == ItemPanelCategory.Statistic)  
             {
