@@ -89,7 +89,7 @@ namespace SzallodaManagerForm
             cbModositas.SelectedIndex = 0;
         }
 
-        private void cbModositas_SelectedIndexChanged(object sender, EventArgs e)
+        private void OptionPanelSelected(object sender, EventArgs e)
         {
             current.Visible = false;
 
@@ -128,7 +128,7 @@ namespace SzallodaManagerForm
             return GetSelectedHotel().hotel_id;
         }
 
-        public void OnSizeChange(object sender, EventArgs e)
+        public void OnSizeChange(object? sender, EventArgs e)
         {
             if(this.Size.Width > 700)
             {

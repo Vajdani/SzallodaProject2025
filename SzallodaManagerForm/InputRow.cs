@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace SzallodaManagerForm
 {
@@ -135,7 +130,7 @@ namespace SzallodaManagerForm
                 ShowError("Nem lehet üres!");
                 return false;
             }
-            if (numOnly && !int.TryParse(ValueTextBox.Text, out int var))
+            if (numOnly && !int.TryParse(ValueTextBox.Text, out int _))
             {
                 ValueTextBox.Clear();
                 ShowError("Csak számot lehet megadni!");
@@ -175,12 +170,14 @@ namespace SzallodaManagerForm
                 {
                     PickMethod.Day => false,
                     PickMethod.Time => true,
+                    _ => false
                 },
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = pick switch
                 {
                     PickMethod.Day => "MM-dd",
-                    PickMethod.Time => "HH:mm"
+                    PickMethod.Time => "HH:mm",
+                    _ => "MM-dd"
                 }
             };
             Start.ValueChanged += (s, e) => { ErrorLabel.Visible = false; };
@@ -192,12 +189,14 @@ namespace SzallodaManagerForm
                 {
                     PickMethod.Day => false,
                     PickMethod.Time => true,
+                    _ => false
                 },
                 Format = DateTimePickerFormat.Custom,
                 CustomFormat = pick switch
                 {
                     PickMethod.Day => "MM-dd",
-                    PickMethod.Time => "HH:mm"
+                    PickMethod.Time => "HH:mm",
+                    _ => "MM-dd"
                 }
             };
             Finish.ValueChanged += (s, e) => { ErrorLabel.Visible = false; };

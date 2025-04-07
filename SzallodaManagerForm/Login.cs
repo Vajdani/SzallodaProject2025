@@ -13,7 +13,7 @@ namespace SzallodaManagerForm
             InitializeComponent();
         }
 
-        private void btnBejelentkezés_Click(object sender, EventArgs e)
+        private void LoginClick(object sender, EventArgs e)
         {
             lbUsernameError.Visible = false;
             lbPasswordError.Visible = false;

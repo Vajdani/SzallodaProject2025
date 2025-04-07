@@ -51,6 +51,7 @@ namespace SzallodaManagerForm
         public void Dispose()
         {
             Close();
+            GC.SuppressFinalize(this);
         }
 
         public void Close()

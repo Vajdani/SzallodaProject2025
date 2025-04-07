@@ -15,7 +15,7 @@ namespace SzallodaManagerForm
         }
 
         Panel itemPanelCon;
-        List<Label> Headers = new List<Label>();
+        List<Label> Headers = [];
 
         //Alkalmazottak Extrák
         Button? extraFunctButton;
@@ -195,14 +195,12 @@ namespace SzallodaManagerForm
                 itemPanelCon.Controls.Add(noElementsLabel);
                 noElementsLabel.Location = new Point(
                     (itemPanelCon.ClientSize.Width - noElementsLabel.Width) / 2, 
-                    (itemPanelCon.ClientSize.Height - noElementsLabel.ClientSize.Height) / 2);
-               
+                    (itemPanelCon.ClientSize.Height - noElementsLabel.ClientSize.Height) / 2);  
             }
             else
             {
                 DisplayHeaderTexts(((ItemPanel)itemPanelCon.Controls[0]).GetControlPositions());
             }
-
         }
 
         public void DisplayHeaderTexts(List<int> points)
@@ -229,8 +227,6 @@ namespace SzallodaManagerForm
                 statisticsYearBox.Location = new Point(itemPanelCon.Location.X + itemPanelCon.Width - 120, itemPanelCon.Location.Y + itemPanelCon.Size.Height + 5);
                 YearLabel.Location = new Point(statisticsYearBox.Location.X - YearLabel.Size.Width - 5, statisticsYearBox.Location.Y + YearLabel.Size.Height / 2);
             }
-
-  
 
             if (itemPanelCon.Controls.Count == 1 && itemPanelCon.Controls[0] is Label noitems)
             {

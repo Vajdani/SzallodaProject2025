@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SzallodaManagerForm
+﻿namespace SzallodaManagerForm
 {
     internal class AddEmployeeForm : Form
     {
@@ -13,7 +7,6 @@ namespace SzallodaManagerForm
 
         public AddEmployeeForm()
         {
-
             this.Size = new(900, 800);
             this.StartPosition = FormStartPosition.CenterParent;
 
@@ -40,18 +33,6 @@ namespace SzallodaManagerForm
         {
             lbTitle.Location = new((this.ClientSize.Width - lbTitle.ClientSize.Width) / 2, 30);
             Display.ResizePanel(this.ClientSize);
-        }
-
-        private void InitializeComponent()
-        {
-            SuspendLayout();
-            // 
-            // AddEmployeeForm
-            // 
-            ClientSize = new Size(326, 253);
-            Name = "AddEmployeeForm";
-            Text = " ";
-            ResumeLayout(false);
         }
     }
 }

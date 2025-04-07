@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SzallodaManagerForm.Models;
+﻿using SzallodaManagerForm.Models;
 
 namespace SzallodaManagerForm
 {
     public partial class ServiceUpdateForm : Form
     {
         internal Service Service { get; private set; }
-        List<InputRow>? InputFields;
+        List<InputRow> InputFields = [];
         Label Title;
         Button CancelButton;
         Button SaveButton;
 
-        internal ServiceUpdateForm(string title, Service service, List<InputRow>? items = null)
+        internal ServiceUpdateForm(string title, Service service, List<InputRow> items)
         {
             InputFields = items;
             Service = service;
@@ -39,7 +34,6 @@ namespace SzallodaManagerForm
                 Text = "Elvet",
                 Size = new Size(Convert.ToInt32(this.ClientSize.Width * 0.35), 50)
             };
-
 
             SaveButton = new()
             {
@@ -80,24 +74,19 @@ namespace SzallodaManagerForm
             }
         }
 
-        void CancelConfirmation(object sender, EventArgs e)
+        void CancelConfirmation(object? sender, EventArgs e)
         {
             DialogResult dialog = MessageBox.Show("Biztos el akarod vetni?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialog == DialogResult.Yes) Close();
         }
 
-        private void InitializeComponent()
-        {
-
-        }
-
-        protected virtual void SaveButtonClick(object sender, EventArgs e)
+        protected virtual void SaveButtonClick(object? sender, EventArgs e)
         {
             if (!ValidateInputs()) { return; }
-            object?[] result = new object[InputFields.Count];
+            object[] result = new object[InputFields.Count];
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] = InputFields[i].GetValue();
+                result[i] = InputFields[i].GetValue()!;
             }
 
             Service.UpdateService(Convert.ToInt32(result[0]), (int)result[1] == 0, (DateTime[]?)result[2], (TimeSpan[]?)result[3]);

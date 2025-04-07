@@ -1,6 +1,6 @@
 ﻿namespace SzallodaManagerForm
 {
-    partial class hotelstat
+    partial class HotelStatisticsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -102,7 +102,7 @@
             cbevek.Name = "cbevek";
             cbevek.Size = new Size(121, 23);
             cbevek.TabIndex = 6;
-            cbevek.SelectedIndexChanged += cbevek_SelectedIndexChanged;
+            cbevek.SelectedIndexChanged += YearSelected;
             // 
             // lbpopular
             // 
@@ -147,7 +147,7 @@
             Name = "hotelstat";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Statisztika";
-            Load += hotelstat_Load;
+            Load += HotelStatistics_Load;
             ((System.ComponentModel.ISupportInitialize)dgvadatok).EndInit();
             ResumeLayout(false);
             PerformLayout();

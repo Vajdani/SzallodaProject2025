@@ -81,7 +81,7 @@
             btnBejelentkezés.TabIndex = 4;
             btnBejelentkezés.Text = "Bejelentkezés";
             btnBejelentkezés.UseVisualStyleBackColor = true;
-            btnBejelentkezés.Click += btnBejelentkezés_Click;
+            btnBejelentkezés.Click += LoginClick;
             // 
             // panel1
             // 

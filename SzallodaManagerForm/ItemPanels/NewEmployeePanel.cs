@@ -46,8 +46,11 @@ namespace SzallodaManagerForm.ItemPanels
                 if (result == DialogResult.Yes) 
                 {
                     user.HireUser(cbAuthorityLevel.SelectedIndex);
-                    UsersPanel.Instance.UpdatePanel();
-                    UsersPanel.Instance.tbSearchbox.Clear();
+                    if (UsersPanel.Instance != null)
+                    {
+                        UsersPanel.Instance.UpdatePanel();
+                        UsersPanel.Instance.tbSearchbox.Clear();
+                    }
                 }
             };
 

@@ -73,7 +73,7 @@
             cbModositas.Name = "cbModositas";
             cbModositas.Size = new Size(138, 28);
             cbModositas.TabIndex = 2;
-            cbModositas.SelectedIndexChanged += cbModositas_SelectedIndexChanged;
+            cbModositas.SelectedIndexChanged += OptionPanelSelected;
             // 
             // label1
             // 
