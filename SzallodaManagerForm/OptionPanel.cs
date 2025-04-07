@@ -243,7 +243,7 @@ namespace SzallodaManagerForm
                     ht.Visible = false;
                 }
             }
-            else if (itemPanelCon.Controls.Count > 1) 
+            else if (itemPanelCon.Controls.Count >= 1) 
             {
                 foreach (ItemPanel ItP in itemPanelCon.Controls)
                 {
