@@ -12,6 +12,7 @@ namespace SzallodaManagerForm
 
         internal ServiceUpdateForm(string title, Service service, List<InputRow> items)
         {
+            this.Text = "Szolgáltatás frissítése";
             InputFields = items;
             Service = service;
 

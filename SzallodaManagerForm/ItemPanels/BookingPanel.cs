@@ -50,6 +50,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             btnComplete = new()
             {
+                Size = new(150, 40),
                 Text = Booking.status switch
                 {
                     Booking.BookingStatus.RefundRequested => "Visszafizetés",

@@ -45,7 +45,7 @@
         public int user_id;
         public string username;
 
-        public TimeOnly lastActivity;
+        //public TimeOnly lastActivity;
         public Dictionary<int, AuthorityLevel> authorityLevels = [];
 
         public User(int user_id)

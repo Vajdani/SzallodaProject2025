@@ -16,6 +16,7 @@ use App\Models\Service;
 use App\Rules\RealNameRule;
 use App\Rules\UsernameUniqueRule;
 use App\Rules\phonenumberUniqueRule;
+use App\Rules\UniqueEmailRule;
 use App\Models\Booking;
 use App\Models\Loyalty;
 use App\Models\LoyaltyRank;
@@ -148,16 +149,18 @@ class UserController extends Controller
         $request->validate([
             "name" => [
                 'required',
+                'max:32',
                 "unique:user,username"
             ],
-            "lastName" => "required",
-            "firstName" => "required",
+            "lastName" => "required|max:50",
+            "firstName" => "required|max:50",
             "email" => [
                 "required",
                 "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
-                "unique:user,email"
+                "unique:user,email",
+                "max:150",
             ],
-            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber",
+            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber|max:15",
             "password" => [
                 "required",
                 Password::min(self::$minPasswordLength)
@@ -173,18 +176,23 @@ class UserController extends Controller
         ], [
             "name.required" => "Muszáj megadnia a felhasználónevét!",
             "name.unique" => "Ez a felhasználónév már foglalt!",
+            "name.max" => "A felhasználó neve maximum 32 karakter legyen",
 
             "lastName.required" => "Muszáj megadnia a vezetéknevét!",
+            "lastName.max" => "A vezetékneve maximum 50 karakter legyen!",
+            "firstName.max" => "A keresztneve maximum 50 karakter legyen!",
             "firstName.required" => "Muszáj megadnia a keresztnevét!",
 
             "email.required" => "Muszáj megadnia az e-mail címét!",
             "email.regex" => "Nem e-mail címet adott meg!",
             "email.unique" => "Ezzel az e-mail címmel már regisztrált fiókot!",
+            "email.max" => "Az email maximum 150 karakter hosszú legyen!",
 
             "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
             "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
             "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
             "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
+            "phonenumber.max" => "A telefonszám maximum 15 karakter hosszú lehet!",
 
             "password.required" => "Muszáj megadnia a jelszavát!",
             "password.min" => "A jelszónak legalább ".self::$minPasswordLength." karakter hosszúnak kell lennie!",
@@ -290,7 +298,8 @@ class UserController extends Controller
             ],
             "email" => [
                 "required",
-                "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
+                "regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/",
+                new UniqueEmailRule()
             ],
             "phonenumber" => [
                 "required",
