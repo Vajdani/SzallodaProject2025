@@ -164,7 +164,7 @@ namespace SzallodaManagerForm
                         var mostPopular = data.OrderByDescending(x => x.Value.Item1).FirstOrDefault();
                         MostPopularMonth.Text = $"Legnépszerűbb hónap: {mostPopular.Key} ({mostPopular.Value.Item1} foglalás)";
                         int totalProfit = data.Sum(x => x.Value.Item2);
-                        TotalProfitYear.Text = $"Összes bevétel: {totalProfit} Ft";
+                        TotalProfitYear.Text = $"Év eddigi összes bevétele: {totalProfit} Ft";
                         var mostProfit = data.OrderByDescending(x => x.Value.Item2).FirstOrDefault();
                         MostProfitMonth.Text = $"Legjövedelmezőbb hónap: {mostProfit.Key} ({mostProfit.Value.Item2} Ft)";
                         MostPopularMonth.Visible = true;
