@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: row;
     height: 140px;
-    margin-bottom: 0.5%;
+    margin-bottom: 5px;
     background-color: var(--colour_sidebar);
 }
 
@@ -83,15 +83,27 @@
     margin-bottom: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+    .sectionHeader h2 {
+        margin: 0;
+    }
+
+    .sectionHeader hr {
+        margin: 0;
+    }
+}
+
 .save-button {
     border-radius: 25px;
     width: 40%;
     border: none;
     background-color: var(--colour_randomgreen1);
+    min-height: fit-content;
     height: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
     border: 2px solid black;
+    padding: 5px 10px 5px 10px;
 }
 
 .save-button:hover {
@@ -100,6 +112,7 @@
 
 .cancel-button {
     border-radius: 15px;
+    min-height: fit-content;
     height: 30px;
     min-width: 10%;
     background-color: var(--colour_delete);
@@ -107,7 +120,7 @@
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
     float: right;
 }
 
@@ -181,7 +194,12 @@
 
 @media only screen and (max-width: 600px) {
     .PPS-body {
-        grid-template-columns: auto auto;
+        grid-template-columns: auto auto auto;
+    }
+
+    #loyal,
+    #pics {
+        width: calc(100% - 20px - 5px * 2);
     }
 }
 
@@ -205,14 +223,9 @@ a:hover {
 }
 
 @media only screen and (max-width: 600px) {
-    .profile-header {
-        width: 100%;
-        border-radius: 0px;
-    }
-
+    .profile-header,
     .profile-body {
-        width: 100%;
-        border-radius: 0px;
+        width: calc(100% - 20px);
     }
 }
 

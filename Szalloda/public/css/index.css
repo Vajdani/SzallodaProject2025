@@ -15,6 +15,12 @@ section:not(:first-child) {
     min-width: fit-content;
 }
 
+@media only screen and (max-width: 660px) {
+    section:not(:first-child) {
+        margin: 0 10px 10px 10px;
+    }
+}
+
 section h2{
     margin-bottom: 10px;
 }

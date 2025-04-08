@@ -189,8 +189,8 @@ function OpenReviewDeleteMenu(review_id) {
         <div id="reviewHolder"></div>
 
         <div style="display:flex;justify-content:space-between">
-            <a href="/ertekelestorles/` + review_id + `"><button class="review-button">Igen, törlöm az értékelést.</button></a>
-            <button onclick="CloseReviewDeleteMenu()" class="delete-button">Nem, mégsem törlöm az értékelést.</button>
+            <a href="/ertekelestorles/` + review_id + `" style="max-width:50%"><button class="review-button">Igen, törlöm az értékelést.</button></a>
+            <button onclick="CloseReviewDeleteMenu()" class="delete-button" style="max-width:50%">Nem, mégsem törlöm az értékelést.</button>
         </div>
     `
 

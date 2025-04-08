@@ -15,7 +15,6 @@
             }
         }, (5000));
     </script>
-    <link rel="stylesheet" href="{{ asset("css/carousel.css") }}">
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     @yield("css")
     <title>RushWave Retreat</title>

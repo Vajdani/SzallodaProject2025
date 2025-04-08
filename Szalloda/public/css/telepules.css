@@ -1,10 +1,13 @@
 .szallodaMainImg {
-    margin: 0 auto 25px auto;
+    margin: 0 auto 10px auto;
     display: block;
 }
 
 .citySection {
     padding: 0 30px 25px 30px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .cityDescription {
@@ -19,7 +22,6 @@
 .city {
     background-color: var(--colour_sidebar);
     padding: 10px;
-    margin-top: 15px;
     text-align: justify;
     overflow: hidden;
     border-radius: 15px;
@@ -58,5 +60,17 @@ th + td {
     .city:nth-child(even) .cityImgContainer {
         float: none;
         padding-left: 0;
+    }
+}
+
+
+@media only screen and (max-width: 660px) {
+    .cityDescription {
+        padding: 10px;
+        margin: 0;
+    }
+
+    .citySection {
+        padding: 0 10px 25px 10px;
     }
 }

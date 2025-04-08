@@ -19,10 +19,11 @@
                         <input type="checkbox" name="deleteReviews" id="deleteReviews">
                         <label for="deleteReviews">Törlöm az értékeléseimet is</label>
                     </div>
-                    <input type="submit" class="save-button" value="Igen, törlöm a fiókom">
-                    <a href="/profil"><button class="delete-button">Nem, mégsem törlöm a fiókom</button></a>
+                    <input type="submit" class="delete-button" value="Igen, törlöm a fiókom">
                 </form>
-
+                <div class="text-center">
+                    <a href="/profil"><button class="save-button">Nem, mégsem törlöm a fiókom</button></a>
+                </div>
             </div>
         </section>
     </div>

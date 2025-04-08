@@ -3,7 +3,7 @@
 }
 
 .ratingSection {
-    padding: 0 30px 25px 30px;
+    padding: 0 30px 10px 30px;
     width: 80%;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -34,12 +34,6 @@
     text-align: center;
 }
 
-@media only screen and (max-width: 600px) {
-    .filterBar ul {
-        text-align: left;
-    }
-}
-
 .filterBar:first-child ul {
     list-style-type: none;
 }
@@ -56,12 +50,11 @@
     font-size: 75%;
 }
 
-select {
-    background-color: var(--colour_sidebar);
-    color: var(--colour_lightwhite);
-}
+@media only screen and (max-width: 700px) {
+    .filterBar ul {
+        text-align: left;
+    }
 
-@media only screen and (max-width: 600px) {
     .filterBar:first-child ul li {
         display: block;
     }
@@ -72,6 +65,23 @@ select {
 
     .filterBar:first-child ul li+li {
         margin-left: 0;
+    }
+}
+
+select {
+    background-color: var(--colour_sidebar);
+    color: var(--colour_lightwhite);
+}
+
+@media only screen and (max-width: 600px) {
+    .ratingSection {
+        padding: 0 0 10px 0;
+        width: 90%;
+    }
+
+    .rating {
+        margin: 0 !important;
+        max-width: max-content;
     }
 }
 
@@ -111,13 +121,14 @@ select {
 
 .review-button {
     border-radius: 15px;
+    min-height: fit-content;
     height: 30px;
     min-width: 15%;
     background-color: var(--colour_randomgreen1);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
-    padding: 0 10px 0 10px;
+    padding: 5px 10px 5px 10px;
 }
 
 .review-button:hover {
@@ -153,13 +164,14 @@ select {
 .delete-button {
     border-radius: 15px;
     height: 30px;
+    min-height: fit-content;
     min-width: 25%;
     background-color: var(--colour_delete);
     color: var(--colour_lightwhite);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
 }
 
 .delete-button:hover {
@@ -207,9 +219,16 @@ select {
 }
 
 .menuPanel {
-    background-color: var(--colour_randomgreen2);
-    border-radius: 25px;
+    background-color: var(--colour_sidebar);
+    border-radius: 15px;
     padding: 25px;
     max-width: 500px;
     height: max-content;
+}
+
+@media only screen and (max-width: 600px) {
+    .menuPanel {
+        padding: 10px;
+        margin: 0 10px 0 10px;
+    }
 }
