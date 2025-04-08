@@ -11,25 +11,20 @@
     <div class="mainContent">
         <section>
             <img src="{{ asset('img/cities/'.$city->city_id.'.jpg') }}" alt="{{ $city->cityName }}.jpg" title="{{ $city->cityName }}" class="szallodaMainImg img-fluid" width="600px" height="400px">
-            <div class="cityDescription">
-                <h1 style="text-align:left">Város leírás</h1>
-                <hr>
-                @for ($i = 0; $i < count($description); $i++)
-                    <p>{{ $description[$i] }}</p>
-                    <br>
-                @endfor
-            </div>
         </section>
-        <div class="citySection">
+        <section>
+            <h1 style="text-align:left">Város leírás</h1>
+            <hr>
+            @for ($i = 0; $i < count($description); $i++)
+                <p>{{ $description[$i] }}</p>
+                <br>
+            @endfor
+        </section>
+        <section>
+            <h1 style="text-align:left">A város szállodái</h1>
+            <hr>
             @foreach ($hotels as $hotel)
                 <div class="city">
-                    @if (!isset($addedCityHeader))
-                        <h1 style="text-align:left">A város szállodái</h1>
-                        <hr>
-                        @php
-                            $addedCityHeader = true;
-                        @endphp
-                    @endif
                     <a href="/szalloda/{{ $hotel->hotel_id }}">
                         <h2>{{ $hotel->hotelName }}</h2>
                     </a>
@@ -53,11 +48,11 @@
                         </tr>
                         <tr>
                             <th>Telefonszám:</th>
-                            <td>{{ $hotel->phoneNumber }}</td>
+                            <td><a href="tel:{{ $hotel->phoneNumber }}">{{ $hotel->phoneNumber }}</a></td>
                         </tr>
                         <tr>
                             <th>E-mail cím:</th>
-                            <td>{{ $hotel->email }}</td>
+                            <td><a href="mailto:{{ $hotel->email }}">{{ $hotel->email }}</a></td>
                         </tr>
                     </table>
                     <hr>
@@ -67,8 +62,9 @@
                         </p>
                         <br>
                     @endforeach
+                    <hr>
                 </div>
             @endforeach
-        </div>
+        </section>
     </div>
 @endsection

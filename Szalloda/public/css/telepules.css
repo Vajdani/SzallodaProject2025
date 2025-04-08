@@ -1,6 +1,8 @@
 .szallodaMainImg {
-    margin: 0 auto 10px auto;
+    margin: 0 auto 0 auto;
     display: block;
+    width: 640px;
+    aspect-ratio: 1 / 1;
 }
 
 .citySection {
@@ -20,12 +22,17 @@
 }
 
 .city {
-    background-color: var(--colour_sidebar);
-    padding: 10px;
+    /* background-color: var(--colour_sidebar); */
+    /* padding: 10px; */
     text-align: justify;
     overflow: hidden;
-    border-radius: 15px;
+    /* border-radius: 15px; */
 }
+
+/* .city a {
+    text-decoration: none;
+    color: var(--colour_lightwhite);
+} */
 
 .city img {
     max-width: 200px;
@@ -34,7 +41,11 @@
 .cityImgContainer {
     float: left;
     padding-right: 10px;
-    text-align: center;
+}
+
+.cityImgContainer a,
+.cityImgContainer p {
+    text-align: center !important;
 }
 
 /* .city:nth-child(even) .cityImgContainer {
@@ -42,10 +53,6 @@
     padding-left: 10px;
 } */
 
-a {
-    text-decoration: none;
-    color: var(--colour_lightwhite);
-}
 
 th + td {
     padding-left: 10px
@@ -72,5 +79,18 @@ th + td {
 
     .citySection {
         padding: 0 10px 25px 10px;
+    }
+}
+
+section:not(:first-child) {
+    background-color: var(--colour_sidebar);
+    border-radius: 10px;
+    margin: 0 25px 10px 25px;
+    min-width: fit-content;
+}
+
+@media only screen and (max-width: 660px) {
+    section:not(:first-child) {
+        margin: 0 10px 10px 10px;
     }
 }
