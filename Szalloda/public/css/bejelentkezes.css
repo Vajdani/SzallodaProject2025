@@ -41,6 +41,9 @@ input::placeholder {
     color: var(--colour_lightwhite);
 }
 
+.comment{
+    padding: 3px;
+}
 input:not(input[type=checkbox]) {
     display: block;
     margin-bottom: 25px;

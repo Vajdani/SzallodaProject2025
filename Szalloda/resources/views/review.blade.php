@@ -38,7 +38,7 @@
                     <p class="error">{{ $message }}</p>
                 @enderror
                 <input type="number" name="star" id="star" style="display: none">
-                <textarea name="comment" id="comment" cols="30" rows="10" maxlength="1000" class="w-100" style="margin-bottom: 10px">@if(old("comment")){{old("comment")}}@elseif(isset($review)){{$review->reviewText}}@endif</textarea>
+                <textarea name="comment" id="comment" cols="30" rows="10" maxlength="1000" class="w-100 comment" style="margin-bottom: 10px">@if(old("comment")){{old("comment")}}@elseif(isset($review)){{$review->reviewText}}@endif</textarea>
                 @error('comment')
                     <p class="error">{{ $message }}</p>
                 @enderror

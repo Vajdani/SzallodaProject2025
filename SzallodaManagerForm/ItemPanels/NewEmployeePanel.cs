@@ -20,7 +20,7 @@ namespace SzallodaManagerForm.ItemPanels
 
             lbFullname = new()
             {
-                Text = $"{user.firstname} {user.lastname}",
+                Text = $"{user.lastname} {user.firstname}",
             };
 
             cbAuthorityLevel = new()
