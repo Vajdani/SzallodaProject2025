@@ -289,3 +289,7 @@ ul {
     text-transform: capitalize;
     padding: 5px;
 }
+
+.review-button {
+    margin: 0 !important;
+}

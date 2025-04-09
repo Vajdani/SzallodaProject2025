@@ -80,6 +80,10 @@ th + td {
     .citySection {
         padding: 0 10px 25px 10px;
     }
+
+    .city img {
+        max-width: 100%;
+    }
 }
 
 section:not(:first-child) {
