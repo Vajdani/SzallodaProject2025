@@ -104,9 +104,11 @@
                     <a href="/foglalas/{{$hotel->hotel_id}}"><button class="book-button" type="submit">Foglalok!</button></a>
                 </div>
             @else
-            <div>
-                <p class="text-center">A foglaláshoz először be kell jelentkeznie!</p>
-            </div>
+                <div class="sectionHeader">
+                    <hr>
+                    <h2 class="text-center">A foglaláshoz először be kell jelentkeznie!</h2>
+                    <hr>
+                </div>
             @endauth
         </section>
         <section>
