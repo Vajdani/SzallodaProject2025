@@ -50,7 +50,7 @@
     border-radius: 25px;
     width: 40%;
     border: none;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     min-height: fit-content;
     height: 25px;
     margin-top: 10px;
@@ -104,7 +104,7 @@ th+td {
 
 .sectionHeader hr {
     margin: 0 10px 0 10px;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     height: 3px
 }
 

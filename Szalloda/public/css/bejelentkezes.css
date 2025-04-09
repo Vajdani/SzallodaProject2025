@@ -1,5 +1,5 @@
 form {
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_sidebar);
     border-radius: 25px;
     padding: 25px;
     max-width: 250px;
@@ -26,7 +26,7 @@ form {
 .delete-form {
     padding: 10px;
     margin-top: 10px;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
 }
 
 .delete-form .delete-button {
@@ -57,7 +57,7 @@ input:not(input[type=checkbox]) {
     min-height: fit-content;
     height: 30px;
     min-width: 25%;
-    background-color: var(--colour_randomgreen3);
+    background-color: var(--colour_save);
     color: var(--colour_lightwhite);
     box-shadow: none;
     border: 2px solid black;
@@ -66,7 +66,7 @@ input:not(input[type=checkbox]) {
 }
 
 .save-button:hover {
-    background-color: var(--colour_sidebar);
+    background-color: var(--colour_save_hover);
 }
 
 .delete-button {
@@ -74,7 +74,7 @@ input:not(input[type=checkbox]) {
     min-height: fit-content;
     height: 30px;
     min-width: 30%;
-    background-color: var(--colour_delete);
+    background-color: var(--colour_delete) !important;
     color: var(--colour_lightwhite);
     box-shadow: none;
     border: 2px solid black;
@@ -93,15 +93,11 @@ form a {
 }
 
 a:hover {
-    color: var(--colour_randomhover);
+    color: var(--colour_lightwhite_hover);
 }
 
 a+a {
     margin-top: 10px;
-}
-
-input {
-    background-color: var(--colour_randomgreen3);
 }
 
 input[type=text],
@@ -117,9 +113,9 @@ input[type=submit] {
     box-shadow: none;
     border: 2px solid black;
     border-radius: 50px;
+    background-color: var(--colour_footer);
 }
 
 input[type=submit]:hover {
-    background-color: var(--colour_randomgreen4);
-    color: var(--colour_randomhover);
+    background-color: var(--colour_sidebar);
 }

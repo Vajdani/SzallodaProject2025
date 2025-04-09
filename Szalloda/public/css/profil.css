@@ -71,7 +71,7 @@
 
 .sectionHeader hr {
     margin: 0 10px 0 10px;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     height: 3px
 }
 
@@ -97,7 +97,7 @@
     border-radius: 25px;
     width: 40%;
     border: none;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     min-height: fit-content;
     height: 25px;
     margin-top: 10px;
@@ -159,7 +159,7 @@
     height: 30px;
     text-align: center;
     color: var(--colour_lightwhite);
-    border-bottom: 2px solid var(--colour_randomgreen1);
+    border-bottom: 2px solid var(--colour_footer);
     background-color: var(--colour_sidebar);
 }
 
@@ -171,7 +171,7 @@
 
 .ProfilePicture-Selection {
     border-radius: 30px;
-    border: 5px solid var(--colour_randomgreen1);
+    border: 5px solid var(--colour_footer);
     background-color: var(--colour_sidebar);
     position: absolute;
     margin: auto;
@@ -219,7 +219,7 @@ a {
 }
 
 a:hover {
-    color: var(--colour_randomhover);
+    color: var(--colour_lightwhite_hover);
 }
 
 @media only screen and (max-width: 600px) {

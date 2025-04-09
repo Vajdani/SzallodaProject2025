@@ -94,7 +94,7 @@ select {
     height: max-content;
     margin-bottom: 10px;
     background-color: var(--colour_sidebar);
-    border: 3px solid var(--colour_randomgreen1);
+    border: 3px solid var(--colour_footer);
     padding: 10px;
     /* margin-top: 15px; */
     border-radius: 15px;
@@ -131,7 +131,7 @@ select {
     min-height: fit-content;
     height: 30px;
     min-width: 15%;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     box-shadow: none;
     border: 2px solid black;
     margin: 10px 0 10px 0;
@@ -191,7 +191,7 @@ select {
 }
 
 .fa-trash:hover {
-    color: var(--colour_randomgreen1);
+    color: var(--colour_footer);
 }
 
 .fa-pen-to-square {
@@ -200,7 +200,7 @@ select {
 }
 
 .fa-pen-to-square:hover {
-    color: var(--colour_randomgreen1);
+    color: var(--colour_footer);
 }
 
 .openFullReview {
@@ -222,7 +222,7 @@ select {
 
 .openFullReview:hover i:nth-child(2) {
     display: inline;
-    color: var(--colour_randomgreen1);
+    color: var(--colour_footer);
 }
 
 .menuPanel {

@@ -7,18 +7,16 @@
     --colour_background: #A3D1C6;
     --colour_sidebar: #15B392;
     --colour_footer: #3D8D7A;
+
+    --colour_save: #2BA84A;
+    --colour_save_hover: #04611c;
+
     --colour_lightwhite: #E5E1EE;
+    --colour_lightwhite_hover: #d2c6ec;
 
     --colour_error: #fd7676;
     --colour_error_intense: #c90000;
     --colour_delete: #f52525;
-
-    --colour_randomgreen1: #3D8D7A;
-    --colour_randomgreen2: #248232;
-    --colour_randomgreen3: #2BA84A;
-    --colour_randomgreen4: #04611c;
-
-    --colour_randomhover: #d2c6ec;
 }
 
 body {
@@ -137,10 +135,15 @@ a {
     color: var(--colour_lightwhite);
 }
 
+a:hover {
+    color: var(--colour_lightwhite_hover);
+}
+
+
 .sidebarLinks li a:hover {
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     border-radius: 5px;
-    outline: 7px solid var(--colour_randomgreen1);
+    outline: 7px solid var(--colour_footer);
 }
 
 .sidebarLinks li+li {
@@ -149,6 +152,10 @@ a {
 
 .sidebarContacts li:first-child {
     font-size: 160%;
+}
+
+.sidebarContacts li a:hover {
+    color: var(--colour_lightwhite_hover);
 }
 
 .sidebar hr {

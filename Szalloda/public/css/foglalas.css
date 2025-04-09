@@ -62,7 +62,7 @@ input[type=text] {
     border: none;
     background-color: var(--colour_sidebar);
     color: var(--colour_lightwhite);
-    border-bottom: var(--colour_randomgreen1) 2px solid;
+    border-bottom: var(--colour_footer) 2px solid;
 }
 
 .inputItem {
@@ -79,7 +79,7 @@ input[type=text] {
 
 .inputItem hr {
     margin-top: 5px;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
 }
 
 input[type=date] {

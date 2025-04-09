@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('css/bejelentkezes.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/regisztracio.css') }}">
 @endsection
 

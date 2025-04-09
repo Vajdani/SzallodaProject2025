@@ -24,7 +24,7 @@
 .form-design input{
     padding: 2px 0 2px 0;
     border: none;
-    border-bottom: 2px solid var(--colour_randomgreen1);
+    border-bottom: 2px solid var(--colour_footer);
     background-color: var(--colour_sidebar);
     transition: all 99999999999999s linear;
     color: var(--colour_lightwhite)
@@ -47,7 +47,7 @@
     border-radius: 25px;
     width: 40%;
     border: none;
-    background-color: var(--colour_randomgreen1);
+    background-color: var(--colour_footer);
     height: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
