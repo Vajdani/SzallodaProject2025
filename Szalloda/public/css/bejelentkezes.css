@@ -83,7 +83,7 @@ input:not(input[type=checkbox]) {
 }
 
 .delete-button:hover {
-    background-color: var(--colour_error_intense);
+    background-color: var(--colour_error_intense) !important;
 }
 
 form a {
