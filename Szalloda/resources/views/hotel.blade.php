@@ -46,11 +46,11 @@
                     </tr>
                     <tr>
                         <th>Telefonszám:</th>
-                        <td>{{ $hotel->phoneNumber }}</td>
+                        <td><a href="tel:{{ $hotel->phoneNumber }}">{{ $hotel->phoneNumber }}</a></td>
                     </tr>
                     <tr>
                         <th>E-mail cím:</th>
-                        <td>{{ $hotel->email }}</td>
+                        <td><a href="mailto:{{ $hotel->email }}">{{ $hotel->email }}</a></td>
                     </tr>
                 </table>
                 <br>
