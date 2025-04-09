@@ -25,7 +25,7 @@
             <hr>
             @foreach ($hotels as $hotel)
                 <div class="city">
-                    <a href="/szalloda/{{ $hotel->hotel_id }}">
+                    <a href="/szalloda/{{ $hotel->hotel_id }}" style="margin-bottom:5px;display:block">
                         <h2>{{ $hotel->hotelName }}</h2>
                     </a>
                     <div class="cityImgContainer">
