@@ -29,7 +29,7 @@ class ReviewController extends Controller
                     reviews.hotel_id = hotel.hotel_id and
                     reviews.user_id = user.user_id and
                     reviews.active = 1
-                order by reviews.created_at
+                order by reviews.created_at desc
             "),
             "cities" => City::all(),
             "hotels" => Hotel::all()
@@ -196,7 +196,7 @@ class ReviewController extends Controller
         if ($city_id != 0 && City::find($city_id) != null) { $reviewQuery .= " and hotel.city_id = $city_id"; }
         if ($hotel_id != 0 && Hotel::find($hotel_id) != null) { $reviewQuery .= " and reviews.hotel_id = $hotel_id"; }
 
-        $reviewQuery .= " order by reviews.created_at";
+        $reviewQuery .= " order by reviews.created_at desc";
 
         $response = [
             "reviews" => Review::fromQuery($reviewQuery),
