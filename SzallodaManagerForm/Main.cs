@@ -97,19 +97,19 @@ namespace SzallodaManagerForm
             switch (cbModositas.Text)
             {
                 case "Alkalmazottak":
-                    current = (dynamic)alkalmazottak;
+                    current = alkalmazottak;
                     break;
                 case "Szobák":
-                    current = (dynamic)szobak;
+                    current = szobak;
                     break;
                 case "Szolgáltatások":
-                    current = (dynamic)szolgaltatasok;
+                    current = szolgaltatasok;
                     break;
                 case "Foglalások":
-                    current = (dynamic)foglalalsok;
+                    current = foglalalsok;
                     break;
                 case "Statisztika":
-                    current = (dynamic)statisztika;
+                    current = statisztika;
                     break;
 
             }
