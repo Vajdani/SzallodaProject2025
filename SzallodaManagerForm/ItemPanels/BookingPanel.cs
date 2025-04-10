@@ -10,6 +10,13 @@ namespace SzallodaManagerForm.ItemPanels
 {
     internal class BookingPanel : ItemPanel
     {
+
+        public static Dictionary<string, Delegate> SearchCategories { get; private set; } = new Dictionary<string, Delegate>()
+        {
+            {"Állapot", new Func<Booking, string>(b => b.status == Booking.BookingStatus.RefundRequested ? "Visszafizetés igényelve" : "Megerősítve") },
+            {"Ár", new Func<Booking, string>(b => b.totalPrice.ToString()) },
+        };
+
         public Booking Booking { get; private set; }
 
         Label lbStartDate;
@@ -38,7 +45,7 @@ namespace SzallodaManagerForm.ItemPanels
                 {
                     Booking.BookingStatus.RefundRequested => "Visszatérítés igényelve",
                     Booking.BookingStatus.Confirmed => "Megerősítve",
-                    _ => throw new Exception("Invalid status")
+                    _ => throw new Exception("Invalid status ")
                 }
             };
 
@@ -68,17 +75,16 @@ namespace SzallodaManagerForm.ItemPanels
                 Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
             };
 
-
             this.Controls.Add(lbStartDate);
             this.Controls.Add(lbEndDate);
             this.Controls.Add(lbPrice);
             this.Controls.Add(lbStatus);
             this.Controls.Add(btnComplete);
             
-
             AlignElementsHorizontally();
-
         }
+        public static new List<Booking> GetList() => Main.Instance.GetSelectedHotel().Bookings.Where(b => b.status == Booking.BookingStatus.RefundRequested || (b.status == Booking.BookingStatus.Confirmed && b.bookEnd.Date < DateTime.Today)).ToList();
+        public static Type GetModelType() => typeof(Booking);
 
     }
 }

@@ -116,13 +116,13 @@
             Employees.Remove(Employees.First(e => e.Id == user_id && e.hotel_id == hotel_id));
         }
 
-        public Dictionary<string, (int, int)> GetBookingStatistics(int year)
+        public List<StatisticData> GetBookingStatistics(int year)
         {
-            Dictionary<string, (int, int)> Data = new();
+            List<StatisticData> Data = new();
             string[] honapok = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"];
             for (int i = 1; i <= 12; i++)
             {
-                Data.Add(honapok[i - 1], (Bookings.Where(b => b.bookStart.Year == year && b.bookStart.Month == i && b.status == Booking.BookingStatus.Completed).Count(), Bookings.Where(b => b.bookStart.Month == i).Sum(b => b.totalPrice)));
+                Data.Add(new (honapok[i - 1], Bookings.Where(b => b.bookStart.Year == year && b.bookStart.Month == i && b.status == Booking.BookingStatus.Completed).Count(), Bookings.Where(b => b.bookStart.Month == i).Sum(b => b.totalPrice)));
             }
             return Data;
         }

@@ -4,6 +4,12 @@ namespace SzallodaManagerForm.ItemPanels
 {
     internal class EmployeePanel : ItemPanel
     {
+        public static Dictionary<string, Delegate> SearchCategories { get; private set; } = new Dictionary<string, Delegate>()
+        {
+            {"Név", new Func<Employee, string>(e => e.username) },
+            {"Rank", new Func<Employee, string>(e => e.AuthorityLevel == User.AuthorityLevel.Employee ? "Alkalmazott" : "Manager") },
+        };
+
         Employee employee;
         Label lbUsername;
         Label lbUserType;
@@ -65,5 +71,8 @@ namespace SzallodaManagerForm.ItemPanels
             }
             Main.current.UpdatePanel(Main.Instance.GetSelectedHotel());
         }
+
+        public static new List<Employee> GetList() => Main.Instance.GetSelectedHotel().Employees;
+        public static Type GetModelType() => typeof(Employee);
     }
 }

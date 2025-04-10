@@ -1,4 +1,5 @@
 ﻿using SzallodaManagerForm.Models;
+using SzallodaManagerForm.ItemPanels;
 
 namespace SzallodaManagerForm
 {
@@ -8,11 +9,11 @@ namespace SzallodaManagerForm
         Panel Header;
 
         public static OptionPanel current;
-        OptionPanel alkalmazottak;
-        OptionPanel szobak;
-        OptionPanel szolgaltatasok;
-        OptionPanel foglalalsok;
-        OptionPanel statisztika;
+        OptionPanel<EmployeePanel> alkalmazottak;
+        OptionPanel<RoomPanel> szobak;
+        OptionPanel<ServicePanel> szolgaltatasok;
+        OptionPanel<BookingPanel> foglalalsok;
+        OptionPanel<MonthStatisticPanel> statisztika;
 
         public static Main Instance;
 
@@ -23,17 +24,17 @@ namespace SzallodaManagerForm
             Instance = this;
             this.Resize += OnSizeChange;
 
-            szobak = new(OptionPanel.ItemPanelCategory.Rooms, ["Szoba", "Állapot", "Ár"]);
-            szolgaltatasok = new(OptionPanel.ItemPanelCategory.Services, ["Név", "Állapot"]);
-            alkalmazottak = new(OptionPanel.ItemPanelCategory.Employees, ["Felhasználó név", "Rank"]);
-            foglalalsok = new(OptionPanel.ItemPanelCategory.Bookings, ["Kezdés dátuma", "Zárás dátuma", "Ár", "Állapot"]);
+            szobak = new(["Szoba", "Állapot", "Ár"]);
+            szolgaltatasok = new(["Név", "Állapot"]);
+            alkalmazottak = new(["Felhasználó név", "Rank"]);
+            foglalalsok = new(["Kezdés dátuma", "Zárás dátuma", "Ár", "Állapot"]);
 
             Controls.Add(foglalalsok);
             Controls.Add(szobak);
             Controls.Add(szolgaltatasok);
             Controls.Add(alkalmazottak);
 
-            current = szobak;
+            current = (dynamic)szobak;
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace SzallodaManagerForm
                 if(c != lbFelhasznalo) c.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             }
 
-            statisztika = new(OptionPanel.ItemPanelCategory.Statistic, ["Hónap", "Foglalások", "Bevétel"]);
+            statisztika = new(["Hónap", "Foglalások", "Bevétel"]);
             Controls.Add(statisztika);
         }
 
@@ -96,21 +97,19 @@ namespace SzallodaManagerForm
             switch (cbModositas.Text)
             {
                 case "Alkalmazottak":
-                    current = alkalmazottak;
+                    current = (dynamic)alkalmazottak;
                     break;
                 case "Szobák":
-                    current = szobak;
+                    current = (dynamic)szobak;
                     break;
                 case "Szolgáltatások":
-                    current = szolgaltatasok;
+                    current = (dynamic)szolgaltatasok;
                     break;
                 case "Foglalások":
-                    current = foglalalsok;
+                    current = (dynamic)foglalalsok;
                     break;
                 case "Statisztika":
-                    current = statisztika;
-                    //hotelstat hs = new hotelstat(cbHotelek.SelectedItem.ToString());
-                    //hs.ShowDialog();
+                    current = (dynamic)statisztika;
                     break;
 
             }

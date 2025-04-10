@@ -4,6 +4,11 @@ namespace SzallodaManagerForm.ItemPanels
 {
     internal class ServicePanel : ItemPanel
     {
+        public static Dictionary<string, Delegate> SearchCategories { get; private set; } = new Dictionary<string, Delegate>()
+        {
+            {"Szolgáltatás", new Func<Service, string>(s => s.Name) },
+            {"Állapot", new Func<Service, string>(s => s.Available ? "Elérhető" : "Nem Elérhető") },
+        };
 
         Service service;
         public Label serviceName { get; private set; }
@@ -12,7 +17,6 @@ namespace SzallodaManagerForm.ItemPanels
 
         public ServicePanel(Panel parent, Service service) : base(parent)
         {
-
             this.service = service; 
 
             serviceName = new Label
@@ -59,5 +63,8 @@ namespace SzallodaManagerForm.ItemPanels
 
             new ServiceUpdateForm("Szolgáltatás Módosítása", service, Inputs).ShowDialog();
         }
+
+        public static new List<Service> GetList() => Main.Instance.GetSelectedHotel().Services;
+        public static Type GetModelType() => typeof(Service);
     }
 }

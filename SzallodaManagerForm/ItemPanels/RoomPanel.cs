@@ -10,6 +10,14 @@ namespace SzallodaManagerForm.ItemPanels
         public ComboBox Availability { get; private set; }
         public TextBox Price { get; private set; }
 
+        public static Dictionary<string, Delegate> SearchCategories { get; private set; } = new Dictionary<string, Delegate>()
+        {
+            {"Szoba", new Func<Room, string>(r => r.RoomNumber) },
+            {"Állapot", new Func<Room, string>(r => r.Available ? "Elérhető" : "Nem elérhető") },
+            {"Ár", new Func<Room, string>(r => r.PricePerNight.ToString()) },
+        };
+
+
         Label AfterPriceLabel;
         Button btnSave;
 
@@ -62,6 +70,10 @@ namespace SzallodaManagerForm.ItemPanels
 
             AlignElementsHorizontally();
         }
+
+        public static new List<Room> GetList() => Main.Instance.GetSelectedHotel().Rooms;
+        public static Type GetModelType() => typeof(Room);
+        //public static Func<Room, string> GetSearchCategory(string key) => SearchCategories[key];
 
         public override void AlignElementsHorizontally(int sidePadding = 20)
         {

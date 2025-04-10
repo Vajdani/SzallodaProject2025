@@ -1,8 +1,9 @@
-﻿namespace SzallodaManagerForm.ItemPanels
+﻿using SzallodaManagerForm.Models;
+
+namespace SzallodaManagerForm.ItemPanels
 {
     internal class ItemPanel : Panel
     {
-        public int ItemID { get; private set; }
         public ItemPanel(Panel parent, int verticalPadding = 10)
         {
             ResizePanel(parent.ClientSize); 
@@ -41,6 +42,11 @@
         public List<int> GetControlPositions()
         {
             return this.Controls.Cast<Control>().Select(c => c.Location.X + c.ClientSize.Width/2).ToList();
+        }
+
+        public static List<Hotel> GetList()
+        {
+            return new();
         }
     }
 }
