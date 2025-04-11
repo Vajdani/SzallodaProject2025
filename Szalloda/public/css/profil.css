@@ -237,6 +237,13 @@ a:hover {
     gap: 10px
 }
 
+@media only screen and (max-width: 600px) {
+    .bookingSection {
+        padding: 0 0 10px 0;
+        width: calc(100% - 20px);
+    }
+}
+
 ul {
     list-style-position: inside;
 }
