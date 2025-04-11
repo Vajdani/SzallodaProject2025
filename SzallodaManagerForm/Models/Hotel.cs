@@ -49,7 +49,8 @@
 
         public static void OnUserLogin(int user_id)
         {
-            var bookings = Database.ReadAll<Booking>("SELECT hotel_id, booking_id, booking.bookStart, booking.bookEnd, booking.status, booking.totalPrice FROM room, booking " +
+            var bookings = Database.ReadAll<Booking>("SELECT hotel_id, booking_id, booking.bookStart, booking.bookEnd, booking.status, " +
+                "booking.totalPrice FROM room, booking " +
                 "WHERE room.room_id = booking.room_id").GroupBy(b => b.hotel_id).ToDictionary(b => b.Key, b => b.ToList());
 
 
@@ -122,7 +123,8 @@
             string[] honapok = ["Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"];
             for (int i = 1; i <= 12; i++)
             {
-                Data.Add(new (honapok[i - 1], Bookings.Where(b => b.bookStart.Year == year && b.bookStart.Month == i && b.status == Booking.BookingStatus.Completed).Count(), Bookings.Where(b => b.bookStart.Month == i).Sum(b => b.totalPrice)));
+                Data.Add(new (honapok[i - 1], Bookings.Where(b => b.bookStart.Year == year && b.bookStart.Month == i && b.status == 
+                Booking.BookingStatus.Completed).Count(), Bookings.Where(b => b.bookStart.Year == year && b.bookStart.Month == i).Sum(b => b.totalPrice)));
             }
             return Data;
         }
