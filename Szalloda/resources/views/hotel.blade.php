@@ -2,8 +2,8 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/szalloda.css') }}">
     <link rel="stylesheet" href="{{ asset('css/ertekelesek.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/szalloda.css') }}">
 @endsection
 
 @php
