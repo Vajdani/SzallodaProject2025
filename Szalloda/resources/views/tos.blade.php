@@ -24,7 +24,7 @@
                 <li class="tos_item">Foglalás lemondása
                   <ol class="tos_sublist">
                     <li class="tos_subitem">A foglalás lemondása a szálloda lemondási politikájának megfelelően történhet. Kérjük, vegye figyelembe, hogy egyes foglalások nem mondhatóak le díjmentesen.</li>
-                    <li class="tos_subitem">A legkésőbbi díjmentes lemondási időpont két héttel a foglalás dátuma előtt van. Az ezután történő lemondásokat nem tudjuk díjmentesen visszatéríteni</li>
+                    <li class="tos_subitem">A legkésőbbi díjmentes lemondási időpont egy héttel a foglalás dátuma előtt van. Az ezután történő lemondásokat nem tudjuk díjmentesen visszatéríteni</li>
                   </ol>
                 </li>
                 <li class="tos_item">Szállás Szolgáltatások

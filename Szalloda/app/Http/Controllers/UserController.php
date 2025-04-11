@@ -73,8 +73,9 @@ class UserController extends Controller
                 $services[$item["booking_id"]][$key] = $item;
             }
 
+            $today = date("Y-m-d");
             $booking = Booking::fromQuery("
-                select b.bookStart, b.bookEnd, b.status, b.totalPrice, r.roomNumber, h.hotelName, h.address, h.hotel_id, b.services, b.booking_id
+                select b.bookStart, b.bookEnd, b.status, b.totalPrice, r.roomNumber, h.hotelName, h.address, h.hotel_id, b.services, b.booking_id, datediff(b.bookEnd, \"$today\") as diff
                 from booking b
                 inner join user u on u.user_id = b.user_id
                 inner join room r on r.room_id = b.room_id
@@ -82,7 +83,6 @@ class UserController extends Controller
                 where b.user_id like $user_id
                 order by b.booking_id desc;
             ");
-
             $writeReviews = ReviewController::CanWriteReview($user_id)[0];
         }
 
@@ -310,7 +310,7 @@ class UserController extends Controller
                 "required",
                 "min:".self::$minPhoneNumberLength,
                 "max:".self::$maxPhoneNumberLength,
-                "regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$",
+                "regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/",
                 new phonenumberUniqueRule()
             ],
         ], [

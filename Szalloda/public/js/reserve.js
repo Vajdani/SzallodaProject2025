@@ -63,7 +63,7 @@ async function DateChanged() {
 
                 let label = document.createElement("label")
                 label.htmlFor = id
-                label.innerText = " " + element.serviceName
+                label.innerText = " " + element.serviceName + " - "+element.price+" Ft"
 
                 div.appendChild(input)
                 div.appendChild(label)

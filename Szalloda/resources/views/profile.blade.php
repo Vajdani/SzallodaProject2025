@@ -141,7 +141,7 @@
                                                     @elseif($b->status == 'completed')
                                                         Befejezve
                                                     @endif)
-                                                    @if($b->status=='confirmed')
+                                                    @if($b->status=='confirmed' && $b->diff>7)
                                                         <button class="cancel-button" type="submit" value="{{$b->booking_id}}" id="cancel" name="cancel">Lemondás</button>
                                                     @endif
                                                 </h3>

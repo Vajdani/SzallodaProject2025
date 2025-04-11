@@ -69,7 +69,7 @@
                                 @if ($s->category_id >= 3)
                                     <div>
                                         <input type="checkbox" name="services[]" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
-                                        <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
+                                        <label for="service_{{ $s->service_id }}">{{ $s->serviceName }} - {{$s->price}} Ft</label>
                                     </div>
                                 @endif
                             @endforeach
