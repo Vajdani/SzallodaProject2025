@@ -48,5 +48,7 @@ namespace SzallodaManagerForm.ItemPanels
         {
             return new();
         }
+        public static Type GetModelType() => typeof(StatisticData);
+
     }
 }

@@ -160,7 +160,12 @@ class UserController extends Controller
                 "unique:user,email",
                 "max:150",
             ],
-            "phonenumber" => "required|min:".self::$minPhoneNumberLength."|max:".self::$maxPhoneNumberLength."|unique:user,phonenumber|max:15",
+            "phonenumber" =>[
+                "required",
+                "min:".self::$minPhoneNumberLength,
+                "max:".self::$maxPhoneNumberLength,
+                "regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/",
+            ],
             "password" => [
                 "required",
                 Password::min(self::$minPasswordLength)
@@ -189,10 +194,10 @@ class UserController extends Controller
             "email.max" => "Az email maximum 150 karakter hosszú legyen!",
 
             "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
+            "phonenumber.regex" => "Érvényes telefonszámot adjon meg!",
             "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
             "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
             "phonenumber.unique" => "Ez a telefonszám már más által használva van!",
-            "phonenumber.max" => "A telefonszám maximum 15 karakter hosszú lehet!",
 
             "password.required" => "Muszáj megadnia a jelszavát!",
             "password.min" => "A jelszónak legalább ".self::$minPasswordLength." karakter hosszúnak kell lennie!",
@@ -305,6 +310,7 @@ class UserController extends Controller
                 "required",
                 "min:".self::$minPhoneNumberLength,
                 "max:".self::$maxPhoneNumberLength,
+                "regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$",
                 new phonenumberUniqueRule()
             ],
         ], [
@@ -317,6 +323,7 @@ class UserController extends Controller
             "email.regex" => "Nem egy e-mail címet adott meg!",
 
             "phonenumber.required" => "Muszáj megadnia a telefonszámát!",
+            "phonenumber.regex" => "Érvényes telefonszámot adjon meg!",
             "phonenumber.min" => "A telefonszámnak legalább ".self::$minPhoneNumberLength." számjegy hosszúnak kell lennie!",
             "phonenumber.max" => "A telefonszám legfeljebb ".self::$maxPhoneNumberLength." számjegy hosszú lehet!",
             "phonenumber.unique" => "Ez a telefonszám már más által használva van!",

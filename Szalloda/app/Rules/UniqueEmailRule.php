@@ -16,7 +16,8 @@ class UniqueEmailRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ($value != Auth::user()->email && User::where("email", $value)->where("active",1)->count() > 0) {
+        $user = Auth::user();
+        if (($user == null || $value != $user->email) && User::where("email", $value)->where("active",1)->count() > 0) {
             $fail("Ez az email már foglalt!");
         }
     }
