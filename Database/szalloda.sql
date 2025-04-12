@@ -673,9 +673,7 @@ ALTER TABLE `servicecategory`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `phonenumber` (`phonenumber`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- A kiírt táblák AUTO_INCREMENT értéke
