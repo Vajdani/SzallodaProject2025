@@ -321,9 +321,9 @@ hr {
     border: 0;
     border-radius: 50%;
     aspect-ratio: 1/1;
-    padding: 5px;
     width: 1.5rem;
     height: 1.5rem;
+    line-height: 0;
 }
 
 .info-popup div button:hover {
