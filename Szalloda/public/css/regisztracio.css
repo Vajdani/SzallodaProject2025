@@ -79,3 +79,7 @@
 }
 
 
+.form-design .inputItem label::after {
+    content: "*";
+    color: var(--colour_error);
+}

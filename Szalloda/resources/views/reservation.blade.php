@@ -91,7 +91,7 @@
                     <p id="osszeg" class="finalPrice">0</p>
                 </div>
 
-                <div class="formWindow" style="align-items: flex-start">
+                <div class="formWindow formWindow2" style="align-items: flex-start">
                     <div class="formHeader">
                         <h2>Számlázási adatok</h2>
                         <hr>

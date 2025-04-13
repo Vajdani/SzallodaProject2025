@@ -164,3 +164,8 @@ textarea {
     width: 100%;
     text-align: center;
 }
+
+.formWindow2 .inputItem:not(:last-of-type) label::after {
+    content: "*";
+    color: var(--colour_error);
+}
