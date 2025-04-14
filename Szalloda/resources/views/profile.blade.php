@@ -30,8 +30,8 @@
                             @else
                             onclick="loyaltymax('{{$loyalty[0]->rank}}', '{{$loyalty[0]->rank_id}}' @foreach($perks as $p),'{{$p}}' @endforeach)"
                             @endif
-                            >Hűségprogram megtekintése</a>
-                            <a onclick="pfpmenu()">Profilképcsere</a>
+                            class="a-click">Hűségprogram megtekintése</a>
+                            <a onclick="pfpmenu()" class="a-click">Profilképcsere</a>
                             <a href="/jelszovaltoztatas">Jelszóváltoztatás</a>
                             <a href="/fioktorles">Felhasználói fiókom törlése</a>
                         </div>
