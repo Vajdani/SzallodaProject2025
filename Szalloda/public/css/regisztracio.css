@@ -26,7 +26,6 @@
     border: none;
     border-bottom: 2px solid var(--colour_footer);
     background-color: var(--colour_sidebar) !important;
-    transition: all 99999999999999s linear;
     color: var(--colour_lightwhite)
 }
 
