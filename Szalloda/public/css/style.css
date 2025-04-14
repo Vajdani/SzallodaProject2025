@@ -281,7 +281,7 @@ hr {
 
 .info-popup {
     background-color: var(--colour_footer);
-    border-radius: 25px;
+    border-radius: 10px;
     margin: 15px auto 0 auto;
     width: fit-content;
     position: absolute;
@@ -344,4 +344,12 @@ nav {
 .loyalty {
     width: 30px;
     height: 30px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
 }

@@ -22,8 +22,8 @@
 
 .profile-header {
     width: 80%;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     /* box-shadow: 10px 10px 8px 10px #888888; */
     display: flex;
     flex-direction: row;
@@ -55,8 +55,8 @@
 }
 
 .profile-body {
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     width: 80%;
     background-color: var(--colour_sidebar);
 }
@@ -94,7 +94,7 @@
 }
 
 .save-button {
-    border-radius: 25px;
+    border-radius: 15px;
     width: 40%;
     border: none;
     background-color: var(--colour_footer);
