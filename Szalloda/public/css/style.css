@@ -350,26 +350,30 @@ input:-webkit-autofill,
 input:-webkit-autofill:focus {
     transition: background-color 600000s 0s, color 600000s 0s;
 }
+
 input[data-autocompleted] {
     background-color: transparent !important;
 }
 
 
-@media (pointer: coarse), (hover: none) {
+@media (pointer: coarse),
+(hover: none) {
     [title] {
-      position: relative;
-      display: inline-flex;
-      justify-content: center;
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
     }
+
     [title]:focus::after {
-      font-family:'Times New Roman', Times, serif;
-      content: attr(title);
-      position: absolute;
-      top: 90%;
-      color: #000;
-      background-color: #fff;
-      border: 1px solid;
-      width: fit-content;
-      padding: 3px;
+        font-family: 'Times New Roman', Times, serif;
+        content: attr(title);
+        position: absolute;
+        top: calc(90% - 10px);
+        left: 100%;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid;
+        width: 150px;
+        padding: 5px;
     }
-  }
+}
