@@ -94,6 +94,7 @@
 }
 
 .save-button {
+    color: var(--colour_lightwhite);
     border-radius: 15px;
     width: 40%;
     border: none;

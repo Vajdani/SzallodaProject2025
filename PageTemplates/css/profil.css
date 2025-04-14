@@ -62,6 +62,7 @@ h2{
 }
 
 .save-button{
+    color: var(--colour_lightwhite);
     border-radius: 15px;
     height: 30px;
     min-width: 15%;

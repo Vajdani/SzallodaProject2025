@@ -127,6 +127,7 @@ select {
 }
 
 .review-button {
+    color: var(--colour_lightwhite);
     border-radius: 15px;
     min-height: fit-content;
     height: 30px;

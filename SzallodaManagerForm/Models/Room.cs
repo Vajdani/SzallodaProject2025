@@ -26,6 +26,13 @@
             PricePerNight = price;
             Available = available == 1;
             using Database ab = new($"UPDATE room SET pricepernight = {price}, available = {available} WHERE room_id = {room_id};");
+            ab.Close();
+            if (!Available)
+            {
+                string leker = $"UPDATE booking SET status = 'refund requested' where room_id = {room_id} and status ='confirmed'";
+                Database db = new Database(leker);
+                db.Close();
+            }
         }
     }
 }
