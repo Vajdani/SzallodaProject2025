@@ -1,0 +1,41 @@
+.formBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px
+}
+
+.formBox form {
+    padding: 0;
+    max-width: 50%;
+}
+
+.formBox form input {
+    margin-bottom: 0;
+}
+
+.formBox > div {
+    max-width: 50%;
+    align-self: flex-end;
+}
+
+.formBox > div a button {
+    margin: 0;
+}
+
+@media only screen and (max-width:600px){
+    .formBox {
+        flex-direction: column;
+    }
+
+    .formBox form {
+        max-width: 75%;
+    }
+
+    .formBox > div {
+        max-width: 75%;
+        margin-top: 10px;
+        align-self: center;
+    }
+}
