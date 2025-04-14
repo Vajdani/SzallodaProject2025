@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+    <nav>
+        <h1>Felhasználói feltételek</h1>
+    </nav>
     <div class="mainContent">
         <div class="tos_div">
             <ol class="tos_mainlist">

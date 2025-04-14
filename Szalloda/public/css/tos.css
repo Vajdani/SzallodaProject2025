@@ -5,11 +5,8 @@
     height: auto;
     background-color: var(--colour_sidebar);
     border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    padding: 0 20px 0 20px;
+    margin: 20px auto 20px auto;
 }
 
 .tos_mainlist{
