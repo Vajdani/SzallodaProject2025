@@ -54,7 +54,7 @@
             </div>
 
             <div class="inputItem">
-                <label for="password">Jelszó <i class="fa-solid fa-circle-info" title="Minimum 8 karakter, legalább egy kis és nagy betű, szám, speciális karakter"></i></label>
+                <div style="display: flex" style="float: right"><label for="password">Jelszó </label><i class="fa-solid fa-circle-info" title="Minimum 8 karakter, legalább egy kis és nagy betű, szám, speciális karakter" tabindex="0"></i></div>
                 <input type="password" name="password" id="password">
                 @error('password')
                     <p class="error">{{ $message }}</p>
