@@ -68,6 +68,10 @@ class ReviewController extends Controller
             return redirect("/");
         }
 
+        if (Auth::user()->user_id != $review->user_id) {
+            return redirect("/");
+        }
+
         return view("review", [
             "hotel" => Hotel::find($review->hotel_id),
             "review" => $review
