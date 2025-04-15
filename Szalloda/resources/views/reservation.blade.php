@@ -33,11 +33,11 @@
                         <p style="font-size:100%" class="inline">{{ $hotel->hotelName }}</p>
                     </div>
 
-                    <div>
+                    <div style="margin-bottom: 10px">
                         <p class="text-center">Dátum</p>
                         <div style="display:flex;justify-content:space-between">
                             <input type="date" id="startDate" class="inline" name="startDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('startDate') }}">
-                            <p class="inline">—</p>
+                            <p class="inline" style="margin: 0 5px 0 5px">—</p>
                             <input type="date" id="endDate" class="inline" name="endDate" onchange="DateChanged()" min="{{$minDate}}" value="{{ old('endDate') }}">
                         </div>
                         @error('startDate')
@@ -50,20 +50,23 @@
 
                     <div style="margin-bottom: 10px">
                         @error('service_id')
-                        <p class="error">{{ $message }}</p>
+                            <p class="error">{{ $message }}</p>
                         @enderror
 
                         <label for="service_0">Szolgálatások:</label>
-                        <div>
+                        <div style="margin-bottom: 5px">
                             <input type="radio" name="service_id" id="service_0" value="0" onchange="ServiceSelected()">
                             <label for="service_0">Nem kérek ellátást</label>
                             @foreach ($services as $s)
                                 @if ($s->category_id < 3)
-                                    <input type="radio" name="service_id" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
-                                    <label for="service_{{ $s->service_id }}">{{ $s->serviceName }}</label>
+                                    <div>
+                                        <input type="radio" name="service_id" id="service_{{ $s->service_id }}" value="{{ $s->service_id }}" onchange="ServiceSelected()">
+                                        <label for="service_{{ $s->service_id }}">{{ $s->serviceName }} - {{$s->price}} Ft <span style="font-weight: bolder">/</span> éjszaka</label>
+                                    </div>
                                 @endif
                             @endforeach
                         </div>
+                        <hr>
                         <div id="services">
                             @foreach ($services as $s)
                                 @if ($s->category_id >= 3)
