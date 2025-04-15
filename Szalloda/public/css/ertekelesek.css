@@ -121,6 +121,8 @@ select {
 }
 
 .ratingData {
+    text-align: justify;
+    text-justify: inter-word;
     display: flex;
     flex-direction: column;
     width: 100%;

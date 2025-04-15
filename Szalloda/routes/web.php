@@ -48,3 +48,4 @@ Route::group(['middleware' => [IsntLoggedIn::class]], function () {
 Route::fallback(function () {
     return redirect('/');
 });
+

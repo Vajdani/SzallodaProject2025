@@ -41,7 +41,7 @@ function RenderRating(username, hotelName, hotel_id, rating, created_at, review,
                 <h3 style="text-wrap:auto;"><a href="/szalloda/` + hotel_id + `">` + hotelName + `</a></h3>
                 <p>` + ratingStars + `</p>
                 <p style="text-wrap:auto;margin-bottom:5px">` + created_at + (isEdited ? " <span style='color: gold'>(szerkesztve)</span>" : "") + `</p>
-                <p style="text-wrap:auto;-ms-word-break:break-all;word-break:break-all;white-space:pre-wrap">` + finalReviewText + `</p>
+                <p style="text-wrap:auto;white-space:pre-wrap">` + finalReviewText + `</p>
                 ` + (disableFooter == true ? "" : footer) + `
             </div>
         </div>

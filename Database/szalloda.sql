@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Ápr 04. 14:49
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Apr 15, 2025 at 07:03 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `szalloda`
+-- Database: `szalloda`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `billing`
+-- Table structure for table `billing`
 --
 
 CREATE TABLE `billing` (
@@ -43,7 +43,7 @@ CREATE TABLE `billing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `billing`
+-- Dumping data for table `billing`
 --
 
 INSERT INTO `billing` (`billing_id`, `booking_id`, `amount`, `bookingDate`, `paymentDate`, `paymentStatus`, `paymentMethod`, `country`, `city`, `zipcode`, `line1`, `line2`) VALUES
@@ -55,7 +55,7 @@ INSERT INTO `billing` (`billing_id`, `booking_id`, `amount`, `bookingDate`, `pay
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `booking`
+-- Table structure for table `booking`
 --
 
 CREATE TABLE `booking` (
@@ -70,7 +70,7 @@ CREATE TABLE `booking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `booking`
+-- Dumping data for table `booking`
 --
 
 INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd`, `totalPrice`, `status`, `services`) VALUES
@@ -81,24 +81,201 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `room_id`, `bookStart`, `bookEnd
 (5, 2, 12, '2025-04-02', '2025-04-06', 359750, 'completed', '8-11-13'),
 (6, 2, 68, '2025-03-06', '2025-03-09', 232500, 'cancelled', '33-34-37'),
 (7, 2, 80, '2025-03-31', '2025-04-02', 143500, 'confirmed', '39-40-41-42'),
-(8, 2, 7, '2025-08-02', '2025-08-05', 310500, 'confirmed', '2-3-4-5'),
+(8, 2, 7, '2025-08-02', '2025-08-05', 310500, 'refund requested', '2-3-4-5'),
 (9, 2, 1, '2025-03-31', '2025-04-13', 723000, 'confirmed', '2-3'),
 (10, 25, 64, '2025-04-01', '2025-04-04', 195000, 'completed', ''),
-(11, 2, 4, '2023-03-12', '2023-03-15', 260000, 'confirmed', ''),
-(12, 3, 2, '2023-03-14', '2023-03-18', 80000, 'confirmed', ''),
+(11, 2, 4, '2023-03-12', '2023-03-15', 260000, 'completed', ''),
+(12, 3, 2, '2023-03-14', '2023-03-18', 80000, 'completed', ''),
 (13, 5, 7, '2024-03-08', '2024-03-13', 300000, 'completed', ''),
-(14, 2, 5, '2024-08-13', '2024-08-16', 298500, 'confirmed', '1-3-4'),
+(14, 2, 5, '2024-08-13', '2024-08-16', 298500, 'completed', '1-3-4'),
 (15, 2, 12, '2022-04-02', '2022-04-06', 359750, 'completed', '8-11-13'),
 (16, 2, 68, '2023-03-06', '2023-03-09', 232500, 'cancelled', '33-34-37'),
-(17, 2, 80, '2024-03-31', '2024-04-02', 143500, 'confirmed', '39-40-41-42'),
-(18, 2, 7, '2024-08-02', '2024-08-05', 310500, 'confirmed', '2-3-4-5'),
-(19, 2, 1, '2023-03-31', '2023-04-13', 723000, 'confirmed', '2-3'),
-(20, 25, 64, '2022-04-01', '2022-04-04', 195000, 'completed', '');
+(17, 2, 80, '2024-03-31', '2024-04-02', 143500, 'completed', '39-40-41-42'),
+(18, 2, 7, '2024-08-02', '2024-08-05', 310500, 'completed', '2-3-4-5'),
+(19, 2, 1, '2023-03-31', '2023-04-13', 723000, 'completed', '2-3'),
+(20, 25, 64, '2022-04-01', '2022-04-04', 195000, 'completed', ''),
+(21, 12, 4, '2023-05-14', '2023-05-17', 255000, 'completed', '1-4'),
+(22, 18, 15, '2022-06-10', '2022-06-14', 320000, 'completed', '9-10'),
+(23, 5, 28, '2024-09-01', '2024-09-05', 360000, 'completed', '16-18'),
+(24, 30, 42, '2025-04-12', '2025-04-15', 210000, 'cancelled', '23-24'),
+(25, 7, 85, '2022-11-08', '2022-11-11', 225000, 'completed', '40-41'),
+(26, 14, 6, '2023-02-02', '2023-02-06', 280000, 'completed', '3-5'),
+(27, 11, 18, '2024-12-01', '2024-12-05', 345000, 'completed', '12-13'),
+(28, 2, 35, '2022-08-20', '2022-08-24', 295000, 'cancelled', '20-22'),
+(29, 33, 40, '2023-07-15', '2023-07-18', 270000, 'completed', '25-26'),
+(30, 4, 53, '2024-04-05', '2024-04-08', 225000, 'completed', '28-30'),
+(31, 21, 64, '2022-05-01', '2022-05-06', 395000, 'completed', '33-34'),
+(32, 26, 90, '2025-07-07', '2025-07-10', 285000, 'refund requested', '42-43'),
+(33, 8, 7, '2023-09-09', '2023-09-12', 240000, 'completed', '2-6'),
+(34, 22, 10, '2024-03-18', '2024-03-21', 210000, 'completed', '8-11'),
+(35, 6, 25, '2022-10-10', '2022-10-13', 255000, 'completed', '15-16'),
+(36, 13, 44, '2023-06-06', '2023-06-11', 385000, 'cancelled', '24-25'),
+(37, 10, 50, '2025-03-02', '2025-03-07', 395000, 'confirmed', '30-31'),
+(38, 35, 66, '2022-04-01', '2022-04-05', 320000, 'completed', '34-36'),
+(39, 3, 84, '2023-10-21', '2023-10-24', 255000, 'completed', '40-43'),
+(40, 28, 1, '2022-12-12', '2022-12-15', 225000, 'completed', '2-3'),
+(41, 17, 20, '2023-01-05', '2023-01-09', 280000, 'completed', '13-14'),
+(42, 20, 32, '2025-10-15', '2025-10-20', 420000, 'refund requested', '18-20'),
+(43, 19, 38, '2024-07-11', '2024-07-15', 345000, 'completed', '23-26'),
+(44, 31, 58, '2023-08-03', '2023-08-07', 290000, 'cancelled', '29-30'),
+(45, 15, 71, '2022-09-14', '2022-09-18', 310000, 'completed', '34-35'),
+(46, 9, 89, '2025-01-25', '2025-01-29', 340000, 'confirmed', '40-42'),
+(47, 16, 5, '2024-10-10', '2024-10-12', 180000, 'completed', '4-5'),
+(48, 25, 12, '2022-06-04', '2022-06-08', 260000, 'cancelled', '8-9'),
+(49, 24, 23, '2023-03-15', '2023-03-19', 290000, 'completed', '15-17'),
+(50, 18, 47, '2025-06-11', '2025-06-14', 255000, 'completed', '25-26'),
+(51, 1, 56, '2024-01-20', '2024-01-24', 310000, 'completed', '28-31'),
+(52, 29, 68, '2023-05-02', '2023-05-05', 240000, 'refund requested', '34-36'),
+(53, 7, 83, '2022-07-18', '2022-07-21', 255000, 'completed', '39-40'),
+(54, 23, 2, '2025-09-22', '2025-09-27', 400000, 'completed', '1-2'),
+(55, 14, 19, '2023-04-11', '2023-04-14', 225000, 'cancelled', '13-14'),
+(56, 27, 26, '2022-11-05', '2022-11-10', 365000, 'completed', '17-18'),
+(57, 11, 41, '2025-02-14', '2025-02-18', 310000, 'completed', '23-24'),
+(58, 19, 48, '2024-03-08', '2024-03-11', 240000, 'completed', '27-29'),
+(59, 20, 62, '2022-10-20', '2022-10-24', 310000, 'cancelled', '30-31'),
+(60, 3, 77, '2023-06-17', '2023-06-20', 240000, 'completed', '35-37'),
+(61, 6, 91, '2025-12-01', '2025-12-05', 345000, 'completed', '41-43'),
+(62, 8, 3, '2022-05-15', '2022-05-17', 165000, 'completed', '1-3'),
+(63, 26, 11, '2023-09-05', '2023-09-08', 210000, 'refund requested', '9-13'),
+(64, 34, 36, '2024-02-22', '2024-02-25', 225000, 'completed', '21-22'),
+(65, 10, 39, '2025-11-11', '2025-11-16', 395000, 'confirmed', '25-26'),
+(66, 32, 52, '2023-08-12', '2023-08-15', 255000, 'completed', '28-30'),
+(67, 13, 65, '2024-09-01', '2024-09-04', 255000, 'cancelled', '33-35'),
+(68, 2, 87, '2022-06-28', '2022-07-03', 410000, 'completed', '39-42'),
+(69, 12, 8, '2023-01-18', '2023-01-21', 225000, 'completed', '6-7'),
+(70, 5, 17, '2025-08-07', '2025-08-12', 390000, 'confirmed', '10-13'),
+(71, 15, 22, '2022-03-03', '2022-03-06', 210000, 'completed', '13-14'),
+(72, 17, 30, '2023-11-09', '2023-11-14', 385000, 'completed', '17-19'),
+(73, 30, 46, '2025-10-01', '2025-10-05', 330000, 'cancelled', '25-26'),
+(74, 28, 59, '2024-06-17', '2024-06-20', 270000, 'completed', '29-31'),
+(75, 6, 69, '2023-04-25', '2023-04-29', 320000, 'completed', '34-36'),
+(76, 24, 92, '2022-08-08', '2022-08-11', 255000, 'completed', '42-43'),
+(77, 4, 6, '2023-05-06', '2023-05-09', 225000, 'completed', '2-5'),
+(78, 35, 13, '2024-02-14', '2024-02-19', 345000, 'completed', '8-11'),
+(79, 9, 27, '2025-09-12', '2025-09-15', 255000, 'refund requested', '15-18'),
+(80, 7, 43, '2022-07-21', '2022-07-24', 240000, 'completed', '23-24'),
+(81, 23, 49, '2023-03-28', '2023-04-01', 310000, 'completed', '27-30'),
+(82, 1, 61, '2024-12-22', '2024-12-26', 360000, 'cancelled', '30-31'),
+(83, 12, 76, '2022-09-17', '2022-09-20', 255000, 'completed', '35-36'),
+(84, 20, 93, '2025-02-03', '2025-02-07', 345000, 'completed', '41-43'),
+(85, 10, 1, '2022-11-02', '2022-11-05', 210000, 'completed', '2-4'),
+(86, 29, 16, '2023-06-01', '2023-06-04', 240000, 'cancelled', '10-12'),
+(87, 13, 24, '2024-05-13', '2024-05-17', 325000, 'completed', '15-17'),
+(88, 8, 37, '2025-03-05', '2025-03-09', 290000, 'confirmed', '20-21'),
+(89, 27, 45, '2022-12-18', '2022-12-22', 320000, 'completed', '25-26'),
+(90, 22, 55, '2023-07-26', '2023-07-29', 270000, 'refund requested', '29-31'),
+(91, 16, 67, '2024-01-02', '2024-01-06', 310000, 'completed', '33-34'),
+(92, 31, 82, '2022-10-15', '2022-10-19', 340000, 'completed', '38-41'),
+(93, 5, 9, '2023-02-11', '2023-02-14', 210000, 'completed', '5-7'),
+(94, 11, 14, '2024-03-25', '2024-03-28', 240000, 'cancelled', '9-10'),
+(95, 18, 29, '2025-06-06', '2025-06-11', 375000, 'confirmed', '16-19'),
+(96, 14, 34, '2022-04-19', '2022-04-22', 225000, 'completed', '20-21'),
+(97, 19, 51, '2023-05-03', '2023-05-07', 310000, 'completed', '27-28'),
+(98, 26, 60, '2025-11-06', '2025-11-09', 255000, 'cancelled', '30-31'),
+(99, 33, 70, '2024-08-11', '2024-08-16', 400000, 'completed', '34-36'),
+(100, 21, 88, '2023-01-28', '2023-02-01', 300000, 'completed', '40-43'),
+(101, 6, 5, '2022-07-01', '2022-07-05', 280000, 'completed', '1-4'),
+(102, 18, 21, '2024-09-18', '2024-09-22', 320000, 'completed', '13-14'),
+(103, 25, 33, '2023-03-14', '2023-03-18', 295000, 'refund requested', '18-19'),
+(104, 8, 57, '2025-05-19', '2025-05-24', 410000, 'confirmed', '29-30'),
+(105, 2, 72, '2022-10-05', '2022-10-08', 255000, 'completed', '34-36'),
+(106, 32, 94, '2024-02-01', '2024-02-05', 320000, 'completed', '42-43'),
+(107, 1, 6, '2023-11-17', '2023-11-21', 310000, 'cancelled', '2-3'),
+(108, 11, 17, '2025-09-10', '2025-09-15', 370000, 'confirmed', '10-12'),
+(109, 4, 31, '2023-06-26', '2023-06-30', 300000, 'completed', '17-18'),
+(110, 15, 54, '2024-04-18', '2024-04-22', 320000, 'completed', '28-30'),
+(111, 5, 66, '2022-09-08', '2022-09-12', 310000, 'completed', '34-36'),
+(112, 23, 86, '2023-10-04', '2023-10-07', 240000, 'completed', '41-42'),
+(113, 30, 2, '2022-12-01', '2022-12-05', 280000, 'completed', '1-2'),
+(114, 12, 8, '2025-01-10', '2025-01-15', 365000, 'refund requested', '6-7'),
+(115, 17, 26, '2024-05-20', '2024-05-24', 310000, 'completed', '16-17'),
+(116, 35, 44, '2023-07-30', '2023-08-03', 300000, 'completed', '24-25'),
+(117, 3, 63, '2022-06-12', '2022-06-16', 310000, 'cancelled', '30-31'),
+(118, 20, 74, '2024-11-04', '2024-11-07', 270000, 'completed', '35-37'),
+(119, 7, 81, '2025-03-22', '2025-03-26', 330000, 'confirmed', '38-40'),
+(120, 22, 4, '2022-03-08', '2022-03-11', 210000, 'completed', '1-3'),
+(121, 13, 15, '2023-09-01', '2023-09-06', 390000, 'completed', '9-10'),
+(122, 29, 38, '2024-08-21', '2024-08-25', 330000, 'cancelled', '23-24'),
+(123, 9, 46, '2025-10-10', '2025-10-14', 320000, 'confirmed', '25-26'),
+(124, 10, 67, '2023-04-10', '2023-04-14', 310000, 'completed', '33-35'),
+(125, 27, 91, '2022-05-14', '2022-05-18', 320000, 'completed', '41-42'),
+(126, 1, 3, '2024-01-10', '2024-01-14', 240000, 'completed', '1-3'),
+(127, 2, 7, '2024-02-05', '2024-02-09', 280000, 'completed', '4-5'),
+(128, 3, 2, '2024-03-12', '2024-03-15', 210000, 'completed', '1-2'),
+(129, 4, 5, '2024-04-20', '2024-04-24', 265000, 'completed', '2-4'),
+(130, 5, 1, '2024-05-02', '2024-05-05', 195000, 'completed', '3-5'),
+(131, 6, 9, '2024-06-08', '2024-06-12', 290000, 'refund requested', '6-7'),
+(132, 7, 4, '2024-07-17', '2024-07-20', 220000, 'completed', '1-4'),
+(133, 8, 6, '2024-08-01', '2024-08-06', 310000, 'completed', '2-3'),
+(134, 9, 2, '2024-09-03', '2024-09-07', 260000, 'cancelled', '3-4'),
+(135, 10, 8, '2024-10-12', '2024-10-15', 215000, 'completed', '5-7'),
+(136, 11, 7, '2024-11-19', '2024-11-23', 275000, 'completed', '2-5'),
+(137, 12, 1, '2024-12-04', '2024-12-07', 200000, 'completed', '1-2'),
+(138, 13, 3, '2024-01-22', '2024-01-25', 230000, 'completed', '3-6'),
+(139, 14, 9, '2024-02-18', '2024-02-21', 245000, 'completed', '2-4'),
+(140, 15, 5, '2024-03-27', '2024-03-31', 295000, 'completed', '5-7'),
+(141, 16, 4, '2024-04-11', '2024-04-14', 210000, 'cancelled', '1-3'),
+(142, 17, 6, '2024-05-16', '2024-05-20', 270000, 'completed', '4-6'),
+(143, 18, 2, '2024-06-23', '2024-06-27', 260000, 'completed', '1-5'),
+(144, 19, 8, '2024-07-29', '2024-08-02', 305000, 'completed', '6-7'),
+(145, 20, 1, '2024-08-10', '2024-08-13', 215000, 'completed', '2-3'),
+(146, 21, 9, '2024-09-14', '2024-09-17', 250000, 'completed', '3-5'),
+(147, 22, 3, '2024-10-21', '2024-10-24', 230000, 'completed', '1-4'),
+(148, 23, 7, '2024-11-02', '2024-11-06', 280000, 'completed', '2-3'),
+(149, 24, 6, '2024-12-13', '2024-12-17', 295000, 'refund requested', '4-6'),
+(150, 25, 5, '2024-01-07', '2024-01-11', 265000, 'completed', '2-3'),
+(151, 26, 8, '2024-02-13', '2024-02-17', 290000, 'completed', '5-6'),
+(152, 27, 2, '2024-03-18', '2024-03-21', 220000, 'completed', '1-2'),
+(153, 28, 9, '2024-04-24', '2024-04-27', 245000, 'completed', '6-7'),
+(154, 29, 4, '2024-05-06', '2024-05-09', 210000, 'cancelled', '2-5'),
+(155, 30, 3, '2024-06-15', '2024-06-18', 235000, 'completed', '1-3'),
+(156, 31, 1, '2024-07-01', '2024-07-04', 205000, 'completed', '1-4'),
+(157, 32, 6, '2024-08-08', '2024-08-12', 275000, 'completed', '3-5'),
+(158, 33, 5, '2024-09-20', '2024-09-24', 260000, 'completed', '2-4'),
+(159, 34, 7, '2024-10-14', '2024-10-18', 285000, 'completed', '4-6'),
+(160, 35, 2, '2024-11-29', '2024-12-03', 300000, 'completed', '1-2'),
+(161, 1, 9, '2024-01-16', '2024-01-19', 235000, 'completed', '5-6'),
+(162, 2, 4, '2024-02-21', '2024-02-24', 220000, 'cancelled', '2-3'),
+(163, 3, 8, '2024-03-03', '2024-03-06', 210000, 'completed', '4-7'),
+(164, 4, 6, '2024-04-09', '2024-04-12', 250000, 'completed', '3-5'),
+(165, 5, 1, '2024-05-19', '2024-05-23', 265000, 'completed', '2-6'),
+(166, 6, 3, '2024-06-27', '2024-06-30', 235000, 'completed', '1-4'),
+(167, 7, 5, '2024-07-05', '2024-07-08', 225000, 'refund requested', '3-5'),
+(168, 8, 7, '2024-08-14', '2024-08-18', 275000, 'completed', '4-6'),
+(169, 9, 9, '2024-09-10', '2024-09-13', 240000, 'completed', '6-7'),
+(170, 10, 2, '2024-10-25', '2024-10-29', 280000, 'completed', '1-3'),
+(171, 11, 4, '2024-11-11', '2024-11-14', 215000, 'completed', '2-4'),
+(172, 12, 6, '2024-12-19', '2024-12-22', 245000, 'completed', '3-6'),
+(173, 13, 8, '2024-01-03', '2024-01-07', 255000, 'completed', '5-7'),
+(174, 14, 3, '2024-02-10', '2024-02-14', 230000, 'completed', '1-2'),
+(175, 15, 9, '2024-03-25', '2024-03-29', 275000, 'completed', '4-6'),
+(176, 16, 5, '2024-04-05', '2024-04-08', 215000, 'cancelled', '3-4'),
+(177, 17, 7, '2024-05-12', '2024-05-15', 245000, 'completed', '6-7'),
+(178, 18, 2, '2024-06-20', '2024-06-23', 220000, 'completed', '1-3'),
+(179, 19, 4, '2024-07-16', '2024-07-20', 270000, 'completed', '2-5'),
+(180, 20, 1, '2024-08-26', '2024-08-30', 250000, 'completed', '3-6'),
+(181, 21, 6, '2024-09-04', '2024-09-07', 235000, 'completed', '1-4'),
+(182, 22, 8, '2024-10-07', '2024-10-11', 275000, 'completed', '5-7'),
+(183, 23, 9, '2024-11-15', '2024-11-19', 260000, 'completed', '4-6'),
+(184, 24, 3, '2024-12-28', '2024-12-31', 240000, 'completed', '2-3'),
+(185, 25, 5, '2024-01-29', '2024-02-02', 270000, 'completed', '3-5'),
+(186, 3, 4, '2025-04-01', '2025-04-05', 260000, 'confirmed', '2-4'),
+(187, 12, 7, '2025-04-03', '2025-04-06', 215000, 'refund requested', '5-7'),
+(188, 7, 2, '2025-04-05', '2025-04-09', 240000, 'confirmed', '1-3'),
+(189, 20, 1, '2025-04-08', '2025-04-12', 195000, 'confirmed', '2-5'),
+(190, 11, 9, '2025-04-10', '2025-04-13', 275000, 'refund requested', '6-7'),
+(191, 5, 6, '2025-04-12', '2025-04-15', 225000, 'confirmed', '3-4'),
+(192, 16, 3, '2025-04-14', '2025-04-18', 250000, 'confirmed', '1-2'),
+(193, 9, 5, '2025-04-17', '2025-04-21', 265000, 'refund requested', '2-3'),
+(194, 14, 8, '2025-04-19', '2025-04-22', 235000, 'confirmed', '5-6'),
+(195, 6, 7, '2025-04-23', '2025-04-27', 270000, 'confirmed', '4-6'),
+(196, 19, 2, '2025-04-25', '2025-04-28', 220000, 'refund requested', '1-2'),
+(197, 22, 1, '2025-04-26', '2025-04-30', 245000, 'confirmed', '3-5');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `city`
+-- Table structure for table `city`
 --
 
 CREATE TABLE `city` (
@@ -110,7 +287,7 @@ CREATE TABLE `city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `city`
+-- Dumping data for table `city`
 --
 
 INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `description_short`) VALUES
@@ -122,7 +299,7 @@ INSERT INTO `city` (`city_id`, `cityName`, `country`, `description`, `descriptio
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `employee`
+-- Table structure for table `employee`
 --
 
 CREATE TABLE `employee` (
@@ -132,7 +309,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `employee`
+-- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
@@ -161,7 +338,7 @@ INSERT INTO `employee` (`hotel_id`, `user_id`, `userType`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `hotel`
+-- Table structure for table `hotel`
 --
 
 CREATE TABLE `hotel` (
@@ -175,7 +352,7 @@ CREATE TABLE `hotel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `hotel`
+-- Dumping data for table `hotel`
 --
 
 INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber`, `email`, `description`) VALUES
@@ -190,7 +367,7 @@ INSERT INTO `hotel` (`hotel_id`, `city_id`, `hotelName`, `address`, `phoneNumber
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `loyalty`
+-- Table structure for table `loyalty`
 --
 
 CREATE TABLE `loyalty` (
@@ -202,7 +379,7 @@ CREATE TABLE `loyalty` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `loyalty`
+-- Dumping data for table `loyalty`
 --
 
 INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at`) VALUES
@@ -242,11 +419,10 @@ INSERT INTO `loyalty` (`loyalty_id`, `user_id`, `rank_id`, `points`, `updated_at
 (34, 34, 1, 0, '2025-04-04 14:50:14'),
 (35, 35, 1, 0, '2025-04-04 14:51:28');
 
-
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `loyaltyrank`
+-- Table structure for table `loyaltyrank`
 --
 
 CREATE TABLE `loyaltyrank` (
@@ -258,7 +434,7 @@ CREATE TABLE `loyaltyrank` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `loyaltyrank`
+-- Dumping data for table `loyaltyrank`
 --
 
 INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) VALUES
@@ -270,7 +446,7 @@ INSERT INTO `loyaltyrank` (`rank_id`, `rank`, `discount`, `minPoint`, `perks`) V
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `reviews`
+-- Table structure for table `reviews`
 --
 
 CREATE TABLE `reviews` (
@@ -285,26 +461,113 @@ CREATE TABLE `reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `reviews`
+-- Dumping data for table `reviews`
 --
 
 INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText`, `created_at`, `active`, `edited`) VALUES
-(2, 1, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 1, 0),
-(3, 1, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 1, 0),
-(4, 2, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 0, 0),
+(1, 31, 1, 5, 'Igazán különleges élmény volt, az igluk belsejei remekek!', '2025-02-18 00:00:00', 1, 0),
+(2, 14, 2, 5, 'Remek a hely, csak ajánlani tudom!', '2025-02-24 11:16:52', 1, 0),
+(3, 16, 3, 2, 'Bunkók a helyiek', '2025-02-24 11:55:23', 1, 0),
+(4, 21, 2, 4, 'Remek a hely viszont a helyi pacalpörkölt lehetne finomabb', '2025-02-24 12:11:04', 0, 0),
 (5, 1, 2, 1, 'Nem éreztem jól magam a helyszínen', '2025-02-24 13:27:18', 1, 0),
 (6, 3, 6, 5, 'Én mint Miku Hatsune nagyon élveztem a helyet, rendkívül aranyosak a macskák', '2025-03-05 17:38:33', 1, 0),
 (7, 4, 3, 4, NULL, '2025-03-05 17:49:56', 1, 0),
-(8, 4, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 1, 0),
+(8, 34, 7, 5, 'Klausztrofóbiásoknak nem ajánlom, viszont ezt leszámítva fenomenális!', '2025-03-05 17:50:08', 1, 0),
 (9, 9, 4, 3, NULL, '2025-03-17 12:10:18', 1, 0),
 (10, 2, 1, 5, 'Fagyos', '2025-03-24 15:29:27', 1, 0),
 (11, 25, 6, 5, 'jó volt', '2025-03-31 12:03:03', 1, 0),
-(12, 5, 1, 5, 'Ez egy értékelés!\r\n\r\nÉs van benne sortörés!\r\n\r\nÉs szerkesztve is van!\r\n\r\nÉs még 1000 karakter hosszú is\r\n\r\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', '2025-03-31 14:36:50', 1, 1);
+(12, 30, 7, 4, 'Macskák mindenhol! Imádtam!', '2024-06-24 11:24:11', 1, 1),
+(13, 13, 5, 1, 'Tiszta, rendezett helyszín, jó volt a programkínálat.', '2024-01-04 09:16:12', 1, 0),
+(14, 25, 4, 2, 'Tiszta, rendezett helyszín, jó volt a programkínálat.', '2024-12-01 07:11:26', 1, 0),
+(15, 30, 1, 2, 'Remek kikapcsolódás, gyönyörű táj és barátságos emberek.', '2025-03-20 23:59:59', 1, 0),
+(16, 35, 5, 3, 'A hely hangulata nagyon kellemes volt, de a kiszolgálás lehetne figyelmesebb.', '2022-07-20 01:21:50', 1, 0),
+(17, 3, 4, 1, 'Sajnos elég csalódottan távoztunk, nem azt kaptuk, amit ígértek.', '2025-01-19 10:58:40', 1, 0),
+(18, 8, 1, 5, 'Ha tehetitek, mindenképp látogassatok el ide! A kilátás lenyűgöző és a környék gasztronómiája is megér egy misét.', '2025-01-19 17:12:58', 1, 0),
+(19, 9, 7, 2, 'Túlértékelt hely. Nem volt különleges élmény.', '2025-01-20 09:47:36', 1, 0),
+(20, 5, 3, 4, 'Meglepően jó volt! Egy kis gyöngyszem a térképen, amiről korábban nem is hallottunk.', '2025-01-21 13:33:27', 1, 0),
+(21, 11, 2, 3, NULL, '2025-01-22 14:25:03', 1, 0),
+(22, 12, 5, 5, 'Egyik legjobb hétvégém volt itt! A szállás kényelmes, a személyzet segítőkész, és minden pontosan úgy volt, ahogy ígérték. Még a helyi macskák is barátságosak voltak.', '2025-01-23 11:51:19', 1, 0),
+(23, 10, 1, 4, 'Jó hely, de kicsit drágának tartom a belépőt a kínált szolgáltatásokhoz képest.', '2025-01-23 18:40:44', 1, 0),
+(24, 7, 6, 5, 'Ez a hely tényleg elvarázsolt! A naplemente a dombtetőről látva egy életre szóló emlék marad. Már tervezzük a visszatérést.', '2025-01-24 16:31:07', 1, 0),
+(25, 13, 4, 2, 'Nem volt rossz, de sokkal jobbat is láttam már.', '2025-01-24 19:12:22', 1, 0),
+(26, 14, 7, 5, NULL, '2025-01-25 08:27:13', 1, 0),
+(27, 15, 1, 1, 'Nagyon csalódott voltam. Koszos volt, a személyzet sem volt segítőkész.', '2025-01-25 10:45:58', 1, 0),
+(28, 16, 3, 4, 'Tökéletes hely egy romantikus hétvégéhez. Csend, nyugalom és gyönyörű táj.', '2025-01-25 17:18:31', 1, 0),
+(29, 17, 6, 3, NULL, '2025-01-26 09:07:43', 1, 0),
+(30, 18, 2, 5, 'Egyik kedvenc helyem lett! Külön köszönet a helyi idegenvezetőnek, aki fantasztikus túrát tartott nekünk.', '2025-01-26 15:59:12', 1, 0),
+(31, 19, 4, 2, 'Kicsit túl reklámozott hely, de a természet szépsége vitathatatlan.', '2025-01-27 11:24:46', 1, 0),
+(32, 20, 7, 4, 'Nagyon jól szervezett programokkal és barátságos légkörrel találkoztunk.', '2025-01-28 14:10:39', 1, 0),
+(33, 21, 3, 1, 'Nem ajánlom senkinek, aki nyugodt pihenésre vágyik.', '2025-01-28 18:22:53', 1, 0),
+(34, 22, 5, 3, NULL, '2025-01-29 07:31:15', 1, 0),
+(35, 23, 2, 5, 'Lenyűgöző kilátás, fantasztikus vendéglátás, és elképesztően jó hangulat. Itt tényleg minden adott egy tökéletes kikapcsolódáshoz!', '2025-01-29 12:46:01', 1, 0),
+(36, 24, 6, 4, 'Kellemes meglepetés volt. Ajánlom mindenkinek, aki aktív pihenésre vágyik.', '2025-01-29 15:34:49', 1, 0),
+(37, 25, 1, 2, 'Kissé zsúfolt volt, de ettől függetlenül jó élmény.', '2025-01-30 10:39:27', 1, 0),
+(38, 26, 4, 3, 'Átlagos. Nem hagyott mély nyomot bennem.', '2025-01-30 14:18:33', 1, 0),
+(39, 27, 2, 5, 'Aki szereti a természetközeli élményeket és az autentikus falusi életet, annak ez a hely telitalálat.', '2025-01-30 18:07:41', 1, 0),
+(40, 28, 7, 3, NULL, '2025-01-31 09:33:29', 1, 0),
+(41, 29, 3, 4, 'Nagyon jól szórakoztunk, de a szállás lehetne kényelmesebb.', '2025-01-31 13:56:16', 1, 0),
+(42, 30, 5, 5, 'Ez volt eddig a legjobb élményünk az évben! A kilátás, a programok, és a hely hangulata mind felejthetetlenek voltak.', '2025-01-31 16:44:52', 1, 0),
+(43, 31, 6, 1, 'Csak azoknak ajánlom, akik szeretik a nyüzsgést.', '2025-02-01 08:19:03', 1, 0),
+(44, 32, 1, 2, 'Néhány részét túl turistásnak találtam, de voltak igazán békés zugok is.', '2025-02-01 10:42:40', 1, 0),
+(45, 33, 4, 4, NULL, '2025-02-01 13:58:10', 1, 0),
+(46, 34, 7, 5, 'Ha valami különlegesre vágytok, ne hagyjátok ki ezt a helyet! A reggeli kávé a teraszon örökre emlékezetes marad.', '2025-02-02 09:06:49', 1, 0),
+(47, 35, 2, 3, 'Kicsit hosszú volt az utazás, de megérte.', '2025-02-02 11:23:17', 1, 0),
+(48, 26, 3, 4, 'Nem volt semmi extra, de egy délutánra megfelelt.', '2025-02-02 15:34:01', 1, 0),
+(49, 27, 6, 2, NULL, '2025-02-02 18:50:55', 1, 0),
+(50, 28, 5, 5, 'Elképesztő hétvégét töltöttünk itt. A túraútvonalak jól karbantartottak, a látvány pedig minden várakozásunkat felülmúlta.', '2025-02-03 08:44:13', 1, 0),
+(51, 19, 1, 4, 'Hangulatos kis hely, a kávézók különösen jók.', '2025-02-03 11:22:48', 1, 0),
+(52, 10, 4, 3, 'Az éttermekben lehetne jobb a kiszolgálás, de amúgy kellemes élmény.', '2025-02-03 16:09:29', 1, 0),
+(53, 11, 7, 2, 'A várakozási idő hosszú volt, ez sokat rontott az összképen.', '2025-02-04 10:17:36', 1, 0),
+(54, 12, 3, 5, 'Imádtam minden percét! A természet és a kultúra itt kéz a kézben jár.', '2025-02-04 13:11:51', 1, 0),
+(55, 33, 2, 4, NULL, '2025-02-04 17:03:27', 1, 0),
+(56, 24, 5, 3, 'Egyszerű, de nagyszerű. Pont erre volt szükségem.', '2025-02-05 08:55:15', 1, 0),
+(57, 15, 6, 1, 'Nem volt rossz, de túl messze van mindentől.', '2025-02-05 12:34:48', 1, 0),
+(58, 26, 1, 2, 'Az utazás megérte, de a szállás hagyott kívánnivalót maga után.', '2025-02-05 15:47:20', 1, 0),
+(59, 17, 4, 5, 'Ez volt életem egyik legszebb élménye. Hosszú séták, kedves emberek, ízletes ételek és lenyűgöző tájak. Egy pillanatig sem unatkoztunk. Mindenkinek szívből ajánlom.', '2025-02-06 09:23:37', 1, 0),
+(60, 18, 7, 4, 'Barátságos környezet, kiváló programok. Jól éreztük magunkat.', '2025-02-06 13:56:03', 1, 0),
+(61, 29, 2, 3, NULL, '2025-02-06 17:44:11', 1, 0),
+(62, 20, 3, 5, 'Minden elvárásunkat felülmúlta! Az időjárás is kedvezett, de a környezet és a vendégszeretet tették igazán különlegessé.', '2025-02-07 10:11:58', 1, 0),
+(63, 34, 2, 4, 'Az ételek finomak voltak, de az adagok mérete csalódást okozott. A környezet viszont barátságos és hangulatos.', '2023-06-12 10:05:44', 1, 0),
+(64, 27, 3, 5, 'A szállás szuper volt, külön kiemelném a reggelit, ami bőséges és változatos. A személyzet is nagyon kedves és segítőkész volt.', '2022-10-04 08:42:39', 1, 0),
+(65, 18, 4, 1, 'Sajnos csalódtam. A reklám alapján sokkal többet vártam, mint amit kaptam. A fürdő koszos volt, a személyzet unott, nem ajánlanám másnak.', '2022-11-17 15:13:28', 1, 0),
+(66, 21, 7, 5, 'Kiváló élmény! A környék gyönyörű, a programok változatosak, és az egész nagyon jól szervezett volt. Visszajövünk jövőre is!', '2024-04-26 13:18:52', 1, 0),
+(67, 18, 1, 3, 'Nem volt rossz, de nem is kiemelkedő. A közlekedés lehetne jobb, és kicsit drágálltam a belépőt.', '2023-09-09 19:23:17', 1, 0),
+(68, 26, 5, 5, 'Lenyűgöző élmény! A barlang túra felejthetetlen volt, a vezetőnk profi és humoros, a gyerekek is imádták. Mindenkinek ajánlom, aki szereti a természetet.', '2025-02-07 12:44:03', 1, 0),
+(69, 19, 3, 2, 'A parkolás szörnyű, alig találtunk helyet. Maga a program rendben volt, de nem igazán nyűgözött le.', '2023-03-13 17:08:21', 1, 0),
+(70, 21, 2, 4, 'Nagyon barátságos hely, finom ételek, kellemes zene. A hangulat igazán megfogott, főleg a nyári esték különlegesek itt.', '2024-06-29 20:46:18', 1, 0),
+(71, 13, 6, 1, 'Zajos, zsúfolt, és a vendéglátás is hagyott kívánnivalót maga után. Nem érzem, hogy újra visszamennék.', '2022-08-22 11:27:34', 1, 0),
+(72, 14, 4, 4, 'Remek ár-érték arány, tiszta és jól karbantartott helyszín. A gyerekek is nagyon élvezték a játszóteret.', '2023-12-15 09:03:58', 1, 0),
+(73, 10, 1, 5, 'Az egész családnak szuper élmény volt. A kiállítás informatív, a gyerekprogramok színvonalasak, és még a büfé is meglepően jó volt.', '2024-03-03 16:22:16', 1, 0),
+(74, 2, 2, 3, 'Nem volt rossz, de kicsit több interaktív elem jól jött volna. A hely történelme viszont érdekes volt.', '2023-10-26 10:36:42', 1, 0),
+(75, 3, 5, 4, 'Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.', '2024-07-21 12:51:37', 1, 0),
+(76, 6, 3, 2, 'A belépő árát nem igazolta a szolgáltatás. Az élmény gyenge volt, és a tömeg miatt nem is tudtunk mindent kipróbálni.', '2022-12-02 14:19:08', 1, 0),
+(77, 11, 4, 5, 'Bámulatos hely, remek túraútvonalakkal. A levegő tiszta, a kilátás pedig páratlan. Aki szereti a természetet, annak kötelező!', '2023-04-07 18:37:01', 1, 0),
+(78, 8, 2, 4, 'Nagyon meg voltunk elégedve. A személyzet mindenben segített, és külön köszönet a kis meglepetésért a szobában.', '2024-09-12 07:54:45', 1, 0),
+(79, 35, 3, 3, 'Átlagos élmény. Nem volt rossz, de különösebben nem is emlékezetes. Az árakat túlzónak éreztem.', '2023-05-28 16:09:29', 1, 0),
+(80, 9, 6, 1, 'Csalódottan távoztunk. Az időzítés nem volt jó, a programok elmaradtak, és a kommunikáció sem volt megfelelő.', '2022-06-20 13:50:51', 1, 0),
+(81, 10, 1, 5, 'Csodálatos élmény minden szempontból. A szolgáltatások magas színvonalúak, a környezet gyönyörű. Visszatérünk!', '2024-11-04 15:35:00', 1, 0),
+(82, 9, 3, 2, 'Nem ért meg ennyit az egész. A látványosság sem volt annyira érdekes, és a tömeg is idegesítő volt.', '2023-07-10 20:28:14', 1, 0),
+(83, 24, 4, 4, 'Minden rendben ment, a program jól szervezett volt. Az idegenvezető felkészült, informatív és vicces volt.', '2025-01-13 09:41:38', 1, 0),
+(84, 7, 5, 5, 'Életem egyik legjobb hétvégéje volt! A programok fantasztikusak, az emberek barátságosak, és mindenhol látszik az odafigyelés.', '2023-08-16 18:11:02', 1, 0),
+(85, 4, 2, 2, 'A várakozásokhoz képest gyengébb élmény volt. A vendéglátás közepes, és a higiénia sem volt a legjobb.', '2022-09-01 10:02:11', 1, 0),
+(86, 8, 4, 4, 'Nagyon pozitív benyomásom volt a helyről. Letisztult, rendezett, informatív. Jó szívvel ajánlom mindenkinek.', '2024-05-19 14:43:33', 1, 0),
+(87, 3, 6, 1, 'Az étterem és a környezet csalódás volt. Az ételek drágák és középszerűek, a mosdók pedig piszkosak.', '2022-03-14 12:00:21', 1, 0),
+(88, 5, 1, 5, 'Az Oslo melletti Frozen Retreat egyszerűen lélegzetelállító! A feleségemmel szerettünk volna kiszakadni a nyüzsgésből, és valami teljesen mást megtapasztalni – ez a szálloda pontosan ezt nyújtotta. A jégből és hóból épített igluk olyan fantasztikus atmoszférát teremtenek, amit máshol lehetetlen megtapasztalni. A belső tér meglepően meleg és barátságos, a puha textilek és a hangulatvilágítás teljesen elfeledteti a kinti hideget. Esténként jégszobrok között sétálni, majd forró teát kortyolgatni egy igluban – ez igazi varázslat volt. A wellness részleg külön kiemelést érdemel: szauna, jeges fürdő, mindez egy havas fenyőerdő közepén! Aki egy mesebeli téli élményre vágyik, ne hagyja ki!', '2024-12-14 12:00:21', 1, 0),
+(89, 12, 1, 4, 'Ez volt az első alkalom, hogy jégszállodában szálltunk meg, és őszintén szólva, kicsit szkeptikusak voltunk. De már az első pillanatban elvarázsolt minket a látvány. A Frozen Retreat tényleg egy műalkotás – minden iglu más, minden részlet ki van dolgozva, és minden szolgáltatás arra törekszik, hogy a vendég elfelejtse a mindennapokat. A hideg dizájn és a meleg vendéglátás remek egyensúlyban van. A személyzet kedves és figyelmes volt, még extra takarót is hoztak nekünk, pedig a szoba már így is nagyon komfortos volt. Nagyon tetszett a közeli sípálya és a lehetőség hószánkózásra – igazi téli kaland!', '2025-02-21 13:23:24', 1, 0),
+(90, 23, 2, 5, 'A Kings Castle egy időutazás – de nem akárhova, hanem egy fényűző, aranykorbeli kastélyba! A szálloda minden szeglete lélegzetelállító, a szobánk ablakából festői kilátás nyílt az udvarra és a távoli hegyekre. A bútorok és a díszítések történelmet mesélnek, de közben ott van a modern luxus is: tökéletesen felszerelt fürdő, kényelmes ágy, gyors wifi. A reggelik bőségesek és elegánsak voltak, a vacsorát pedig soha nem fogom elfelejteni – az étterem hangulata olyan volt, mintha egy filmforgatáson lennék. Mindenképpen visszatérünk, mert ez a hely nemcsak szálloda, hanem élmény is!', '2022-01-14 22:17:51', 1, 0),
+(91, 33, 2, 5, 'Ez a hotel olyan volt, mintha beléptünk volna egy történelmi regény lapjaira. Minden részlet aprólékosan kidolgozott, a dísztermek, a csillárok, a régi festmények... egyszerűen gyönyörű! A személyzet rendkívül udvarias, folyamatosan azt éreztették velünk, hogy különleges vendégek vagyunk. Az ágyak kényelmesek, a fürdőszoba modern, mégis illeszkedik a történelmi stílushoz. Nagyon tetszett, hogy a szálloda központi elhelyezkedése ellenére csendes és nyugodt. A vacsora valóban kulináris élmény volt, a norvég specialitások fantasztikusak!', '2024-03-14 12:14:21', 1, 0),
+(92, 20, 3, 5, 'Az Oceanview Hotel életem egyik legkülönlegesebb élményét nyújtotta! Soha nem gondoltam volna, hogy egyszer a tengeralatt járás érzését ilyen kényelemben élhetem át. A szoba fala teljesen üvegből volt, és egész nap csodálhattuk a halakat, teknősöket és még rájákat is! A nyugalom, amit ez a látvány nyújtott, leírhatatlan. Az étterem külön élmény volt, mintha egy víz alatti szentélyben vacsoráztunk volna – a friss tenger gyümölcsei kifogástalanok voltak. Ha valaki a természetet szeretné egy igazán exkluzív környezetben élvezni, ne keresgéljen tovább!', '2023-02-14 09:30:12', 1, 0),
+(93, 5, 3, 4, 'A Maldív-szigetek önmagukban is csodásak, de az Oceanview Hotel valami egészen más szint. Olyan, mint egy víz alatti mennyország. A dizájn rendkívül elegáns, minden apró részlet illeszkedik a tengeri tematika világához. A wellness részleg is fantasztikus, kipróbáltuk a tengeri sóval végzett kezelést – frissítő és relaxáló egyszerre. Az egyik este a szobánk ablakánál egy kis cápa úszott el – olyan volt, mintha egy természetfilm főszereplői lennénk. Ez az a hely, ahová ha egyszer eljutsz, örökké emlékezni fogsz rá.', '2024-10-14 20:54:51', 1, 0),
+(94, 8, 4, 5, 'A Rocky Ridge Lodge-ban eltöltött időszak maga volt a csoda. A kapszulák, amelyek szó szerint a hegyoldalra vannak erősítve, valami egészen elképesztő látványt nyújtanak. Éjszaka, amikor az ég tele volt csillagokkal, és alattunk a völgy fényei ragyogtak – olyan érzés volt, mintha lebegnénk. A szoba teljesen felszerelt, a fűtés kiválóan működik, és a kilátás minden percben új arcát mutatta. A túrák a környéken szintén fantasztikusak – ez a hely minden természetimádónak kötelező!', '2025-01-14 17:42:42', 1, 0),
+(95, 12, 5, 3, 'A Locomotive Lounge egy igazi rejtett gyöngyszem! A vasúti témájú szálloda annyira hitelesen adja vissza a régi idők hangulatát, hogy az ember szinte hallja a mozdonyok füttyét. A vonatkocsi, ahol megszálltunk, tágas és kényelmes volt, de megőrizte a nosztalgikus hangulatot. Az étterem is különleges – mintha egy első osztályú dining car-ban ülnél az Orient Expresszen. Imádtuk az apró részleteket: régi jegykiadó gépek, vasúti csengők, eredeti ülések. Egy élmény volt, nem csak egy szállás!', '2022-07-14 11:27:29', 1, 0),
+(96, 9, 6, 5, 'A Kitty Cove nem csak szálloda – ez maga a boldogság! Már a recepción néhány cica üdvözölt minket, és onnantól kezdve egyetlen perc sem telt el úgy, hogy ne lettünk volna macskák között. A szobánkba is beköltözhetett az általunk kiválasztott kedvenc, és egész éjjel ott dorombolt mellettünk. Nagyon otthonos és tiszta a szálloda, a személyzet kedves és nyitott. A macskák jól ápoltak, barátságosak és egyáltalán nem tolakodóak – csak ott vannak, ha szeretnéd őket. Igazi lélekmelengető élmény volt!', '2023-04-14 08:12:30', 1, 1),
+(97, 16, 7, 4, 'A Cave Haven teljesen lenyűgözött! A barlangszállás ötlete elsőre kissé szokatlannak tűnt, de az élmény magáért beszélt. A szobák a természetes kőzetformációkhoz illeszkednek, különleges hangulatot teremtve. A világítás hangulatos, a hűvös levegő pedig frissítő, különösen a nyári melegben. Az étterem szintén a barlangba van építve – egyedülálló atmoszféra, kiváló helyi ételek, csodás borválaszték. Ha valaki valami teljesen másra vágyik, itt megtalálja.', '2024-06-14 11:55:21', 1, 0),
+(98, 23, 1, 2, 'Bár a Frozen Retreat elsőre rendkívül látványosnak és különlegesnek tűnt a fotók alapján, a valóság sajnos egészen más képet mutatott. Az ötlet – az igluk és a jeges esztétika – valóban kreatív és ígéretes, de a megvalósítás hagy kívánnivalót maga után.\r\nAz iglunk belső tere túl hideg volt még a meleg textilek ellenére is, és a fűtés nem volt elegendő ahhoz, hogy komfortosan érezzük magunkat. Az ágy kemény és kényelmetlen volt, és a világítás is túlságosan gyenge – romantikusnak szánták, de inkább nyomasztóan sötét volt.\r\nA wellness részleg sajnos túlzsúfolt volt, és nem sikerült időpontot foglalnunk sem masszázsra, sem szaunára. A személyzet kedves, de láthatóan túlterhelt és kissé szervezetlen volt. Ráadásul az étkezési lehetőségek nagyon korlátozottak, és a hideg környezetben még az ételek is hamar kihűltek, mire az asztalhoz értünk.\r\nÖsszességében az élmény sajnos inkább kényelmetlen és fárasztó volt, mintsem különleges vagy pihentető. Két csillagot adok, mert az ötlet tényleg jó, és a helyszín is gyönyörű, de a kivitelezés komolyan javításra szorul.', '2025-04-14 18:17:21', 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `room`
+-- Table structure for table `room`
 --
 
 CREATE TABLE `room` (
@@ -318,7 +581,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `room`
+-- Dumping data for table `room`
 --
 
 INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `pricepernight`, `available`) VALUES
@@ -420,7 +683,7 @@ INSERT INTO `room` (`room_id`, `hotel_id`, `roomNumber`, `floor`, `capacity`, `p
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `service`
+-- Table structure for table `service`
 --
 
 CREATE TABLE `service` (
@@ -437,7 +700,7 @@ CREATE TABLE `service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `service`
+-- Dumping data for table `service`
 --
 
 INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `available`, `allYear`, `startDate`, `endDate`, `openTime`, `closeTime`) VALUES
@@ -488,7 +751,7 @@ INSERT INTO `service` (`service_id`, `hotel_id`, `category_id`, `price`, `availa
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `servicecategory`
+-- Table structure for table `servicecategory`
 --
 
 CREATE TABLE `servicecategory` (
@@ -497,7 +760,7 @@ CREATE TABLE `servicecategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `servicecategory`
+-- Dumping data for table `servicecategory`
 --
 
 INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
@@ -528,7 +791,7 @@ INSERT INTO `servicecategory` (`serviceCategory_id`, `serviceName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -547,7 +810,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`, `phonenumber`, `email`, `password`, `created_at`, `updated_at`, `active`, `profilePic`) VALUES
@@ -586,19 +849,20 @@ INSERT INTO `user` (`user_id`, `username`, `lastName`, `firstName`, `birthDate`,
 (33, 'Dragon286', 'Kiss', 'Barnabás', '2003-07-21', '+368579283', 'barnobruno@hotmail.com', '$2y$12$6f1m8o0P5h/7594H.BaD7uRn0oSx35dgsQ22Iw9gBAU.HZ2b37cby', '2025-04-04 12:57:43', '2025-04-04 12:57:43', 1, 2),
 (34, 'Gubacs_mester', 'Kresz', 'Vince', '2005-04-12', '+368579253', 'Gubi@gmail.com', '$2y$12$MhlDFc7DhSKReV9RqFYVmeWqPzKKQBm.P.d8GZ/95/Niyel.of/pu', '2025-04-04 12:58:24', '2025-04-04 12:58:24', 1, 6),
 (35, 'Kecifei', 'Bánki', 'Gábor', '2005-08-13', '+368578582', 'Bgabor@freemail.hu', '$2y$12$k1hIkFXZ23ezqy.t.UNXZeRvaZLJ8IHNpprj9IP.sNz1J.yqjrQwW', '2025-04-04 12:59:05', '2025-04-04 12:59:05', 1, 4);
+
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `billing`
+-- Indexes for table `billing`
 --
 ALTER TABLE `billing`
   ADD PRIMARY KEY (`billing_id`),
   ADD KEY `booking_id` (`booking_id`);
 
 --
--- A tábla indexei `booking`
+-- Indexes for table `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
@@ -606,27 +870,27 @@ ALTER TABLE `booking`
   ADD KEY `room_id` (`room_id`);
 
 --
--- A tábla indexei `city`
+-- Indexes for table `city`
 --
 ALTER TABLE `city`
   ADD PRIMARY KEY (`city_id`);
 
 --
--- A tábla indexei `employee`
+-- Indexes for table `employee`
 --
 ALTER TABLE `employee`
   ADD KEY `hotel_id` (`hotel_id`,`user_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- A tábla indexei `hotel`
+-- Indexes for table `hotel`
 --
 ALTER TABLE `hotel`
   ADD PRIMARY KEY (`hotel_id`),
   ADD KEY `city_id` (`city_id`) USING BTREE;
 
 --
--- A tábla indexei `loyalty`
+-- Indexes for table `loyalty`
 --
 ALTER TABLE `loyalty`
   ADD PRIMARY KEY (`loyalty_id`),
@@ -634,13 +898,13 @@ ALTER TABLE `loyalty`
   ADD KEY `user_id` (`user_id`);
 
 --
--- A tábla indexei `loyaltyrank`
+-- Indexes for table `loyaltyrank`
 --
 ALTER TABLE `loyaltyrank`
   ADD PRIMARY KEY (`rank_id`);
 
 --
--- A tábla indexei `reviews`
+-- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`review_id`),
@@ -648,14 +912,14 @@ ALTER TABLE `reviews`
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- A tábla indexei `room`
+-- Indexes for table `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`room_id`),
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- A tábla indexei `service`
+-- Indexes for table `service`
 --
 ALTER TABLE `service`
   ADD PRIMARY KEY (`service_id`),
@@ -663,140 +927,140 @@ ALTER TABLE `service`
   ADD KEY `category_id` (`category_id`);
 
 --
--- A tábla indexei `servicecategory`
+-- Indexes for table `servicecategory`
 --
 ALTER TABLE `servicecategory`
   ADD PRIMARY KEY (`serviceCategory_id`);
 
 --
--- A tábla indexei `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `billing`
+-- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
   MODIFY `billing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `booking`
+-- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=198;
 
 --
--- AUTO_INCREMENT a táblához `city`
+-- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
   MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `hotel`
+-- AUTO_INCREMENT for table `hotel`
 --
 ALTER TABLE `hotel`
   MODIFY `hotel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT a táblához `loyalty`
+-- AUTO_INCREMENT for table `loyalty`
 --
 ALTER TABLE `loyalty`
-  MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `loyalty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- AUTO_INCREMENT a táblához `loyaltyrank`
+-- AUTO_INCREMENT for table `loyaltyrank`
 --
 ALTER TABLE `loyaltyrank`
   MODIFY `rank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `reviews`
+-- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
--- AUTO_INCREMENT a táblához `room`
+-- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
   MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
--- AUTO_INCREMENT a táblához `service`
+-- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
   MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT a táblához `servicecategory`
+-- AUTO_INCREMENT for table `servicecategory`
 --
 ALTER TABLE `servicecategory`
   MODIFY `serviceCategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT a táblához `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for dumped tables
 --
 
 --
--- Megkötések a táblához `billing`
+-- Constraints for table `billing`
 --
 ALTER TABLE `billing`
   ADD CONSTRAINT `billing_ibfk_1` FOREIGN KEY (`billing_id`) REFERENCES `booking` (`booking_id`);
 
 --
--- Megkötések a táblához `booking`
+-- Constraints for table `booking`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`);
 
 --
--- Megkötések a táblához `employee`
+-- Constraints for table `employee`
 --
 ALTER TABLE `employee`
   ADD CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Megkötések a táblához `hotel`
+-- Constraints for table `hotel`
 --
 ALTER TABLE `hotel`
   ADD CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`);
 
 --
--- Megkötések a táblához `loyalty`
+-- Constraints for table `loyalty`
 --
 ALTER TABLE `loyalty`
   ADD CONSTRAINT `loyalty_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `loyalty_ibfk_2` FOREIGN KEY (`rank_id`) REFERENCES `loyaltyrank` (`rank_id`);
 
 --
--- Megkötések a táblához `reviews`
+-- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Megkötések a táblához `room`
+-- Constraints for table `room`
 --
 ALTER TABLE `room`
   ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`);
 
 --
--- Megkötések a táblához `service`
+-- Constraints for table `service`
 --
 ALTER TABLE `service`
   ADD CONSTRAINT `service_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `servicecategory` (`serviceCategory_id`),
