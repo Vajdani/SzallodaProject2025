@@ -539,7 +539,7 @@ INSERT INTO `reviews` (`review_id`, `user_id`, `hotel_id`, `rating`, `reviewText
 (72, 14, 4, 4, 'Remek ár-érték arány, tiszta és jól karbantartott helyszín. A gyerekek is nagyon élvezték a játszóteret.', '2023-12-15 09:03:58', 1, 0),
 (73, 10, 1, 5, 'Az egész családnak szuper élmény volt. A kiállítás informatív, a gyerekprogramok színvonalasak, és még a büfé is meglepően jó volt.', '2024-03-03 16:22:16', 1, 0),
 (74, 2, 2, 3, 'Nem volt rossz, de kicsit több interaktív elem jól jött volna. A hely történelme viszont érdekes volt.', '2023-10-26 10:36:42', 1, 0),
-(75, 3, 5, 4, 'Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.', '2024-07-21 12:51:37', 1, 0),
+(75, 3, 5, 4, 'Rendezett, kulturált, kellemes légkör. Jól éreztük magunkat, és a személyzet hozzáállása is példás.', '2024-07-21 12:51:37', 1, 0),
 (76, 6, 3, 2, 'A belépő árát nem igazolta a szolgáltatás. Az élmény gyenge volt, és a tömeg miatt nem is tudtunk mindent kipróbálni.', '2022-12-02 14:19:08', 1, 0),
 (77, 11, 4, 5, 'Bámulatos hely, remek túraútvonalakkal. A levegő tiszta, a kilátás pedig páratlan. Aki szereti a természetet, annak kötelező!', '2023-04-07 18:37:01', 1, 0),
 (78, 8, 2, 4, 'Nagyon meg voltunk elégedve. A személyzet mindenben segített, és külön köszönet a kis meglepetésért a szobában.', '2024-09-12 07:54:45', 1, 0),
