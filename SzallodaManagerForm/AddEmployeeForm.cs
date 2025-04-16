@@ -35,10 +35,5 @@
             lbTitle.Location = new((this.ClientSize.Width - lbTitle.ClientSize.Width) / 2, 30);
             Display.ResizePanel(this.ClientSize);
         }
-
-        private void InitializeComponent()
-        {
-
-        }
     }
 }

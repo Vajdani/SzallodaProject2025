@@ -61,5 +61,8 @@ namespace SzallodaManagerForm.ItemPanels
 
             AlignElementsHorizontally();
         }
+
+        public static new List<BaseUser> GetList() => Database.ReadAll<BaseUser>($"SELECT user_id, username, firstName, lastName FROM user WHERE user_id NOT IN (SELECT user_id FROM employee WHERE hotel_id = {Main.Instance.GetSelectedHotelId()});");
+        public static Type GetModelType() => typeof(BaseUser);
     }
 }
